@@ -1,0 +1,40 @@
+{
+  "sha256": "ec4b3a8abf90c75df3c5c7cf475f38a68092545b4e616acc93e4ec947d0be080",
+  "parts": [
+    {
+      "name": "steez8-source.part-000",
+      "bytes": 20971520,
+      "sha256": "7029065c9a9836993c8307135ba32edfcffe9c7ba628bd1f5b06ca9e70318907"
+    },
+    {
+      "name": "steez8-source.part-001",
+      "bytes": 20971520,
+      "sha256": "c4c59917391c7cef4c560ff9625b0e99901c5b863903b92fde097b268cd66e05"
+    },
+    {
+      "name": "steez8-source.part-002",
+      "bytes": 20971520,
+      "sha256": "305f4134ae72f458d763599c9df5bc1d6ce5a0a2ff8d02b8ca00b747265ce023"
+    },
+    {
+      "name": "steez8-source.part-003",
+      "bytes": 20971520,
+      "sha256": "3f7c5b6039e24a4c4edf88df31845753c8d5356f0416d06f715f9f184b1d6444"
+    },
+    {
+      "name": "steez8-source.part-004",
+      "bytes": 20971520,
+      "sha256": "2d8cef47b453b4848d8d6e1e18ac3773a56ba9d83d6eb0353a9fc188918b0c68"
+    },
+    {
+      "name": "steez8-source.part-005",
+      "bytes": 20971520,
+      "sha256": "8e5768b3b4bbcbc530859e96b6131e8895cdcbe6cc55851b841cdecd419c01e6"
+    },
+    {
+      "name": "steez8-source.part-006",
+      "bytes": 11720585,
+      "sha256": "eb627bb7a92f1e96d4ae5c198c949f27b920bfcea7a9f9b7b0acbc7383ff2098"
+    }
+  ]
+}
