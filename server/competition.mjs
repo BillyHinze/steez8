@@ -655,7 +655,10 @@ export class Competition {
   }
   broadcastState(m) {
     const wire = this.wire(m);
-    if (wire) this.net.roomSend(m.room, wire, this.hostPeer(m));
+    // Every player, including the match host, must receive authoritative
+    // server phases. Otherwise the host can advance locally while the guest
+    // remains on an old round waiting for verification.
+    if (wire) this.net.roomSend(m.room, wire);
     this.sendRecords(m);
   }
   sendRecords(m) {
@@ -918,6 +921,10 @@ export class Competition {
     )
       throw fault("This match round has ended", 409);
     m.verified[key] = result.score;
+    console.info("Competition run verified", {
+      match: m.id, kind: m.kind, drop: context.drop,
+      role: context.role, score: result.score,
+    });
     this.post(m, context.role, result.score);
   }
   notePendingScore(m, role) {
@@ -925,7 +932,12 @@ export class Competition {
     // A reported completion must still let the match recover if verification
     // is overloaded or fails, without awarding an unverified score.
     m.pendingScores ??= {};
-    m.pendingScores[role] ??= this.now();
+    if (m.pendingScores[role] === undefined) {
+      m.pendingScores[role] = this.now();
+      console.info("Competition run submitted", {
+        match: m.id, kind: m.kind, drop: m.state.drop, role,
+      });
+    }
   }
   post(m, role, mark) {
     const old = m.state;

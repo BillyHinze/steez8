@@ -322,6 +322,15 @@ test("two real queue clients enter ranked 1v1 and complete four server-verified 
     assert.equal(result.status, 200, JSON.stringify(result.data));
     assert.equal(result.data.verified, true);
     assert.equal(match.state.phase, "posted");
+    // Both browsers must receive the authoritative posted state. Previously
+    // the server excluded the match host, leaving players on different turns.
+    for (const peer of [ra, rb]) {
+      const posted = await peer.wait(
+        (m) => m.t === "duel" && m.op === "state" &&
+          m.phase === "posted" && m.drop === drop,
+      );
+      assert.equal(posted.seq, match.state.seq);
+    }
     await tick(4500);
     if (drop < 3) await tick(4500);
   }
