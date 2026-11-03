@@ -733,7 +733,7 @@ test("duel releases each rider immediately and reconciles verified scores across
     (x) => x.t === "duel" && x.op === "state" &&
       x.phase === "posted" && x.drop === 1,
   );
-  assert.equal(secondPosted.runs[2], 0);
+  assert.equal(secondPosted.runs[m.state.runs.host.length], 0);
   assert.equal(m.state.runs.guest[0], 0);
   assert.ok(m.pendingScores["1:guest"]);
 
