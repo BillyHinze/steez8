@@ -678,13 +678,12 @@ test("the real client where message changes party follow privacy and destination
   a.ws.close();
   b.ws.close();
 });
-test("a completed run advances to the next rider even if verification stays unavailable", async () => {
+test("duel releases each rider immediately and reconciles verified scores across turns", async () => {
   const c = app.realtime.competition,
     m = c.createMatch(
-      "duel",
-      "apex",
+      "duel", "apex",
       { host: accounts.One.user.id, guest: accounts.Two.user.id },
-      false,
+      true,
     ),
     host = await room(accounts.One, m.room),
     guest = await room(accounts.Two, m.room);
@@ -692,35 +691,61 @@ test("a completed run advances to the next rider even if verification stays unav
   await tick(4500);
   assert.equal(m.state.phase, "run");
   assert.equal(m.state.drop, 0);
+  const firstContext = c.verificationContext(accounts.One.user.id, {
+    duel: { id: m.id, drop: 0 },
+  });
 
-  // The original host reports its local state, not a score result.
+  // The browser host reports a local 'posted' state when it finishes.
   host.send({
     t: "duel", op: "state", v: 2, seq: 20, phase: "posted",
-    drop: 0, first: "h", runs: [100000, -1, -1, -1],
+    drop: 0, first: "h", runs: [999999, -1, -1, -1],
     win: "", left: 4000,
   });
-  await new Promise((resolve) => setTimeout(resolve, 20));
-  assert.equal(m.state.phase, "run");
-  assert.notEqual(m.pendingScores.host, undefined);
-
-  await tick(120001);
+  const hostPosted = await host.wait(
+    (x) => x.t === "duel" && x.op === "state" &&
+      x.phase === "posted" && x.drop === 0,
+  );
+  const guestSawHost = await guest.wait(
+    (x) => x.t === "duel" && x.op === "state" &&
+      x.phase === "posted" && x.drop === 0,
+  );
+  assert.equal(hostPosted.runs[0], 0);
+  assert.equal(guestSawHost.runs[0], 0);
+  assert.equal(m.state.runs.host[0], 0);
+  assert.ok(m.pendingScores["0:host"]);
   assert.equal(m.state.phase, "posted");
-  assert.equal(m.state.runs.host[0], "dnf");
+
   await tick(4500);
   assert.equal(m.state.phase, "present");
   assert.equal(m.state.drop, 1);
   await tick(4500);
   assert.equal(m.state.phase, "run");
 
-  // A client-provided positive score is only a completion hint; if verification
-  // fails we finish that turn with DNF, not attacker-chosen ranked points.
+  // Proof arriving after the second player starts still belongs to drop 0.
+  const lateContext = c.verificationContext(accounts.One.user.id, {
+    duel: { id: m.id, drop: 0 },
+  });
+  assert.equal(lateContext.role, firstContext.role);
+
+  // Guest can finish immediately too. A forged score is never credited.
   guest.send({ t: "duel", op: "result", v: 2, drop: 1, score: 999999 });
-  await new Promise((resolve) => setTimeout(resolve, 20));
-  assert.equal(m.state.phase, "run");
-  assert.notEqual(m.pendingScores.guest, undefined);
-  await tick(120001);
-  assert.equal(m.state.phase, "posted");
-  assert.equal(m.state.runs.guest[0], "dnf");
+  const secondPosted = await guest.wait(
+    (x) => x.t === "duel" && x.op === "state" &&
+      x.phase === "posted" && x.drop === 1,
+  );
+  assert.equal(secondPosted.runs[2], 0);
+  assert.equal(m.state.runs.guest[0], 0);
+  assert.ok(m.pendingScores["1:guest"]);
+
+  c.verified(lateContext, { score: 1450 });
+  assert.equal(m.state.runs.host[0], 1450);
+  assert.equal(m.state.drop, 1);
+  c.verified(c.verificationContext(accounts.Two.user.id, {
+    duel: { id: m.id, drop: 1 },
+  }), { score: 750 });
+  assert.equal(m.state.runs.guest[0], 750);
+  assert.equal(Object.keys(m.pendingScores).length, 0);
+  assert.equal(Object.keys(m.verified).length, 2);
   host.ws.close();
   guest.ws.close();
 });
