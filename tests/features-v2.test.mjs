@@ -678,6 +678,51 @@ test("the real client where message changes party follow privacy and destination
   a.ws.close();
   b.ws.close();
 });
+test("the actual recovered duel controllers accept server turns for both host and guest", async () => {
+  const physics = await physicsFor("apex");
+  const Duel = physics.input.ht;
+  assert.equal(typeof Duel, "function");
+  function client(role) {
+    const actions = { gates: 0, releases: 0 };
+    const host = {
+      toGate() { actions.gates++; },
+      release() { actions.releases++; },
+      myRun() { return { phase: "skiing", score: 0, moved: false }; },
+      stopRun() {},
+      opponentHere() { return true; },
+      connected() { return true; },
+    };
+    const controller = new Duel(role, { host: "One", guest: "Two" },
+      host, { send() {} }, 1000, undefined, 2, "apex");
+    controller.refereeing();
+    return { controller, actions };
+  }
+  const first = client("host"), second = client("guest");
+  const wire = (seq, phase, drop, runs = [-1, -1, -1, -1, -1, -1]) => ({
+    op: "state", seq, phase, drop, first: "h", runs,
+    win: "", wo: false, left: 4000,
+  });
+  for (const c of [first, second]) {
+    c.controller.receive(wire(1, "intro", 0), 1500);
+    assert.equal(c.controller.state.phase, "intro");
+    c.controller.receive(wire(2, "run", 0), 2000);
+    assert.equal(c.controller.state.phase, "run");
+    c.controller.update(2100);
+  }
+  assert.equal(first.actions.releases, 1);
+  assert.equal(second.actions.releases, 0);
+  for (const c of [first, second]) {
+    c.controller.receive(wire(3, "posted", 0, [0, -1, -1, -1, -1, -1]), 2300);
+    assert.equal(c.controller.state.phase, "posted");
+    c.controller.receive(wire(4, "present", 1, [0, -1, -1, -1, -1, -1]), 2500);
+    assert.equal(c.controller.state.drop, 1);
+    c.controller.receive(wire(5, "run", 1, [0, -1, -1, -1, -1, -1]), 2800);
+    c.controller.update(2900);
+    assert.equal(c.controller.state.phase, "run");
+  }
+  assert.equal(first.actions.releases, 1);
+  assert.equal(second.actions.releases, 1);
+});
 test("duel releases each rider immediately and reconciles verified scores across turns", async () => {
   const c = app.realtime.competition,
     m = c.createMatch(
