@@ -893,11 +893,15 @@ export class Competition {
       throw fault("Match not found", 404);
     const role = Object.keys(m.players).find((k) => m.players[k] === id);
     if (!role) throw fault("Not a participant in this match", 403);
-    if (
-      ref.drop !== m.state.drop ||
-      !["present", "count", "run"].includes(m.state.phase) ||
-      !this.activeRoles(m).includes(role)
-    )
+    const active =
+      ref.drop === m.state.drop &&
+      ["present", "count", "run"].includes(m.state.phase) &&
+      this.activeRoles(m).includes(role);
+    const pending = m.kind === "duel" &&
+      m.pendingScores?.[`${ref.drop}:${role}`];
+    // The player may finish while the verifier is still working. Continue
+    // accepting that exact proof even after the next player's turn begins.
+    if (!active && !(pending && !m.result))
       throw fault("This match round is not accepting inputs", 409);
     return {
       match: m,
@@ -914,6 +918,12 @@ export class Competition {
     const m = context.match,
       key = context.drop + ":" + context.role;
     if (m.verified[key] !== undefined) return;
+    // A completed duel turn is only provisionally scored until the input log
+    // has been simulated. The verifier can finish during another rider's turn.
+    if (m.kind === "duel" && m.pendingScores?.[key] && !m.result) {
+      this.settleDuelScore(m, key, result.score);
+      return;
+    }
     if (
       m.state.drop !== context.drop ||
       !["present", "count", "run"].includes(m.state.phase) ||
@@ -927,17 +937,48 @@ export class Competition {
     });
     this.post(m, context.role, result.score);
   }
-  notePendingScore(m, role) {
-    // Score comes from server replay verification, not the client's WebSocket.
-    // A reported completion must still let the match recover if verification
-    // is overloaded or fails, without awarding an unverified score.
-    m.pendingScores ??= {};
-    if (m.pendingScores[role] === undefined) {
-      m.pendingScores[role] = this.now();
-      console.info("Competition run submitted", {
-        match: m.id, kind: m.kind, drop: m.state.drop, role,
-      });
+  settleDuelScore(m, key, mark) {
+    const pending = m.pendingScores?.[key];
+    if (!pending || m.result || m.kind !== "duel") return;
+    delete m.pendingScores[key];
+    m.verified[key] = mark;
+    const { drop, role } = pending;
+    const runs = [...m.state.runs[role]];
+    runs[Math.floor(drop / 2)] = mark;
+    m.state = {
+      ...m.state,
+      seq: m.state.seq + 1,
+      runs: { ...m.state.runs, [role]: runs },
+    };
+    // The provisional result can change the winner after all four drops.
+    if (m.state.phase === "winner") {
+      m.state.winner = parks.g({
+        ...m.state, phase: "posted", drop: 3,
+      }).winner;
     }
+    console.info("Competition run verified", {
+      match: m.id, kind: "duel", drop, role, score: mark,
+    });
+    this.save(m);
+    this.broadcastState(m);
+  }
+  notePendingScore(m, role) {
+    m.pendingScores ??= {};
+    if (m.kind === "duel") {
+      if (m.state.phase !== "run") return;
+      const drop = m.state.drop, key = drop + ":" + role;
+      if (m.pendingScores[key]) return;
+      m.pendingScores[key] = { drop, role, at: this.now() };
+      console.info("Competition run finished; advancing turn while verifying", {
+        match: m.id, drop, role,
+      });
+      // Never trust the client's score. Zero is a provisional placeholder;
+      // the verified replay will replace it, even during a later drop.
+      this.post(m, role, 0);
+      return;
+    }
+    // Together 2v2 still requires all teammates' verified marks.
+    m.pendingScores[role] ??= this.now();
   }
   post(m, role, mark) {
     const old = m.state;
@@ -1077,6 +1118,15 @@ export class Competition {
         }
     this.matchQueues();
     for (const m of this.matches.values()) {
+      // Verification is allowed to settle after the turn advances. When a
+      // verifier remains unavailable, end the provisional score as a DNF.
+      if (m.kind === "duel") {
+        for (const [key, pending] of Object.entries(m.pendingScores || {})) {
+          if (pending && typeof pending === "object" &&
+              now - pending.at >= 240000)
+            this.settleDuelScore(m, key, "dnf");
+        }
+      }
       if (m.state.phase === "over") continue;
       for (const [role, at] of Object.entries(m.missing)) {
         if (
@@ -1140,6 +1190,20 @@ export class Competition {
             this.post(m, role, "dnf");
         }
       }
+      // Keep the winner screen up until all submitted runs are verified (or
+      // safely timed out). Never publish ranked ratings from placeholder scores.
+      const duelPending = m.kind === "duel" &&
+        Object.values(m.pendingScores || {}).some(
+          (p) => p && typeof p === "object",
+        );
+      if (m.state.phase === "winner" && duelPending) {
+        if (now - (m.sentAt || 0) >= 4000) {
+          m.sentAt = now;
+          this.broadcastState(m);
+        }
+        continue;
+      }
+      if (m.state.phase === "winner" && !m.result) this.finish(m);
       if (
         m.state.phase === "run" &&
         now - m.phaseAt > parks.w(m.park).runLimit
