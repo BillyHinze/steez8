@@ -16480,7 +16480,7 @@ var rh = class {
         this.audio.volume = en(this.state.volume) * (this.ducked ? .35 : 1)
     }
     silent() {
-        return this.muted || this.state.volume <= 0
+        return true; // Background soundtrack disabled for STEEZ8
     }
     setEnvironment(e, t) {
         let n = this.silent();

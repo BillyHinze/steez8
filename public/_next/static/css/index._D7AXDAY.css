@@ -17253,3 +17253,6 @@ select:focus-visible {
 
 /* Keep the STEEZ8 identity visible in Basecamp. */
 @media(min-width:481px){.game-shell.is-intro .topbar .wordmark{clip-path:none;width:auto;height:auto;position:static;overflow:visible}}
+
+/* The lobby soundtrack and its music toggle are disabled. */
+.top-pocket{display:none!important}
