@@ -1,7 +1,5 @@
 name: Import prepared game source
 on:
-  push:
-    paths: ['steez8-source.part-*', 'manifest.json']
   workflow_dispatch:
 permissions:
   contents: write
