@@ -432,7 +432,7 @@ var Ge = e => `${e.pow.toLocaleString(`en-US`)} POW`
     mythic: `Mythic`
 }
   , B = e => `score` in e.unlock ? e.unlock.score : null
-  , qe = e => e.toLocaleString(`en-US`)
+  , qe = e => e >= Number.MAX_SAFE_INTEGER / 2 ? `∞` : e.toLocaleString(`en-US`)
   , V = e => e >= 1e3 ? `${Math.round(e / 1e3)}K` : String(e)
   , H = e => f.includes(e)
   , U = e => u.includes(e)

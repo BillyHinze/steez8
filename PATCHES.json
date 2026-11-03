@@ -27,7 +27,7 @@
     "file": "_next/static/chunks/game-client-lLy7DYzG.js",
     "reason": "Disable cash sales, mount owner tools, refresh earned rewards, and integrate 3v3/4v4 into the native ranked selector and solo sessions into Ride; STEEZ8 branding and public navigation",
     "original_sha256": "cf472c9f7c7c657674eb87d9b3c4ad59c9529f031cad93d20062a3e8bd688bb4",
-    "patched_sha256": "451171ba7e4b27fb16beca9aa83a746bda4f4150151b792992533ea408fd45f3"
+    "patched_sha256": "4c469d8bd9b8cdc94579fef36aed6c54c5459392744d2c5d62beed5e6b28cf7f"
   },
   {
     "file": "_next/static/chunks/input-log-BvMdAwyG.js",

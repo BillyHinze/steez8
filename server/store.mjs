@@ -285,6 +285,8 @@ export class Store {
       : null;
   }
   balance(id) {
+    // Finite wire value for unlimited owner POW; privileges remain server-authorized.
+    if (this.owner(id)) return Number.MAX_SAFE_INTEGER;
     return this.rows("pow_ledger")
       .filter((r) => r.player_id === id)
       .reduce((n, r) => n + r.delta, 0);
@@ -313,6 +315,7 @@ export class Store {
         .map((r) => ({ id: r.id, ref: r.ref, pow: -r.delta })),
       best: yard.length ? Math.max(...yard.map((r) => r.score)) : null,
       pow: this.balance(id),
+      pow_unlimited: owner,
       role: this.role(id),
       tag: owner ? "OWNER" : null,
       pass: {
