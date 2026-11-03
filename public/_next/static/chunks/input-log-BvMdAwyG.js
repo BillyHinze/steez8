@@ -1280,7 +1280,7 @@ var Un = {
     }
     receive(e, t) {
         let n = p(this.me);
-        if (e.name && (this.names[n] = e.name),
+        if (e.name && !(this.refereed && e.op === `state`) && (this.names[n] = e.name),
         e.op === `bye`) {
             this.over(u(this.state, n), t);
             return
@@ -1295,7 +1295,7 @@ var Un = {
             this.me === `guest` && e.code && e.park && (this.state.phase === `over` || this.state.phase === `winner`) && this.host.moveTo?.(e.code, e.park);
             return
         }
-        if (this.me === `host`) {
+        if (this.me === `host` && !this.refereed) {
             if (e.op === `hello`) {
                 this.heard = !0,
                 this.send(t);
@@ -1307,7 +1307,7 @@ var Un = {
             }
             return
         }
-        if (e.op !== `state` || e.seq === void 0 || e.seq <= this.state.seq && this.heard || this.decided && e.phase !== `intro`)
+        if (e.op !== `state` || e.seq === void 0 || !this.refereed && e.seq <= this.state.seq && this.heard || this.decided && e.phase !== `intro`)
             return;
         this.heard = !0,
         e.phase === `intro` && (this.state.phase === `over` || this.state.phase === `winner`) && (this.wants = {
@@ -1406,9 +1406,9 @@ var Un = {
             this.ride(e);
             return
         }
-        this.me === `host` ? (!this.announced && n && this.send(e),
+        this.me === `host` && !this.refereed ? (!this.announced && n && this.send(e),
         t.phase === `waiting` ? this.heard && this.host.opponentHere() ? this.set(f(t), e) : e - this.createdAt > (this.queued ? 45e3 : m.waitLimit) && this.over(u(t, `guest`), e) : this.endsAt >= 0 && e >= this.endsAt && this.announced ? this.set(te(t, this.drops), e) : t.phase === `run` && this.announced && n && e - this.backAt > qn && e - this.phaseAt > this.clock.runLimit && this.set(r(t, d(t, t.drop), t.drop, `dnf`), e),
-        e - this.sentAt > Wn && t.phase !== `waiting` && this.send(e)) : this.alone ? this.endsAt >= 0 && e >= this.endsAt && (this.state = te(t, this.drops),
+        e - this.sentAt > Wn && t.phase !== `waiting` && this.send(e)) : this.me === `host` && this.refereed ? this.ride(e) : this.alone ? this.endsAt >= 0 && e >= this.endsAt && (this.state = te(t, this.drops),
         this.phaseAt = e,
         this.endsAt = -1) : this.queued && !this.heard && e - this.createdAt > 45e3 ? this.over(u(t, `host`), e) : (!this.heard || t.phase === `waiting`) && e - this.helloAt > Gn && this.hello(e),
         this.ride(e)
@@ -1447,7 +1447,7 @@ var Un = {
             this.report(t.drop, `dns`, e)) : (e - this.releasedAt > this.clock.runClock * 1e3 || this.stillFor >= m.stillLimit) && (this.report(t.drop, Math.round(n.score), e, !0),
             this.host.stopRun())
         }
-        if (this.me === `guest`)
+        if (this.me === `guest` || this.refereed)
             for (let[t,n] of this.reported)
                 e - n.at > Kn && (n.at = e,
                 this.link.send({
@@ -1459,7 +1459,7 @@ var Un = {
     report(e, t, n, i=!1) {
         if (this.onRun = !1,
         typeof t == `number` && this.host.ran?.(e, i),
-        this.me === `host`) {
+        this.me === `host` && !this.refereed) {
             this.reported.set(e, {
                 mark: t,
                 at: n
