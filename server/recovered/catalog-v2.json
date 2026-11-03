@@ -705,7 +705,7 @@
         }
       },
       {
-        "name": "Team CORK7",
+        "name": "Team STEEZ8",
         "value": "team",
         "rarity": "mythic",
         "unlock": {
@@ -827,7 +827,7 @@
         }
       },
       {
-        "name": "Cork7 Cup Winner",
+        "name": "STEEZ8 Cup Winner",
         "value": "cork7-cup-winner",
         "rarity": "mythic",
         "unlock": {
@@ -6404,7 +6404,7 @@
     },
     {
       "kind": "helmet",
-      "name": "Team CORK7",
+      "name": "Team STEEZ8",
       "value": "team",
       "rarity": "mythic",
       "unlock": {
@@ -6541,7 +6541,7 @@
     },
     {
       "kind": "helmet",
-      "name": "Cork7 Cup Winner",
+      "name": "STEEZ8 Cup Winner",
       "value": "cork7-cup-winner",
       "rarity": "mythic",
       "unlock": {

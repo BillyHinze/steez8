@@ -230,7 +230,7 @@ function Re(e, r) {
         n.textAlign = `center`,
         n.textBaseline = `middle`,
         n.font = `900 ${t.height * .68}px Arial`,
-        n.fillText(e ? `GOOD LINES ONLY` : `CORK7 / ${l}`, t.width / 2, t.height * .49);
+        n.fillText(e ? `GOOD LINES ONLY` : `STEEZ8 / ${l}`, t.width / 2, t.height * .49);
         let r = new C(t);
         r.colorSpace = j,
         r.anisotropy = 4;
@@ -288,7 +288,7 @@ var X = () => {
     return new O(r,n(r, e) + .045,e)
 }
 ;
-function Z(e, t=`CORK7`, n=8) {
+function Z(e, t=`STEEZ8`, n=8) {
     let r = document.createElement(`canvas`);
     r.width = e === `wall` ? 1024 : 2048,
     r.height = e === `wall` ? 512 : Math.round(r.width / n);
@@ -304,7 +304,7 @@ function Z(e, t=`CORK7`, n=8) {
                   , r = e * 128 + 47;
                 i.fillStyle = `#ecede4`,
                 i.font = `italic 900 42px Arial`,
-                i.fillText(`CORK7`, n, r),
+                i.fillText(`STEEZ8`, n, r),
                 i.fillStyle = `#ea7954`,
                 i.fillRect(n - 67, r + 28, 134, 3),
                 i.fillStyle = `#8fa8b3`,
@@ -361,7 +361,7 @@ function Ve(e, r=typeof document < `u`, a={
                 n.textAlign = `center`,
                 n.textBaseline = `middle`,
                 n.font = `900 104px Arial`,
-                n.fillText(e ? `CORK7` : `FINISH`, 0, 0, 660);
+                n.fillText(e ? `STEEZ8` : `FINISH`, 0, 0, 660);
                 let r = new C(t);
                 r.colorSpace = j;
                 let i = Q(r, 1.23, 2.7);
@@ -427,14 +427,14 @@ function Ge(i, a=typeof document < `u`, s={
         if (!u.has(e))
             throw Error(`Venue missing ${e}`);
     let f = new N;
-    f.name = `CORK7 terminals and finish`;
+    f.name = `STEEZ8 terminals and finish`;
     let m = u.get(`StartPortal`).clone(!0)
       , h = r;
     if (m.position.set(t(h), n(t(h), h), h),
     m.rotation.y = Math.atan(d(h)),
     a)
         for (let e of [!1, !0]) {
-            let t = Q(Z(`banner`, e ? `GOOD LINES ONLY` : `CORK7 / ${l}`, 22.4 / .94), 22.4, .94);
+            let t = Q(Z(`banner`, e ? `GOOD LINES ONLY` : `STEEZ8 / ${l}`, 22.4 / .94), 22.4, .94);
             t.position.set(0, 6.275, e ? .455 : -.455),
             t.rotation.y = e ? 0 : Math.PI,
             m.add(t)
@@ -455,7 +455,7 @@ function Ge(i, a=typeof document < `u`, s={
         }
         if (a)
             for (let e of [-1, 1]) {
-                let n = Q(Z(`banner`, c.surfaceLift ? `${l} / T-BAR` : t ? `NORD EXPRESS` : `CORK7 / SUMMIT`, 8.5 / .48), 8.5, .48);
+                let n = Q(Z(`banner`, c.surfaceLift ? `${l} / T-BAR` : t ? `NORD EXPRESS` : `STEEZ8 / SUMMIT`, 8.5 / .48), 8.5, .48);
                 n.position.set(r - 3, i + 6.27, t + e * 11.035),
                 n.rotation.y = e < 0 ? Math.PI : 0,
                 f.add(n)

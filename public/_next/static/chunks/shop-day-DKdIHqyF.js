@@ -478,7 +478,7 @@ function nt(e, t=!1) {
         let n = e.unlock.score;
         return n === 0 ? t ? `Free` : `Free for every rider` : t ? `${V(n)} Yard run` : `Earned with a ${V(n)} run on ${et}`
     }
-    return `season01` in e.unlock ? t ? `S01 ${V(e.unlock.season01)} run` : `Earned with a ${V(e.unlock.season01)} run in Season 01` : `prize` in e.unlock ? t ? `${Z(e.unlock.prize)} place` : `Won with ${Z(e.unlock.prize).toLowerCase()} place in a season` : t ? `Team` : `Given by Team CORK7`
+    return `season01` in e.unlock ? t ? `S01 ${V(e.unlock.season01)} run` : `Earned with a ${V(e.unlock.season01)} run in Season 01` : `prize` in e.unlock ? t ? `${Z(e.unlock.prize)} place` : `Won with ${Z(e.unlock.prize).toLowerCase()} place in a season` : t ? `Team` : `Given by Team STEEZ8`
 }
 var rt = e => {
     let[t=e.name,...n] = e.name.split(` · `);

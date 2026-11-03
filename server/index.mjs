@@ -56,7 +56,7 @@ const readableTables = new Set([
 ]);
 export function createApplication({
   dataDir = process.env.DATA_DIR || root + "/data",
-  brand = process.env.GAME_NAME || "Cork7 Reconstruction",
+  brand = process.env.GAME_NAME || "STEEZ8",
   paymentMode = process.env.PAYMENT_MODE || "disabled",
   clock = Date.now,
   publicOrigin = process.env.PUBLIC_ORIGIN || "",

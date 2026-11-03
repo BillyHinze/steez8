@@ -4444,6 +4444,17 @@ function Co(e, t) {
     e.forceSinglePass = u || i.forceSinglePass,
     e.userData.goggleClear = c
 }
+var steez8BandTexture;
+function steez8Band() {
+    if (!steez8BandTexture && typeof document !== 'undefined') {
+        const canvas=document.createElement('canvas');canvas.width=2048;canvas.height=128;
+        const ctx=canvas.getContext('2d');ctx.fillStyle='#f4f4e9';ctx.fillRect(0,0,2048,128);
+        ctx.fillStyle='#14272c';ctx.font='italic 900 96px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+        for(const x of [256,768,1280,1792])ctx.fillText('STEEZ8',x,68,440);
+        steez8BandTexture=new Ke(canvas);steez8BandTexture.needsUpdate=true;steez8BandTexture.flipY=false;steez8BandTexture.colorSpace=ze;steez8BandTexture.wrapS=Ye;steez8BandTexture.anisotropy=4;
+    }
+    return steez8BandTexture||null;
+}
 var wo = new Map;
 function To(e) {
     let t = g(e)
@@ -5444,7 +5455,7 @@ function Hc(e, t, n) {
         zc.has(e) || zc.set(e, e.map);
         let t = To(n.goggleItem)
           , r = n.strapPrint === `plain`
-          , i = r ? null : t ?? zc.get(e) ?? null;
+          , i = r ? null : t ?? steez8Band();
         e.map !== i && (e.map = i,
         e.needsUpdate = !0),
         r ? e.color.copy(Lc) : t && e.color.set(16777215)
@@ -5613,7 +5624,7 @@ var Uc = {
         distant: `#c7ccd4`
     },
     team: {
-        map: `/items/skins/helmet-team.webp`,
+        map: `/brand/steez8-team-helmet.svg`,
         roughness: .2,
         metalness: 0,
         clearcoat: 1,

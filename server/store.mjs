@@ -39,6 +39,7 @@ export class Store {
         .run("session-key", key);
     }
     this.key = key;
+    if (process.env.OWNER_ACCOUNT_ID) this.configureOwner(process.env.OWNER_ACCOUNT_ID);
   }
   rows(table) {
     return this.db
@@ -75,6 +76,13 @@ export class Store {
       this.db.exec("ROLLBACK");
       throw error;
     }
+  }
+  configureOwner(id) {
+    // Deployment-only setting: bind privileges to an existing immutable account ID.
+    // Never trust a display name, client metadata, or a newly registered email.
+    if (!this.db.prepare("SELECT id FROM users WHERE id=?").get(id))
+      throw Error("Configured owner account does not exist");
+    this.db.prepare("INSERT INTO metadata(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").run("owner_user_id", id);
   }
   owner(id) {
     return (

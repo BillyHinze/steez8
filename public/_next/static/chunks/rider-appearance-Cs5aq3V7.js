@@ -1258,7 +1258,7 @@ var ve = new Map(y.flatMap(e => [`helmet`, `pants`, `top`, `skis`, `board`, `pol
 }
   , Se = Object.keys(F)
   , Ce = [{
-    name: `CORK7 logo`,
+    name: `STEEZ8 logo`,
     value: `logo`
 }, {
     name: `Plain`,
@@ -1331,7 +1331,7 @@ var ve = new Map(y.flatMap(e => [`helmet`, `pants`, `top`, `skis`, `board`, `pol
         prize: 3
     }
 }, {
-    name: `Team CORK7`,
+    name: `Team STEEZ8`,
     value: `team`,
     rarity: `mythic`,
     unlock: {
@@ -1438,7 +1438,7 @@ var ve = new Map(y.flatMap(e => [`helmet`, `pants`, `top`, `skis`, `board`, `pol
         granted: !0
     }
 }, {
-    name: `Cork7 Cup Winner`,
+    name: `STEEZ8 Cup Winner`,
     value: `cork7-cup-winner`,
     rarity: `mythic`,
     unlock: {

@@ -1134,37 +1134,7 @@ function Po(e, t, n, r=8) {
 }
 var $ = r();
 function Fo() {
-    return (0,
-    $.jsx)(`svg`, {
-        className: `cork7-mark`,
-        role: `img`,
-        "aria-label": `Cork7`,
-        viewBox: `0 0 176 38`,
-        xmlns: `http://www.w3.org/2000/svg`,
-        children: (0,
-        $.jsxs)(`g`, {
-            transform: `translate(10 1) skewX(-12)`,
-            fill: `currentColor`,
-            fillRule: `evenodd`,
-            children: [(0,
-            $.jsx)(`path`, {
-                d: `M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z`
-            }), (0,
-            $.jsx)(`path`, {
-                d: `M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z`
-            }), (0,
-            $.jsx)(`path`, {
-                d: `M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z`
-            }), (0,
-            $.jsx)(`path`, {
-                d: `M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z`
-            }), (0,
-            $.jsx)(`path`, {
-                fill: `#101418`,
-                d: `M136 0H164V8L149 36H139L154 8H136Z`
-            })]
-        })
-    })
+    return (0, $.jsx)('svg', {className:'steez8-mark',role:'img','aria-label':'STEEZ8',viewBox:'0 0 208 38',xmlns:'http://www.w3.org/2000/svg',children:(0,$.jsx)('g',{transform:'translate(9 1) skewX(-12)',fill:'currentColor',fillRule:'evenodd',children:["M0 6 6 0H28V8H10L8 10V14H22L28 20V30L22 36H0V28H18L20 26V22H6L0 16Z","M34 0H64V8H53V36H45V8H34Z","M70 0H96V8H78V14H93V22H78V28H96V36H70Z","M102 0H128V8H110V14H125V22H110V28H128V36H102Z","M134 0H162V8L145 28H162V36H134V28L151 8H134Z","M168 6 174 0H192L198 6V14L194 18 198 22V30L192 36H174L168 30V22L172 18 168 14ZM176 8V14H190V8ZM176 22V28H190V22Z"].map((d,i)=>(0,$.jsx)('path',{d},i))})});
 }
 var Io = {
     solo: `SOLO`,
@@ -5453,7 +5423,7 @@ function kl({train: e, onSwitch: t, onCamera: n, table: r, onTable: i}) {
         }), e.spectator && (0,
         $.jsxs)(`span`, {
             className: `train-watch-out`,
-            children: [`CORK7 CUP`, ` · WATCHING`]
+            children: [`STEEZ8 CUP`, ` · WATCHING`]
         }), (0,
         $.jsxs)(`div`, {
             className: `train-watch-who`,
@@ -6148,7 +6118,7 @@ function Bl({train: e, onLeave: t, onNew: n}) {
             children: [(0,
             $.jsx)(vo, {
                 size: 18
-            }), ` `, i.you ? `YOU WIN` : `${i.name} WINS`, e.prize ? ` · CUP ITEM + POW${e.test ? ` (TEST)` : ``}` : ` THE CORK7 CUP`]
+            }), ` `, i.you ? `YOU WIN` : `${i.name} WINS`, e.prize ? ` · CUP ITEM + POW${e.test ? ` (TEST)` : ``}` : ` THE STEEZ8 CUP`]
         }), s && s.place !== null && (0,
         $.jsxs)(`p`, {
             className: `train-total`,
@@ -9221,7 +9191,7 @@ function md({news: e}) {
             }), (0,
             $.jsx)(`p`, {
                 className: `nfy-line`,
-                children: `For supporting Cork7 before the change.`
+                children: `For supporting STEEZ8 before the change.`
             })]
         });
     case `friend-gift`:
@@ -9277,7 +9247,7 @@ function md({news: e}) {
             }), (0,
             $.jsx)(`p`, {
                 className: `nfy-line`,
-                children: `From Team CORK7.`
+                children: `From Team STEEZ8.`
             })]
         });
     case `pack`:
@@ -13213,7 +13183,7 @@ function jp({outfit: e, quality: t, accountUnlocked: n, authReady: r, bestScore:
             }), p && (0,
             $.jsx)(`p`, {
                 className: `pow-web-note`,
-                children: `POW isn’t sold in the app. Buy it at cork7.com in your browser.`
+                children: `POW isn’t sold in the app. Earn it by riding and completing goals.`
             })]
         }) : (0,
         $.jsxs)(`button`, {
@@ -14040,7 +14010,7 @@ function Mp({accountUnlocked: e, authReady: t, till: n=null, progress: r=null, o
                     }), a && n && L !== null && !O && !k && ne > 0 && (0,
                     $.jsx)(`p`, {
                         className: `pow-web-note`,
-                        children: `POW isn’t sold in the app. Buy it at cork7.com in your browser.`
+                        children: `POW isn’t sold in the app. Earn it by riding and completing goals.`
                     }), n && L !== null && !k && !a && (0,
                     $.jsxs)(`button`, {
                         className: `text-button pass-gift`,
@@ -14320,7 +14290,7 @@ function Vp({progress: e, error: t, slow: n, tip: r}) {
             $.jsx)(`noscript`, {
                 children: (0,
                 $.jsxs)(`p`, {
-                    children: [`Enable JavaScript to play Cork7. You can still read the `, (0,
+                    children: [`Enable JavaScript to play STEEZ8. You can still read the `, (0,
                     $.jsx)(`a`, {
                         href: `/how-to-play`,
                         children: `game guide`
@@ -15476,7 +15446,7 @@ function Lm({game: e, pad: t=null, loadError: n, name: r, headcount: i, duelCoun
     (0,
     $.jsxs)(`section`, {
         className: `bc-shell ${Ce ? `bc-ready` : `bc-loading`} bc-tab-${fe}`,
-        "aria-label": Ce ? `Basecamp lobby` : `Loading Cork7`,
+        "aria-label": Ce ? `Basecamp lobby` : `Loading STEEZ8`,
         children: [(0,
         $.jsx)(Bp, {
             loadingShot: de,
@@ -15558,7 +15528,7 @@ function Lm({game: e, pad: t=null, loadError: n, name: r, headcount: i, duelCoun
                         children: (0,
                         $.jsxs)(`p`, {
                             className: `rd-noscript`,
-                            children: [`Enable JavaScript to play Cork7. You can still read the `, (0,
+                            children: [`Enable JavaScript to play STEEZ8. You can still read the `, (0,
                             $.jsx)(`a`, {
                                 href: `/how-to-play`,
                                 children: `game guide`
@@ -16143,10 +16113,10 @@ function Lm({game: e, pad: t=null, loadError: n, name: r, headcount: i, duelCoun
                 children: [(0,
                 $.jsxs)(`a`, {
                     className: `bc-discord`,
-                    href: `https://discord.gg/quMrfAwctK`,
+                    href: `https://discord.gg/VtwW9xue5k`,
                     target: `_blank`,
                     rel: `noopener noreferrer`,
-                    "aria-label": `Join the Cork7 Discord (opens in a new tab)`,
+                    "aria-label": `Join the STEEZ8 Discord (opens in a new tab)`,
                     children: [(0,
                     $.jsx)(Ud, {}), (0,
                     $.jsx)(`span`, {
@@ -16168,18 +16138,10 @@ function Lm({game: e, pad: t=null, loadError: n, name: r, headcount: i, duelCoun
                     $.jsx)(`a`, {
                         href: `/how-to-play`,
                         children: `How to play`
-                    }), !le && (0,
-                    $.jsx)(`a`, {
-                        href: `/download`,
-                        children: `Download`
                     }), (0,
                     $.jsx)(`a`, {
                         href: `/privacy`,
                         children: `Privacy`
-                    }), (0,
-                    $.jsx)(`a`, {
-                        href: `/credits`,
-                        children: `Credits`
                     }), (0,
                     $.jsx)(`a`, {
                         href: `/updates`,
@@ -17458,7 +17420,7 @@ function Th({touch: e=!1, deck: t, muted: n, ducked: r, obscured: i, open: a, ap
                         className: `music-credits`,
                         children: [(0,
                         $.jsx)(`p`, {
-                            children: `Collections curated for Cork7, each song under its Creative Commons license.`
+                            children: `Collections curated for STEEZ8, each song under its Creative Commons license.`
                         }), zm.map(e => (0,
                         $.jsxs)(`p`, {
                             children: [(0,
@@ -21142,7 +21104,7 @@ var g_ = {
         title: `Or pair it over Bluetooth.`,
         lines: [`PlayStation: hold *Create* (*Share* on a PS4 controller) and the *PS* button until the light flashes.`, `Xbox: turn it on, then hold the small *pair* button on top until the Xbox button flashes fast.`, `On the Mac, open *System Settings → Bluetooth* and click *Connect* next to the controller.`]
     }, {
-        title: `Press any button with Cork7 open.`,
+        title: `Press any button with STEEZ8 open.`,
         lines: [`Browsers only show a controller once a button is pressed. Then it shows up in Settings → Controls, with its own buttons in the picture.`]
     }],
     windows: [{
@@ -21152,7 +21114,7 @@ var g_ = {
         title: `Or pair it over Bluetooth.`,
         lines: [`PlayStation: hold *Create* (*Share* on a PS4 controller) and the *PS* button until the light flashes.`, `Xbox: turn it on, then hold the small *pair* button on top until the Xbox button flashes fast.`, `On the PC, open *Settings → Bluetooth & devices → Add device → Bluetooth* and pick the controller.`, `Older Xbox One controllers without Bluetooth need the cable or an Xbox Wireless Adapter.`]
     }, {
-        title: `Press any button with Cork7 open.`,
+        title: `Press any button with STEEZ8 open.`,
         lines: [`Browsers only show a controller once a button is pressed. Then it shows up in Settings → Controls, with its own buttons in the picture.`]
     }]
 };
@@ -24212,11 +24174,11 @@ function hv({hidden: e}) {
             className: `update-notice`,
             children: [(0,
             $.jsx)(`span`, {
-                children: `A new Cork7 app is ready.`
+                children: `A new STEEZ8 app is ready.`
             }), (0,
             $.jsxs)(`a`, {
                 className: `update-reload`,
-                href: `/download`,
+                href: `/`,
                 target: `_blank`,
                 rel: `noopener`,
                 onClick: e,
@@ -24225,7 +24187,7 @@ function hv({hidden: e}) {
                     size: 14,
                     strokeWidth: 2.6,
                     "aria-hidden": `true`
-                }), `Download`]
+                }), `Ride now`]
             }), (0,
             $.jsx)(`button`, {
                 className: `update-close`,
@@ -24244,7 +24206,7 @@ function hv({hidden: e}) {
         className: `update-notice ${c === `must` ? `is-must` : ``}`,
         children: [(0,
         $.jsx)(`span`, {
-            children: c === `must` ? `Cork7 has changed. Reload so your runs count.` : `A new version of Cork7 is ready.`
+            children: c === `must` ? `STEEZ8 has changed. Reload so your runs count.` : `A new version of STEEZ8 is ready.`
         }), (0,
         $.jsxs)(`button`, {
             className: `update-reload`,
@@ -24303,7 +24265,7 @@ function bv({hidden: e, auto: t, software: n, onUndo: r, onClose: i}) {
         className: `update-notice perf-notice`,
         children: [(0,
         $.jsx)(`span`, {
-            children: n ? `Cork7 is running without your graphics card${t ? `, so Performance mode is on` : ``}. Turn on hardware acceleration in your browser’s settings for a smoother game.` : t === `slow` ? `The game ran slowly, so Performance mode is on.` : `Performance mode is on for this device.`
+            children: n ? `STEEZ8 is running without your graphics card${t ? `, so Performance mode is on` : ``}. Turn on hardware acceleration in your browser’s settings for a smoother game.` : t === `slow` ? `The game ran slowly, so Performance mode is on.` : `Performance mode is on for this device.`
         }), t && (0,
         $.jsx)(`button`, {
             className: `update-reload`,
@@ -24891,7 +24853,7 @@ var Rv = 4e3
     busy: e => `${e} IS IN A 1V1`,
     "you-busy": () => `FINISH YOUR 1V1 FIRST`,
     "too-soon": () => `ONE MOMENT`,
-    reload: e => `${e} NEEDS TO RELOAD CORK7 FOR THAT MAP`
+    reload: e => `${e} NEEDS TO RELOAD STEEZ8 FOR THAT MAP`
 }
   , Jv = {
     yourself: () => `THAT IS YOU`,
@@ -24914,7 +24876,7 @@ var Rv = 4e3
     "not-leader": () => `ONLY THE PARTY LEADER CAN`,
     "no-party": () => `YOU’RE NOT IN A PARTY`,
     bad: () => `COULDN’T DO THAT`,
-    reload: e => `${e} NEEDS TO RELOAD CORK7 FOR PARTIES`,
+    reload: e => `${e} NEEDS TO RELOAD STEEZ8 FOR PARTIES`,
     "leader-away": () => `THEIR PARTY LEADER IS AWAY · TRY AGAIN SOON`,
     removed: () => `YOU WERE REMOVED FROM THAT PARTY · TRY AGAIN LATER`,
     "removed-invite": e => `${e} WAS REMOVED · ONLY THE LEADER CAN INVITE THEM BACK`
@@ -29922,7 +29884,7 @@ function Tb() {
                     }), !tr && Tr && (0,
                     $.jsxs)(`button`, {
                         className: `game-menu-trigger cup-admin-trigger`,
-                        "aria-label": `Admin: open a CORK7 CUP in this room`,
+                        "aria-label": `Admin: open a STEEZ8 CUP in this room`,
                         "aria-haspopup": `dialog`,
                         onClick: () => Cr(!0),
                         children: [(0,
@@ -30785,7 +30747,7 @@ function Tb() {
                 children: `TURN YOUR PHONE`
             }), (0,
             $.jsx)(`span`, {
-                children: `Cork7 rides sideways.`
+                children: `STEEZ8 rides sideways.`
             })]
         }), (0,
         $.jsx)(Gu, {

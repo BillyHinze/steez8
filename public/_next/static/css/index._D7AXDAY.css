@@ -48,7 +48,7 @@
     display: inline-flex
 }
 
-.info-brand .cork7-mark {
+.info-brand .steez8-mark {
     width: 122px;
     height: 27px;
     color: var(--ink)
@@ -337,7 +337,7 @@
     display: flex
 }
 
-.info-footer-brand .cork7-mark {
+.info-footer-brand .steez8-mark {
     width: 104px;
     height: 23px
 }
@@ -475,7 +475,7 @@
         display: none
     }
 
-    .info-brand .cork7-mark {
+    .info-brand .steez8-mark {
         width: 100px;
         height: 22px
     }
@@ -7951,7 +7951,7 @@ legend.settings-head {
     --muted: #c0ced0
 }
 
-.cork7-mark {
+.steez8-mark {
     color: #f3f5ef;
     width: 134px;
     height: 30px;
@@ -8126,7 +8126,7 @@ legend.settings-head {
 }
 
 @media (max-width: 620px) {
-    .is-intro:has(.bc-shell) .wordmark>svg.cork7-mark {
+    .is-intro:has(.bc-shell) .wordmark>svg.steez8-mark {
         width:108px;
         height: 26px
     }
@@ -10415,7 +10415,7 @@ a.primary-button.gu-open {
     outline-color: var(--pass-ink)
 }
 
-.game-shell[data-menus=light]:has(.bc-shell:is(.bc-tab-pass,.bc-tab-shop,.bc-tab-pow,.bc-tab-board,.bc-tab-replays,.bc-tab-updates)) .topbar .cork7-mark {
+.game-shell[data-menus=light]:has(.bc-shell:is(.bc-tab-pass,.bc-tab-shop,.bc-tab-pow,.bc-tab-board,.bc-tab-replays,.bc-tab-updates)) .topbar .steez8-mark {
     color: #1d2127
 }
 
@@ -12063,7 +12063,7 @@ a.primary-button.gu-open {
     line-height: 0
 }
 
-.bc-load-identity .cork7-mark {
+.bc-load-identity .steez8-mark {
     width: 100%;
     height: auto;
     overflow: visible
@@ -12267,11 +12267,11 @@ a.primary-button.gu-open {
     filter: none
 }
 
-[data-loading-art-theme=light] .bc-loading .cork7-mark {
+[data-loading-art-theme=light] .bc-loading .steez8-mark {
     color: #111
 }
 
-[data-loading-art-theme=light] .bc-loading .cork7-mark path {
+[data-loading-art-theme=light] .bc-loading .steez8-mark path {
     fill: currentColor
 }
 
@@ -16333,7 +16333,7 @@ select:focus-visible {
         padding: 0 var(--safe-r) 0 var(--safe-l)
     }
 
-    .game-shell .topbar .cork7-mark {
+    .game-shell .topbar .steez8-mark {
         width: 92px;
         height: 21px
     }
@@ -17250,3 +17250,6 @@ select:focus-visible {
     min-width: 44px;
     min-height: 44px
 }
+
+/* Keep the STEEZ8 identity visible in Basecamp. */
+@media(min-width:481px){.game-shell.is-intro .topbar .wordmark{clip-path:none;width:auto;height:auto;position:static;overflow:visible}}

@@ -153,7 +153,7 @@ function x(e, t, n, r) {
 }
 function S(e, t, n) {
     let r = e => String(e).padStart(2, `0`);
-    return `cork7-${e}-${t.getFullYear()}-${r(t.getMonth() + 1)}-${r(t.getDate())}-${r(t.getHours())}.${r(t.getMinutes())}.${r(t.getSeconds())}.${n}`
+    return `steez8-${e}-${t.getFullYear()}-${r(t.getMonth() + 1)}-${r(t.getDate())}-${r(t.getHours())}.${r(t.getMinutes())}.${r(t.getSeconds())}.${n}`
 }
 var C = (e, t) => e.reduce( (e, n) => (n.kind === `land` || n.kind === `butter`) && n.t <= t ? e + n.score : e, 0)
   , w = class {

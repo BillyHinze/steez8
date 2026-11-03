@@ -184,7 +184,7 @@ var Ue = class {
         } : t
     }
 }
-  , We = `CORK7 CUP`
+  , We = `STEEZ8 CUP`
   , g = [`apex`, `forestline`, `halfpipe`, `bigair`];
 function Ge(e, t=30) {
     let n = Math.max(1, e.length)

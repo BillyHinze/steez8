@@ -103,10 +103,10 @@ var w = `fuck.cunt.nigg.faggot.retard.whore.slut.bitch.shit.pussy.twat.wank.jizz
   , Se = x.slice(x.indexOf(`À`))
   , N = `a-z${xe}`
   , P = `A-Z${Se}`
-  , Ce = `admin.administrator.moderator.mod.staff.support.official.system.server.cork7.cork-7.cork.nordryggen.whiteout.rider.guest.anonymous.bot.you.me.developer.developers.dev-team.devteam.game-dev.gamedev.game-developer.tester.testers.beta-tester.owner`.split(`.`)
+  , Ce = `admin.administrator.moderator.mod.staff.support.official.system.server.steez8.steez-8.steez.cork7.cork-7.cork.nordryggen.whiteout.rider.guest.anonymous.bot.you.me.developer.developers.dev-team.devteam.game-dev.gamedev.game-developer.tester.testers.beta-tester.owner`.split(`.`)
   , we = [`devtest`, `devtesert`]
   , F = [`dev`, `devs`, `developer`, `developers`, `staff`, `admin`, `administrator`, `mod`, `moderator`, `official`, `team`, `support`, `tester`, `testers`, `owner`]
-  , Te = `^(cork7|cork)(${F.join(`|`)})[0-9]*$|^(${F.join(`|`)})(cork7|cork)[0-9]*$`
+  , Te = `^(steez8|steez|cork7|cork)(${F.join(`|`)})[0-9]*$|^(${F.join(`|`)})(steez8|steez|cork7|cork)[0-9]*$`
   , I = `A-Za-z${x}`
   , Ee = RegExp(`^[0-9${I}]([0-9${I} _-]*[0-9${I}])?$`)
   , L = RegExp(`[^0-9${I} _-]`);
@@ -179,7 +179,7 @@ function Re(e) {
       , n = t.replace(/-/g, ``)
       , r = B(n)
       , i = t.split(`-`);
-    return we.some(e => n.includes(e) || r.includes(e)) || new RegExp(Te).test(n) ? !0 : i.some(e => e === `cork7` || e === `cork`) && i.some(e => F.includes(e.replace(/[0-9]+$/, ``)))
+    return we.some(e => n.includes(e) || r.includes(e)) || new RegExp(Te).test(n) ? !0 : i.some(e => e === `steez8` || e === `steez` || e === `cork7` || e === `cork`) && i.some(e => F.includes(e.replace(/[0-9]+$/, ``)))
 }
 function ze(e) {
     let t = V(e);
@@ -459,7 +459,7 @@ var Dt = /\b(?:https?:\/\/|www\.)\S+|\b[a-z0-9-]{2,}\s?(?:\.|\(dot\)|\[dot\]|\sd
   , jt = /\b(?:snap\s?chat|snap|snahp|insta\s?gram|insta|tik\s?tok|whats\s?app|telegram|kik|discord|onlyfans|add\s+me|add\s+meg|dm\s+me|legg\s+meg\s+til|my\s+number|mitt\s+nummer|call\s+me|ring\s+meg|on\s+snip)\b/i
   , Mt = new RegExp([`\\bhow old (?:${K([`are`, `r`, `ar`, `is`, `iz`, `ru`, `are u`, `r u`])} )?${K([`you`, `u`, `ya`, `yu`, `yall`, `you guys`, `u guys`, `you all`, `everyone`, `every1`, `everybody`])}\\b`, `\\b${K([`whats`, `what is`, `what`, `wats`, `wat is`, `tell me`])} ${X} age\\b`, `\\bwhere (?:${K([`do`, `d`, `did`, `does`])} )?${K([`you`, `u`, `ya`, `yu`, `yall`, `you guys`, `u guys`, `you all`])} ${K([`live`, `liv`, `lve`, `stay`, `lives`])}\\b`, `\\bwhere(?:s| is| iz)? ${X} ${K([`house`, `home`, `address`, `adress`, `school`, `location`])}\\b`, `\\b${K([`whats`, `wats`, `wuts`, `wuz`, `whts`, `what`, `wat`, `what is`, `wat is`, `tell me`, `give me`, `gimme`, `drop`, `send`, `send me`, `post`, `say`, `can i have`, `can i get`])} ${K([`your`, `ur`, `yo`, `ya`, `youre`, `you`, `u`, `his`, `her`, `their`])} ${K(`address.adress.addy.location.home address.postcode.zip code.zipcode.real name.irl name.full name.last name.surname.actual name.school.phone.phone number.digits.cell.snap.snapchat.snahp.snp.sc.insta.ig.tiktok.discord.disc.dc.whatsapp.email.mail.gmail.roblox.xbox.psn.steam.facebook.fb`.split(`.`))}\\b`, `\\b${K([`give me`, `gimme`, `send me`, `drop`, `can i have`, `can i get`, `tell me`])} ${X} (?:phone )?number\\b`, `\\b${K([`what`, `wat`, `which`, `wich`, `whats`, `what is`])} ${K([`school`, `skool`, `grade`, `year`, `class`])} (?:${K([`do`, `d`, `r`, `are`, `ar`, `is`])} )?${K([`you`, `u`, `ya`, `yall`, `you guys`, `u guys`, `you all`])}\\b`, `\\b${K([`vilken`, `hvilken`, `vilke`, `hvilke`])} ${K([`skola`, `skole`, `klass`, `klasse`])}\\b`, `\\b${K([`hvor`, `var`])} bor du\\b`, `\\b${K([`hvor`, `hur`])} ${K([`gammel`, `gammal`])} ${K([`er`, `e`, `ar`])} du\\b`, `\\bsend (?:${K([`me`, `us`, `him`, `her`])} )?(?:${K([`a`, `some`, `ur`, `your`, `yo`, `da`, `the`, `more`, `ya`])} )?${K([`pic`, `pics`, `pix`, `picture`, `pictures`, `photo`, `photos`, `selfie`, `selfies`, `face pic`, `face pics`])}\\b`, `\\b${K([`come to`, `come over to`, `visit`])} ${X} ${K([`house`, `home`, `place`, `school`])}\\b`, `\\b${K([`meet`, `meetup`])} (?:${K([`up`, `me`])} )?${K([`irl`, `in real life`, `in person`])}\\b`].join(`|`));
 function Nt(e) {
-    return Array.from(e.matchAll(Dt), e => e[0].toLowerCase().replace(/\s|\(dot\)|\[dot\]|dot/g, `.`)).some(e => !/^(?:https?:\/\/)?(?:www\.)?cork7\.+com\b/.test(e)) ? !0 : Ot.test(e) || kt.test(e) || At.test(e) || jt.test(e) || Mt.test(J(e).join(` `))
+    return Array.from(e.matchAll(Dt), e => e[0].toLowerCase().replace(/\s|\(dot\)|\[dot\]|dot/g, `.`)).some(e => !/^(?:https?:\/\/)?(?:www\.)?steez8\.+me\b/.test(e)) ? !0 : Ot.test(e) || kt.test(e) || At.test(e) || jt.test(e) || Mt.test(J(e).join(` `))
 }
 function Pt(e) {
     if (typeof e != `string`)

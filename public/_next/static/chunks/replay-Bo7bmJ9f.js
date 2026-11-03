@@ -28000,7 +28000,7 @@ function Kp(e, t=!0) {
       , a = i.getUint32(0, !0)
       , o = JSON.parse(new TextDecoder().decode(new Uint8Array(n,4,a)));
     if (o.magic !== Wp)
-        throw Error(`Not a Cork7 replay`);
+        throw Error(`Not a STEEZ8 replay`);
     if (!Number.isSafeInteger(o.frames) || o.frames < 1 || !Number.isFinite(o.hz) || o.hz <= 0 || !Number.isSafeInteger(o.crashes) || o.crashes < 0)
         throw Error(`Invalid replay frames`);
     o.meta.outfit !== void 0 && (o.meta.outfit = r(o.meta.outfit));

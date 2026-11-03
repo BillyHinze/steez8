@@ -4589,7 +4589,7 @@ var Do = {
     margin: .9
 }
   , Oo = [{
-    name: `CORK7 LOGO`,
+    name: `STEEZ8 LOGO`,
     x: M(Do.z) + Do.offset,
     z: Do.z,
     width: Do.height * 172 / 36,
@@ -12323,7 +12323,7 @@ var Xh = {
     mound: {
         height: 12
     }
-}), ag(1075, 20, `CORK SEVEN`, {
+}), ag(1075, 20, `STEEZ EIGHT`, {
     width: 22,
     lipAngle: 35,
     run: 50,
@@ -12511,7 +12511,7 @@ for (let e of dg)
 var hg = []
   , gg = []
   , _g = []
-  , vg = [[0, `DROP IN`], [125, `BREMS / STREET LINK`], [166, `STREET LINK`], [260, `DROP / SWITCH YARD`], [312, `BREMS / SWITCH YARD`], [346, `SWITCH YARD`], [465, `DROP / FIRST WALL`], [570, `FIRST WALL`], [760, `HIGH TIDE`], [977, `CORK SEVEN`], [1250, `LAST LIGHT`], [1515, `UTLØP / BREMS`], [1540, `FINISH`]]
+  , vg = [[0, `DROP IN`], [125, `BREMS / STREET LINK`], [166, `STREET LINK`], [260, `DROP / SWITCH YARD`], [312, `BREMS / SWITCH YARD`], [346, `SWITCH YARD`], [465, `DROP / FIRST WALL`], [570, `FIRST WALL`], [760, `HIGH TIDE`], [977, `STEEZ EIGHT`], [1250, `LAST LIGHT`], [1515, `UTLØP / BREMS`], [1540, `FINISH`]]
   , ridgelineZones = isRidgeline && (vg = [[0, 'RIDGELINE / DROP IN'], [166, 'WARMUP RAILS'], [346, 'SWITCH YARD'], [530, 'FIRST TRACKS'], [700, 'BLUEBIRD'], [880, 'RIDGE RUNNER / SIDE QUEST'], [1070, 'SKYLINE'], [1290, 'HOME STRETCH'], [1500, 'RUNOUT / FINISH']])
   , yg = e({
     AIR_ANGLE: () => G_,
