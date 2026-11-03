@@ -951,7 +951,7 @@ export class Competition {
       runs: { ...m.state.runs, [role]: runs },
     };
     // The provisional result can change the winner after all four drops.
-    if (m.state.phase === "winner") {
+    if (m.state.phase === "winner" && !m.state.walkover) {
       m.state.winner = parks.g({
         ...m.state, phase: "posted", drop: 3,
       }).winner;
@@ -1172,6 +1172,12 @@ export class Competition {
         delete m.missing[role];
         this.save(m);
         this.broadcastState(m);
+      }
+      // A walkover is final regardless of unfinished run verification.
+      if (m.kind === "duel" && m.state.walkover) {
+        for (const [key, pending] of Object.entries(m.pendingScores || {}))
+          if (pending && typeof pending === "object")
+            this.settleDuelScore(m, key, "dnf");
       }
       if (m.state.phase === "waiting") {
         if (now > (m.reconnectUntil || m.created + 90000)) {
