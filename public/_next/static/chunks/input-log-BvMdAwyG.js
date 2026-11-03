@@ -1400,8 +1400,7 @@ var Un = {
         let t = this.state
           , n = this.host.connected?.() ?? !0;
         if (n && this.offlineSince !== null && (this.backAt = e),
-        this.watchOpponent(e),
-        this.watchHost(e),
+        this.refereed ? this.offlineSince = n ? null : this.offlineSince ?? e : (this.watchOpponent(e), this.watchHost(e)),
         this.state !== t) {
             this.ride(e);
             return
@@ -1495,7 +1494,7 @@ var Un = {
     }
     hostDue() {
         let e = this.state;
-        return this.me !== `guest` || this.alone || this.decided || !this.heard || e.phase === `waiting` || e.phase === `winner` || e.phase === `over` ? null : this.endsAt >= 0 ? this.endsAt : e.phase === `run` ? d(e, e.drop) === `host` ? this.phaseAt + this.clock.runClock * 1e3 : this.reported.get(e.drop)?.at ?? this.phaseAt + this.clock.runLimit : null
+        return this.refereed || this.me !== `guest` || this.alone || this.decided || !this.heard || e.phase === `waiting` || e.phase === `winner` || e.phase === `over` ? null : this.endsAt >= 0 ? this.endsAt : e.phase === `run` ? d(e, e.drop) === `host` ? this.phaseAt + this.clock.runClock * 1e3 : this.reported.get(e.drop)?.at ?? this.phaseAt + this.clock.runLimit : null
     }
     watchHost(e) {
         let t = this.hostDue();
