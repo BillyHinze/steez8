@@ -1,0 +1,1445 @@
+{
+  "captured_at": "2026-11-02T21:54:30.387Z",
+  "files": [
+    {
+      "url": "https://cork7.com/items/halloween/bone-yard-boot.webp?rev=costume-1",
+      "target": "items/halloween/bone-yard-boot.webp",
+      "source": "public/items/boots/hw-bone-yard-boots.glb",
+      "original": "original/recovered/items/halloween/bone-yard-boot.webp",
+      "bytes": 6374,
+      "sha256": "a9708fe1f558587c17cdc0ee735f51ff74f4a25a3900cdc07e8a1b57308cae21"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/blue-hour-boot.webp?rev=costume-1",
+      "target": "items/halloween/blue-hour-boot.webp",
+      "source": "public/items/boots/hw-blue-hour-boots.glb",
+      "original": "original/recovered/items/halloween/blue-hour-boot.webp",
+      "bytes": 24594,
+      "sha256": "ead0ed0e83187276d345a0b124f8711ae4656d3e66a3f30aec523339f4353fa5"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-press-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-press-boot.webp",
+      "source": "public/items/boots/hw-dead-press-boots.glb",
+      "original": "original/recovered/items/halloween/dead-press-boot.webp",
+      "bytes": 22074,
+      "sha256": "4ed6f15f36514465e53cd1a10eeea652ec8c6bfb3216cb7efbdd2e72b6bfdc50"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghosted-boot.webp?rev=costume-1",
+      "target": "items/halloween/ghosted-boot.webp",
+      "source": "public/items/boots/hw-ghosted-boots.glb",
+      "original": "original/recovered/items/halloween/ghosted-boot.webp",
+      "bytes": 18440,
+      "sha256": "aef922a0fafef3c569d8b97a9a5140058739b3b019bcb59b221a48f653512a00"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-form-boot.webp?rev=costume-1",
+      "target": "items/halloween/grave-form-boot.webp",
+      "source": "public/items/boots/hw-grave-form-boots.glb",
+      "original": "original/recovered/items/halloween/grave-form-boot.webp",
+      "bytes": 26494,
+      "sha256": "49deeb1dd618b172abb4cc842f08b6aab4dbe0a91f463ab77a6131f52fd65761"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/afterburn-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/afterburn-boot.webp",
+      "source": "public/items/boots/hw-afterburn-boots.glb",
+      "original": "original/recovered/items/halloween/afterburn-boot.webp",
+      "bytes": 22458,
+      "sha256": "d9720887af6003d2e7fa7d6c8576c3972eb09e0f3e05e231fa857d43a2e5542c"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-shift-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/grave-shift-boot.webp",
+      "source": "public/items/boots/hw-grave-shift-boots.glb",
+      "original": "original/recovered/items/halloween/grave-shift-boot.webp",
+      "bytes": 8148,
+      "sha256": "d252369d19ec542853064386fb31a16260d946a71347cc85bae382351f79aa3f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bail-notice-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/bail-notice-boot.webp",
+      "source": "public/items/boots/hw-bail-notice-boots.glb",
+      "original": "original/recovered/items/halloween/bail-notice-boot.webp",
+      "bytes": 11254,
+      "sha256": "282fe38cd68d6dbc1cf2c10cbbc098c18c01db2c97696b45039baf328d8a31ff"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bloodmoon-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/bloodmoon-boot.webp",
+      "source": "public/items/boots/hw-bloodmoon-boots.glb",
+      "original": "original/recovered/items/halloween/bloodmoon-boot.webp",
+      "bytes": 16482,
+      "sha256": "c715a814a3ae198356759ef88175d0e3bbbcf8048a87635888c7a35a80d03d6f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghost-lap-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/ghost-lap-boot.webp",
+      "source": "public/items/boots/hw-ghost-lap-boots.glb",
+      "original": "original/recovered/items/halloween/ghost-lap-boot.webp",
+      "bytes": 31792,
+      "sha256": "135c601ce9d95023521303cae5b0802bd4617981dc105278ef9200ea1b053434"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/harvest-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/harvest-boot.webp",
+      "source": "public/items/boots/hw-harvest-boots.glb",
+      "original": "original/recovered/items/halloween/harvest-boot.webp",
+      "bytes": 20790,
+      "sha256": "9e64e63786fa046ba1a9792a486df280221777374f0c2398847da4d563df3342"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/phantom-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/phantom-boot.webp",
+      "source": "public/items/boots/hw-phantom-boots.glb",
+      "original": "original/recovered/items/halloween/phantom-boot.webp",
+      "bytes": 12590,
+      "sha256": "f307745c4c6334c90ac6a5b210e1cbf0089f4316085d75419668642d12630664"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/jack-o-boot.webp?rev=costume-1",
+      "target": "items/halloween/jack-o-boot.webp",
+      "source": "public/items/boots/hw-jack-o-boots.glb",
+      "original": "original/recovered/items/halloween/jack-o-boot.webp",
+      "bytes": 22872,
+      "sha256": "e7581ebceae4d4a002d9d9171012b2b2a89129c05c77629d4b235cb4ef84e984"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/sugar-rush-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/sugar-rush-boot.webp",
+      "source": "public/items/boots/hw-sugar-rush-boots.glb",
+      "original": "original/recovered/items/halloween/sugar-rush-boot.webp",
+      "bytes": 22684,
+      "sha256": "94d9848684dff466b8e9cd4ba9920c6176bc00efc48f5ab86a2868024efe8471"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/toxic-tape-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/toxic-tape-boot.webp",
+      "source": "public/items/boots/hw-toxic-tape-boots.glb",
+      "original": "original/recovered/items/halloween/toxic-tape-boot.webp",
+      "bytes": 30412,
+      "sha256": "aeaa6ee4c2222fdea8058642a3ab14f7e6dbf5363863c25b8dcb2d34f1100ca3"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/hex-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/hex-boot.webp",
+      "source": "public/items/boots/hw-hex-boots.glb",
+      "original": "original/recovered/items/halloween/hex-boot.webp",
+      "bytes": 34132,
+      "sha256": "379659fdda2059fe4c5621ff2d86f409c88de223133f6ce8e3b85e01315bf235"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/joker-cut-boot.webp?rev=costume-1",
+      "target": "items/halloween/joker-cut-boot.webp",
+      "source": "public/items/boots/hw-joker-cut-boots.glb",
+      "original": "original/recovered/items/halloween/joker-cut-boot.webp",
+      "bytes": 25076,
+      "sha256": "2939e4fc266c8aa769ac2d940262acecd96eb04770f8582f7c0e39af1c1a3bc2"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/last-laugh-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/last-laugh-boot.webp",
+      "source": "public/items/boots/hw-last-laugh-boots.glb",
+      "original": "original/recovered/items/halloween/last-laugh-boot.webp",
+      "bytes": 17744,
+      "sha256": "737f9885110a82019258ddeaf520b95484a397f61c542807471551973a640882"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-air-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-air-boot.webp",
+      "source": "public/items/boots/hw-dead-air-boots.glb",
+      "original": "original/recovered/items/halloween/dead-air-boot.webp",
+      "bytes": 9870,
+      "sha256": "9cec63ecaa5280c09d1d5b5db02eaee4b813be4a8651e8b1ba9860216f34cd29"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ossuary-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/ossuary-boot.webp",
+      "source": "public/items/boots/hw-ossuary-boots.glb",
+      "original": "original/recovered/items/halloween/ossuary-boot.webp",
+      "bytes": 9716,
+      "sha256": "ed4f9fc7b378a56ad6a49e556a406e5d60665af005c25d69c9cab60b952fcf93"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/nightfang-boot.webp?rev=costume-1",
+      "target": "items/halloween/nightfang-boot.webp",
+      "source": "public/items/boots/hw-nightfang-boots.glb",
+      "original": "original/recovered/items/halloween/nightfang-boot.webp",
+      "bytes": 25742,
+      "sha256": "781e824af824aec09559d846094b87c517f5dd6801ea148d2ea2a4061331c768"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wildcard-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/wildcard-boot.webp",
+      "source": "public/items/boots/hw-wildcard-boots.glb",
+      "original": "original/recovered/items/halloween/wildcard-boot.webp",
+      "bytes": 18774,
+      "sha256": "ee9df7916ec62030ee9080cc5807f3e31427c1b8456b3a2de5fd11d20ddcff6d"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/witching-boot.webp?rev=park-ink-5",
+      "target": "items/halloween/witching-boot.webp",
+      "source": "public/items/boots/hw-witching-boots.glb",
+      "original": "original/recovered/items/halloween/witching-boot.webp",
+      "bytes": 22974,
+      "sha256": "9fdf925d0ef332a461b29dc3099aea6a69edab6f165587ca58624dcacf2da1bb"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/moth-eaten-boot.webp?rev=costume-1",
+      "target": "items/halloween/moth-eaten-boot.webp",
+      "source": "public/items/boots/hw-moth-eaten-boots.glb",
+      "original": "original/recovered/items/halloween/moth-eaten-boot.webp",
+      "bytes": 26932,
+      "sha256": "b96b7d1129706f2c96e0d3811d65f6aea8e8901cc2433fccd79053bcdfd628ac"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wrap-sheet-boot.webp?rev=costume-1",
+      "target": "items/halloween/wrap-sheet-boot.webp",
+      "source": "public/items/boots/hw-wrap-sheet-boots.glb",
+      "original": "original/recovered/items/halloween/wrap-sheet-boot.webp",
+      "bytes": 23394,
+      "sha256": "af630f8d56f6e5551e4a279313af44811fdd18fd48a2f233e90990150179e691"
+    },
+    {
+      "url": "https://cork7.com/items/street/80k-redline-boot.webp?rev=street-1",
+      "target": "items/street/80k-redline-boot.webp",
+      "source": "public/items/boots/sd-80k-redline-boots.glb",
+      "original": "original/recovered/items/street/80k-redline-boot.webp",
+      "bytes": 231730,
+      "sha256": "03cc6b9e576c792340acc76b39fb07356918b85408e48490e1bee1d9f0689c20"
+    },
+    {
+      "url": "https://cork7.com/items/street/acid-line-boot.webp?rev=street-1",
+      "target": "items/street/acid-line-boot.webp",
+      "source": "public/items/boots/sd-acid-line-boots.glb",
+      "original": "original/recovered/items/street/acid-line-boot.webp",
+      "bytes": 157332,
+      "sha256": "527908d1239eef312cab6dda6167f52adeed0de78ebf2437efd88d86d9898eff"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-noise-boot.webp?rev=street-1",
+      "target": "items/street/blue-noise-boot.webp",
+      "source": "public/items/boots/sd-blue-noise-boots.glb",
+      "original": "original/recovered/items/street/blue-noise-boot.webp",
+      "bytes": 151654,
+      "sha256": "5aab3f01b6c1d4efcffde0baecf92c47175eaefc4e4e1f1c64531cdb52c84d77"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/afterburn-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/afterburn-mitt.webp",
+      "source": "public/items/gloves/hw-afterburn-gloves.glb",
+      "original": "original/recovered/items/halloween/afterburn-mitt.webp",
+      "bytes": 76,
+      "sha256": "a3ecbe2b178ac0976d0ad762dfdc79b21a4d1b748ccfd348c3dfe18fc18d9902"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-static-boot.webp?rev=street-1",
+      "target": "items/street/blue-static-boot.webp",
+      "source": "public/items/boots/sd-blue-static-boots.glb",
+      "original": "original/recovered/items/street/blue-static-boot.webp",
+      "bytes": 216468,
+      "sha256": "7b0ee53608e9c57aeeb571199a8814085cecb2dfca9c33ca8868efd2c9b75522"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bloodmoon-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/bloodmoon-mitt.webp",
+      "source": "public/items/gloves/hw-bloodmoon-gloves.glb",
+      "original": "original/recovered/items/halloween/bloodmoon-mitt.webp",
+      "bytes": 76,
+      "sha256": "b2e71d552e0e239e55d14b74225e44d21f91fb3d9fda74a8aba8c5c9def7f563"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/blue-hour-mitt.webp?rev=costume-1",
+      "target": "items/halloween/blue-hour-mitt.webp",
+      "source": "public/items/gloves/hw-blue-hour-gloves.glb",
+      "original": "original/recovered/items/halloween/blue-hour-mitt.webp",
+      "bytes": 78,
+      "sha256": "ad0e82146e8f6b0a978d66400102aa804cac4f27b6ea42504d8acc984904dafb"
+    },
+    {
+      "url": "https://cork7.com/items/street/brush-country-boot.webp?rev=street-1",
+      "target": "items/street/brush-country-boot.webp",
+      "source": "public/items/boots/sd-brush-country-boots.glb",
+      "original": "original/recovered/items/street/brush-country-boot.webp",
+      "bytes": 163196,
+      "sha256": "9e2bef739953b29406fec540d3a8c5a7b9577929b1743691837ce14d9e3de09e"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bone-yard-mitt.webp?rev=costume-1",
+      "target": "items/halloween/bone-yard-mitt.webp",
+      "source": "public/items/gloves/hw-bone-yard-gloves.glb",
+      "original": "original/recovered/items/halloween/bone-yard-mitt.webp",
+      "bytes": 78,
+      "sha256": "1909795faebf1cdaaafe31432f896580b4a1b861ca24e53cdd14af7d5c75d5f6"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-press-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-press-mitt.webp",
+      "source": "public/items/gloves/hw-dead-press-gloves.glb",
+      "original": "original/recovered/items/halloween/dead-press-mitt.webp",
+      "bytes": 74,
+      "sha256": "ccfee376fdc2c6182215074d34000937d14f61fbc6e791b62cc0c7c499c60d6d"
+    },
+    {
+      "url": "https://cork7.com/items/street/cold-front-boot.webp?rev=street-1",
+      "target": "items/street/cold-front-boot.webp",
+      "source": "public/items/boots/sd-cold-front-boots.glb",
+      "original": "original/recovered/items/street/cold-front-boot.webp",
+      "bytes": 187896,
+      "sha256": "901d340f43812d41d97fc1b22f5e7646b8a076355b070a6db2338a6b4664eabc"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghosted-mitt.webp?rev=costume-1",
+      "target": "items/halloween/ghosted-mitt.webp",
+      "source": "public/items/gloves/hw-ghosted-gloves.glb",
+      "original": "original/recovered/items/halloween/ghosted-mitt.webp",
+      "bytes": 76,
+      "sha256": "342efe12344cd4e061644d066bd1acbb54b2b0bac6f6f787a294eaa8011caaac"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-shift-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/grave-shift-mitt.webp",
+      "source": "public/items/gloves/hw-grave-shift-gloves.glb",
+      "original": "original/recovered/items/halloween/grave-shift-mitt.webp",
+      "bytes": 80,
+      "sha256": "d6a473de699d7b1dc80660425803d4975c4d51a0ff73d83cf9db03768521e1f5"
+    },
+    {
+      "url": "https://cork7.com/items/street/after-hours-boot.webp?rev=street-1",
+      "target": "items/street/after-hours-boot.webp",
+      "source": "public/items/boots/sd-after-hours-boots.glb",
+      "original": "original/recovered/items/street/after-hours-boot.webp",
+      "bytes": 142030,
+      "sha256": "1018f0437c216b054694c536c34a5bfe09e5d382efda3b56474f8cca1a810871"
+    },
+    {
+      "url": "https://cork7.com/items/street/off-script-boot.webp?rev=street-1",
+      "target": "items/street/off-script-boot.webp",
+      "source": "public/items/boots/sd-off-script-boots.glb",
+      "original": "original/recovered/items/street/off-script-boot.webp",
+      "bytes": 163328,
+      "sha256": "8861bf70221dba2ef119d12e45f8d7ed65cd767307666f4d53425536666a93a4"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-form-mitt.webp?rev=costume-1",
+      "target": "items/halloween/grave-form-mitt.webp",
+      "source": "public/items/gloves/hw-grave-form-gloves.glb",
+      "original": "original/recovered/items/halloween/grave-form-mitt.webp",
+      "bytes": 76,
+      "sha256": "754a24ea51a90e693621ad75a906f06f43ad6ef59fa336ec764a9d035fd9567a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/harvest-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/harvest-mitt.webp",
+      "source": "public/items/gloves/hw-harvest-gloves.glb",
+      "original": "original/recovered/items/halloween/harvest-mitt.webp",
+      "bytes": 78,
+      "sha256": "373d1723cee7429aeb73142ddbb94ac53ec9eedd93a4dd4b18693b94fbce6061"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/moth-eaten-mitt.webp?rev=costume-1",
+      "target": "items/halloween/moth-eaten-mitt.webp",
+      "source": "public/items/gloves/hw-moth-eaten-gloves.glb",
+      "original": "original/recovered/items/halloween/moth-eaten-mitt.webp",
+      "bytes": 76,
+      "sha256": "6a3d9a74b611e804116a5f503bd033d5f5593a08b9d25cb8eb73433410126094"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bail-notice-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/bail-notice-mitt.webp",
+      "source": "public/items/gloves/hw-bail-notice-gloves.glb",
+      "original": "original/recovered/items/halloween/bail-notice-mitt.webp",
+      "bytes": 76,
+      "sha256": "4e2894b18c3a3f8ec5e33137b15d6435175738f1454464eee639660f8df77af1"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-air-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-air-mitt.webp",
+      "source": "public/items/gloves/hw-dead-air-gloves.glb",
+      "original": "original/recovered/items/halloween/dead-air-mitt.webp",
+      "bytes": 76,
+      "sha256": "9de9e59f9a697da1fcf3e885e25dc9e054558c68b9b8dee3d38d864e3869064a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ossuary-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/ossuary-mitt.webp",
+      "source": "public/items/gloves/hw-ossuary-gloves.glb",
+      "original": "original/recovered/items/halloween/ossuary-mitt.webp",
+      "bytes": 76,
+      "sha256": "eb83a2aadf381b293baab09f35a6da1adf98ca406adc70d9735fa52c4c0581b2"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/phantom-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/phantom-mitt.webp",
+      "source": "public/items/gloves/hw-phantom-gloves.glb",
+      "original": "original/recovered/items/halloween/phantom-mitt.webp",
+      "bytes": 82,
+      "sha256": "eaa9bb404b2e79fd609c322cda1c691bb377095af4d5eb46bcccaefe26583bd0"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghost-lap-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/ghost-lap-mitt.webp",
+      "source": "public/items/gloves/hw-ghost-lap-gloves.glb",
+      "original": "original/recovered/items/halloween/ghost-lap-mitt.webp",
+      "bytes": 80,
+      "sha256": "730a5528ffd5f55f650677d76fbcbe87a91f10f354b458bb4b680e4d4a1bb2e5"
+    },
+    {
+      "url": "https://cork7.com/items/street/side-country-boot.webp?rev=street-1",
+      "target": "items/street/side-country-boot.webp",
+      "source": "public/items/boots/sd-side-country-boots.glb",
+      "original": "original/recovered/items/street/side-country-boot.webp",
+      "bytes": 118524,
+      "sha256": "b1d46231b792a6ecaa7aa5a45c77946004b5e5d9db64252699d8632fb8b3d281"
+    },
+    {
+      "url": "https://cork7.com/items/street/switch-lane-boot.webp?rev=street-1",
+      "target": "items/street/switch-lane-boot.webp",
+      "source": "public/items/boots/sd-switch-lane-boots.glb",
+      "original": "original/recovered/items/street/switch-lane-boot.webp",
+      "bytes": 70394,
+      "sha256": "e1e0cb21cf4570a5e8dcddad4bc964b91e19fcf147286d5479b15280d2a36b22"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/toxic-tape-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/toxic-tape-mitt.webp",
+      "source": "public/items/gloves/hw-toxic-tape-gloves.glb",
+      "original": "original/recovered/items/halloween/toxic-tape-mitt.webp",
+      "bytes": 78,
+      "sha256": "3238835f7dfc8d49979b3d7337ceddf02e91c70dc3d3649360caca9bdf33ab5a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/jack-o-mitt.webp?rev=costume-1",
+      "target": "items/halloween/jack-o-mitt.webp",
+      "source": "public/items/gloves/hw-jack-o-gloves.glb",
+      "original": "original/recovered/items/halloween/jack-o-mitt.webp",
+      "bytes": 78,
+      "sha256": "25e4d716ea5f5b80217a8da6026454e3cdae5d75a066ce9fd29a0d6bbe7239f2"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/sugar-rush-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/sugar-rush-mitt.webp",
+      "source": "public/items/gloves/hw-sugar-rush-gloves.glb",
+      "original": "original/recovered/items/halloween/sugar-rush-mitt.webp",
+      "bytes": 76,
+      "sha256": "71c20daf4d350415cbac189930df7016236c4a076ad2ed39b65c4d0bfc01c8c5"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/witching-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/witching-mitt.webp",
+      "source": "public/items/gloves/hw-witching-gloves.glb",
+      "original": "original/recovered/items/halloween/witching-mitt.webp",
+      "bytes": 76,
+      "sha256": "fdc8df4a3083eec574cc6e80f58f7bed6981bfdaa42c597169ca252ff7ee47eb"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/joker-cut-mitt.webp?rev=costume-1",
+      "target": "items/halloween/joker-cut-mitt.webp",
+      "source": "public/items/gloves/hw-joker-cut-gloves.glb",
+      "original": "original/recovered/items/halloween/joker-cut-mitt.webp",
+      "bytes": 78,
+      "sha256": "5dc78f2f134d9a78b3aea365b19a3b63d69ed4b4d4aa9e4a0fca2834acaae861"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wrap-sheet-mitt.webp?rev=costume-1",
+      "target": "items/halloween/wrap-sheet-mitt.webp",
+      "source": "public/items/gloves/hw-wrap-sheet-gloves.glb",
+      "original": "original/recovered/items/halloween/wrap-sheet-mitt.webp",
+      "bytes": 74,
+      "sha256": "5a5d5e240f9e8c9e26c097f7b49e8bab27a8df0ed77eb3a7b9703797589ee99c"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/hex-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/hex-mitt.webp",
+      "source": "public/items/gloves/hw-hex-gloves.glb",
+      "original": "original/recovered/items/halloween/hex-mitt.webp",
+      "bytes": 78,
+      "sha256": "d0b7593717ca5025f4bbe9211b9a637d8a974b9706b2a4ceec79cbff8ba3dd15"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/last-laugh-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/last-laugh-mitt.webp",
+      "source": "public/items/gloves/hw-last-laugh-gloves.glb",
+      "original": "original/recovered/items/halloween/last-laugh-mitt.webp",
+      "bytes": 80,
+      "sha256": "d9e17b6b116c1cf2f3f17b8f961536ba02a0b507b3a3e6305251941ad89049ef"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/nightfang-mitt.webp?rev=costume-1",
+      "target": "items/halloween/nightfang-mitt.webp",
+      "source": "public/items/gloves/hw-nightfang-gloves.glb",
+      "original": "original/recovered/items/halloween/nightfang-mitt.webp",
+      "bytes": 78,
+      "sha256": "c3af393fb7ddab60117680b28549cc5903ef48339784f051c7671cd655a9f1b7"
+    },
+    {
+      "url": "https://cork7.com/items/street/hot-lap-boot.webp?rev=street-1",
+      "target": "items/street/hot-lap-boot.webp",
+      "source": "public/items/boots/sd-hot-lap-boots.glb",
+      "original": "original/recovered/items/street/hot-lap-boot.webp",
+      "bytes": 190560,
+      "sha256": "1cd72386f5437bb0410ae62567ed50a6c97b39b58a4f9bfd401e1a31ab0e5a1f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wildcard-mitt.webp?rev=park-ink-5",
+      "target": "items/halloween/wildcard-mitt.webp",
+      "source": "public/items/gloves/hw-wildcard-gloves.glb",
+      "original": "original/recovered/items/halloween/wildcard-mitt.webp",
+      "bytes": 76,
+      "sha256": "6be41e837eea44cb96557ec5fce13dce57b6dbeb1918656d59f50670737875cc"
+    },
+    {
+      "url": "https://cork7.com/items/street/acid-line-mitt.webp?rev=street-1",
+      "target": "items/street/acid-line-mitt.webp",
+      "source": "public/items/gloves/sd-acid-line-gloves.glb",
+      "original": "original/recovered/items/street/acid-line-mitt.webp",
+      "bytes": 78,
+      "sha256": "2fb0e7e5e85ad255bad2258532590758a98b2c91be00277435164a27966213fb"
+    },
+    {
+      "url": "https://cork7.com/items/street/after-hours-mitt.webp?rev=street-1",
+      "target": "items/street/after-hours-mitt.webp",
+      "source": "public/items/gloves/sd-after-hours-gloves.glb",
+      "original": "original/recovered/items/street/after-hours-mitt.webp",
+      "bytes": 76,
+      "sha256": "fcf57a414c22ec1ac05d282bcde23909332988f70e3749ed8a09d8feeadd9a96"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/afterburn-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/afterburn-ski-left.webp",
+      "source": "public/items/skis/hw-afterburn-skis.glb",
+      "original": "original/recovered/items/halloween/afterburn-ski-left.webp",
+      "bytes": 22046,
+      "sha256": "eac48033d77a99dc2ca18182d0a2602c8fb3177abbbb60c3900dc7c1bd1f0bf4"
+    },
+    {
+      "url": "https://cork7.com/items/street/80k-redline-mitt.webp?rev=street-1",
+      "target": "items/street/80k-redline-mitt.webp",
+      "source": "public/items/gloves/sd-80k-redline-gloves.glb",
+      "original": "original/recovered/items/street/80k-redline-mitt.webp",
+      "bytes": 80,
+      "sha256": "b34d37b8aba34fd368e618ee54bfc435af32075bcb1b417fb6c79f6a8b3e3ba3"
+    },
+    {
+      "url": "https://cork7.com/items/street/cold-front-mitt.webp?rev=street-1",
+      "target": "items/street/cold-front-mitt.webp",
+      "source": "public/items/gloves/sd-cold-front-gloves.glb",
+      "original": "original/recovered/items/street/cold-front-mitt.webp",
+      "bytes": 78,
+      "sha256": "91f17ad274a0540c570f042af9423586e1ba79888e42ac8c7368776f97215f0a"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-noise-mitt.webp?rev=street-1",
+      "target": "items/street/blue-noise-mitt.webp",
+      "source": "public/items/gloves/sd-blue-noise-gloves.glb",
+      "original": "original/recovered/items/street/blue-noise-mitt.webp",
+      "bytes": 76,
+      "sha256": "0e6fa74afc95cec0eb60e1a14fc118601b8e8b268688b3172700db7f1df5e5d9"
+    },
+    {
+      "url": "https://cork7.com/items/street/brush-country-mitt.webp?rev=street-1",
+      "target": "items/street/brush-country-mitt.webp",
+      "source": "public/items/gloves/sd-brush-country-gloves.glb",
+      "original": "original/recovered/items/street/brush-country-mitt.webp",
+      "bytes": 78,
+      "sha256": "c59be2e81e86240c9a54cdc799dde320e5ec39b0e0031585107c0c93d69651de"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/afterburn-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/afterburn-ski-base.webp",
+      "source": "public/items/skis/hw-afterburn-skis.glb",
+      "original": "original/recovered/items/halloween/afterburn-ski-base.webp",
+      "bytes": 17378,
+      "sha256": "8c1a6e333623762372769700565657bdaf46b84d32a36f4952188e59ebfef739"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-static-mitt.webp?rev=street-1",
+      "target": "items/street/blue-static-mitt.webp",
+      "source": "public/items/gloves/sd-blue-static-gloves.glb",
+      "original": "original/recovered/items/street/blue-static-mitt.webp",
+      "bytes": 80,
+      "sha256": "f12ba97465a905c2975443ff9631f37e571bb9638adfe782f38460871a2cc161"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/afterburn-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/afterburn-ski-right.webp",
+      "source": "public/items/skis/hw-afterburn-skis.glb",
+      "original": "original/recovered/items/halloween/afterburn-ski-right.webp",
+      "bytes": 22046,
+      "sha256": "eac48033d77a99dc2ca18182d0a2602c8fb3177abbbb60c3900dc7c1bd1f0bf4"
+    },
+    {
+      "url": "https://cork7.com/items/street/off-script-mitt.webp?rev=street-1",
+      "target": "items/street/off-script-mitt.webp",
+      "source": "public/items/gloves/sd-off-script-gloves.glb",
+      "original": "original/recovered/items/street/off-script-mitt.webp",
+      "bytes": 78,
+      "sha256": "d53aaa3dcad23d00a56bd410fb5a58b4730e2878c3885b22552199c2fb69c039"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bone-yard-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/bone-yard-ski-left.webp",
+      "source": "public/items/skis/hw-bone-yard-skis.glb",
+      "original": "original/recovered/items/halloween/bone-yard-ski-left.webp",
+      "bytes": 17136,
+      "sha256": "431516a51342d2c1d4bf8d59a7b7711b6354dd02510c77137393f0277f05de81"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bone-yard-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/bone-yard-ski-base.webp",
+      "source": "public/items/skis/hw-bone-yard-skis.glb",
+      "original": "original/recovered/items/halloween/bone-yard-ski-base.webp",
+      "bytes": 19252,
+      "sha256": "6fb5973b01b6925b7b560ef40cc546106b09dd6aacae15a07aa7c1b375cf35cf"
+    },
+    {
+      "url": "https://cork7.com/items/street/side-country-mitt.webp?rev=street-1",
+      "target": "items/street/side-country-mitt.webp",
+      "source": "public/items/gloves/sd-side-country-gloves.glb",
+      "original": "original/recovered/items/street/side-country-mitt.webp",
+      "bytes": 76,
+      "sha256": "c130031d53e85aa26eb746eb31b5456df25266a649506a0ea980c078897d5f3b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bone-yard-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/bone-yard-ski-right.webp",
+      "source": "public/items/skis/hw-bone-yard-skis.glb",
+      "original": "original/recovered/items/halloween/bone-yard-ski-right.webp",
+      "bytes": 17136,
+      "sha256": "431516a51342d2c1d4bf8d59a7b7711b6354dd02510c77137393f0277f05de81"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/blue-hour-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/blue-hour-ski-left.webp",
+      "source": "public/items/skis/hw-blue-hour-skis.glb",
+      "original": "original/recovered/items/halloween/blue-hour-ski-left.webp",
+      "bytes": 34130,
+      "sha256": "4f21975f732914a185ba05ca67466b19a805e8711b06817ae795fd453a0cd276"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/blue-hour-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/blue-hour-ski-base.webp",
+      "source": "public/items/skis/hw-blue-hour-skis.glb",
+      "original": "original/recovered/items/halloween/blue-hour-ski-base.webp",
+      "bytes": 28670,
+      "sha256": "17d26230fb35c654a971cd91311703e0d01dc2c7ceb5db0966dbc50210deb7fd"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/blue-hour-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/blue-hour-ski-right.webp",
+      "source": "public/items/skis/hw-blue-hour-skis.glb",
+      "original": "original/recovered/items/halloween/blue-hour-ski-right.webp",
+      "bytes": 34130,
+      "sha256": "4f21975f732914a185ba05ca67466b19a805e8711b06817ae795fd453a0cd276"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-air-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-air-ski-left.webp",
+      "source": "public/items/skis/hw-dead-air-skis.glb",
+      "original": "original/recovered/items/halloween/dead-air-ski-left.webp",
+      "bytes": 3516,
+      "sha256": "23683df8396abd527a9abac11dcd613d2eb7bada61b35d778aada84456bb886b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-air-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-air-ski-base.webp",
+      "source": "public/items/skis/hw-dead-air-skis.glb",
+      "original": "original/recovered/items/halloween/dead-air-ski-base.webp",
+      "bytes": 3152,
+      "sha256": "610229fd341fdc6aa6fe93e2e16e666a3b601522c5642616cc51690a4bb07585"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bail-notice-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/bail-notice-ski-base.webp",
+      "source": "public/items/skis/hw-bail-notice-skis.glb",
+      "original": "original/recovered/items/halloween/bail-notice-ski-base.webp",
+      "bytes": 8564,
+      "sha256": "edc70e78d3bac289b0d9db5b1047ed0145d2c48952e85d9ae4e8a170a1610739"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bail-notice-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/bail-notice-ski-right.webp",
+      "source": "public/items/skis/hw-bail-notice-skis.glb",
+      "original": "original/recovered/items/halloween/bail-notice-ski-right.webp",
+      "bytes": 6880,
+      "sha256": "c1c7b7d55c549191f52cac6eee3490df349874f0c8b7cd1bba33961c15c26c75"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bail-notice-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/bail-notice-ski-left.webp",
+      "source": "public/items/skis/hw-bail-notice-skis.glb",
+      "original": "original/recovered/items/halloween/bail-notice-ski-left.webp",
+      "bytes": 6880,
+      "sha256": "c1c7b7d55c549191f52cac6eee3490df349874f0c8b7cd1bba33961c15c26c75"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-air-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-air-ski-right.webp",
+      "source": "public/items/skis/hw-dead-air-skis.glb",
+      "original": "original/recovered/items/halloween/dead-air-ski-right.webp",
+      "bytes": 3516,
+      "sha256": "23683df8396abd527a9abac11dcd613d2eb7bada61b35d778aada84456bb886b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bloodmoon-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/bloodmoon-ski-left.webp",
+      "source": "public/items/skis/hw-bloodmoon-skis.glb",
+      "original": "original/recovered/items/halloween/bloodmoon-ski-left.webp",
+      "bytes": 9740,
+      "sha256": "6ef99c97573768f968d078e2e78e4a4730d96b779f47820819d68afc32b9015b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bloodmoon-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/bloodmoon-ski-right.webp",
+      "source": "public/items/skis/hw-bloodmoon-skis.glb",
+      "original": "original/recovered/items/halloween/bloodmoon-ski-right.webp",
+      "bytes": 9740,
+      "sha256": "6ef99c97573768f968d078e2e78e4a4730d96b779f47820819d68afc32b9015b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-press-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-press-ski-left.webp",
+      "source": "public/items/skis/hw-dead-press-skis.glb",
+      "original": "original/recovered/items/halloween/dead-press-ski-left.webp",
+      "bytes": 6192,
+      "sha256": "0fac1b552b83834199a082a049c26a0160f30ad2261b53f7737390ea090002de"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/bloodmoon-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/bloodmoon-ski-base.webp",
+      "source": "public/items/skis/hw-bloodmoon-skis.glb",
+      "original": "original/recovered/items/halloween/bloodmoon-ski-base.webp",
+      "bytes": 9120,
+      "sha256": "6f9915be76de286175b4ec30f3ae2cf393391ac42d687decfc2e5d360252a00a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-press-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-press-ski-base.webp",
+      "source": "public/items/skis/hw-dead-press-skis.glb",
+      "original": "original/recovered/items/halloween/dead-press-ski-base.webp",
+      "bytes": 6250,
+      "sha256": "fce51a1d9657d2914fa3e7dec0b74773c754b1c4317924369a89a600736d567a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/dead-press-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/dead-press-ski-right.webp",
+      "source": "public/items/skis/hw-dead-press-skis.glb",
+      "original": "original/recovered/items/halloween/dead-press-ski-right.webp",
+      "bytes": 6192,
+      "sha256": "0fac1b552b83834199a082a049c26a0160f30ad2261b53f7737390ea090002de"
+    },
+    {
+      "url": "https://cork7.com/items/street/switch-lane-mitt.webp?rev=street-1",
+      "target": "items/street/switch-lane-mitt.webp",
+      "source": "public/items/gloves/sd-switch-lane-gloves.glb",
+      "original": "original/recovered/items/street/switch-lane-mitt.webp",
+      "bytes": 78,
+      "sha256": "f7048689e0a8028970cc0d56a7457aaf96ed474d05ede02b23aaf9a330d0bfc6"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-form-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/grave-form-ski-left.webp",
+      "source": "public/items/skis/hw-grave-form-skis.glb",
+      "original": "original/recovered/items/halloween/grave-form-ski-left.webp",
+      "bytes": 14812,
+      "sha256": "386fd1c829e62e87feb95c877663d971b1f9b05d34e65542da481126cde5130b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-form-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/grave-form-ski-right.webp",
+      "source": "public/items/skis/hw-grave-form-skis.glb",
+      "original": "original/recovered/items/halloween/grave-form-ski-right.webp",
+      "bytes": 14812,
+      "sha256": "386fd1c829e62e87feb95c877663d971b1f9b05d34e65542da481126cde5130b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-form-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/grave-form-ski-base.webp",
+      "source": "public/items/skis/hw-grave-form-skis.glb",
+      "original": "original/recovered/items/halloween/grave-form-ski-base.webp",
+      "bytes": 14618,
+      "sha256": "0aa2106d0f05f453803a6f690d49c37c3822262567aa68695c830759f0e849fe"
+    },
+    {
+      "url": "https://cork7.com/items/street/hot-lap-mitt.webp?rev=street-1",
+      "target": "items/street/hot-lap-mitt.webp",
+      "source": "public/items/gloves/sd-hot-lap-gloves.glb",
+      "original": "original/recovered/items/street/hot-lap-mitt.webp",
+      "bytes": 76,
+      "sha256": "46166370d3645770343950ece820ed6112ba92e64131ec6f34475127161b8efb"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghosted-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/ghosted-ski-left.webp",
+      "source": "public/items/skis/hw-ghosted-skis.glb",
+      "original": "original/recovered/items/halloween/ghosted-ski-left.webp",
+      "bytes": 29634,
+      "sha256": "3c5fa61c83e0464a30ec118879206a358c6ce92945db277c77baa8a3a9329723"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghosted-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/ghosted-ski-base.webp",
+      "source": "public/items/skis/hw-ghosted-skis.glb",
+      "original": "original/recovered/items/halloween/ghosted-ski-base.webp",
+      "bytes": 28122,
+      "sha256": "9ccbab1e7077f021981f0c137c61b29d9550db306848cae02852dbfb0a11372d"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghosted-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/ghosted-ski-right.webp",
+      "source": "public/items/skis/hw-ghosted-skis.glb",
+      "original": "original/recovered/items/halloween/ghosted-ski-right.webp",
+      "bytes": 29778,
+      "sha256": "03c4af0cabd7421235a628b41046e9d03ba908ba28af8cac5158130e75ffba41"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-shift-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/grave-shift-ski-left.webp",
+      "source": "public/items/skis/hw-grave-shift-skis.glb",
+      "original": "original/recovered/items/halloween/grave-shift-ski-left.webp",
+      "bytes": 8272,
+      "sha256": "6ba0c919b72cea4eaf5072549b1eb2fc697a371a18398164fe8096422fcd2b86"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-shift-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/grave-shift-ski-right.webp",
+      "source": "public/items/skis/hw-grave-shift-skis.glb",
+      "original": "original/recovered/items/halloween/grave-shift-ski-right.webp",
+      "bytes": 8272,
+      "sha256": "6ba0c919b72cea4eaf5072549b1eb2fc697a371a18398164fe8096422fcd2b86"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/grave-shift-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/grave-shift-ski-base.webp",
+      "source": "public/items/skis/hw-grave-shift-skis.glb",
+      "original": "original/recovered/items/halloween/grave-shift-ski-base.webp",
+      "bytes": 5608,
+      "sha256": "ac9ffd8c2d819868540844df2a9c58efa637281658d525d59c1c24feb824bbb4"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghost-lap-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/ghost-lap-ski-base.webp",
+      "source": "public/items/skis/hw-ghost-lap-skis.glb",
+      "original": "original/recovered/items/halloween/ghost-lap-ski-base.webp",
+      "bytes": 40804,
+      "sha256": "b5d3cec1232de1472a19061255aa60bdbf831d4dd7aa3e9a8729870930c97b5a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghost-lap-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/ghost-lap-ski-left.webp",
+      "source": "public/items/skis/hw-ghost-lap-skis.glb",
+      "original": "original/recovered/items/halloween/ghost-lap-ski-left.webp",
+      "bytes": 46970,
+      "sha256": "8e33683b5da9cae7979a0465db41091bd960bebe796c8c440f3a78da3606ecb3"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ghost-lap-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/ghost-lap-ski-right.webp",
+      "source": "public/items/skis/hw-ghost-lap-skis.glb",
+      "original": "original/recovered/items/halloween/ghost-lap-ski-right.webp",
+      "bytes": 46970,
+      "sha256": "8e33683b5da9cae7979a0465db41091bd960bebe796c8c440f3a78da3606ecb3"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/jack-o-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/jack-o-ski-base.webp",
+      "source": "public/items/skis/hw-jack-o-skis.glb",
+      "original": "original/recovered/items/halloween/jack-o-ski-base.webp",
+      "bytes": 20674,
+      "sha256": "4b1e6b6339ce8ef2466dbc2a9b6d5b6142d7b626ad9642ea97a5249ca63bc862"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/harvest-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/harvest-ski-left.webp",
+      "source": "public/items/skis/hw-harvest-skis.glb",
+      "original": "original/recovered/items/halloween/harvest-ski-left.webp",
+      "bytes": 24926,
+      "sha256": "6b4c4a1fd6f4f9790af352e43da877e4c15b56f9b464d2e05fab5a74f3eadcce"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/hex-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/hex-ski-base.webp",
+      "source": "public/items/skis/hw-hex-skis.glb",
+      "original": "original/recovered/items/halloween/hex-ski-base.webp",
+      "bytes": 31200,
+      "sha256": "d5e9fb3e22ff08c71ea8412afe68d198ad64db6ae2a0b910b12de2d90e336ed5"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/jack-o-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/jack-o-ski-left.webp",
+      "source": "public/items/skis/hw-jack-o-skis.glb",
+      "original": "original/recovered/items/halloween/jack-o-ski-left.webp",
+      "bytes": 27308,
+      "sha256": "bf4ef3bbab4703e2e62d55fdb10f892be0d6c4a4685dc701f8776bd7449468c0"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/hex-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/hex-ski-left.webp",
+      "source": "public/items/skis/hw-hex-skis.glb",
+      "original": "original/recovered/items/halloween/hex-ski-left.webp",
+      "bytes": 33174,
+      "sha256": "1d82ce4b34c30762556a19e36724ebfde9dcd18bd0cd10b17bf64a30c55795b1"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/hex-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/hex-ski-right.webp",
+      "source": "public/items/skis/hw-hex-skis.glb",
+      "original": "original/recovered/items/halloween/hex-ski-right.webp",
+      "bytes": 33174,
+      "sha256": "1d82ce4b34c30762556a19e36724ebfde9dcd18bd0cd10b17bf64a30c55795b1"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/harvest-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/harvest-ski-right.webp",
+      "source": "public/items/skis/hw-harvest-skis.glb",
+      "original": "original/recovered/items/halloween/harvest-ski-right.webp",
+      "bytes": 24926,
+      "sha256": "6b4c4a1fd6f4f9790af352e43da877e4c15b56f9b464d2e05fab5a74f3eadcce"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/jack-o-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/jack-o-ski-right.webp",
+      "source": "public/items/skis/hw-jack-o-skis.glb",
+      "original": "original/recovered/items/halloween/jack-o-ski-right.webp",
+      "bytes": 27350,
+      "sha256": "a12f4eaf0596c0ad6ec6916ffbfb8478709e9f28ad0f2296247374e438b862bb"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/harvest-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/harvest-ski-base.webp",
+      "source": "public/items/skis/hw-harvest-skis.glb",
+      "original": "original/recovered/items/halloween/harvest-ski-base.webp",
+      "bytes": 25728,
+      "sha256": "28b86f91ae4fbdf92a01c501769c770bf7052355408923405d96fd543b2f9dad"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/nightfang-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/nightfang-ski-left.webp",
+      "source": "public/items/skis/hw-nightfang-skis.glb",
+      "original": "original/recovered/items/halloween/nightfang-ski-left.webp",
+      "bytes": 35286,
+      "sha256": "016e286e9858bc2fe2c30c2a8f2b470a7ea0852b5b4017672534784f6e3e596a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/nightfang-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/nightfang-ski-base.webp",
+      "source": "public/items/skis/hw-nightfang-skis.glb",
+      "original": "original/recovered/items/halloween/nightfang-ski-base.webp",
+      "bytes": 35530,
+      "sha256": "f9201c5320761c11e9db4597b16808ce2420300779732fab7796ef88087f102d"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/nightfang-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/nightfang-ski-right.webp",
+      "source": "public/items/skis/hw-nightfang-skis.glb",
+      "original": "original/recovered/items/halloween/nightfang-ski-right.webp",
+      "bytes": 35286,
+      "sha256": "016e286e9858bc2fe2c30c2a8f2b470a7ea0852b5b4017672534784f6e3e596a"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/joker-cut-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/joker-cut-ski-base.webp",
+      "source": "public/items/skis/hw-joker-cut-skis.glb",
+      "original": "original/recovered/items/halloween/joker-cut-ski-base.webp",
+      "bytes": 25118,
+      "sha256": "353f7d6ce65a775b5e9da34d7efd72cdfda58591df03e26cd9b9fc8ec74763a2"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/joker-cut-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/joker-cut-ski-left.webp",
+      "source": "public/items/skis/hw-joker-cut-skis.glb",
+      "original": "original/recovered/items/halloween/joker-cut-ski-left.webp",
+      "bytes": 36936,
+      "sha256": "a8959ea82b72a4edd3203c436453fc0aa97c90dd3f897ba20c064d3a23b4e403"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/joker-cut-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/joker-cut-ski-right.webp",
+      "source": "public/items/skis/hw-joker-cut-skis.glb",
+      "original": "original/recovered/items/halloween/joker-cut-ski-right.webp",
+      "bytes": 36936,
+      "sha256": "a8959ea82b72a4edd3203c436453fc0aa97c90dd3f897ba20c064d3a23b4e403"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/moth-eaten-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/moth-eaten-ski-base.webp",
+      "source": "public/items/skis/hw-moth-eaten-skis.glb",
+      "original": "original/recovered/items/halloween/moth-eaten-ski-base.webp",
+      "bytes": 35212,
+      "sha256": "9aac36a08f9adffd8d466354f507f0e22f6655d5e865ca613df262d5445f4de0"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/last-laugh-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/last-laugh-ski-left.webp",
+      "source": "public/items/skis/hw-last-laugh-skis.glb",
+      "original": "original/recovered/items/halloween/last-laugh-ski-left.webp",
+      "bytes": 27852,
+      "sha256": "c2cb6d8fa85c8625b2df2ba0be3e7a85c138c58e5eb1b247a893a1636d42c973"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/last-laugh-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/last-laugh-ski-right.webp",
+      "source": "public/items/skis/hw-last-laugh-skis.glb",
+      "original": "original/recovered/items/halloween/last-laugh-ski-right.webp",
+      "bytes": 27852,
+      "sha256": "c2cb6d8fa85c8625b2df2ba0be3e7a85c138c58e5eb1b247a893a1636d42c973"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/last-laugh-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/last-laugh-ski-base.webp",
+      "source": "public/items/skis/hw-last-laugh-skis.glb",
+      "original": "original/recovered/items/halloween/last-laugh-ski-base.webp",
+      "bytes": 31412,
+      "sha256": "1639f89580a24e375744c6ec75d92d2b7bb891f101dfcc822584e31eb6fde85b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/phantom-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/phantom-ski-left.webp",
+      "source": "public/items/skis/hw-phantom-skis.glb",
+      "original": "original/recovered/items/halloween/phantom-ski-left.webp",
+      "bytes": 12994,
+      "sha256": "b99fb15846535bebb0c66b2366f30a609b8891d1385ee7d5a329b56a46c6d051"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/phantom-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/phantom-ski-base.webp",
+      "source": "public/items/skis/hw-phantom-skis.glb",
+      "original": "original/recovered/items/halloween/phantom-ski-base.webp",
+      "bytes": 10548,
+      "sha256": "74c11427b2ffd17269593821704ea015135eabea858906ab3571cdb7a5fb228f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/moth-eaten-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/moth-eaten-ski-right.webp",
+      "source": "public/items/skis/hw-moth-eaten-skis.glb",
+      "original": "original/recovered/items/halloween/moth-eaten-ski-right.webp",
+      "bytes": 37306,
+      "sha256": "dd2ea6cf015eccb983173465665d0fd317c70fd35a8318539e05329ed0385e6c"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/moth-eaten-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/moth-eaten-ski-left.webp",
+      "source": "public/items/skis/hw-moth-eaten-skis.glb",
+      "original": "original/recovered/items/halloween/moth-eaten-ski-left.webp",
+      "bytes": 37306,
+      "sha256": "dd2ea6cf015eccb983173465665d0fd317c70fd35a8318539e05329ed0385e6c"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/phantom-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/phantom-ski-right.webp",
+      "source": "public/items/skis/hw-phantom-skis.glb",
+      "original": "original/recovered/items/halloween/phantom-ski-right.webp",
+      "bytes": 12994,
+      "sha256": "b99fb15846535bebb0c66b2366f30a609b8891d1385ee7d5a329b56a46c6d051"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/toxic-tape-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/toxic-tape-ski-base.webp",
+      "source": "public/items/skis/hw-toxic-tape-skis.glb",
+      "original": "original/recovered/items/halloween/toxic-tape-ski-base.webp",
+      "bytes": 11288,
+      "sha256": "f211351ca887e9f226bb83f47546873d882c2ed7f1e8fc36dca978982e4cdd07"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/toxic-tape-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/toxic-tape-ski-right.webp",
+      "source": "public/items/skis/hw-toxic-tape-skis.glb",
+      "original": "original/recovered/items/halloween/toxic-tape-ski-right.webp",
+      "bytes": 16548,
+      "sha256": "9c43b6ae0607a82307540314e7833679b73c247511bdeb2d4ce1feebfe4dfec0"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/toxic-tape-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/toxic-tape-ski-left.webp",
+      "source": "public/items/skis/hw-toxic-tape-skis.glb",
+      "original": "original/recovered/items/halloween/toxic-tape-ski-left.webp",
+      "bytes": 16548,
+      "sha256": "9c43b6ae0607a82307540314e7833679b73c247511bdeb2d4ce1feebfe4dfec0"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/sugar-rush-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/sugar-rush-ski-base.webp",
+      "source": "public/items/skis/hw-sugar-rush-skis.glb",
+      "original": "original/recovered/items/halloween/sugar-rush-ski-base.webp",
+      "bytes": 27842,
+      "sha256": "d110543db35bd4d974b74d4fc311a3543df284b378c97a73627bd931767d2671"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/sugar-rush-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/sugar-rush-ski-right.webp",
+      "source": "public/items/skis/hw-sugar-rush-skis.glb",
+      "original": "original/recovered/items/halloween/sugar-rush-ski-right.webp",
+      "bytes": 29392,
+      "sha256": "85a2179a341b9ee2ebb5804dea5388ed3491da0868158742d04021d7666db51f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/sugar-rush-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/sugar-rush-ski-left.webp",
+      "source": "public/items/skis/hw-sugar-rush-skis.glb",
+      "original": "original/recovered/items/halloween/sugar-rush-ski-left.webp",
+      "bytes": 29392,
+      "sha256": "85a2179a341b9ee2ebb5804dea5388ed3491da0868158742d04021d7666db51f"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/witching-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/witching-ski-left.webp",
+      "source": "public/items/skis/hw-witching-skis.glb",
+      "original": "original/recovered/items/halloween/witching-ski-left.webp",
+      "bytes": 28190,
+      "sha256": "aa4d148a7d2f0ff952bbbcc1a808f8efc8422907c5a1bfbca80a990dfe71b0c8"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/witching-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/witching-ski-base.webp",
+      "source": "public/items/skis/hw-witching-skis.glb",
+      "original": "original/recovered/items/halloween/witching-ski-base.webp",
+      "bytes": 23592,
+      "sha256": "20beb9d5dd7db3c3dcfe4c1c4400e1e9a605188d6b7dd38eb123464c9d9caa1b"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/witching-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/witching-ski-right.webp",
+      "source": "public/items/skis/hw-witching-skis.glb",
+      "original": "original/recovered/items/halloween/witching-ski-right.webp",
+      "bytes": 28190,
+      "sha256": "aa4d148a7d2f0ff952bbbcc1a808f8efc8422907c5a1bfbca80a990dfe71b0c8"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ossuary-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/ossuary-ski-right.webp",
+      "source": "public/items/skis/hw-ossuary-skis.glb",
+      "original": "original/recovered/items/halloween/ossuary-ski-right.webp",
+      "bytes": 12346,
+      "sha256": "3e94645ba1368b43ac5668f4b15eabe6af5e2088b69627227c6835f26af21247"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ossuary-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/ossuary-ski-left.webp",
+      "source": "public/items/skis/hw-ossuary-skis.glb",
+      "original": "original/recovered/items/halloween/ossuary-ski-left.webp",
+      "bytes": 12346,
+      "sha256": "3e94645ba1368b43ac5668f4b15eabe6af5e2088b69627227c6835f26af21247"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/ossuary-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/ossuary-ski-base.webp",
+      "source": "public/items/skis/hw-ossuary-skis.glb",
+      "original": "original/recovered/items/halloween/ossuary-ski-base.webp",
+      "bytes": 13778,
+      "sha256": "c179cc5b43c98449309e28d46a57e3ff996e823dca3f8c6938e1c53d1db2f29d"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wildcard-ski-base.webp?rev=park-ink-5",
+      "target": "items/halloween/wildcard-ski-base.webp",
+      "source": "public/items/skis/hw-wildcard-skis.glb",
+      "original": "original/recovered/items/halloween/wildcard-ski-base.webp",
+      "bytes": 28540,
+      "sha256": "a48e2f7d42b036f21f202283470d611f7dfa730f9e9975cef0eb40594e9647c8"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wildcard-ski-right.webp?rev=park-ink-5",
+      "target": "items/halloween/wildcard-ski-right.webp",
+      "source": "public/items/skis/hw-wildcard-skis.glb",
+      "original": "original/recovered/items/halloween/wildcard-ski-right.webp",
+      "bytes": 29414,
+      "sha256": "826d65a72d36461f079b718761f83c7f92b82cebac47574e31015bac473126f9"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wildcard-ski-left.webp?rev=park-ink-5",
+      "target": "items/halloween/wildcard-ski-left.webp",
+      "source": "public/items/skis/hw-wildcard-skis.glb",
+      "original": "original/recovered/items/halloween/wildcard-ski-left.webp",
+      "bytes": 29414,
+      "sha256": "826d65a72d36461f079b718761f83c7f92b82cebac47574e31015bac473126f9"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wrap-sheet-ski-left.webp?rev=costume-1",
+      "target": "items/halloween/wrap-sheet-ski-left.webp",
+      "source": "public/items/skis/hw-wrap-sheet-skis.glb",
+      "original": "original/recovered/items/halloween/wrap-sheet-ski-left.webp",
+      "bytes": 23580,
+      "sha256": "e4302b8ee53031f475b73a9248580f747eb911f1dea60bb105514c43bbfbd336"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wrap-sheet-ski-right.webp?rev=costume-1",
+      "target": "items/halloween/wrap-sheet-ski-right.webp",
+      "source": "public/items/skis/hw-wrap-sheet-skis.glb",
+      "original": "original/recovered/items/halloween/wrap-sheet-ski-right.webp",
+      "bytes": 23580,
+      "sha256": "e4302b8ee53031f475b73a9248580f747eb911f1dea60bb105514c43bbfbd336"
+    },
+    {
+      "url": "https://cork7.com/items/halloween/wrap-sheet-ski-base.webp?rev=costume-1",
+      "target": "items/halloween/wrap-sheet-ski-base.webp",
+      "source": "public/items/skis/hw-wrap-sheet-skis.glb",
+      "original": "original/recovered/items/halloween/wrap-sheet-ski-base.webp",
+      "bytes": 18272,
+      "sha256": "de221e2cbadea212b95c4076b0e5aa4a80911962191510bdb1735d363f74c770"
+    },
+    {
+      "url": "https://cork7.com/items/street/80k-redline-ski-right.webp?rev=street-1",
+      "target": "items/street/80k-redline-ski-right.webp",
+      "source": "public/items/skis/sd-80k-redline-skis.glb",
+      "original": "original/recovered/items/street/80k-redline-ski-right.webp",
+      "bytes": 66978,
+      "sha256": "3c0d52898d6fdea314be83599b84147cd38dc9ef67323c488638e29686c3e775"
+    },
+    {
+      "url": "https://cork7.com/items/street/80k-redline-ski-left.webp?rev=street-1",
+      "target": "items/street/80k-redline-ski-left.webp",
+      "source": "public/items/skis/sd-80k-redline-skis.glb",
+      "original": "original/recovered/items/street/80k-redline-ski-left.webp",
+      "bytes": 66978,
+      "sha256": "3c0d52898d6fdea314be83599b84147cd38dc9ef67323c488638e29686c3e775"
+    },
+    {
+      "url": "https://cork7.com/items/street/80k-redline-ski-base.webp?rev=street-1",
+      "target": "items/street/80k-redline-ski-base.webp",
+      "source": "public/items/skis/sd-80k-redline-skis.glb",
+      "original": "original/recovered/items/street/80k-redline-ski-base.webp",
+      "bytes": 33144,
+      "sha256": "07132ea21d8296f97fbe175254b987d9d0fc9f0f27937244d53d8331b01f3ef6"
+    },
+    {
+      "url": "https://cork7.com/items/street/acid-line-ski-right.webp?rev=street-1",
+      "target": "items/street/acid-line-ski-right.webp",
+      "source": "public/items/skis/sd-acid-line-skis.glb",
+      "original": "original/recovered/items/street/acid-line-ski-right.webp",
+      "bytes": 56460,
+      "sha256": "5abbb78097ddd1c6673443f12e433e000077729caff00c1bf004aa655043e597"
+    },
+    {
+      "url": "https://cork7.com/items/street/acid-line-ski-left.webp?rev=street-1",
+      "target": "items/street/acid-line-ski-left.webp",
+      "source": "public/items/skis/sd-acid-line-skis.glb",
+      "original": "original/recovered/items/street/acid-line-ski-left.webp",
+      "bytes": 56460,
+      "sha256": "5abbb78097ddd1c6673443f12e433e000077729caff00c1bf004aa655043e597"
+    },
+    {
+      "url": "https://cork7.com/items/street/acid-line-ski-base.webp?rev=street-1",
+      "target": "items/street/acid-line-ski-base.webp",
+      "source": "public/items/skis/sd-acid-line-skis.glb",
+      "original": "original/recovered/items/street/acid-line-ski-base.webp",
+      "bytes": 30402,
+      "sha256": "4eb9814b6519661a66b2028048ea123032d0da64dd06f22199b5889d1cf1272e"
+    },
+    {
+      "url": "https://cork7.com/items/street/after-hours-ski-right.webp?rev=street-1",
+      "target": "items/street/after-hours-ski-right.webp",
+      "source": "public/items/skis/sd-after-hours-skis.glb",
+      "original": "original/recovered/items/street/after-hours-ski-right.webp",
+      "bytes": 41116,
+      "sha256": "7c15faa94f0ca0c655afc87de7a2a503347d9af4148a3afc2edfcb33186378f6"
+    },
+    {
+      "url": "https://cork7.com/items/street/after-hours-ski-left.webp?rev=street-1",
+      "target": "items/street/after-hours-ski-left.webp",
+      "source": "public/items/skis/sd-after-hours-skis.glb",
+      "original": "original/recovered/items/street/after-hours-ski-left.webp",
+      "bytes": 41116,
+      "sha256": "7c15faa94f0ca0c655afc87de7a2a503347d9af4148a3afc2edfcb33186378f6"
+    },
+    {
+      "url": "https://cork7.com/items/street/after-hours-ski-base.webp?rev=street-1",
+      "target": "items/street/after-hours-ski-base.webp",
+      "source": "public/items/skis/sd-after-hours-skis.glb",
+      "original": "original/recovered/items/street/after-hours-ski-base.webp",
+      "bytes": 20078,
+      "sha256": "9cbde0fe3db53073fc6ae5d1fd5143b89683cf1a7e3d5ab49794944f49bb57bb"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-noise-ski-left.webp?rev=street-1",
+      "target": "items/street/blue-noise-ski-left.webp",
+      "source": "public/items/skis/sd-blue-noise-skis.glb",
+      "original": "original/recovered/items/street/blue-noise-ski-left.webp",
+      "bytes": 60826,
+      "sha256": "80d0c24d981e746b386adc8f0fd7c7dfa46ae751bac99cd39608c5cb502c1ce4"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-noise-ski-right.webp?rev=street-1",
+      "target": "items/street/blue-noise-ski-right.webp",
+      "source": "public/items/skis/sd-blue-noise-skis.glb",
+      "original": "original/recovered/items/street/blue-noise-ski-right.webp",
+      "bytes": 60826,
+      "sha256": "80d0c24d981e746b386adc8f0fd7c7dfa46ae751bac99cd39608c5cb502c1ce4"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-noise-ski-base.webp?rev=street-1",
+      "target": "items/street/blue-noise-ski-base.webp",
+      "source": "public/items/skis/sd-blue-noise-skis.glb",
+      "original": "original/recovered/items/street/blue-noise-ski-base.webp",
+      "bytes": 35074,
+      "sha256": "3d64bc51bf72d4c16d99a7919910038304daa7ecd89b03e81b5d683b69fede6c"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-static-ski-right.webp?rev=street-1",
+      "target": "items/street/blue-static-ski-right.webp",
+      "source": "public/items/skis/sd-blue-static-skis.glb",
+      "original": "original/recovered/items/street/blue-static-ski-right.webp",
+      "bytes": 64290,
+      "sha256": "2c2100821ca04bf5156a377b6691fb60e7c50fa990c1218047174d29cabb216a"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-static-ski-base.webp?rev=street-1",
+      "target": "items/street/blue-static-ski-base.webp",
+      "source": "public/items/skis/sd-blue-static-skis.glb",
+      "original": "original/recovered/items/street/blue-static-ski-base.webp",
+      "bytes": 32168,
+      "sha256": "516e500b2129c3fd89c43b51d1ea62cfb92c77b5bce7d4649ca6e51b7bf0c862"
+    },
+    {
+      "url": "https://cork7.com/items/street/blue-static-ski-left.webp?rev=street-1",
+      "target": "items/street/blue-static-ski-left.webp",
+      "source": "public/items/skis/sd-blue-static-skis.glb",
+      "original": "original/recovered/items/street/blue-static-ski-left.webp",
+      "bytes": 64290,
+      "sha256": "2c2100821ca04bf5156a377b6691fb60e7c50fa990c1218047174d29cabb216a"
+    },
+    {
+      "url": "https://cork7.com/items/street/hot-lap-ski-left.webp?rev=street-1",
+      "target": "items/street/hot-lap-ski-left.webp",
+      "source": "public/items/skis/sd-hot-lap-skis.glb",
+      "original": "original/recovered/items/street/hot-lap-ski-left.webp",
+      "bytes": 53784,
+      "sha256": "6f9509e7936355b5735d647409e6d9acf125f5c3595f74427634cca9136bfb62"
+    },
+    {
+      "url": "https://cork7.com/items/street/hot-lap-ski-right.webp?rev=street-1",
+      "target": "items/street/hot-lap-ski-right.webp",
+      "source": "public/items/skis/sd-hot-lap-skis.glb",
+      "original": "original/recovered/items/street/hot-lap-ski-right.webp",
+      "bytes": 53784,
+      "sha256": "6f9509e7936355b5735d647409e6d9acf125f5c3595f74427634cca9136bfb62"
+    },
+    {
+      "url": "https://cork7.com/items/street/brush-country-ski-base.webp?rev=street-1",
+      "target": "items/street/brush-country-ski-base.webp",
+      "source": "public/items/skis/sd-brush-country-skis.glb",
+      "original": "original/recovered/items/street/brush-country-ski-base.webp",
+      "bytes": 26256,
+      "sha256": "b3db2f3a85bcf298e490793a7668e1e7795173b71ef5e3cefbf220143cea487f"
+    },
+    {
+      "url": "https://cork7.com/items/street/hot-lap-ski-base.webp?rev=street-1",
+      "target": "items/street/hot-lap-ski-base.webp",
+      "source": "public/items/skis/sd-hot-lap-skis.glb",
+      "original": "original/recovered/items/street/hot-lap-ski-base.webp",
+      "bytes": 28298,
+      "sha256": "563d71ea75502d3349090c957fb708e92bb13ffeaadadeeccacd8e8d16790374"
+    },
+    {
+      "url": "https://cork7.com/items/street/brush-country-ski-right.webp?rev=street-1",
+      "target": "items/street/brush-country-ski-right.webp",
+      "source": "public/items/skis/sd-brush-country-skis.glb",
+      "original": "original/recovered/items/street/brush-country-ski-right.webp",
+      "bytes": 49816,
+      "sha256": "b4d73baac01f26c696094a59eb971a5188f2be48bfb2e7b32ac88a2060a13b4b"
+    },
+    {
+      "url": "https://cork7.com/items/street/brush-country-ski-left.webp?rev=street-1",
+      "target": "items/street/brush-country-ski-left.webp",
+      "source": "public/items/skis/sd-brush-country-skis.glb",
+      "original": "original/recovered/items/street/brush-country-ski-left.webp",
+      "bytes": 49816,
+      "sha256": "b4d73baac01f26c696094a59eb971a5188f2be48bfb2e7b32ac88a2060a13b4b"
+    },
+    {
+      "url": "https://cork7.com/items/street/cold-front-ski-left.webp?rev=street-1",
+      "target": "items/street/cold-front-ski-left.webp",
+      "source": "public/items/skis/sd-cold-front-skis.glb",
+      "original": "original/recovered/items/street/cold-front-ski-left.webp",
+      "bytes": 61282,
+      "sha256": "e2dda10cf6ddeeb3c1ac486c49c3c00de1ab5b8386c28cf19d6fe73c65a7e8c8"
+    },
+    {
+      "url": "https://cork7.com/items/street/cold-front-ski-right.webp?rev=street-1",
+      "target": "items/street/cold-front-ski-right.webp",
+      "source": "public/items/skis/sd-cold-front-skis.glb",
+      "original": "original/recovered/items/street/cold-front-ski-right.webp",
+      "bytes": 61282,
+      "sha256": "e2dda10cf6ddeeb3c1ac486c49c3c00de1ab5b8386c28cf19d6fe73c65a7e8c8"
+    },
+    {
+      "url": "https://cork7.com/items/street/cold-front-ski-base.webp?rev=street-1",
+      "target": "items/street/cold-front-ski-base.webp",
+      "source": "public/items/skis/sd-cold-front-skis.glb",
+      "original": "original/recovered/items/street/cold-front-ski-base.webp",
+      "bytes": 29814,
+      "sha256": "8d3811ef0ca39be34228438a6f3e51eeb86030731748e8e5b5d3cad05629cc6d"
+    },
+    {
+      "url": "https://cork7.com/items/street/off-script-ski-base.webp?rev=street-1",
+      "target": "items/street/off-script-ski-base.webp",
+      "source": "public/items/skis/sd-off-script-skis.glb",
+      "original": "original/recovered/items/street/off-script-ski-base.webp",
+      "bytes": 34006,
+      "sha256": "b18bd3c7b7e128d4f91d574921a3b9ef72fcf58bd02f57351aabd2b6a127a211"
+    },
+    {
+      "url": "https://cork7.com/items/street/off-script-ski-right.webp?rev=street-1",
+      "target": "items/street/off-script-ski-right.webp",
+      "source": "public/items/skis/sd-off-script-skis.glb",
+      "original": "original/recovered/items/street/off-script-ski-right.webp",
+      "bytes": 56652,
+      "sha256": "f694d908c59c8dd385aea6ad60f76a03bb3e524588ccf90db54f64380bb4b8fb"
+    },
+    {
+      "url": "https://cork7.com/items/street/off-script-ski-left.webp?rev=street-1",
+      "target": "items/street/off-script-ski-left.webp",
+      "source": "public/items/skis/sd-off-script-skis.glb",
+      "original": "original/recovered/items/street/off-script-ski-left.webp",
+      "bytes": 56652,
+      "sha256": "f694d908c59c8dd385aea6ad60f76a03bb3e524588ccf90db54f64380bb4b8fb"
+    },
+    {
+      "url": "https://cork7.com/items/street/side-country-ski-base.webp?rev=street-1",
+      "target": "items/street/side-country-ski-base.webp",
+      "source": "public/items/skis/sd-side-country-skis.glb",
+      "original": "original/recovered/items/street/side-country-ski-base.webp",
+      "bytes": 17312,
+      "sha256": "88c67b1f95a4b7a7f26ed77d16003ec75ddebef86d5237f463c6a9a897bf2557"
+    },
+    {
+      "url": "https://cork7.com/items/street/switch-lane-ski-right.webp?rev=street-1",
+      "target": "items/street/switch-lane-ski-right.webp",
+      "source": "public/items/skis/sd-switch-lane-skis.glb",
+      "original": "original/recovered/items/street/switch-lane-ski-right.webp",
+      "bytes": 30666,
+      "sha256": "77a323832098dbb6d87d534f1d76d96be5ecac11d5e800c68ae1187fe91b80f1"
+    },
+    {
+      "url": "https://cork7.com/items/street/switch-lane-ski-left.webp?rev=street-1",
+      "target": "items/street/switch-lane-ski-left.webp",
+      "source": "public/items/skis/sd-switch-lane-skis.glb",
+      "original": "original/recovered/items/street/switch-lane-ski-left.webp",
+      "bytes": 30666,
+      "sha256": "77a323832098dbb6d87d534f1d76d96be5ecac11d5e800c68ae1187fe91b80f1"
+    },
+    {
+      "url": "https://cork7.com/items/street/side-country-ski-left.webp?rev=street-1",
+      "target": "items/street/side-country-ski-left.webp",
+      "source": "public/items/skis/sd-side-country-skis.glb",
+      "original": "original/recovered/items/street/side-country-ski-left.webp",
+      "bytes": 34486,
+      "sha256": "05d7382e1a14fcc619fa7bda31405adf7acbec07a1c8eb372ccf88ccdf8ebc21"
+    },
+    {
+      "url": "https://cork7.com/items/street/side-country-ski-right.webp?rev=street-1",
+      "target": "items/street/side-country-ski-right.webp",
+      "source": "public/items/skis/sd-side-country-skis.glb",
+      "original": "original/recovered/items/street/side-country-ski-right.webp",
+      "bytes": 34486,
+      "sha256": "05d7382e1a14fcc619fa7bda31405adf7acbec07a1c8eb372ccf88ccdf8ebc21"
+    },
+    {
+      "url": "https://cork7.com/items/street/switch-lane-ski-base.webp?rev=street-1",
+      "target": "items/street/switch-lane-ski-base.webp",
+      "source": "public/items/skis/sd-switch-lane-skis.glb",
+      "original": "original/recovered/items/street/switch-lane-ski-base.webp",
+      "bytes": 17424,
+      "sha256": "69089ebdac08e7940c830a038a53fa2199a5d997de8373369dffb2771a72d031"
+    }
+  ]
+}
