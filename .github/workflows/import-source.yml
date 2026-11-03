@@ -1,0 +1,41 @@
+name: Import prepared game source
+on:
+  push:
+    paths: ['steez8-source.part-*', 'manifest.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and extract prepared source
+        run: |
+          python3 - <<'PY'
+          import json, hashlib, pathlib, tarfile
+          manifest = json.loads(pathlib.Path('manifest.json').read_text())
+          archive = pathlib.Path('/tmp/steez8-source.tar.gz')
+          with archive.open('wb') as output:
+              for part in manifest['parts']:
+                  p = pathlib.Path(part['name'])
+                  assert p.name == str(p) and p.name.startswith('steez8-source.part-')
+                  data = p.read_bytes()
+                  assert len(data) == part['bytes']
+                  assert hashlib.sha256(data).hexdigest() == part['sha256']
+                  output.write(data)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest() == manifest['sha256']
+          with tarfile.open(archive) as tar:
+              for member in tar.getmembers():
+                  p = pathlib.PurePosixPath(member.name)
+                  assert not p.is_absolute() and '..' not in p.parts
+                  assert not member.issym() and not member.islnk()
+                  assert p.parts[0] not in ('data', '.env', '.git', 'node_modules')
+              tar.extractall('.', filter='data')
+          PY
+      - name: Commit unpacked source
+        run: |
+          git rm steez8-source.part-* manifest.json
+          git add public server migrations tests scripts package.json pnpm-lock.yaml README.md DEPLOYMENT.md CHANGELOG.md KNOWN_ISSUES.md .env.example .gitignore Dockerfile netlify.toml render.yaml PATCHES.json
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "Publish STEEZ8 0.5 game source and free hosting support"
+          git push
