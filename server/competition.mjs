@@ -628,6 +628,22 @@ export class Competition {
   wire(m) {
     const host = this.hostPeer(m);
     if (!host) return null;
+    const runs = [...m.state.runs.host, ...m.state.runs.guest].map(parks.D);
+    const pending = [];
+    if (m.kind === "duel") {
+      // The displayed estimate can come from a client, but actual saved match
+      // scores, the winner and ranked ratings NEVER use it. Only the verified
+      // physics result can replace the server's provisional zero.
+      for (const report of Object.values(m.pendingScores || {})) {
+        if (!report || typeof report !== "object") continue;
+        pending.push(report.drop);
+        if (Number.isInteger(report.preview) &&
+            report.preview >= 0 && report.preview <= 2000000) {
+          const offset = report.role === "guest" ? m.state.runs.host.length : 0;
+          runs[offset + Math.floor(report.drop / 2)] = report.preview;
+        }
+      }
+    }
     return {
       t: "duel",
       op: "state",
@@ -638,7 +654,8 @@ export class Competition {
       phase: m.state.phase,
       drop: m.state.drop,
       first: m.state.first === "guest" ? "g" : "h",
-      runs: [...m.state.runs.host, ...m.state.runs.guest].map(parks.D),
+      runs,
+      pending,
       win:
         m.state.winner === "draw"
           ? "d"
@@ -841,7 +858,7 @@ export class Competition {
         v.phase === "posted" &&
         v.drop === m.state.drop &&
         this.activeRoles(m).includes(role)
-      ) this.notePendingScore(m, role);
+      ) this.notePendingScore(m, role, v.runs[Math.floor(v.drop / 2)]);
       if (c === this.hostPeer(m)) this.broadcastState(m);
       return true;
     }
@@ -851,7 +868,7 @@ export class Competition {
         this.activeRoles(m).includes(role)
       ) {
         if (v.score < 0) this.post(m, role, parks.y(v.score));
-        else if (m.state.phase === "run") this.notePendingScore(m, role);
+        else if (m.state.phase === "run") this.notePendingScore(m, role, v.score);
       }
       return true;
     }
@@ -962,13 +979,17 @@ export class Competition {
     this.save(m);
     this.broadcastState(m);
   }
-  notePendingScore(m, role) {
+  notePendingScore(m, role, preview = null) {
     m.pendingScores ??= {};
     if (m.kind === "duel") {
       if (m.state.phase !== "run") return;
       const drop = m.state.drop, key = drop + ":" + role;
       if (m.pendingScores[key]) return;
-      m.pendingScores[key] = { drop, role, at: this.now() };
+      m.pendingScores[key] = {
+        drop, role, at: this.now(),
+        preview: Number.isInteger(preview) && preview >= 0 &&
+          preview <= 2000000 ? preview : null,
+      };
       console.info("Competition run finished; advancing turn while verifying", {
         match: m.id, drop, role,
       });

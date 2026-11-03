@@ -297,6 +297,7 @@ function H(e) {
             drop: t.drop,
             first: t.first,
             runs: [...t.runs],
+            pending: Array.isArray(t.pending) ? t.pending.filter(e => B(e, 0, 3)) : [],
             win: t.win,
             wo: t.wo === !0,
             left: t.left

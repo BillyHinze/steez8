@@ -712,8 +712,12 @@ test("the actual recovered duel controllers accept server turns for both host an
   assert.equal(first.actions.releases, 1);
   assert.equal(second.actions.releases, 0);
   for (const c of [first, second]) {
-    c.controller.receive(wire(3, "posted", 0, [0, -1, -1, -1, -1, -1]), 2300);
+    c.controller.receive({
+      ...wire(3, "posted", 0, [415021, -1, -1, -1, -1, -1]),
+      pending: [0],
+    }, 2300);
     assert.equal(c.controller.state.phase, "posted");
+    assert.deepEqual(Array.from(c.controller.hud(2310).pending), [0]);
     c.controller.receive(wire(4, "present", 1, [0, -1, -1, -1, -1, -1]), 2500);
     assert.equal(c.controller.state.drop, 1);
     c.controller.receive(wire(5, "run", 1, [0, -1, -1, -1, -1, -1]), 2800);
@@ -754,8 +758,12 @@ test("duel releases each rider immediately and reconciles verified scores across
     (x) => x.t === "duel" && x.op === "state" &&
       x.phase === "posted" && x.drop === 0,
   );
-  assert.equal(hostPosted.runs[0], 0);
-  assert.equal(guestSawHost.runs[0], 0);
+  // Both screens show an *estimated* score immediately. The server still
+  // stores zero until replay verification, so forged points cannot win.
+  assert.equal(hostPosted.runs[0], 999999);
+  assert.equal(guestSawHost.runs[0], 999999);
+  assert.deepEqual(hostPosted.pending, [0]);
+  assert.deepEqual(guestSawHost.pending, [0]);
   assert.equal(m.state.runs.host[0], 0);
   assert.ok(m.pendingScores["0:host"]);
   assert.equal(m.state.phase, "posted");
@@ -778,19 +786,26 @@ test("duel releases each rider immediately and reconciles verified scores across
     (x) => x.t === "duel" && x.op === "state" &&
       x.phase === "posted" && x.drop === 1,
   );
-  assert.equal(secondPosted.runs[m.state.runs.host.length], 0);
+  assert.equal(secondPosted.runs[m.state.runs.host.length], 999999);
+  assert.deepEqual(secondPosted.pending.sort(), [0, 1]);
   assert.equal(m.state.runs.guest[0], 0);
   assert.ok(m.pendingScores["1:guest"]);
 
   c.verified(lateContext, { score: 1450 });
   assert.equal(m.state.runs.host[0], 1450);
   assert.equal(m.state.drop, 1);
+  const afterHostProof = c.wire(m);
+  assert.equal(afterHostProof.runs[0], 1450);
+  assert.equal(afterHostProof.runs[m.state.runs.host.length], 999999);
+  assert.deepEqual(afterHostProof.pending, [1]);
   c.verified(c.verificationContext(accounts.Two.user.id, {
     duel: { id: m.id, drop: 1 },
   }), { score: 750 });
   assert.equal(m.state.runs.guest[0], 750);
   assert.equal(Object.keys(m.pendingScores).length, 0);
   assert.equal(Object.keys(m.verified).length, 2);
+  assert.equal(c.wire(m).runs[m.state.runs.host.length], 750);
+  assert.deepEqual(c.wire(m).pending, []);
   host.ws.close();
   guest.ws.close();
 });

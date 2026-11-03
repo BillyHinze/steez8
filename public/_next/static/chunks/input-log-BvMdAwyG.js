@@ -1191,6 +1191,7 @@ function Hn(e) {
         phase: e.phase,
         drop: e.drop,
         first: n,
+        pending: e.pending ?? [],
         runs: {
             host: t.slice(0, r),
             guest: t.slice(r)
@@ -1327,10 +1328,28 @@ var Un = {
         this.endWhy = null);
         let i = e.phase !== this.state.phase || e.drop !== this.state.drop;
         this.state = Hn(e),
+        this.scoreVerificationNotice(),
         i && (this.phaseAt = t),
         this.endsAt = e.left !== void 0 && e.left >= 0 ? t + e.left : -1;
         for (let e of this.reported.keys())
             this.postedAlready(e) && this.reported.delete(e)
+    }
+    scoreVerificationNotice() {
+        if (!this.refereed || typeof document === `undefined` || !document.body)
+            return;
+        let e = `steez8-score-pending`
+          , t = document.getElementById(e)
+          , n = this.state.pending?.length ?? 0;
+        if (!n) {
+            t?.remove();
+            return
+        }
+        t || (t = document.createElement(`div`),
+        t.id = e,
+        t.className = `steez8-score-pending`,
+        t.setAttribute(`role`, `status`),
+        document.body.appendChild(t)),
+        t.textContent = n === 1 ? `ESTIMATED SCORE · VERIFYING` : `ESTIMATED SCORES · VERIFYING`
     }
     verdict(e, t, n) {
         let r = p(e);
@@ -1654,6 +1673,7 @@ var Un = {
             phase: t.phase,
             me: this.me,
             shot: this.shot(),
+            pending: t.pending ?? [],
             riders: {
                 host: Vn(t, `host`, this.names.host, this.me === `host`, this.runs),
                 guest: Vn(t, `guest`, this.names.guest, this.me === `guest`, this.runs)
