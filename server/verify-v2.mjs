@@ -13,38 +13,89 @@ const courses = {
   uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
 const fault = (message, status = 400) =>
   Object.assign(Error(message), { status });
-let running = 0;
-export async function workerJob(data) {
-  if (running >= Math.max(1, Number(process.env.VERIFICATION_CONCURRENCY) || 3))
-    throw fault("Verification queue is busy; retry shortly", 429);
-  running++;
+// Run a single warm verification worker. A fresh VM/physics graph per run was
+// repeatedly hitting Render Free's 20-second timeout and blocking the match.
+const QUEUE_LIMIT = 12;
+const VERIFY_TIMEOUT_MS = 90000;
+const pending = [];
+let worker = null;
+let active = null;
+let nextJobId = 0;
+
+function discardWorker() {
+  const previous = worker;
+  worker = null;
+  if (previous) void previous.terminate().catch(() => {});
+}
+
+function failActive(error) {
+  const job = active;
+  if (!job) return;
+  active = null;
+  clearTimeout(job.timer);
+  job.reject(error);
+}
+
+function replaceWorker(error) {
+  discardWorker();
+  failActive(error);
+  pump();
+}
+
+function ensureWorker() {
+  if (worker) return worker;
+  const instance = new Worker(
+    new URL("./verification-worker-v2.mjs", import.meta.url),
+    { resourceLimits: { maxOldGenerationSizeMb: 256 } },
+  );
+  // An idle cached verifier should not prevent Node from exiting.
+  instance.unref();
+  worker = instance;
+  instance.on("message", (message) => {
+    if (worker !== instance || !active || message.id !== active.id) return;
+    const job = active;
+    active = null;
+    clearTimeout(job.timer);
+    instance.unref();
+    if (message.error) job.reject(fault(message.error, 422));
+    else job.resolve(message);
+    pump();
+  });
+  instance.on("error", (error) => {
+    if (worker === instance) replaceWorker(error);
+  });
+  instance.on("exit", (code) => {
+    if (worker === instance)
+      replaceWorker(fault("Verification worker exited (" + code + ")", 503));
+  });
+  return instance;
+}
+
+function pump() {
+  if (active || pending.length === 0) return;
+  const job = pending.shift();
+  active = job;
+  let instance;
   try {
-    return await new Promise((resolve, reject) => {
-      const worker = new Worker(
-          new URL("./verification-worker-v2.mjs", import.meta.url),
-          { workerData: data, resourceLimits: { maxOldGenerationSizeMb: 192 } },
-        ),
-        timer = setTimeout(() => {
-          worker.terminate();
-          reject(fault("Verification time limit exceeded", 422));
-        }, 20000);
-      worker.once("message", (m) => {
-        clearTimeout(timer);
-        worker.terminate();
-        m.error ? reject(fault(m.error, 422)) : resolve(m);
-      });
-      worker.once("error", (e) => {
-        clearTimeout(timer);
-        reject(e);
-      });
-      worker.once("exit", (code) => {
-        clearTimeout(timer);
-        if (code !== 0) reject(fault("Verification worker ended", 422));
-      });
-    });
-  } finally {
-    running--;
+    instance = ensureWorker();
+    instance.ref();
+    job.timer = setTimeout(() => {
+      if (active === job)
+        replaceWorker(fault("Verification time limit exceeded", 503));
+    }, VERIFY_TIMEOUT_MS);
+    instance.postMessage({ id: job.id, data: job.data });
+  } catch (error) {
+    replaceWorker(error);
   }
+}
+
+export function workerJob(data) {
+  if (pending.length + Number(!!active) >= QUEUE_LIMIT)
+    return Promise.reject(fault("Verification queue is busy; retry shortly", 429));
+  return new Promise((resolve, reject) => {
+    pending.push({ id: ++nextJobId, data, resolve, reject, timer: null });
+    pump();
+  });
 }
 export async function verifyRun(store, id, body, replayOnly = false) {
   if (store.banned(id)) throw fault("Account is not eligible to submit runs", 403);
