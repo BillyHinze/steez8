@@ -1224,7 +1224,7 @@ export class Competition {
         this.save(m);
         this.broadcastState(m);
       }
-      if (m.state.phase === "winner") this.finish(m);
+      if (m.state.phase === "winner" && !duelPending) this.finish(m);
       if (now - (m.sentAt || 0) >= 4000) {
         m.sentAt = now;
         this.broadcastState(m);
