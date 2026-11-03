@@ -95,7 +95,7 @@ export function physicsFor(park = "nordryggen") {
         return m;
       }
       // Course definitions must match what the browser executes, including new parks.
-      let source = ['active-course-BUb4R-L7.js', 'parks-1qsmaijL.js', 'live-protocol-j28FoPiw.js'].includes(name) ? fs.readFileSync(path.join(chunks, name), 'utf8') : sources[name];
+      let source = ['active-course-BUb4R-L7.js', 'parks-1qsmaijL.js', 'live-protocol-j28FoPiw.js', 'input-log-BvMdAwyG.js'].includes(name) ? fs.readFileSync(path.join(chunks, name), 'utf8') : sources[name];
       if (!source) throw Error("Missing verifier source: " + name);
       if (name === "input-log-BvMdAwyG.js")
         source +=
