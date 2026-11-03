@@ -1,0 +1,74 @@
+[
+  {
+    "file": "_next/static/chunks/rider-outfit-BI9AmbRj.js",
+    "reason": "Ignore malformed optional normal maps that reference vertex/index buffers instead of image bytes; retain equipment geometry, colours and valid textures",
+    "original_sha256": "a855f236b81770273b7de498e88039a7819980ed87f10d5cb96ee3133f84103b",
+    "patched_sha256": "c557dacf8fa0c969ba869a06a59b291044084554a1f26beb7025a0684e151b95"
+  },
+  {
+    "file": "_next/static/chunks/supabase-BEhtaJUq.js",
+    "reason": "Route service calls to the independent same-origin backend; retain trusted owner metadata for nameplates",
+    "original_sha256": "55b32393519599d9cfc347eea09dd3691b28e701a65d21f078014cfb3ff412fe",
+    "patched_sha256": "c806dabfbd0f4861ce4f40d24b0564332de2f357add112487004fab8e3b5554b"
+  },
+  {
+    "file": "_next/static/chunks/engine-Dlp-9Jq2.js",
+    "reason": "Route service calls to the independent same-origin backend; retain trusted owner metadata for nameplates",
+    "original_sha256": "e8ebb3a0cb13915bb54981f97d99de6895f4c0dc2e8c57f41565fbd152a80eae",
+    "patched_sha256": "d83d182acbbee7714557d9ddd969e424ffac6845609231cf98d8c5c1a2a3a2d5"
+  },
+  {
+    "file": "_next/static/chunks/index-CXkhr5iE.js",
+    "reason": "Mount the preserved React app with createRoot; the archived production SSR document is not a fresh independent server render",
+    "original_sha256": "af701d1798e9dbbd01fdc9cfe63eb47e2dcb2d0f1e0a396a39e7ce6fbcb6f3ea",
+    "patched_sha256": "5e6015c263049ab5a7afb5fa095506c78438bade4de537a362f1908ddb025b05"
+  },
+  {
+    "file": "_next/static/chunks/game-client-lLy7DYzG.js",
+    "reason": "Disable cash sales, mount owner tools, refresh earned rewards, and integrate 3v3/4v4 into the native ranked selector and solo sessions into Ride",
+    "original_sha256": "cf472c9f7c7c657674eb87d9b3c4ad59c9529f031cad93d20062a3e8bd688bb4",
+    "patched_sha256": "f1213b86da6010f71ec2d7416f4e62c3edaf46fa5d52a8b5ed98907aa8abcf5e"
+  },
+  {
+    "file": "_next/static/chunks/input-log-BvMdAwyG.js",
+    "reason": "Use real independent live services, including local installs",
+    "original_sha256": "f59d691126e2c39371696cddb5f5c6789bcb9cdf31c1890e879ff11a57cf804f",
+    "patched_sha256": "e74928c812725acf26825530b2e2b201674dc18918cf1b7e36cad13f552f0e33"
+  },
+  {
+    "file": "_next/static/chunks/active-course-BUb4R-L7.js",
+    "reason": "Disable original localhost bots/test cups and allow verified score submission",
+    "original_sha256": "67305ee703071770818a42d00fc6c571292252bd23b8856f53576791e2fd9861",
+    "patched_sha256": "08d8537b45fa2a8248f6cbf19b4406be8b1619195da03d2490a8e006accea934"
+  },
+  {
+    "file": "_next/static/chunks/clip-export-Cda1zaM8.js",
+    "reason": "Retain working MediaRecorder clip export when optional MP4 acceleration cannot load",
+    "original_sha256": "6a3481bae7040dfab4af4a1b359f9b6b503faa03cca406d091eba52f5532a281",
+    "patched_sha256": "1b85629ddfbea36be2f9ee372a6ec032e13a363a813bd184393feafbe04b2277"
+  },
+  {
+    "file": "index.html",
+    "reason": "Remove production analytics; leave the serialized React document consistent",
+    "original_sha256": "a9386b146eea6b03d251400cdf3bb7de573ecdb0dc05812ff263148e97543afc",
+    "patched_sha256": "176879baa0bfe8d7453b82dd66b675e30d59998988028a7da0e8349acfddfbc4"
+  },
+  {
+    "file": "_next/static/chunks/lobby-picture-Qth4wHFI.js",
+    "reason": "Invalidate rider portraits rendered before missing model textures were restored",
+    "original_sha256": "7aa004c95c33f3bf958caa13d8a00b97f8ae9cd428f25bd5f31fbe751d3db62c",
+    "patched_sha256": "631c32844edb35c8ee0eed4a8c6b4c572406efdd35188675d1a2f9ded687a65e"
+  },
+  {
+    "file": "_next/static/chunks/patch-notes-CRCSZuih.js",
+    "reason": "Publish independent release notes in the original Updates tab and new-update indicator; preserve older history",
+    "original_sha256": "90c71de5d91dce68014fde34506be45b6d6aa46445198a9c3f236d2e08ee83a1",
+    "patched_sha256": "b1c84df09976b8f662b8dd07f0874ed474d9bbb4072b767b443f37b2ebe6b72e"
+  },
+  {
+    "file": "_next/static/chunks/parks-1qsmaijL.js",
+    "reason": "Ridgeline course metadata and live room capacity",
+    "original_sha256": null,
+    "patched_sha256": "2ee4e65bb2f7845b42acd249c4a6e6bc6ba31a655f0caed5f3a304c6b783e563"
+  }
+]

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="/runtime-config.js"></script>
+        <script src="/services.js"></script>
+        <meta charSet="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <link rel="stylesheet" href="/_next/static/css/index._D7AXDAY.css" data-rsc-css-href="/_next/static/css/index._D7AXDAY.css" data-precedence="vite-rsc/importer-resources"/>
+        <link rel="stylesheet" href="/_next/static/css/game-client.DXRQiZxI.css" data-precedence="vite-rsc/client-reference"/>
+        <link rel="modulepreload" fetchPriority="low" href="/_next/static/chunks/index-CXkhr5iE.js"/>
+        <script src="/_next/static/chunks/rolldown-runtime-C60lm6uB.js" type="module" async=""></script>
+        <script src="/_next/static/chunks/framework-D_rUT4EX.js" type="module" async=""></script>
+        <link rel="modulepreload" href="/_next/static/chunks/layout-segment-context-Cw6iy1xX.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/game-client-lLy7DYzG.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/desktop-downloads-DSNPNuob.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/shop-day-DKdIHqyF.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/rider-appearance-Cs5aq3V7.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/season-BrQumfIM.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/lobby-pose-Crez8-8N.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/patch-notes-CRCSZuih.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/active-course-BUb4R-L7.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/rider-outfit-BI9AmbRj.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/replay-Bo7bmJ9f.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/live-protocol-j28FoPiw.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/parks-1qsmaijL.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/input-log-BvMdAwyG.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/chat-DlnF30mF.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/clip-export-Cda1zaM8.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/replay-store-DlNSG3Tr.js" crossorigin=""/>
+        <link rel="modulepreload" href="/_next/static/chunks/supabase-BEhtaJUq.js" crossorigin=""/>
+        <title>STEEZ8 — Freestyle mountain game</title>
+        <meta name="description" content="Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed."/>
+        <meta name="application-name" content="Cork7"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+        <meta property="og:title" content="Cork7 — Free Online Ski Game · Solo &amp; Multiplayer"/>
+        <meta property="og:description" content="Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed."/>
+        <meta property="og:url" content="https://steez8.me"/>
+        <meta property="og:site_name" content="Cork7"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="https://steez8.me/brand/cork7-share.jpg"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:image:alt" content="Cork7, free online ski game: a black skier silhouette carrying skis on white"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="Cork7 — Free Online Ski Game · Solo &amp; Multiplayer"/>
+        <meta name="twitter:description" content="Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed."/>
+        <meta name="twitter:image" content="https://steez8.me/brand/cork7-share.jpg"/>
+        <meta name="twitter:image:alt" content="Cork7, free online ski game: a black skier silhouette carrying skis on white"/>
+        <link rel="icon" href="/favicon.ico?v=2" sizes="48x48"/>
+        <link rel="icon" href="/brand/favicon-96.png?v=2" type="image/png" sizes="96x96"/>
+        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" sizes="any"/>
+        <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png?v=2" sizes="180x180"/>
+        <link rel="manifest" href="/site.webmanifest"/>
+        <link rel="canonical" href="https://steez8.me"/>
+        
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-title" content="Cork7"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="theme-color" content="#102b35"/>
+        <script>
+            Object.assign(((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }), {
+                params: {},
+                nav: {
+                    "pathname": "/",
+                    "searchParams": []
+                }
+            })
+        </script>
+        <link rel="modulepreload" href="/_next/static/chunks/index-CXkhr5iE.js"/>
+    </head>
+    <body>
+        <script id="cork7-art-bootstrap">
+            (function m(e) {
+                if (window.__CORK7_ART__)
+                    return window.__CORK7_ART__;
+                let t = navigator.connection
+                  , n = !!t?.saveData || [`slow-2g`, `2g`].includes(t?.effectiveType ?? ``)
+                  , r = -1;
+                try {
+                    let e = localStorage.getItem(`cork7-loading-art-v7`);
+                    e !== null && /^[0-9]+$/.test(e) && (r = Number(e))
+                } catch {}
+                let i = e.map( (e, t) => t).filter(t => e[t].startup && t !== r)
+                  , a = i[Math.floor(Math.random() * i.length)];
+                try {
+                    localStorage.setItem(`cork7-loading-art-v7`, String(a))
+                } catch {}
+                let o = {
+                    shot: a,
+                    saveData: n
+                };
+                window.__CORK7_ART__ = o;
+                let s = e[a]
+                  , c = typeof location > `u` || /[?&]park(=|&|$)/.test(location.search) ? s : e.find(e => e.lobby) ?? s
+                  , l = n ? c.compact : c.normal;
+                document.documentElement.setAttribute(`data-loading-art-theme`, s.theme),
+                document.documentElement.style.setProperty(`--cork7-startup-preview`, `url("${s.preview}")`),
+                document.documentElement.style.setProperty(`--cork7-startup-portrait-preview`, `url("${s.portraitPreview ?? s.preview}")`);
+                for (let e of [!0, !1]) {
+                    let t = document.createElement(`link`);
+                    t.rel = `preload`,
+                    t.as = `image`,
+                    t.type = `image/webp`,
+                    t.fetchPriority = `high`,
+                    t.media = e ? c.portraitMedia : c.landscapeMedia,
+                    t.href = e ? l.portrait : l.src,
+                    t.imageSrcset = e ? l.portraitSrcSet : l.srcSet,
+                    t.imageSizes = e ? `100vw` : l.sizes,
+                    document.head.appendChild(t)
+                }
+                return o
+            }
+            )([{
+                "normal": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/violet-switch-v7-640.webp",
+                    "srcSet": "/onboarding/violet-switch-v7-640.webp 640w, /onboarding/violet-switch-v7-960.webp 960w, /onboarding/violet-switch-v7-1280.webp 1280w, /onboarding/violet-switch-v7.webp 1672w",
+                    "portrait": "/onboarding/violet-switch-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/violet-switch-v7-portrait-360.webp 360w, /onboarding/violet-switch-v7-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/violet-switch-v7-640.webp",
+                    "srcSet": "/onboarding/violet-switch-v7-640.webp 640w",
+                    "portrait": "/onboarding/violet-switch-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/violet-switch-v7-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRnwCAABXRUJQVlA4IHACAABwEACdASpgADYAPv1oq06rJiOiMVdroWAfiWoAuVP70MUq72/7HHF/J+jdXMZ2hVEEbFPrUEIQSQhZNu3osM9j1ta3a5NnP7szItt8++6Xs0Qv79rwWwDg0cxPVMtCoaa9DJ0IPBZ+LwrFcoYPg+7yWqPm64FS+vxCJyaWX9TDPWQtnWryVoa1rs9KgAD9G+9VBn78NGx0Gmvk/z5ND+AZPUg5ZurbD8ZImt+P74m67Beq+8xbwZYsecZsXuJ50efbc2RhehlCM7I9Af49vVncJWwCvPagqIlnpfCLfpVXXvc9Zz8egWLo4A1pEK8WP2qFkWMh5vaDrH7LUXkvJpvG3ypLZmSBbA1oJomQJH1KZpJnZSmOqcBqzQ7YncOLH0tvbzpxZpW3SBQuvsVhubAFb+eYLkDCZuQOhlYnxZ5JCq4eiUq4z3FNQCFR3wefzQR8tw18BJBtywi2Dw/Bb+brzmQYgZYE5gkNY3MxUOWOWv5obTeDFwgumVpPiWqPMjPt5YjlDW9rGhdex5HF8Vrutm5ENIWl5XyPgLOOk434g+kihCBC7dpa+FHiEyZmLAg1ea3ClechOdQvUmofRXyL9rBcBFH1/97BRjp5qoWmlyeW2X0Z8ZGauQRrhILBh42oKvppJRoVRuPX8CEr5zgb5knuKctuNCk9AZuBzQ4X3lzBBrXX2pOa/hzmhlZS0VrATjkGdTF5f64n3nnbkh+WA7UU1ZsFjQut5TnGXvatfoAx5CWwOBKrC/JrtNZgVPvZaNwn5eljHGQ3B1DgSSV6mvVLdpFVSMjwpki9qM7L9hSB+BinxIOKUU6sTlhAAAA=",
+                "portraitPreview": null,
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "dark",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/scarlet-cork-v7-640.webp",
+                    "srcSet": "/onboarding/scarlet-cork-v7-640.webp 640w, /onboarding/scarlet-cork-v7-960.webp 960w, /onboarding/scarlet-cork-v7-1280.webp 1280w, /onboarding/scarlet-cork-v7.webp 1672w",
+                    "portrait": "/onboarding/scarlet-cork-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/scarlet-cork-v7-portrait-360.webp 360w, /onboarding/scarlet-cork-v7-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/scarlet-cork-v7-640.webp",
+                    "srcSet": "/onboarding/scarlet-cork-v7-640.webp 640w",
+                    "portrait": "/onboarding/scarlet-cork-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/scarlet-cork-v7-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRkADAABXRUJQVlA4IDQDAAAQEwCdASpgADYAPwFoqk+rJaOiMVO9yWAgCWoAv3HRfmfNygfnnvV5lPp157vz/76ZX/2B/tnSHiK9d2fNyNjizH+YLBnfpOjsiqvNm83SihbUHjxLKcpA+6IV02LU5szcDLEpAwHub3aMzDvaP6XutAeFKl/jU9tvd3Ao/f1EqDxbrmOZ7GSotj2pwyjyUiepeE/FBxjOId+ZvAEsfcUbuABzS4QN3sE66mX1h8lsHmGw0rFZsFsa+6szyO4AjY/nEwZg/y15pQjoj5RWJw1nwPaRzcIimfdO1Btjv6Q8D5yrtKPFElehvfE+r6rFwBiTRZhNW+sNc1+dLibG8uxmDv6xhy37qJAG6XdcHD52+yC2SMbUiekom2k9p6hhunyP5TsmMVyxwceLQEK20l/mqb6pPFgc1KGGn35iQLadFLKsY2WYe9qHwHOwDsD+xMec/lfkRrM2T9ONj1X+sEM28ZdT5zMBppslZ6NnH2TmLKDG1OwFOStpZ6A8hYMs/IgSCMmn8ta24Dt8EGm3JXza+ul44wYQn5wCBZSz7RaRv+pVVqRPtvk2yRAeVB8/xa12CSUMxYoDdNaoSSZzXqCpOOd1ut5m0Kud600k2X8PWbyNOwEXEnO6kP+381UXLyC9WO8FEGOh9Q7d2DjDNommqHLqKqGTMAUgKhsZQlHMkS0e0jM3tCDAVjVw7PwIGx8hIuaRsnXFpTc2N3K7TmT0ST0Bf0zb4WHuuGcFiGikP+RQXDQaizdDEnE1UNQWRjI24DZcwH3ttXowoIUahslQmfsf6juwh8Kv/35254OarOU1Kjo09Ke9ddZ4w2fyZaYm+nW6gj050ZJwxBRcWzCPfKt8JdXegoSzqdDVqsaKONyvSJKq9ItsJD/TIXM9r4HVhocTkxtPZJvYSPYwkBnWmyaD8EzcVqARDuw/woJwP+PlHLUrTFfOSfPcXzo0kJIt8AwzXFJYr+hmg5ct7USE/sasd6fa2rs0znGduasRfLopyO3Qo1+PjnUa33TtL853fkIKQ39TnVX01PW1TFZEME6WShX7OIra2B4Wgl3nA7HyaKcMuryzeaUcaNJrHxHa+TAA",
+                "portraitPreview": null,
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "dark",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/powder-cut-v7-640.webp",
+                    "srcSet": "/onboarding/powder-cut-v7-640.webp 640w, /onboarding/powder-cut-v7-960.webp 960w, /onboarding/powder-cut-v7-1280.webp 1280w, /onboarding/powder-cut-v7.webp 1672w",
+                    "portrait": "/onboarding/powder-cut-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/powder-cut-v7-portrait-360.webp 360w, /onboarding/powder-cut-v7-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/powder-cut-v7-640.webp",
+                    "srcSet": "/onboarding/powder-cut-v7-640.webp 640w",
+                    "portrait": "/onboarding/powder-cut-v7-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/powder-cut-v7-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRu4CAABXRUJQVlA4IOICAABwEgCdASpgADYAPwFsrFArJaQqLVZtIWAgCWQAshAmjNU/8db9vHdz/6nyFPd1tQELBKd3B0RVegBTj4P900C4RCz9zPO91nsYzl5gpqetUax3YJA19M7AoYcfOHlHJM3PmPryJylWPCiyOZ5+aX5Y4L4rl9V01rOpaS//yMpUetzvpKrG1AwVBk9ilnjZ66Bw+m0EvEQ9ocrpZ2gA/urqFKOL7bUP5HYGvqvhLK77x9brFZMdEhVuaRwTuDra3deewuM253XuRqHHZiis1VXcvtK8H8ThDu+uxOwVIi+UB7laPhO/OmqpMqYsbNHzjZn3flPUAfuFS5FCww+FoAoj8o+HUI7VaOF+EfnEYwnIyqU+qpClnnQH5pyoRX0aGekcn6wEuZFlXjnRt15ZV3ST+ohowf2yro+frakkcWEBr4R+E2qXhCqBscz7SuVAgHGTEoRNCm2RBGNOm3c0jh+SKRNMn+bmotyUK+cfk8dND0cjGUjXvAeOTkmtM9CPaHnCYuk4GWEwW011rpr2kn1lFrSjzaz8J0qff02zrQjcbdOoRMXFX1z/4mMJPIZCpYBX5qLgtAyjuJjuSW8n57yK6BMskTnCxami8AjV7sg3P2QJRl8HadhriysiXf8SbMwFG3kCBgunzEUtCfR3NW8MT8Jt1/QdzeM7it1i4hnAJKZeY/+nO7XCqHoxfLR7A9z5ao0YBvLi6kguRKcpA3zLNcGBGoVmYUmovCiQbdaIJ8FAn6nfnUC9rN92Eo/zkNcGZ2Bu1DMlP2zkASF0nydoTw0Xp3/9fENdPsNbyvkx5Qex6YXQIlNswbjq/yaJibcBRGTV3gnk8FZ1k8+coQNgW714D/pdZEeVJxFsgVMwcUkyrEZyx4aD5UClABZJTq0uGDKAwavle50ulqAH4AHLGBsUVlz/q011HlSR+/0PRwzPEwy617Af80EhIdtB81kdy1xTVGUNNaSn6FMNSpuAAAA=",
+                "portraitPreview": null,
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "dark",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/diagonal-carry-v8-640.webp",
+                    "srcSet": "/onboarding/diagonal-carry-v8-640.webp 640w, /onboarding/diagonal-carry-v8-960.webp 960w, /onboarding/diagonal-carry-v8-1280.webp 1280w, /onboarding/diagonal-carry-v8.webp 1672w",
+                    "portrait": "/onboarding/diagonal-carry-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/diagonal-carry-v8-portrait-360.webp 360w, /onboarding/diagonal-carry-v8-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/diagonal-carry-v8-640.webp",
+                    "srcSet": "/onboarding/diagonal-carry-v8-640.webp 640w",
+                    "portrait": "/onboarding/diagonal-carry-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/diagonal-carry-v8-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRuYDAABXRUJQVlA4WAoAAAAQAAAAXwAANQAAQUxQSGgDAAABoChJtmnb6jHnOvvaz7Zt27Zt27Zt27q2bdu2ffdac4x+uH7jAyJiAuCkxBgFjosACOKXYPO3Wj6/AcQrweZDWPA3BKcEWScuLxfpIGQ+BWy1QpPmvESiuCQoDWBSjrtqzM4IHiHiPRbKuf3YpQrEEZEYViLY5EuqmeV83xMRQOQ/iLiMySxZzssR3UCsde8RCCt7ioWZWc7HkDkhqPT7wq6/1oSs5BwmM1OO2wXBjapDuLjldQgABBuMZTJLvBwRXgYcspBzv90BAUDAnyzMcn6L4AYiribH31UCIKg8nMkscVpdiBuIeIXa/QQEBGy/gGqmypMR/RCJDVj+dmuEiDOYzMxy3oPMDwRs0J/zHiwhw6csVvYxoiOI2HMmR52NgM4rU87cAuIIIs4p2HoX1BrJtLL5WyN4ggwPMn+zYou51P8UbAqBrxGfc/b5B1NtZb8hOCOo2p7t312N1hBnELD1RE6hrTSxM/yNOHIZVVfRxyFkuIbJzFQtcZj4I/v8cvUwqpmpKidXgXiD+mMndxlGVTNTztsKwZmIQ/9oM3wWlUWyxDG1IO7c06npeTnTLGXOgQcjwNmAvae9WXsw9d5bx5CnIoO7ER9ejldYlOtf88jMB1ERxBvB9oeiFQtj0eCyB4+GSBRfAEGdsUxaJJab9Pnl0BIkiC8Re5qpqeWcc8o9HV8+riYkiC8XMdl/C47daJdXXrvtrA2BKH5keI5LyjTjou7sXr3inAcuvuqiTSDiRsTPHDKVqlxxbD/+ErDdLefte8kD+0CcEEg39u/OpIkn71Pmy5Bw0h1bH3fb7hAvqg7n4i/KTKornrqPvBklbHDLU1WrCZwUtCDrt2Yy5bLd/+Ty01BCxflnVoM4keEVcvotZaqVeU/tyZx9ELKASpXhZcSlzHljayZLnLLBSYljtkGMAjcD9mZil4YszAq2xEtky3oQ+CmQ+ixYfxrVrODZ6EB+sQnED0Rcy5xTP86plvND7D6Tcz7aAOLJgWo5X+rCZMpFe+MK8qc6vlzKVPDLd1mYJh4DPNh5VwR4KSi9mGuRs+F7zIs858MoAQI3BdKcyYwTmmlKpI04CzGE4MmGc8gFI9hyAbn41btPyeBu3POUM7cOu106Y3LX0xAgwZ1VygY1gZhFgb8hxiBRAIlYc1ZQOCBYAAAA0AQAnQEqYAA2AD8BfrZXKyeko6K4CGFgIAlpAAAaANDUTcLoRVAHnbm8Dy08rmAA/vDU2m2lLMzUPqETnGCNnQ4DOzZk/slJm96r1iQN3ORitLioAAAAAA==",
+                "portraitPreview": "data:image/webp;base64,UklGRtQBAABXRUJQVlA4IMgBAABwCwCdASowAEEAPwFsrlIrJSQirNVbiWAgCWkADo+2AynWBOkamj+Q2Q+a0M5krQSn/31qpqW81WLjJjdgMSZY4iAB3cqL5QSts6+6P8ia0Czf8LutU3/NRg2VscgeUABmRIQAAP7341dxwKy2n9S6qmSRuAh3F4BbK4uEJgd6xHbu87zr59TK+C8OrffsmTToe+Pg29aCJlV9ZfA+e2565zrSG3wYVQUx6dipHVcpY1msPaNWTTQGXvy8jq6RnXrG1muLnsnzDFPZa6/S5Pv3be2ynV/IiuF63NtPSf+EWvsXR9BSCG0Rf83XXDETdXkkgcCdGU1WTOdObBXrcnUf0jCzp5zjNuXr/kzAN3X5D883MwdPAWsH3x6K2a0ZjZZD5kR+XK1EyjafEMeiILJ/wILjZGzBfpIcR/iDOdd7H+roJxKPYB2X+gnDkljxyymVn+qxNhdtsMG9nUbO8wi0dVO5USg3TuSzUhFLGc5Yfi6JePe10PdRrcudtSDnHtMrk0JRlCnPihOdFcz6YHCAGRgIkFvNOH+eyb3DiFp6I6WcLeONgdHr40nMxvjHZsuDotUfoVxT3IZ79YA7pPT6uOhlyIlGAAA=",
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "light",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/hood-portrait-v8-640.webp",
+                    "srcSet": "/onboarding/hood-portrait-v8-640.webp 640w, /onboarding/hood-portrait-v8-960.webp 960w, /onboarding/hood-portrait-v8-1280.webp 1280w, /onboarding/hood-portrait-v8.webp 1672w",
+                    "portrait": "/onboarding/hood-portrait-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/hood-portrait-v8-portrait-360.webp 360w, /onboarding/hood-portrait-v8-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/hood-portrait-v8-640.webp",
+                    "srcSet": "/onboarding/hood-portrait-v8-640.webp 640w",
+                    "portrait": "/onboarding/hood-portrait-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/hood-portrait-v8-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAAAwCQCdASpgADYAPwF2tlOrJyUipXQLMWAgCWkACBA4gW/DZZKQu3R4z18YBVAqz2IU15jwoIAvUmLVG8chKo6v/t1owKyLWbD/BtzR1KxgHjwYAP7xsAt8BFg7avTuqmSzWP1Pn70/GTW25Z3wTN8QwssUD/BBbXoMDpAUwmUVhDc9nHxK8OgMjayY1+lmFnmavU/bVf/HYNNdcUei9EKQWhcqqibTc80ZRtrsZFPumv8P3wkpONRmhx7/ahMNitaW27DVX1mim9UuRV8lEYEvA95I0Qk/3wU3h5KPp06VjUli3IEWQpKKo6kksVpjstr4OvuxE5H7CR/jQjgLjgajZEelZ8eC9oYN7MAA",
+                "portraitPreview": "data:image/webp;base64,UklGRi4BAABXRUJQVlA4ICIBAABwCACdASowADUAPwFqrk+rJaQiKrQO+WAgCWkABRAe3WpIkyg0HltnCGgHkuTmWrYe7hdLj+y+wwpqiu+eBe5PGsmoZcUtXVjeeWYAAP734jU6w1cokkZKkUqViEwEfK72PiDpkUhbfvgISYPeL1HADGMiJQXUXQ2T1pJ0Gsief6+oqFm2TdVEKFfEucqytwb6sZzYoFDtsqKYTFLb3aZPV/IQ8quG6MP4TdccsUf0yiZrF8QmrbbQgONulKO1FNcgMuJfQJyr1MvLJhrN+jVFHwrP+lBKwyKByKERtx+Scin3CapSL2te0sY+ivpPZbVix54AWEu16u4FVrBV/SdZ/rBBjDwTxUMEvLRX5mq5UYSWAkt2Hagh9Zt0gT2kAAAAAA==",
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "light",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/shell-front-v8-640.webp",
+                    "srcSet": "/onboarding/shell-front-v8-640.webp 640w, /onboarding/shell-front-v8-960.webp 960w, /onboarding/shell-front-v8-1280.webp 1280w, /onboarding/shell-front-v8.webp 1672w",
+                    "portrait": "/onboarding/shell-front-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/shell-front-v8-portrait-360.webp 360w, /onboarding/shell-front-v8-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "100vw",
+                    "src": "/onboarding/shell-front-v8-640.webp",
+                    "srcSet": "/onboarding/shell-front-v8-640.webp 640w",
+                    "portrait": "/onboarding/shell-front-v8-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/shell-front-v8-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRkYDAABXRUJQVlA4WAoAAAAQAAAAXwAANQAAQUxQSO0CAAABoHZtmyFJ3tATETkza9u27d2Ptm3btm3btm3btm1URjzvs8iqzD4RETEBKKYLIQSHcgc0Blcqj1F3uOHmQyeFL9bmO/wt6pg9x4ErUcCOOudX1rwiXgRfIIdR31YvxljX6Y+Z4MvjMbdMjUlroSpPwNL6+uVH77rzoec+0o5lWsYO2mijzbbabJOd/9qtRB6zvTRRqEIVhlUPropQHgB7jo8KCL7aeTSUOGDFuYBtDwOmWB8ldg4HfnfgAbVO3/XzLRHK4zD8FCUpRZnisggFulx1qhMZ655uhSuNQ3heyf5PY+Ilo8CVpcK8v4pGmpmRSYshFCUMwyGqbaBFUPmCeEx42BeiNdLMjM9tPAK+GB4rfSHSGmnNemYR+EIErEj1khn/1zfW+nMp+CI4jPu+amtN6+mJgCIGHKCarUizqOURCuAw7sdKNLYwM9a6Ab4AAZspWlvSzIz6fRb4/Bzu76Bv1IEI2XnM8Zc4ENlAI5Oeq+ByC9hX0bqmcX743OCeU+rMah2EKjOPuWvRzNhN1COAyytgH0Xrjvp9Gvi8HB5q6jppfVRZOYz2ltIQsKczELKCw+OKQxH1vEfWHjN9Iw6B0dJC8Bk54B5F65R9ah2FkJHHJD+KndD6Rm2X2YzJOqeZMerZUeCymk192O7/VFoIHhk7DHtOqQ2NAxh1MvIOWLuPkU0tabYQfF4HK5oZae3ZoD9mye2Ahm5Js6TXAlxOHtP8JFJffye2YQP16ch5OYz5nlKt2+9TNDMOpK+fUEp60ecFh/m/VE9Hn94wIC3pyZ1V651Z4ZF3wBn6W3vu2Mas1iWbqKcjUCG749TTOycrtYm66VX1tFd+Ds8p6sezxDZJ132hWjfD5+Zxj+Ktv50c1YY6+4e7/9ClCLkF7Csd8979ycyMg5jue/csaitUuXlM9bU+2vEFJdrgSfdu95HeHhsuN3is8IO2uVaxTa29d9BnS8Ajf49pd57mHkUjB4q6cIatJ4FHIwBWUDggMgAAAPADAJ0BKmAANgA/AYC7V6soJiOhaAFgIAlpAAALMiRIkSJEiRIkR9AA/vDBoPGAAAAA",
+                "portraitPreview": "data:image/webp;base64,UklGRnQBAABXRUJQVlA4IGgBAACwCQCdASowAEEAPwFssVKrJSSipnVdUWAgCWkAE9LpAZYGkmZvMizdtDZ93e47v3r8FNBzmVBP70sw6Quv1mgCQW2jTSsuw4chKQR7G6QWGEbPbnkEAAD+84Sr/CIvgQm+tjAIf9Srvgtok+82mttC+HGyYOUwO5cnZ9eREt8o9zmz9NfvQZYWJ1nVOPLgkHHhuIVOWthFF9Jpg89nnuKMPZE3YO4fZZhyh1v20EcQUgGODt6nf3/KSOLv5SqCxrZXZ3DlDhaZ8vTlVNRhgUjQFcke4uJ+qGLkGO4Do3KoLfOaDIsmf4kbHM7fgVxnz1FmPZfBRVMxLbOce8IuljTPDXoeP5UZSfHb1rmf1CQim/ss7CnM9LXfxe/hdLPQuSlRCD1en+UzCRqVeXtBrGf9nZTtFAZsLLaaq2bTIbuhMy8y9ttdf5JRSWKHNxUV8qgaewSFxdn1nX/+HQPGwabjqz+cjXAAAAA=",
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "light",
+                "startup": true,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/lobby-winter-v9-640.webp",
+                    "srcSet": "/onboarding/lobby-winter-v9-640.webp 640w, /onboarding/lobby-winter-v9-960.webp 960w, /onboarding/lobby-winter-v9-1280.webp 1280w, /onboarding/lobby-winter-v9.webp 1672w",
+                    "portrait": "/onboarding/lobby-winter-v9-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/lobby-winter-v9-portrait-360.webp 360w, /onboarding/lobby-winter-v9-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/lobby-winter-v9-640.webp",
+                    "srcSet": "/onboarding/lobby-winter-v9-640.webp 640w",
+                    "portrait": "/onboarding/lobby-winter-v9-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/lobby-winter-v9-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRhoDAABXRUJQVlA4IA4DAAAwEwCdASpgADYAPwFyr1ErJqQiqrYMeWAgCWMAvYzGzNvwL5OMeAg1c283LdrE23943ebyDJige78F3jubUENKKaiow1FcXkZXJjJd6IiYCW4+J5syuW4W+DBeGt3bKRAaCIR5FPbdxf1+MZzpJscv+CFOoVxXntBk1FCVdeEhimsSD7+NRBl/DK1sVJRJ/TqYuwIrzW6zVAxEP9ecXY3t+IAA/ueTfS50Jfmz8x78rois5VxuVWgtIa9pHWKRdiqe8AqejITYAg2dyfh+F4TbJAFGp390OrM6C4z5ACinsOWdoSvY/1VYsRMNXS4RTJo6mSEW+GuU3PzKP8LGueyv9cr6v0YiWCSIDJRzcFKVrr/kzxWK6ELmzmlIqfIDZwimKpwMT5cvJK+v9dqj/mTTd/pskEM00scDUuXiI7MY13ibkINGcOtkg1C8TyZqco32V1xauG0LETAi29tvCkudru5LkzqSKja0wT/1wqNDXb/uO38l/EdWFt7+1fDRfHeGP1+cEFFEELrA8LElgB8Skx2Y9WwL0YENLCheVIWC05o3OLsmTxzRmecSEBJPebejr7V+iSAFiO+qQAXq3o0KjR4oyI2rja+KyXU1A8htr1ADAZlP1M31hGlLCkkmMOwtJdtAN5eY08kFEZ7wzf0/9ZJuNAjdT8AJD03tKbG/YAjp37ggJ+y63a9F14orBWNUJ905Rpgm85t4T/PMAVMeCcBHMIsB/Hb6yha61n/HWCtSczkvzYWhxax1fMlBYsncXVnVyk6Xqc4CNYMkGLKQjWeRmLRU1EL261INT0qoMu8pPro9/YbyiVBv3Icz1+4LXvzL3QXt9eWaMvqtn6ydTAxPCBacoxJ+otVD85J2AHpq6/Z70gTdKDLZuEEm0/sogPwRmhMLx22X3tbujK7677CQHn6LFqRVlA3tHTcFxp3JDyA6xhfb4tqL1WVeSJZiTjkVFQRb/mV5LrlzUrl4JKDa9PZZ7DjDScyl2hTs06fKzyO+1EUrkscZIgU2bTDfIRRQPBWe23RYvTQAAA==",
+                "portraitPreview": null,
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "dark",
+                "startup": false,
+                "lobby": false
+            }, {
+                "normal": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/lobby-halloween-v10-640.webp",
+                    "srcSet": "/onboarding/lobby-halloween-v10-640.webp 640w, /onboarding/lobby-halloween-v10-960.webp 960w, /onboarding/lobby-halloween-v10-1280.webp 1280w, /onboarding/lobby-halloween-v10.webp 1672w",
+                    "portrait": "/onboarding/lobby-halloween-v10-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/lobby-halloween-v10-portrait-360.webp 360w, /onboarding/lobby-halloween-v10-portrait-528.webp 528w"
+                },
+                "compact": {
+                    "sizes": "(max-aspect-ratio: 16/9) 178vh, 100vw",
+                    "src": "/onboarding/lobby-halloween-v10-640.webp",
+                    "srcSet": "/onboarding/lobby-halloween-v10-640.webp 640w",
+                    "portrait": "/onboarding/lobby-halloween-v10-portrait-360.webp",
+                    "portraitSrcSet": "/onboarding/lobby-halloween-v10-portrait-360.webp 360w"
+                },
+                "preview": "data:image/webp;base64,UklGRk4DAABXRUJQVlA4IEIDAAAQEwCdASpgADYAPv1srU6rJiQjLrorsWAfiWQAwrRUxV3X8zlhJzZT5kxOvAB/cn1Yg4dj3+v8UEtCDpR9eJipdiOCyPgSjex7BRzZ0P28mU0usB4KTnjnuKwqGHKyyFwow5J6w33LVRM3XDoVymhG2GiIhPXnYqMjSOHEHtqy74qbZqsZPu4jM7T2o9XYyWUPpbXD23/oq1KezYH27rTUgAD+0RaX6m7Y2AX2+d0dSITi7PZzgB14TEAWr1y0VrnIgEdsXEN2iZIepmzdmP2an3H2luyYhrgfpuUzFZ+2Hl+PwAfcBZaoQP92LIYW5d9wq+d9Ud10XPNNPT1v9W6CvzSTxswAHfvBTJHtIYju9bflwpRB5eAzI5n8+SpyNFcOdukgnl/BzYj+c5MgL1G6RUzdgmvg1mJmf6o2a/LVb2Vd7HkG0xFr+qIT53qEu3Eo8KnVavlMpl6Omshx2Q98t2YQJ46EQpT1cIGJk1qFsJ05WiNHZ3VqTAhP+BpHiiACEhpRf8BlOn52K4KOvjwUtnKFn/jaegC4WCQQFFCRjeeIC5camuGM37dB6aADjIN4onetZPR5dbQs2RuR57fb+Jm6lGmSdMpzUkgZ1vXFPJ/Jo9X7AxsSYBSQG/V922dYy9IMyTlgcA9Ds1JYJVdEGoWknwRD7z4yW2DOmBO9CpL8pSqdErBbxn3btWNLu5wbVfpeOIDXlpIYEvH+EN7h5mPrH1hQjzayl4r+ltf7tdBHkvUsCUY4okurAutAl6ulnd4UanbqoWY179QbREttzha1tphcLU6ovmXFoSUh16kImAfRiAy6DSn5+o0fmDtRStVw7FYXf/S9H12y56vHDeLsDsiRKZ+KOgOAi14mm+HCrz4CGX0oXOF73ajwCEMQ0QzXzzlfnd8SrHjFYe8lfBc8jO3SW68k75A3fxEevoj/Ag9pEZTD1baISzfm7sHX2aC/JeOwqwtV3gh/y8gTD+KAeuPDJWUOH/BCdCY3oYtOp/np/zlVpSB68ulbR5Nu0DwDfpkIPQQgcXBvDs4y+ZADhw3vQYRmKZIv8omPjAFJgNA4yVYuCrL3X9lhSthDi892xWcQXKuilDFIHUAAAAA=",
+                "portraitPreview": null,
+                "portraitMedia": "(max-width: 620px) and (orientation: portrait)",
+                "landscapeMedia": "not all and (max-width: 620px) and (orientation: portrait)",
+                "theme": "dark",
+                "startup": false,
+                "lobby": true
+            }]);
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://cork7.com/#publisher",
+                        "name": "Cork7",
+                        "url": "https://cork7.com/",
+                        "logo": "https://cork7.com/brand/icon-512.png?v=2",
+                        "email": "robin@dimora.no",
+                        "sameAs": [
+                            "https://www.tiktok.com/@cork7.com",
+                            "https://www.instagram.com/cork_game/",
+                            "https://www.youtube.com/@cork7_game",
+                            "https://discord.gg/quMrfAwctK"
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://cork7.com/#website",
+                        "url": "https://cork7.com/",
+                        "name": "Cork7",
+                        "alternateName": "CORK7",
+                        "description": "Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.",
+                        "inLanguage": "en"
+                    },
+                    {
+                        "@type": [
+                            "VideoGame",
+                            "WebApplication"
+                        ],
+                        "@id": "https://cork7.com/#game",
+                        "name": "Cork7",
+                        "url": "https://cork7.com/",
+                        "description": "Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.",
+                        "publisher": {
+                            "@id": "https://cork7.com/#publisher"
+                        },
+                        "image": "https://cork7.com/brand/cork7-share.jpg",
+                        "applicationCategory": "GameApplication",
+                        "genre": [
+                            "Sports",
+                            "Skiing",
+                            "Freeskiing"
+                        ],
+                        "operatingSystem": "Windows, macOS, Linux, ChromeOS",
+                        "browserRequirements": "A modern browser with JavaScript, WebGL 2 and hardware acceleration. Keyboard or controller recommended.",
+                        "isAccessibleForFree": true,
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD",
+                            "url": "https://cork7.com/"
+                        },
+                        "playMode": [
+                            "https://schema.org/SinglePlayer",
+                            "https://schema.org/MultiPlayer"
+                        ],
+                        "inLanguage": "en",
+                        "featureList": [
+                            "Five parks: The Yard, APEX, Shirakumo, Forest Line and Big Air",
+                            "Online multiplayer rooms",
+                            "1v1 against friends",
+                            "Corks, flips and grabs",
+                            "Rail slides",
+                            "Your own rider in the Locker",
+                            "Replays and video clips",
+                            "Season leaderboards",
+                            "Keyboard, controller and touch controls"
+                        ]
+                    }
+                ]
+            }</script>
+        <main data-menus="dark" class="game-shell  is-intro       ">
+            <div class="world-canvas"></div>
+            <div style="display:contents">
+                <div class="cinematic-shade"></div>
+                <div class="film-grain"></div>
+                <header class="topbar">
+                    <h1 class="wordmark ">
+                        <svg class="cork7-mark" role="img" aria-label="Cork7" viewBox="0 0 176 38" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="translate(10 1) skewX(-12)" fill="currentColor" fill-rule="evenodd">
+                                <path d="M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z"></path>
+                                <path d="M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z"></path>
+                                <path d="M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z"></path>
+                                <path d="M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z"></path>
+                                <path fill="#101418" d="M136 0H164V8L149 36H139L154 8H136Z"></path>
+                            </g>
+                        </svg>
+                    </h1>
+                </header>
+                <section class="bc-shell bc-ready bc-tab-ride" aria-label="Basecamp lobby">
+                    <div class="bc-art" aria-hidden="true">
+                        <div class="bc-art-placeholder" style="background-image:var(--cork7-startup-preview, url(&quot;data:image/webp;base64,UklGRk4DAABXRUJQVlA4IEIDAAAQEwCdASpgADYAPv1srU6rJiQjLrorsWAfiWQAwrRUxV3X8zlhJzZT5kxOvAB/cn1Yg4dj3+v8UEtCDpR9eJipdiOCyPgSjex7BRzZ0P28mU0usB4KTnjnuKwqGHKyyFwow5J6w33LVRM3XDoVymhG2GiIhPXnYqMjSOHEHtqy74qbZqsZPu4jM7T2o9XYyWUPpbXD23/oq1KezYH27rTUgAD+0RaX6m7Y2AX2+d0dSITi7PZzgB14TEAWr1y0VrnIgEdsXEN2iZIepmzdmP2an3H2luyYhrgfpuUzFZ+2Hl+PwAfcBZaoQP92LIYW5d9wq+d9Ud10XPNNPT1v9W6CvzSTxswAHfvBTJHtIYju9bflwpRB5eAzI5n8+SpyNFcOdukgnl/BzYj+c5MgL1G6RUzdgmvg1mJmf6o2a/LVb2Vd7HkG0xFr+qIT53qEu3Eo8KnVavlMpl6Omshx2Q98t2YQJ46EQpT1cIGJk1qFsJ05WiNHZ3VqTAhP+BpHiiACEhpRf8BlOn52K4KOvjwUtnKFn/jaegC4WCQQFFCRjeeIC5camuGM37dB6aADjIN4onetZPR5dbQs2RuR57fb+Jm6lGmSdMpzUkgZ1vXFPJ/Jo9X7AxsSYBSQG/V922dYy9IMyTlgcA9Ds1JYJVdEGoWknwRD7z4yW2DOmBO9CpL8pSqdErBbxn3btWNLu5wbVfpeOIDXlpIYEvH+EN7h5mPrH1hQjzayl4r+ltf7tdBHkvUsCUY4okurAutAl6ulnd4UanbqoWY179QbREttzha1tphcLU6ovmXFoSUh16kImAfRiAy6DSn5+o0fmDtRStVw7FYXf/S9H12y56vHDeLsDsiRKZ+KOgOAi14mm+HCrz4CGX0oXOF73ajwCEMQ0QzXzzlfnd8SrHjFYe8lfBc8jO3SW68k75A3fxEevoj/Ag9pEZTD1baISzfm7sHX2aC/JeOwqwtV3gh/y8gTD+KAeuPDJWUOH/BCdCY3oYtOp/np/zlVpSB68ulbR5Nu0DwDfpkIPQQgcXBvDs4y+ZADhw3vQYRmKZIv8omPjAFJgNA4yVYuCrL3X9lhSthDi892xWcQXKuilDFIHUAAAAA=&quot;))"></div>
+                    </div>
+                    <div class="bc-shade"></div>
+                    <div class="bc-lobby-content">
+                        <nav class="bc-tabs" aria-label="Basecamp sections">
+                            <button aria-current="page">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mountain" aria-hidden="true">
+                                    <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                                </svg>
+                                Ride
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shirt" aria-hidden="true">
+                                    <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
+                                </svg>
+                                Locker
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-store" aria-hidden="true">
+                                    <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"></path>
+                                    <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"></path>
+                                    <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"></path>
+                                </svg>
+                                Shop
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket" aria-hidden="true">
+                                    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                                    <path d="M13 5v2"></path>
+                                    <path d="M13 17v2"></path>
+                                    <path d="M13 11v2"></path>
+                                </svg>
+                                Pass
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy" aria-hidden="true">
+                                    <path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"></path>
+                                    <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"></path>
+                                    <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"></path>
+                                    <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"></path>
+                                </svg>
+                                Leaderboard
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-film" aria-hidden="true">
+                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                    <path d="M7 3v18"></path>
+                                    <path d="M3 7.5h4"></path>
+                                    <path d="M3 12h18"></path>
+                                    <path d="M3 16.5h4"></path>
+                                    <path d="M17 3v18"></path>
+                                    <path d="M17 7.5h4"></path>
+                                    <path d="M17 16.5h4"></path>
+                                </svg>
+                                Replays
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper" aria-hidden="true">
+                                    <path d="M15 18h-5"></path>
+                                    <path d="M18 14h-8"></path>
+                                    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path>
+                                    <rect width="8" height="4" x="10" y="6" rx="1"></rect>
+                                </svg>
+                                Updates
+                            </button>
+                            <button>
+                                <span class="bc-pow-mark" aria-hidden="true">
+                                    <img class="pow-icon" src="/brand/pow.webp" alt="POW" width="16" height="16" draggable="false"/>
+                                </span>
+                                POW
+                            </button>
+                        </nav>
+                        <div class="bc-ride bc-panel">
+                            <aside class="rd-side" aria-label="News">
+                                <noscript>
+                                    <p class="rd-noscript">
+                                        Enable JavaScript to play Cork7. You can still read the <a href="/how-to-play">game guide</a>
+                                        .
+                                    </p>
+                                </noscript>
+                                <button type="button" class="rd-tile rd-tier-tile" aria-label="Season Pass: checking your tier">
+                                    <span class="rd-rays" aria-hidden="true"></span>
+                                    <span class="rd-tag" aria-hidden="true">
+                                        <span class="rd-tag-season">SEASON </span>
+                                        PASS
+                                    </span>
+                                    <span class="rd-tier" aria-hidden="true">
+                                        <small>TIER</small>
+                                        <b>…</b>
+                                    </span>
+                                    <span class="rd-tier-bar" aria-hidden="true">
+                                        <i style="width:0%"></i>
+                                    </span>
+                                    <span class="rd-tier-next" aria-hidden="true">CHECKING YOUR PASS…</span>
+                                </button>
+                                <button type="button" class="rd-tile rd-news-tile ">
+                                    <img src="/updates/party-follow.webp" alt="" draggable="false" style="object-position:88% 55%"/>
+                                    <span class="rd-tag">LATEST</span>
+                                    <span class="rd-tile-copy">
+                                        <b>Your party rides with you</b>
+                                    </span>
+                                </button>
+                                <button type="button" class="rd-tile rd-season-tile">
+                                    <span class="rd-rays" aria-hidden="true"></span>
+                                    <span class="rd-tag is-prize">TOP <!-- -->10<!-- --> WIN</span>
+                                    <span class="rd-tile-copy">
+                                        <small>ENDS <!-- -->17 NOV</small>
+                                        <b>Race for the top 10</b>
+                                    </span>
+                                </button>
+                            </aside>
+                            <div class="rd-stage">
+                                <div class="rd-riders"></div>
+                                <div class="bc-identity rd-pass">
+                                    <span class="rd-pass-head">LIFT PASS</span>
+                                    <label class="rd-pass-name">
+                                        <small>RIDER</small>
+                                        <input aria-label="Rider name" maxLength="20" placeholder="Rider" autoComplete="off" spellCheck="false" value=""/>
+                                    </label>
+                                    <button>
+                                        Sign in
+                                        <!-- -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true">
+                                            <path d="M7 7h10v10"></path>
+                                            <path d="M7 17 17 7"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="rd-barcode" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="rd-play">
+                                <fieldset class="bc-modes rd-modes" aria-label="Choose a game mode">
+                                    <button class="rd-mode is-solo is-selected" aria-pressed="true">
+                                        <span class="rd-rays" aria-hidden="true"></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round rd-icon" aria-hidden="true">
+                                            <circle cx="12" cy="8" r="5"></circle>
+                                            <path d="M20 21a8 8 0 0 0-16 0"></path>
+                                        </svg>
+                                        <span class="rd-mode-name">
+                                            <b>Solo</b>
+                                        </span>
+                                        <span class="rd-tag is-picked" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check" aria-hidden="true">
+                                                <path d="M20 6 9 17l-5-5"></path>
+                                            </svg>
+                                            PICKED
+                                        </span>
+                                    </button>
+                                    <button class="rd-mode is-live  is-locked" aria-pressed="false" aria-label="Multiplayer: sign in with a free account to ride with others" disabled="">
+                                        <span class="rd-rays" aria-hidden="true"></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-radio rd-icon" aria-hidden="true">
+                                            <path d="M16.247 7.761a6 6 0 0 1 0 8.478"></path>
+                                            <path d="M19.075 4.933a10 10 0 0 1 0 14.134"></path>
+                                            <path d="M4.925 19.067a10 10 0 0 1 0-14.134"></path>
+                                            <path d="M7.753 16.239a6 6 0 0 1 0-8.478"></path>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                        <span class="rd-mode-name">
+                                            <b>Multiplayer</b>
+                                            <small>Checking account…</small>
+                                        </span>
+                                    </button>
+                                </fieldset>
+                                <button class="bc-start rd-start" data-pad-primary="true">
+                                    <span>Ride</span>
+                                    <kbd>ENTER</kbd>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true">
+                                        <path d="M7 7h10v10"></path>
+                                        <path d="M7 17 17 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="bc-footer">
+                        <div class="bc-footer-left">
+                            <a class="bc-discord" href="https://discord.gg/quMrfAwctK" target="_blank" rel="noopener noreferrer" aria-label="Join the Cork7 Discord (opens in a new tab)">
+                                <svg width="18" height="13.642284096271826" viewBox="0 0 127.14 96.36" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"></path>
+                                </svg>
+                                <span>DISCORD</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true">
+                                    <path d="M7 7h10v10"></path>
+                                    <path d="M7 17 17 7"></path>
+                                </svg>
+                            </a>
+                            <nav class="bc-site-links" aria-label="About the game">
+                                <a href="/about">About</a>
+                                <a href="/how-to-play">How to play</a>
+                                <a href="/download">Download</a>
+                                <a href="/privacy">Privacy</a>
+                                <a href="/credits">Credits</a>
+                                <a href="/updates">Updates</a>
+                            </nav>
+                        </div>
+                    </footer>
+                </section>
+            </div>
+            <div style="display:contents"></div>
+            <div style="display:contents"></div>
+            <div style="display:contents">
+                <aside data-music-player="true" class="music-player is-music  " style="--track-color:#8acac6" aria-label="Pocket: music, chat and riders">
+                    <div class="music-tray">
+                        <button class="music-open" aria-label="Open the Pocket" aria-expanded="false">
+                            <span class="mixtape-art is-mini" aria-hidden="true">
+                                <span>C7</span>
+                            </span>
+                            <span class="tray-text">
+                                <b>Quasarise</b>
+                                <small>| e s c p |</small>
+                            </span>
+                            <span class="tray-progress" aria-hidden="true">
+                                <i style="width:0%"></i>
+                            </span>
+                        </button>
+                        <span class="tray-wheel">
+                            <button class="tray-previous" aria-label="Previous track">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-back" aria-hidden="true">
+                                    <path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"></path>
+                                    <path d="M3 20V4"></path>
+                                </svg>
+                            </button>
+                            <button class="tray-play" aria-label="Play music" disabled="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" aria-hidden="true">
+                                    <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>
+                                </svg>
+                            </button>
+                            <button class="tray-next" aria-label="Next track">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-forward" aria-hidden="true">
+                                    <path d="M21 4v16"></path>
+                                    <path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                </aside>
+            </div>
+        </main>
+        <script type="module" src="/_next/static/chunks/index-CXkhr5iE.js" id="_R_" async=""></script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("0:{\"page:/\":\"$L1\",\"layout:/\":\"$L2\",\"route:/\":\"$L3\",\"__route\":\"route:/\",\"__interceptionContext\":null,\"__layoutIds\":[\"layout:/\"],\"__rootLayout\":\"/\",\"__bfcacheSegmentIdentities\":{\"layout:/\":\"[\\\"layout\\\",\\\"layout:/\\\",\\\"root-boundary:/\\\",\\\"\\\"]\",\"page:/\":\"[\\\"page\\\",\\\"page:/\\\",\\\"root-boundary:/\\\",\\\"\\\"]\"},\"__srcPage\":[\"page\"],\"__layoutFlags\":{\"layout:/\":\"s\"},\"__artifactCompatibility\":{\"schemaVersion\":1,\"graphVersion\":\"app-route-graph:1177fd80f83fa7b0\",\"deploymentVersion\":\"f3d02fd2-4657-499e-8138-0d2fdc7ec9cb\",\"appElementsSchemaVersion\":1,\"rscPayloadSchemaVersion\":1,\"rootBoundaryId\":\"/\",\"renderEpoch\":null}}\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("4:I[\"8c0f216c4604\",[],\"Children\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("5:I[\"593f344dc510\",[],\"GlobalErrorBoundary\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("6:I[\"0b874ad30386\",[],\"default\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("7:I[\"593f344dc510\",[],\"ErrorBoundary\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("8:I[\"15c18cfaeeff\",[],\"LayoutSegmentProvider\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("9:I[\"8c0f216c4604\",[],\"Slot\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("a:I[\"593f344dc510\",[],\"NotFoundBoundary\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push(":HL[\"/_next/static/css/index._D7AXDAY.css\",\"style\"     ]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("2:[[[\"$\",\"link\",\"css:/_next/static/css/index._D7AXDAY.css\",{\"rel\":\"stylesheet\",\"precedence\":\"vite-rsc/importer-resources\",\"href\":\"/_next/static/css/index._D7AXDAY.css\",\"data-rsc-css-href\":\"/_next/static/css/index._D7AXDAY.css\"}],\"$undefined\"],[\"$\",\"html\",null,{\"lang\":\"en\",\"suppressHydrationWarning\":true,\"children\":[\"$\",\"body\",null,{\"children\":[\"$\",\"$L4\",null,{}]}]}]]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("3:[[[\"$\",\"meta\",null,{\"charSet\":\"utf-8\"}],[[\"$\",\"title\",\"0\",{\"children\":\"Cork7 — Free Online Ski Game · Solo \u0026 Multiplayer\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.\"}],[\"$\",\"meta\",\"2\",{\"name\":\"application-name\",\"content\":\"Cork7\"}],[\"$\",\"meta\",\"3\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"4\",{\"name\":\"googlebot\",\"content\":\"index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1\"}],[\"$\",\"meta\",\"5\",{\"property\":\"og:title\",\"content\":\"Cork7 — Free Online Ski Game · Solo \u0026 Multiplayer\"}],[\"$\",\"meta\",\"6\",{\"property\":\"og:description\",\"content\":\"Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.\"}],[\"$\",\"meta\",\"7\",{\"property\":\"og:url\",\"content\":\"https://cork7.com\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:site_name\",\"content\":\"Cork7\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:image\",\"content\":\"https://cork7.com/brand/cork7-share.jpg\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:image:alt\",\"content\":\"Cork7, free online ski game: a black skier silhouette carrying skis on white\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"Cork7 — Free Online Ski Game · Solo \u0026 Multiplayer\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:image\",\"content\":\"https://cork7.com/brand/cork7-share.jpg\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:image:alt\",\"content\":\"Cork7, free online ski game: a black skier silhouette carrying skis on white\"}],[\"$\",\"link\",\"19\",{\"data-vinext-streamed-icon\":\"$undefined\",\"rel\":\"icon\",\"href\":\"/favicon.ico?v=2\",\"type\":\"$undefined\",\"sizes\":\"48x48\",\"color\":\"$undefined\",\"media\":\"$undefined\",\"fetchPriority\":\"$undefined\"}],[\"$\",\"link\",\"20\",{\"data-vinext-streamed-icon\":\"$undefined\",\"rel\":\"icon\",\"href\":\"/brand/favicon-96.png?v=2\",\"type\":\"image/png\",\"sizes\":\"96x96\",\"color\":\"$undefined\",\"media\":\"$undefined\",\"fetchPriority\":\"$undefined\"}],[\"$\",\"link\",\"21\",{\"data-vinext-streamed-icon\":\"$undefined\",\"rel\":\"icon\",\"href\":\"/favicon.svg?v=2\",\"type\":\"image/svg+xml\",\"sizes\":\"any\",\"color\":\"$undefined\",\"media\":\"$undefined\",\"fetchPriority\":\"$undefined\"}],[\"$\",\"link\",\"22\",{\"data-vinext-streamed-icon\":\"$undefined\",\"rel\":\"apple-touch-icon\",\"href\":\"/brand/apple-touch-icon.png?v=2\",\"type\":\"$undefined\",\"sizes\":\"180x180\",\"color\":\"$undefined\",\"media\":\"$undefined\",\"fetchPriority\":\"$undefined\"}],[\"$\",\"link\",\"23\",{\"rel\":\"manifest\",\"href\":\"/site.webmanifest\"}],[\"$\",\"link\",\"24\",{\"rel\":\"canonical\",\"href\":\"https://cork7.com\"}],[\"$\",\"meta\",\"25\",{\"name\":\"google-site-verification\",\"content\":\"_XndHZIsIPLlveCq6Sn6W5l47dmqyzj9gjuBrHEn3KQ\"}],[\"$\",\"meta\",\"26\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"27\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"Cork7\"}],[\"$\",\"meta\",\"28\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"black-translucent\"}]],[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1, viewport-fit=cover\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#102b35\"}]]],[\"$\",\"$L5\",null,{\"fallback\":\"$6\",\"children\":[\"$\",\"$L7\",null,{\"fallback\":\"$6\",\"children\":[\"$\",\"$L8\",null,{\"providerId\":\"layout:/\",\"segmentMap\":{\"children\":[]},\"children\":[\"$\",\"$L9\",null,{\"id\":\"layout:/\",\"parallelSlots\":\"$undefined\",\"children\":[\"$\",\"$La\",null,{\"resetKey\":\"\",\"fallback\":[[[\"$\",\"link\",\"css:/_next/static/css/index._D7AXDAY.css\",{\"rel\":\"stylesheet\",\"precedence\":\"vite-rsc/importer-resources\",\"href\":\"/_next/static/css/index._D7AXDAY.css\",\"data-rsc-css-href\":\"/_next/static/css/index._D7AXDAY.css\"}],\"$undefined\"],[\"$\",\"div\",null,{\"className\":\"info-page\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-skip\",\"href\":\"#guide-content\",\"children\":\"Skip to content\"}],[\"$\",\"header\",null,{\"className\":\"info-header\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-brand\",\"href\":\"/\",\"aria-label\":\"Cork7 home\",\"children\":[\"$\",\"svg\",null,{\"className\":\"cork7-mark\",\"role\":\"img\",\"aria-label\":\"Cork7\",\"viewBox\":\"0 0 176 38\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"children\":[\"$\",\"g\",null,{\"transform\":\"translate(10 1) skewX(-12)\",\"fill\":\"currentColor\",\"fillRule\":\"evenodd\",\"children\":[\"$Lb\",\"$Lc\",\"$Ld\",\"$Le\",\"$Lf\"]}]}]}],\"$L10\"]}],\"$L11\",\"$L12\"]}]],\"children\":\"$L13\"}]}]}]}]}],null,null]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("14:I[\"9276801271d6\",[],\"AppRouterScrollTarget\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("15:I[\"593f344dc510\",[],\"RedirectBoundary\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("b:[\"$\",\"path\",null,{\"d\":\"M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z\"}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("c:[\"$\",\"path\",null,{\"d\":\"M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z\"}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("d:[\"$\",\"path\",null,{\"d\":\"M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z\"}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("e:[\"$\",\"path\",null,{\"d\":\"M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z\"}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("f:[\"$\",\"path\",null,{\"fill\":\"#101418\",\"d\":\"M136 0H164V8L149 36H139L154 8H136Z\"}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("10:[\"$\",\"nav\",null,{\"aria-label\":\"Main navigation\",\"children\":[[\"$\",\"a\",null,{\"href\":\"/about\",\"children\":\"The game\"}],[\"$\",\"a\",null,{\"href\":\"/how-to-play\",\"children\":\"How to play\"}],[\"$\",\"a\",null,{\"href\":\"/updates\",\"children\":\"Updates\"}],[\"$\",\"a\",null,{\"href\":\"/download\",\"children\":\"Download\"}],[\"$\",\"a\",null,{\"className\":\"info-play\",\"href\":\"/\",\"children\":[\"Play free \",[\"$\",\"span\",null,{\"aria-hidden\":\"true\",\"children\":\"→\"}]]}]]}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("11:[\"$\",\"main\",null,{\"id\":\"guide-content\",\"className\":\"info-main\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-lead\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-lead-copy\",\"children\":[[\"$\",\"span\",null,{\"className\":\"info-eyebrow\",\"children\":[\"CORK7 / \",\"404 / OFF PISTE\"]}],[\"$\",\"h1\",null,{\"children\":\"This line ends here.\"}],[\"$\",\"p\",null,{\"children\":\"That page does not exist. The mountain is still open.\"}]]}],\"$undefined\"]}],[\"$\",\"section\",null,{\"children\":[\"$\",\"a\",null,{\"className\":\"info-play\",\"href\":\"/\",\"children\":\"Back to Cork7 ↗\"}]}]]}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("12:[\"$\",\"footer\",null,{\"className\":\"info-footer\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-footer-brand\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-brand\",\"href\":\"/\",\"aria-label\":\"Cork7 home\",\"children\":[\"$\",\"svg\",null,{\"className\":\"cork7-mark\",\"role\":\"img\",\"aria-label\":\"Cork7\",\"viewBox\":\"0 0 176 38\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"children\":[\"$\",\"g\",null,{\"transform\":\"translate(10 1) skewX(-12)\",\"fill\":\"currentColor\",\"fillRule\":\"evenodd\",\"children\":[[\"$\",\"path\",null,{\"d\":\"M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z\"}],[\"$\",\"path\",null,{\"d\":\"M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z\"}],[\"$\",\"path\",null,{\"d\":\"M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z\"}],[\"$\",\"path\",null,{\"d\":\"M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z\"}],[\"$\",\"path\",null,{\"fill\":\"#101418\",\"d\":\"M136 0H164V8L149 36H139L154 8H136Z\"}]]}]}]}],[\"$\",\"p\",null,{\"children\":\"A free freeski game in your browser.\"}]]}],[\"$\",\"nav\",null,{\"aria-label\":\"Site information\",\"children\":[[\"$\",\"a\",null,{\"href\":\"/about\",\"children\":\"About\"}],[\"$\",\"a\",null,{\"href\":\"/how-to-play\",\"children\":\"How to play\"}],[\"$\",\"a\",null,{\"href\":\"/updates\",\"children\":\"Updates\"}],[\"$\",\"a\",null,{\"href\":\"/download\",\"children\":\"Download the app\"}],[\"$\",\"a\",null,{\"href\":\"/privacy\",\"children\":\"Privacy \u0026 saves\"}],[\"$\",\"a\",null,{\"href\":\"/credits\",\"children\":\"Credits\"}],[\"$\",\"a\",null,{\"href\":\"/terms-of-use\",\"children\":\"Terms of use\"}],[\"$\",\"a\",null,{\"href\":\"/terms\",\"children\":\"Terms of purchase\"}],[\"$\",\"a\",null,{\"href\":\"mailto:robin@dimora.no\",\"children\":\"Contact\"}]]}]]}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("13:[\"$\",\"$La\",null,{\"resetKey\":\"\",\"fallback\":[[[\"$\",\"link\",\"css:/_next/static/css/index._D7AXDAY.css\",{\"rel\":\"stylesheet\",\"precedence\":\"vite-rsc/importer-resources\",\"href\":\"/_next/static/css/index._D7AXDAY.css\",\"data-rsc-css-href\":\"/_next/static/css/index._D7AXDAY.css\"}],\"$undefined\"],[\"$\",\"div\",null,{\"className\":\"info-page\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-skip\",\"href\":\"#guide-content\",\"children\":\"Skip to content\"}],[\"$\",\"header\",null,{\"className\":\"info-header\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-brand\",\"href\":\"/\",\"aria-label\":\"Cork7 home\",\"children\":[\"$\",\"svg\",null,{\"className\":\"cork7-mark\",\"role\":\"img\",\"aria-label\":\"Cork7\",\"viewBox\":\"0 0 176 38\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"children\":[\"$\",\"g\",null,{\"transform\":\"translate(10 1) skewX(-12)\",\"fill\":\"currentColor\",\"fillRule\":\"evenodd\",\"children\":[[\"$\",\"path\",null,{\"d\":\"M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z\"}],[\"$\",\"path\",null,{\"d\":\"M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z\"}],[\"$\",\"path\",null,{\"d\":\"M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z\"}],[\"$\",\"path\",null,{\"d\":\"M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z\"}],[\"$\",\"path\",null,{\"fill\":\"#101418\",\"d\":\"M136 0H164V8L149 36H139L154 8H136Z\"}]]}]}]}],[\"$\",\"nav\",null,{\"aria-label\":\"Main navigation\",\"children\":[[\"$\",\"a\",null,{\"href\":\"/about\",\"children\":\"The game\"}],[\"$\",\"a\",null,{\"href\":\"/how-to-play\",\"children\":\"How to play\"}],[\"$\",\"a\",null,{\"href\":\"/updates\",\"children\":\"Updates\"}],[\"$\",\"a\",null,{\"href\":\"/download\",\"children\":\"Download\"}],[\"$\",\"a\",null,{\"className\":\"info-play\",\"href\":\"/\",\"children\":[\"Play free \",[\"$\",\"span\",null,{\"aria-hidden\":\"true\",\"children\":\"→\"}]]}]]}]]}],[\"$\",\"main\",null,{\"id\":\"guide-content\",\"className\":\"info-main\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-lead\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-lead-copy\",\"children\":[[\"$\",\"span\",null,{\"className\":\"info-eyebrow\",\"children\":[\"CORK7 / \",\"404 / OFF PISTE\"]}],[\"$\",\"h1\",null,{\"children\":\"This line ends here.\"}],[\"$\",\"p\",null,{\"children\":\"That page does not exist. The mountain is still open.\"}]]}],\"$undefined\"]}],[\"$\",\"section\",null,{\"children\":[\"$\",\"a\",null,{\"className\":\"info-play\",\"href\":\"/\",\"children\":\"Back to Cork7 ↗\"}]}]]}],[\"$\",\"footer\",null,{\"className\":\"info-footer\",\"children\":[[\"$\",\"div\",null,{\"className\":\"info-footer-brand\",\"children\":[[\"$\",\"a\",null,{\"className\":\"info-brand\",\"href\":\"/\",\"aria-label\":\"Cork7 home\",\"children\":[\"$\",\"svg\",null,{\"className\":\"cork7-mark\",\"role\":\"img\",\"aria-label\":\"Cork7\",\"viewBox\":\"0 0 176 38\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"children\":[\"$\",\"g\",null,{\"transform\":\"translate(10 1) skewX(-12)\",\"fill\":\"currentColor\",\"fillRule\":\"evenodd\",\"children\":[[\"$\",\"path\",null,{\"d\":\"M0 6 6 0H26V8H10L8 10V26L10 28H26V36H6L0 30Z\"}],[\"$\",\"path\",null,{\"d\":\"M32 6 38 0H54L60 6V30L54 36H38L32 30ZM40 10V26L42 28H50L52 26V10L50 8H42Z\"}],[\"$\",\"path\",null,{\"d\":\"M66 0H89L95 6V18L89 23 97 36H87L79 23H74V36H66ZM74 8V16H85L87 14V10L85 8Z\"}],[\"$\",\"path\",null,{\"d\":\"M101 0H109V14L121 0H132L117 17 132 36H121L109 21V36H101Z\"}],[\"$\",\"path\",null,{\"fill\":\"#101418\",\"d\":\"M136 0H164V8L149 36H139L154 8H136Z\"}]]}]}]}],[\"$\",\"p\",null,{\"children\":\"A free freeski game in your browser.\"}]]}],[\"$\",\"nav\",null,{\"aria-label\":\"Site information\",\"children\":[[\"$\",\"a\",null,{\"href\":\"/about\",\"children\":\"About\"}],[\"$\",\"a\",null,{\"href\":\"/how-to-play\",\"children\":\"How to play\"}],[\"$\",\"a\",null,{\"href\":\"/updates\",\"children\":\"Updates\"}],[\"$\",\"a\",null,{\"href\":\"/download\",\"children\":\"Download the app\"}],[\"$\",\"a\",null,{\"href\":\"/privacy\",\"children\":\"Privacy \u0026 saves\"}],[\"$\",\"a\",null,{\"href\":\"/credits\",\"children\":\"Credits\"}],[\"$\",\"a\",null,{\"href\":\"/terms-of-use\",\"children\":\"Terms of use\"}],[\"$\",\"a\",null,{\"href\":\"/terms\",\"children\":\"Terms of purchase\"}],[\"$\",\"a\",null,{\"href\":\"mailto:robin@dimora.no\",\"children\":\"Contact\"}]]}]]}]]}]],\"children\":[\"$\",\"$L14\",null,{\"children\":[\"$\",\"$L15\",null,{\"children\":[[\"$\",\"$L8\",null,{\"providerId\":\"page:/\",\"segmentMap\":{\"children\":[\"__PAGE__\"]},\"children\":[\"$\",\"$L9\",null,{\"id\":\"page:/\"}]}],null]}]}]}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("16:T4949,")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("(function m(e){if(window.__CORK7_ART__)return window.__CORK7_ART__;let t=navigator.connection,n=!!t?.saveData||[`slow-2g`,`2g`].includes(t?.effectiveType??``),r=-1;try{let e=localStorage.getItem(`cork7-loading-art-v7`);e!==null\u0026\u0026/^[0-9]+$/.test(e)\u0026\u0026(r=Number(e))}catch{}let i=e.map((e,t)=\u003et).filter(t=\u003ee[t].startup\u0026\u0026t!==r),a=i[Math.floor(Math.random()*i.length)];try{localStorage.setItem(`cork7-loading-art-v7`,String(a))}catch{}let o={shot:a,saveData:n};window.__CORK7_ART__=o;let s=e[a],c=typeof location\u003e`u`||/[?\u0026]park(=|\u0026|$)/.test(location.search)?s:e.find(e=\u003ee.lobby)??s,l=n?c.compact:c.normal;document.documentElement.setAttribute(`data-loading-art-theme`,s.theme),document.documentElement.style.setProperty(`--cork7-startup-preview`,`url(\"${s.preview}\")`),document.documentElement.style.setProperty(`--cork7-startup-portrait-preview`,`url(\"${s.portraitPreview??s.preview}\")`);for(let e of[!0,!1]){let t=document.createElement(`link`);t.rel=`preload`,t.as=`image`,t.type=`image/webp`,t.fetchPriority=`high`,t.media=e?c.portraitMedia:c.landscapeMedia,t.href=e?l.portrait:l.src,t.imageSrcset=e?l.portraitSrcSet:l.srcSet,t.imageSizes=e?`100vw`:l.sizes,document.head.appendChild(t)}return o})([{\"normal\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/violet-switch-v7-640.webp\",\"srcSet\":\"/onboarding/violet-switch-v7-640.webp 640w, /onboarding/violet-switch-v7-960.webp 960w, /onboarding/violet-switch-v7-1280.webp 1280w, /onboarding/violet-switch-v7.webp 1672w\",\"portrait\":\"/onboarding/violet-switch-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/violet-switch-v7-portrait-360.webp 360w, /onboarding/violet-switch-v7-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/violet-switch-v7-640.webp\",\"srcSet\":\"/onboarding/violet-switch-v7-640.webp 640w\",\"portrait\":\"/onboarding/violet-switch-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/violet-switch-v7-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRnwCAABXRUJQVlA4IHACAABwEACdASpgADYAPv1oq06rJiOiMVdroWAfiWoAuVP70MUq72/7HHF/J+jdXMZ2hVEEbFPrUEIQSQhZNu3osM9j1ta3a5NnP7szItt8++6Xs0Qv79rwWwDg0cxPVMtCoaa9DJ0IPBZ+LwrFcoYPg+7yWqPm64FS+vxCJyaWX9TDPWQtnWryVoa1rs9KgAD9G+9VBn78NGx0Gmvk/z5ND+AZPUg5ZurbD8ZImt+P74m67Beq+8xbwZYsecZsXuJ50efbc2RhehlCM7I9Af49vVncJWwCvPagqIlnpfCLfpVXXvc9Zz8egWLo4A1pEK8WP2qFkWMh5vaDrH7LUXkvJpvG3ypLZmSBbA1oJomQJH1KZpJnZSmOqcBqzQ7YncOLH0tvbzpxZpW3SBQuvsVhubAFb+eYLkDCZuQOhlYnxZ5JCq4eiUq4z3FNQCFR3wefzQR8tw18BJBtywi2Dw/Bb+brzmQYgZYE5gkNY3MxUOWOWv5obTeDFwgumVpPiWqPMjPt5YjlDW9rGhdex5HF8Vrutm5ENIWl5XyPgLOOk434g+kihCBC7dpa+FHiEyZmLAg1ea3ClechOdQvUmofRXyL9rBcBFH1/97BRjp5qoWmlyeW2X0Z8ZGauQRrhILBh42oKvppJRoVRuPX8CEr5zgb5knuKctuNCk9AZuBzQ4X3lzBBrXX2pOa/hzmhlZS0VrATjkGdTF5f64n3nnbkh+WA7UU1ZsFjQut5TnGXvatfoAx5CWwOBKrC/JrtNZgVPvZaNwn5eljHGQ3B1DgSSV6mvVLdpFVSMjwpki9qM7L9hSB+BinxIOKUU6sTlhAAAA=\",\"portraitPreview\":null,\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"dark\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/scarlet-cork-v7-640.webp\",\"srcSet\":\"/onboarding/scarlet-cork-v7-640.webp 640w, /onboarding/scarlet-cork-v7-960.webp 960w, /onboarding/scarlet-cork-v7-1280.webp 1280w, /onboarding/scarlet-cork-v7.webp 1672w\",\"portrait\":\"/onboarding/scarlet-cork-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/scarlet-cork-v7-portrait-360.webp 360w, /onboarding/scarlet-cork-v7-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/scarlet-cork-v7-640.webp\",\"srcSet\":\"/onboarding/scarlet-cork-v7-640.webp 640w\",\"portrait\":\"/onboarding/scarlet-cork-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/scarlet-cork-v7-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRkADAABXRUJQVlA4IDQDAAAQEwCdASpgADYAPwFoqk+rJaOiMVO9yWAgCWoAv3HRfmfNygfnnvV5lPp157vz/76ZX/2B/tnSHiK9d2fNyNjizH+YLBnfpOjsiqvNm83SihbUHjxLKcpA+6IV02LU5szcDLEpAwHub3aMzDvaP6XutAeFKl/jU9tvd3Ao/f1EqDxbrmOZ7GSotj2pwyjyUiepeE/FBxjOId+ZvAEsfcUbuABzS4QN3sE66mX1h8lsHmGw0rFZsFsa+6szyO4AjY/nEwZg/y15pQjoj5RWJw1nwPaRzcIimfdO1Btjv6Q8D5yrtKPFElehvfE+r6rFwBiTRZhNW+sNc1+dLibG8uxmDv6xhy37qJAG6XdcHD52+yC2SMbUiekom2k9p6hhunyP5TsmMVyxwceLQEK20l/mqb6pPFgc1KGGn35iQLadFLKsY2WYe9qHwHOwDsD+xMec/lfkRrM2T9ONj1X+sEM28ZdT5zMBppslZ6NnH2TmLKDG1OwFOStpZ6A8hYMs/IgSCMmn8ta24Dt8EGm3JXza+ul44wYQn5wCBZSz7RaRv+pVVqRPtvk2yRAeVB8/xa12CSUMxYoDdNaoSSZzXqCpOOd1ut5m0Kud600k2X8PWbyNOwEXEnO6kP+381UXLyC9WO8FEGOh9Q7d2DjDNommqHLqKqGTMAUgKhsZQlHMkS0e0jM3tCDAVjVw7PwIGx8hIuaRsnXFpTc2N3K7TmT0ST0Bf0zb4WHuuGcFiGikP+RQXDQaizdDEnE1UNQWRjI24DZcwH3ttXowoIUahslQmfsf6juwh8Kv/35254OarOU1Kjo09Ke9ddZ4w2fyZaYm+nW6gj050ZJwxBRcWzCPfKt8JdXegoSzqdDVqsaKONyvSJKq9ItsJD/TIXM9r4HVhocTkxtPZJvYSPYwkBnWmyaD8EzcVqARDuw/woJwP+PlHLUrTFfOSfPcXzo0kJIt8AwzXFJYr+hmg5ct7USE/sasd6fa2rs0znGduasRfLopyO3Qo1+PjnUa33TtL853fkIKQ39TnVX01PW1TFZEME6WShX7OIra2B4Wgl3nA7HyaKcMuryzeaUcaNJrHxHa+TAA\",\"portraitPreview\":null,\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"dark\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/powder-cut-v7-640.webp\",\"srcSet\":\"/onboarding/powder-cut-v7-640.webp 640w, /onboarding/powder-cut-v7-960.webp 960w, /onboarding/powder-cut-v7-1280.webp 1280w, /onboarding/powder-cut-v7.webp 1672w\",\"portrait\":\"/onboarding/powder-cut-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/powder-cut-v7-portrait-360.webp 360w, /onboarding/powder-cut-v7-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/powder-cut-v7-640.webp\",\"srcSet\":\"/onboarding/powder-cut-v7-640.webp 640w\",\"portrait\":\"/onboarding/powder-cut-v7-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/powder-cut-v7-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRu4CAABXRUJQVlA4IOICAABwEgCdASpgADYAPwFsrFArJaQqLVZtIWAgCWQAshAmjNU/8db9vHdz/6nyFPd1tQELBKd3B0RVegBTj4P900C4RCz9zPO91nsYzl5gpqetUax3YJA19M7AoYcfOHlHJM3PmPryJylWPCiyOZ5+aX5Y4L4rl9V01rOpaS//yMpUetzvpKrG1AwVBk9ilnjZ66Bw+m0EvEQ9ocrpZ2gA/urqFKOL7bUP5HYGvqvhLK77x9brFZMdEhVuaRwTuDra3deewuM253XuRqHHZiis1VXcvtK8H8ThDu+uxOwVIi+UB7laPhO/OmqpMqYsbNHzjZn3flPUAfuFS5FCww+FoAoj8o+HUI7VaOF+EfnEYwnIyqU+qpClnnQH5pyoRX0aGekcn6wEuZFlXjnRt15ZV3ST+ohowf2yro+frakkcWEBr4R+E2qXhCqBscz7SuVAgHGTEoRNCm2RBGNOm3c0jh+SKRNMn+bmotyUK+cfk8dND0cjGUjXvAeOTkmtM9CPaHnCYuk4GWEwW011rpr2kn1lFrSjzaz8J0qff02zrQjcbdOoRMXFX1z/4mMJPIZCpYBX5qLgtAyjuJjuSW8n57yK6BMskTnCxami8AjV7sg3P2QJRl8HadhriysiXf8SbMwFG3kCBgunzEUtCfR3NW8MT8Jt1/QdzeM7it1i4hnAJKZeY/+nO7XCqHoxfLR7A9z5ao0YBvLi6kguRKcpA3zLNcGBGoVmYUmovCiQbdaIJ8FAn6nfnUC9rN92Eo/zkNcGZ2Bu1DMlP2zkASF0nydoTw0Xp3/9fENdPsNbyvkx5Qex6YXQIlNswbjq/yaJibcBRGTV3gnk8FZ1k8+coQNgW714D/pdZEeVJxFsgVMwcUkyrEZyx4aD5UClABZJTq0uGDKAwavle50ulqAH4AHLGBsUVlz/q011HlSR+/0PRwzPEwy617Af80EhIdtB81kdy1xTVGUNNaSn6FMNSpuAAAA=\",\"portraitPreview\":null,\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"dark\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/diagonal-carry-v8-640.webp\",\"srcSet\":\"/onboarding/diagonal-carry-v8-640.webp 640w, /onboarding/diagonal-carry-v8-960.webp 960w, /onboarding/diagonal-carry-v8-1280.webp 1280w, /onboarding/diagonal-carry-v8.webp 1672w\",\"portrait\":\"/onboarding/diagonal-carry-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/diagonal-carry-v8-portrait-360.webp 360w, /onboarding/diagonal-carry-v8-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/diagonal-carry-v8-640.webp\",\"srcSet\":\"/onboarding/diagonal-carry-v8-640.webp 640w\",\"portrait\":\"/onboarding/diagonal-carry-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/diagonal-carry-v8-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRuYDAABXRUJQVlA4WAoAAAAQAAAAXwAANQAAQUxQSGgDAAABoChJtmnb6jHnOvvaz7Zt27Zt27Zt27q2bdu2ffdac4x+uH7jAyJiAuCkxBgFjosACOKXYPO3Wj6/AcQrweZDWPA3BKcEWScuLxfpIGQ+BWy1QpPmvESiuCQoDWBSjrtqzM4IHiHiPRbKuf3YpQrEEZEYViLY5EuqmeV83xMRQOQ/iLiMySxZzssR3UCsde8RCCt7ioWZWc7HkDkhqPT7wq6/1oSs5BwmM1OO2wXBjapDuLjldQgABBuMZTJLvBwRXgYcspBzv90BAUDAnyzMcn6L4AYiribH31UCIKg8nMkscVpdiBuIeIXa/QQEBGy/gGqmypMR/RCJDVj+dmuEiDOYzMxy3oPMDwRs0J/zHiwhw6csVvYxoiOI2HMmR52NgM4rU87cAuIIIs4p2HoX1BrJtLL5WyN4ggwPMn+zYou51P8UbAqBrxGfc/b5B1NtZb8hOCOo2p7t312N1hBnELD1RE6hrTSxM/yNOHIZVVfRxyFkuIbJzFQtcZj4I/v8cvUwqpmpKidXgXiD+mMndxlGVTNTztsKwZmIQ/9oM3wWlUWyxDG1IO7c06npeTnTLGXOgQcjwNmAvae9WXsw9d5bx5CnIoO7ER9ejldYlOtf88jMB1ERxBvB9oeiFQtj0eCyB4+GSBRfAEGdsUxaJJab9Pnl0BIkiC8Re5qpqeWcc8o9HV8+riYkiC8XMdl/C47daJdXXrvtrA2BKH5keI5LyjTjou7sXr3inAcuvuqiTSDiRsTPHDKVqlxxbD/+ErDdLefte8kD+0CcEEg39u/OpIkn71Pmy5Bw0h1bH3fb7hAvqg7n4i/KTKornrqPvBklbHDLU1WrCZwUtCDrt2Yy5bLd/+Ty01BCxflnVoM4keEVcvotZaqVeU/tyZx9ELKASpXhZcSlzHljayZLnLLBSYljtkGMAjcD9mZil4YszAq2xEtky3oQ+CmQ+ixYfxrVrODZ6EB+sQnED0Rcy5xTP86plvND7D6Tcz7aAOLJgWo5X+rCZMpFe+MK8qc6vlzKVPDLd1mYJh4DPNh5VwR4KSi9mGuRs+F7zIs858MoAQI3BdKcyYwTmmlKpI04CzGE4MmGc8gFI9hyAbn41btPyeBu3POUM7cOu106Y3LX0xAgwZ1VygY1gZhFgb8hxiBRAIlYc1ZQOCBYAAAA0AQAnQEqYAA2AD8BfrZXKyeko6K4CGFgIAlpAAAaANDUTcLoRVAHnbm8Dy08rmAA/vDU2m2lLMzUPqETnGCNnQ4DOzZk/slJm96r1iQN3ORitLioAAAAAA==\",\"portraitPreview\":\"data:image/webp;base64,UklGRtQBAABXRUJQVlA4IMgBAABwCwCdASowAEEAPwFsrlIrJSQirNVbiWAgCWkADo+2AynWBOkamj+Q2Q+a0M5krQSn/31qpqW81WLjJjdgMSZY4iAB3cqL5QSts6+6P8ia0Czf8LutU3/NRg2VscgeUABmRIQAAP7341dxwKy2n9S6qmSRuAh3F4BbK4uEJgd6xHbu87zr59TK+C8OrffsmTToe+Pg29aCJlV9ZfA+e2565zrSG3wYVQUx6dipHVcpY1msPaNWTTQGXvy8jq6RnXrG1muLnsnzDFPZa6/S5Pv3be2ynV/IiuF63NtPSf+EWvsXR9BSCG0Rf83XXDETdXkkgcCdGU1WTOdObBXrcnUf0jCzp5zjNuXr/kzAN3X5D883MwdPAWsH3x6K2a0ZjZZD5kR+XK1EyjafEMeiILJ/wILjZGzBfpIcR/iDOdd7H+roJxKPYB2X+gnDkljxyymVn+qxNhdtsMG9nUbO8wi0dVO5USg3TuSzUhFLGc5Yfi6JePe10PdRrcudtSDnHtMrk0JRlCnPihOdFcz6YHCAGRgIkFvNOH+eyb3DiFp6I6WcLeONgdHr40nMxvjHZsuDotUfoVxT3IZ79YA7pPT6uOhlyIlGAAA=\",\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"light\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/hood-portrait-v8-640.webp\",\"srcSet\":\"/onboarding/hood-portrait-v8-640.webp 640w, /onboarding/hood-portrait-v8-960.webp 960w, /onboarding/hood-portrait-v8-1280.webp 1280w, /onboarding/hood-portrait-v8.webp 1672w\",\"portrait\":\"/onboarding/hood-portrait-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/hood-portrait-v8-portrait-360.webp 360w, /onboarding/hood-portrait-v8-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/hood-portrait-v8-640.webp\",\"srcSet\":\"/onboarding/hood-portrait-v8-640.webp 640w\",\"portrait\":\"/onboarding/hood-portrait-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/hood-portrait-v8-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAAAwCQCdASpgADYAPwF2tlOrJyUipXQLMWAgCWkACBA4gW/DZZKQu3R4z18YBVAqz2IU15jwoIAvUmLVG8chKo6v/t1owKyLWbD/BtzR1KxgHjwYAP7xsAt8BFg7avTuqmSzWP1Pn70/GTW25Z3wTN8QwssUD/BBbXoMDpAUwmUVhDc9nHxK8OgMjayY1+lmFnmavU/bVf/HYNNdcUei9EKQWhcqqibTc80ZRtrsZFPumv8P3wkpONRmhx7/ahMNitaW27DVX1mim9UuRV8lEYEvA95I0Qk/3wU3h5KPp06VjUli3IEWQpKKo6kksVpjstr4OvuxE5H7CR/jQjgLjgajZEelZ8eC9oYN7MAA\",\"portraitPreview\":\"data:image/webp;base64,UklGRi4BAABXRUJQVlA4ICIBAABwCACdASowADUAPwFqrk+rJaQiKrQO+WAgCWkABRAe3WpIkyg0HltnCGgHkuTmWrYe7hdLj+y+wwpqiu+eBe5PGsmoZcUtXVjeeWYAAP734jU6w1cokkZKkUqViEwEfK72PiDpkUhbfvgISYPeL1HADGMiJQXUXQ2T1pJ0Gsief6+oqFm2TdVEKFfEucqytwb6sZzYoFDtsqKYTFLb3aZPV/IQ8quG6MP4TdccsUf0yiZrF8QmrbbQgONulKO1FNcgMuJfQJyr1MvLJhrN+jVFHwrP+lBKwyKByKERtx+Scin3CapSL2te0sY+ivpPZbVix54AWEu16u4FVrBV/SdZ/rBBjDwTxUMEvLRX5mq5UYSWAkt2Hagh9Zt0gT2kAAAAAA==\",\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"light\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/shell-front-v8-640.webp\",\"srcSet\":\"/onboarding/shell-front-v8-640.webp 640w, /onboarding/shell-front-v8-960.webp 960w, /onboarding/shell-front-v8-1280.webp 1280w, /onboarding/shell-front-v8.webp 1672w\",\"portrait\":\"/onboarding/shell-front-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/shell-front-v8-portrait-360.webp 360w, /onboarding/shell-front-v8-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"100vw\",\"src\":\"/onboarding/shell-front-v8-640.webp\",\"srcSet\":\"/onboarding/shell-front-v8-640.webp 640w\",\"portrait\":\"/onboarding/shell-front-v8-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/shell-front-v8-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRkYDAABXRUJQVlA4WAoAAAAQAAAAXwAANQAAQUxQSO0CAAABoHZtmyFJ3tATETkza9u27d2Ptm3btm3btm3btm1URjzvs8iqzD4RETEBKKYLIQSHcgc0Blcqj1F3uOHmQyeFL9bmO/wt6pg9x4ErUcCOOudX1rwiXgRfIIdR31YvxljX6Y+Z4MvjMbdMjUlroSpPwNL6+uVH77rzoec+0o5lWsYO2mijzbbabJOd/9qtRB6zvTRRqEIVhlUPropQHgB7jo8KCL7aeTSUOGDFuYBtDwOmWB8ldg4HfnfgAbVO3/XzLRHK4zD8FCUpRZnisggFulx1qhMZ655uhSuNQ3heyf5PY+Ilo8CVpcK8v4pGmpmRSYshFCUMwyGqbaBFUPmCeEx42BeiNdLMjM9tPAK+GB4rfSHSGmnNemYR+EIErEj1khn/1zfW+nMp+CI4jPu+amtN6+mJgCIGHKCarUizqOURCuAw7sdKNLYwM9a6Ab4AAZspWlvSzIz6fRb4/Bzu76Bv1IEI2XnM8Zc4ENlAI5Oeq+ByC9hX0bqmcX743OCeU+rMah2EKjOPuWvRzNhN1COAyytgH0Xrjvp9Gvi8HB5q6jppfVRZOYz2ltIQsKczELKCw+OKQxH1vEfWHjN9Iw6B0dJC8Bk54B5F65R9ah2FkJHHJD+KndD6Rm2X2YzJOqeZMerZUeCymk192O7/VFoIHhk7DHtOqQ2NAxh1MvIOWLuPkU0tabYQfF4HK5oZae3ZoD9mye2Ahm5Js6TXAlxOHtP8JFJffye2YQP16ch5OYz5nlKt2+9TNDMOpK+fUEp60ecFh/m/VE9Hn94wIC3pyZ1V651Z4ZF3wBn6W3vu2Mas1iWbqKcjUCG749TTOycrtYm66VX1tFd+Ds8p6sezxDZJ132hWjfD5+Zxj+Ktv50c1YY6+4e7/9ClCLkF7Csd8979ycyMg5jue/csaitUuXlM9bU+2vEFJdrgSfdu95HeHhsuN3is8IO2uVaxTa29d9BnS8Ajf49pd57mHkUjB4q6cIatJ4FHIwBWUDggMgAAAPADAJ0BKmAANgA/AYC7V6soJiOhaAFgIAlpAAALMiRIkSJEiRIkR9AA/vDBoPGAAAAA\",\"portraitPreview\":\"data:image/webp;base64,UklGRnQBAABXRUJQVlA4IGgBAACwCQCdASowAEEAPwFssVKrJSSipnVdUWAgCWkAE9LpAZYGkmZvMizdtDZ93e47v3r8FNBzmVBP70sw6Quv1mgCQW2jTSsuw4chKQR7G6QWGEbPbnkEAAD+84Sr/CIvgQm+tjAIf9Srvgtok+82mttC+HGyYOUwO5cnZ9eREt8o9zmz9NfvQZYWJ1nVOPLgkHHhuIVOWthFF9Jpg89nnuKMPZE3YO4fZZhyh1v20EcQUgGODt6nf3/KSOLv5SqCxrZXZ3DlDhaZ8vTlVNRhgUjQFcke4uJ+qGLkGO4Do3KoLfOaDIsmf4kbHM7fgVxnz1FmPZfBRVMxLbOce8IuljTPDXoeP5UZSfHb1rmf1CQim/ss7CnM9LXfxe/hdLPQuSlRCD1en+UzCRqVeXtBrGf9nZTtFAZsLLaaq2bTIbuhMy8y9ttdf5JRSWKHNxUV8qgaewSFxdn1nX/+HQPGwabjqz+cjXAAAAA=\",\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"light\",\"startup\":true,\"lobby\":false},{\"normal\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/lobby-winter-v9-640.webp\",\"srcSet\":\"/onboarding/lobby-winter-v9-640.webp 640w, /onboarding/lobby-winter-v9-960.webp 960w, /onboarding/lobby-winter-v9-1280.webp 1280w, /onboarding/lobby-winter-v9.webp 1672w\",\"portrait\":\"/onboarding/lobby-winter-v9-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/lobby-winter-v9-portrait-360.webp 360w, /onboarding/lobby-winter-v9-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/lobby-winter-v9-640.webp\",\"srcSet\":\"/onboarding/lobby-winter-v9-640.webp 640w\",\"portrait\":\"/onboarding/lobby-winter-v9-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/lobby-winter-v9-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRhoDAABXRUJQVlA4IA4DAAAwEwCdASpgADYAPwFyr1ErJqQiqrYMeWAgCWMAvYzGzNvwL5OMeAg1c283LdrE23943ebyDJige78F3jubUENKKaiow1FcXkZXJjJd6IiYCW4+J5syuW4W+DBeGt3bKRAaCIR5FPbdxf1+MZzpJscv+CFOoVxXntBk1FCVdeEhimsSD7+NRBl/DK1sVJRJ/TqYuwIrzW6zVAxEP9ecXY3t+IAA/ueTfS50Jfmz8x78rois5VxuVWgtIa9pHWKRdiqe8AqejITYAg2dyfh+F4TbJAFGp390OrM6C4z5ACinsOWdoSvY/1VYsRMNXS4RTJo6mSEW+GuU3PzKP8LGueyv9cr6v0YiWCSIDJRzcFKVrr/kzxWK6ELmzmlIqfIDZwimKpwMT5cvJK+v9dqj/mTTd/pskEM00scDUuXiI7MY13ibkINGcOtkg1C8TyZqco32V1xauG0LETAi29tvCkudru5LkzqSKja0wT/1wqNDXb/uO38l/EdWFt7+1fDRfHeGP1+cEFFEELrA8LElgB8Skx2Y9WwL0YENLCheVIWC05o3OLsmTxzRmecSEBJPebejr7V+iSAFiO+qQAXq3o0KjR4oyI2rja+KyXU1A8htr1ADAZlP1M31hGlLCkkmMOwtJdtAN5eY08kFEZ7wzf0/9ZJuNAjdT8AJD03tKbG/YAjp37ggJ+y63a9F14orBWNUJ905Rpgm85t4T/PMAVMeCcBHMIsB/Hb6yha61n/HWCtSczkvzYWhxax1fMlBYsncXVnVyk6Xqc4CNYMkGLKQjWeRmLRU1EL261INT0qoMu8pPro9/YbyiVBv3Icz1+4LXvzL3QXt9eWaMvqtn6ydTAxPCBacoxJ+otVD85J2AHpq6/Z70gTdKDLZuEEm0/sogPwRmhMLx22X3tbujK7677CQHn6LFqRVlA3tHTcFxp3JDyA6xhfb4tqL1WVeSJZiTjkVFQRb/mV5LrlzUrl4JKDa9PZZ7DjDScyl2hTs06fKzyO+1EUrkscZIgU2bTDfIRRQPBWe23RYvTQAAA==\",\"portraitPreview\":null,\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"dark\",\"startup\":false,\"lobby\":false},{\"normal\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/lobby-halloween-v10-640.webp\",\"srcSet\":\"/onboarding/lobby-halloween-v10-640.webp 640w, /onboarding/lobby-halloween-v10-960.webp 960w, /onboarding/lobby-halloween-v10-1280.webp 1280w, /onboarding/lobby-halloween-v10.webp 1672w\",\"portrait\":\"/onboarding/lobby-halloween-v10-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/lobby-halloween-v10-portrait-360.webp 360w, /onboarding/lobby-halloween-v10-portrait-528.webp 528w\"},\"compact\":{\"sizes\":\"(max-aspect-ratio: 16/9) 178vh, 100vw\",\"src\":\"/onboarding/lobby-halloween-v10-640.webp\",\"srcSet\":\"/onboarding/lobby-halloween-v10-640.webp 640w\",\"portrait\":\"/onboarding/lobby-halloween-v10-portrait-360.webp\",\"portraitSrcSet\":\"/onboarding/lobby-halloween-v10-portrait-360.webp 360w\"},\"preview\":\"data:image/webp;base64,UklGRk4DAABXRUJQVlA4IEIDAAAQEwCdASpgADYAPv1srU6rJiQjLrorsWAfiWQAwrRUxV3X8zlhJzZT5kxOvAB/cn1Yg4dj3+v8UEtCDpR9eJipdiOCyPgSjex7BRzZ0P28mU0usB4KTnjnuKwqGHKyyFwow5J6w33LVRM3XDoVymhG2GiIhPXnYqMjSOHEHtqy74qbZqsZPu4jM7T2o9XYyWUPpbXD23/oq1KezYH27rTUgAD+0RaX6m7Y2AX2+d0dSITi7PZzgB14TEAWr1y0VrnIgEdsXEN2iZIepmzdmP2an3H2luyYhrgfpuUzFZ+2Hl+PwAfcBZaoQP92LIYW5d9wq+d9Ud10XPNNPT1v9W6CvzSTxswAHfvBTJHtIYju9bflwpRB5eAzI5n8+SpyNFcOdukgnl/BzYj+c5MgL1G6RUzdgmvg1mJmf6o2a/LVb2Vd7HkG0xFr+qIT53qEu3Eo8KnVavlMpl6Omshx2Q98t2YQJ46EQpT1cIGJk1qFsJ05WiNHZ3VqTAhP+BpHiiACEhpRf8BlOn52K4KOvjwUtnKFn/jaegC4WCQQFFCRjeeIC5camuGM37dB6aADjIN4onetZPR5dbQs2RuR57fb+Jm6lGmSdMpzUkgZ1vXFPJ/Jo9X7AxsSYBSQG/V922dYy9IMyTlgcA9Ds1JYJVdEGoWknwRD7z4yW2DOmBO9CpL8pSqdErBbxn3btWNLu5wbVfpeOIDXlpIYEvH+EN7h5mPrH1hQjzayl4r+ltf7tdBHkvUsCUY4okurAutAl6ulnd4UanbqoWY179QbREttzha1tphcLU6ovmXFoSUh16kImAfRiAy6DSn5+o0fmDtRStVw7FYXf/S9H12y56vHDeLsDsiRKZ+KOgOAi14mm+HCrz4CGX0oXOF73ajwCEMQ0QzXzzlfnd8SrHjFYe8lfBc8jO3SW68k75A3fxEevoj/Ag9pEZTD1baISzfm7sHX2aC/JeOwqwtV3gh/y8gTD+KAeuPDJWUOH/BCdCY3oYtOp/np/zlVpSB68ulbR5Nu0DwDfpkIPQQgcXBvDs4y+ZADhw3vQYRmKZIv8omPjAFJgNA4yVYuCrL3X9lhSthDi892xWcQXKuilDFIHUAAAAA=\",\"portraitPreview\":null,\"portraitMedia\":\"(max-width: 620px) and (orientation: portrait)\",\"landscapeMedia\":\"not all and (max-width: 620px) and (orientation: portrait)\",\"theme\":\"dark\",\"startup\":false,\"lobby\":true}]);")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("1:[[\"$\",\"script\",null,{\"id\":\"cork7-art-bootstrap\",\"dangerouslySetInnerHTML\":{\"__html\":\"$16\"}}],\"$L17\",\"$L18\"]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("1a:I[\"e988af9e0617\",[],\"default\",1]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("19:T706,")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://cork7.com/#publisher\",\"name\":\"Cork7\",\"url\":\"https://cork7.com/\",\"logo\":\"https://cork7.com/brand/icon-512.png?v=2\",\"email\":\"robin@dimora.no\",\"sameAs\":[\"https://www.tiktok.com/@cork7.com\",\"https://www.instagram.com/cork_game/\",\"https://www.youtube.com/@cork7_game\",\"https://discord.gg/quMrfAwctK\"]},{\"@type\":\"WebSite\",\"@id\":\"https://cork7.com/#website\",\"url\":\"https://cork7.com/\",\"name\":\"Cork7\",\"alternateName\":\"CORK7\",\"description\":\"Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.\",\"inLanguage\":\"en\"},{\"@type\":[\"VideoGame\",\"WebApplication\"],\"@id\":\"https://cork7.com/#game\",\"name\":\"Cork7\",\"url\":\"https://cork7.com/\",\"description\":\"Play Cork7 free in your browser: a 3D freeski game with five parks, corks and flips, rails, multiplayer and 1v1. No download needed.\",\"publisher\":{\"@id\":\"https://cork7.com/#publisher\"},\"image\":\"https://cork7.com/brand/cork7-share.jpg\",\"applicationCategory\":\"GameApplication\",\"genre\":[\"Sports\",\"Skiing\",\"Freeskiing\"],\"operatingSystem\":\"Windows, macOS, Linux, ChromeOS\",\"browserRequirements\":\"A modern browser with JavaScript, WebGL 2 and hardware acceleration. Keyboard or controller recommended.\",\"isAccessibleForFree\":true,\"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\",\"url\":\"https://cork7.com/\"},\"playMode\":[\"https://schema.org/SinglePlayer\",\"https://schema.org/MultiPlayer\"],\"inLanguage\":\"en\",\"featureList\":[\"Five parks: The Yard, APEX, Shirakumo, Forest Line and Big Air\",\"Online multiplayer rooms\",\"1v1 against friends\",\"Corks, flips and grabs\",\"Rail slides\",\"Your own rider in the Locker\",\"Replays and video clips\",\"Season leaderboards\",\"Keyboard, controller and touch controls\"]}]}")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("17:[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"$19\"}}]\n")
+        </script>
+        <script>
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).rsc.push("18:[\"$\",\"$L1a\",null,{}]\n")
+        </script>
+        <script>
+            Object.assign(((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }), {
+                "initialCacheKind": "static"
+            });
+            ((self[Symbol.for("vinext.navigationRuntime")] ??= {
+                bootstrap: {
+                    routeManifest: null
+                },
+                functions: {}
+            }).bootstrap.rsc ??= {
+                rsc: []
+            }).done = true
+        </script>
+    </body>
+</html>

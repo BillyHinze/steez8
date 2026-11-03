@@ -1,0 +1,24 @@
+{
+  "name": "cork7-independent-reconstruction",
+  "version": "0.5.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --experimental-vm-modules server/index.mjs",
+    "start": "node --env-file-if-exists=.env --experimental-vm-modules server/index.mjs",
+    "test": "node --experimental-vm-modules --test tests/*.test.mjs",
+    "audit": "node scripts/audit.mjs",
+    "build:pages": "node scripts/build-static.mjs"
+  },
+  "dependencies": {
+    "libsql": "0.5.29",
+    "ws": "8.22.1"
+  },
+  "devDependencies": {
+    "acorn": "8.15.0",
+    "prettier": "3.6.2"
+  }
+}

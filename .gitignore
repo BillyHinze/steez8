@@ -3,6 +3,14 @@ data/
 .env
 .env.*
 !.env.example
+.sites-runtime/
 dist/
 *.log
+.andromity/
+
+# Local reconstruction archives and test captures are not deployed.
+original/
+work/
+QA/
+research/
 .DS_Store

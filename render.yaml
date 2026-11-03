@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: steez8-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npx --yes pnpm@11.25.0 install --frozen-lockfile --prod
+    startCommand: node --experimental-vm-modules server/index.mjs
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: '24'
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: GAME_NAME
+        value: STEEZ8
+      - key: PUBLIC_ORIGIN
+        value: https://steez8.me
+      - key: ALLOWED_ORIGINS
+        value: https://www.steez8.me,https://billyhinze.github.io
+      - key: DATA_DIR
+        value: /tmp/steez8
+      - key: VERIFICATION_CONCURRENCY
+        value: '1'
+      - key: ASSET_CACHE_MB
+        value: '24'
+      - key: PAYMENT_MODE
+        value: disabled
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false

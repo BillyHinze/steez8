@@ -1,0 +1,154 @@
+[
+  {
+    "id": "2026-11-03-ridgeline",
+    "label": "3 NOV · 0.5",
+    "tag": "NEW PARK",
+    "title": "Meet Ridgeline.",
+    "body": "A new progression line on the alpine ridge. Warm up in two rail zones, link five flow kickers from First Tracks to Home Stretch, then branch off to the Side Quest hip. Wider takeoffs and a smaller opening jump make room to find your rhythm. Ride solo or join a live room; complete runs count toward your goals, journal and session records.",
+    "icon": "mountain",
+    "highlights": [
+      "FIVE FLOW KICKERS + SIDE HIP",
+      "TWO WARMUP RAIL ZONES",
+      "SOLO + LIVE ROOMS",
+      "ITS OWN VERIFIED RECORDS"
+    ],
+    "link": {
+      "href": "/?park=ridgeline&mode=solo",
+      "label": "Ride Ridgeline"
+    }
+  },
+  {
+    "id": "2026-11-03-basecamp-connection",
+    "label": "3 NOV · 0.5",
+    "tag": "ACCOUNTS",
+    "title": "Stay connected to your mountain.",
+    "body": "Sign-in now supports a separately hosted account server. Email addresses are trimmed before sign-in and registration, connection problems have clearer explanations, and Basecamp includes a server status check with a retry button. Progress stays with your account when the permanent database is connected.",
+    "icon": "users",
+    "highlights": [
+      "CLEARER SIGN-IN ERRORS",
+      "SERVER STATUS + RETRY",
+      "HTTPS + CROSS-DOMAIN SUPPORT"
+    ]
+  },
+  {
+    "id": "2026-11-03-mountain-links",
+    "label": "3 NOV · 0.5",
+    "tag": "BASECAMP POLISH",
+    "title": "Find your next session faster.",
+    "body": "Jump into Ridgeline from the park selector or the new Basecamp shortcut. The journal now has a sixth scored park stamp. Direct links to goals, sessions, updates, recovery and the journal work in the static build, so you can bookmark them and come back later.",
+    "icon": "medal",
+    "highlights": [
+      "RIDGELINE SHORTCUT",
+      "SIX SCORED PARK STAMPS",
+      "BOOKMARKABLE GAME PAGES"
+    ],
+    "link": {
+      "href": "/journal",
+      "label": "Open your passport"
+    }
+  },
+  {
+    "id": "2026-11-03-mountain-sessions",
+    "label": "3 NOV · 0.4",
+    "tag": "MOUNTAIN SESSIONS",
+    "title": "Eight new reasons to drop in",
+    "body": "Ranked 3v3 and 4v4 join 1v1 and 2v2 in the red ranked selector above Find Match. Riding solo? Chase Time Attack, Score Rush, Clean Line, Park Tour, Air Time and Rail Jam from Ride’s Solo Sessions button. Six solo challenges, two bigger ranked formats, one familiar Basecamp.",
+    "image": "/updates/mountain-sessions.svg",
+    "alt": "Mountain Sessions: six solo modes and ranked squads, illustrated with alpine peaks and trail lines.",
+    "highlights": [
+      "RANKED 1V1 · 2V2 · 3V3 · 4V4",
+      "SIX SOLO SESSION MODES",
+      "VERIFIED RESULTS",
+      "BUILT INTO RIDE"
+    ],
+    "link": {
+      "href": "/sessions",
+      "label": "Pick your session"
+    }
+  },
+  {
+    "id": "2026-11-03-ranked-squads",
+    "label": "3 NOV · 0.4",
+    "tag": "RANKED SQUADS",
+    "title": "Bring the whole crew",
+    "body": "Queue for 3v3 or 4v4 alone or with a party. Parties stay together and every rider confirms readiness before the match starts. Everyone rides one solo Apex run in the same six-minute window; verified scores combine into the team total. Each format has its own rating and leaderboard, with rating protection for a losing teammate who stayed when another rider left.",
+    "icon": "users",
+    "highlights": [
+      "SIX OR EIGHT REAL RIDERS",
+      "PARTIES STAY TOGETHER",
+      "SEPARATE RATINGS",
+      "READY CHECK + TEAM SCOREBOARD"
+    ],
+    "link": {
+      "href": "/squads",
+      "label": "Find your crew"
+    }
+  },
+  {
+    "id": "2026-11-03-mountain-journal",
+    "label": "3 NOV · 0.4",
+    "tag": "PROGRESSION",
+    "title": "Every lap leaves a mark",
+    "body": "Your Mountain journal remembers your verified finishes, personal bests, favourite park and days on snow. Finish a run in each of the five scored parks to stamp your passport. Six lifetime milestones award a total of 675 POW, from your first tracks to the Century Club. Previous verified runs count too.",
+    "icon": "medal",
+    "highlights": [
+      "FIVE-PARK PASSPORT",
+      "SIX LIFETIME MILESTONES",
+      "675 POW TO EARN",
+      "FILTERABLE RUN HISTORY"
+    ],
+    "link": {
+      "href": "/journal",
+      "label": "Open your journal"
+    }
+  },
+  {
+    "id": "2026-11-03-gear-and-goals",
+    "label": "3 NOV · 0.4",
+    "tag": "LOCKER + WEEKLY GOALS",
+    "title": "Your kit. Your week. Your mountain.",
+    "body": "Save three named outfits in the Locker and swap complete setups. Restored 180 missing equipment textures, refreshed cached rider pictures and fixed saved-outfit broadcasts to mountain riders and parties. Three weekly goals award up to 300 POW for 20 finishes, all five parks and riding on three different UTC days. Weekly goals reset Monday at 00:00 UTC.",
+    "icon": "medal",
+    "highlights": [
+      "THREE SAVED LOOKS",
+      "180 EQUIPMENT TEXTURES RESTORED",
+      "300 POW IN WEEKLY GOALS",
+      "FASTER REPEAT ASSET LOADS"
+    ],
+    "link": {
+      "href": "/?open=locker",
+      "label": "Open the Locker"
+    }
+  },
+  {
+    "id": "2026-11-03-session-records",
+    "label": "3 NOV · 0.4",
+    "tag": "PERSONAL BESTS",
+    "title": "Your next line has something to beat",
+    "body": "Every session saves its result. Check your best for each mode and park, browse your latest twenty attempts, or see the top twenty-five riders on the session boards. The in-game session display tracks your progress, and the Park Tour keeps your next stop ready across visits. A daily park pick gives you somewhere new to start.",
+    "icon": "mountain",
+    "highlights": [
+      "MODE AND PARK LEADERBOARDS",
+      "PERSONAL BESTS",
+      "SESSION HISTORY",
+      "DAILY PARK PICK"
+    ]
+  },
+  {
+    "id": "2026-11-03-daily-goals",
+    "label": "3 NOV · 0.3",
+    "tag": "DAILY GOALS",
+    "title": "Small goals. More reasons to ride.",
+    "body": "Finish three runs, score 5,000 points and explore two parks to earn up to 100 POW a day. Claim your rewards in Menu → Daily + weekly goals. Goals reset at midnight UTC and only completed verified runs count. Cash purchases remain closed.",
+    "icon": "medal",
+    "highlights": [
+      "THREE DAILY GOALS",
+      "100 POW EACH DAY",
+      "EARNED BY RIDING"
+    ],
+    "link": {
+      "href": "/challenges",
+      "label": "See today’s goals"
+    }
+  }
+]

@@ -1,0 +1,11 @@
+[build]
+  publish = "dist"
+  command = "node scripts/build-static.mjs"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[[redirects]]
+  from = "/updates"
+  to = "/updates/"
+  status = 301
