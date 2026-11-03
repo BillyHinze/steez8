@@ -669,6 +669,52 @@ test("the real client where message changes party follow privacy and destination
   a.ws.close();
   b.ws.close();
 });
+test("a completed run advances to the next rider even if verification stays unavailable", async () => {
+  const c = app.realtime.competition,
+    m = c.createMatch(
+      "duel",
+      "apex",
+      { host: accounts.One.user.id, guest: accounts.Two.user.id },
+      false,
+    ),
+    host = await room(accounts.One, m.room),
+    guest = await room(accounts.Two, m.room);
+  await tick(7000);
+  await tick(4500);
+  assert.equal(m.state.phase, "run");
+  assert.equal(m.state.drop, 0);
+
+  // The original host reports its local state, not a score result.
+  host.send({
+    t: "duel", op: "state", v: 2, seq: 20, phase: "posted",
+    drop: 0, first: "h", runs: [100000, -1, -1, -1],
+    win: "", left: 4000,
+  });
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  assert.equal(m.state.phase, "run");
+  assert.notEqual(m.pendingScores.host, undefined);
+
+  await tick(120001);
+  assert.equal(m.state.phase, "posted");
+  assert.equal(m.state.runs.host[0], "dnf");
+  await tick(4500);
+  assert.equal(m.state.phase, "present");
+  assert.equal(m.state.drop, 1);
+  await tick(4500);
+  assert.equal(m.state.phase, "run");
+
+  // A client-provided positive score is only a completion hint; if verification
+  // fails we finish that turn with DNF, not attacker-chosen ranked points.
+  guest.send({ t: "duel", op: "result", v: 2, drop: 1, score: 999999 });
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  assert.equal(m.state.phase, "run");
+  assert.notEqual(m.pendingScores.guest, undefined);
+  await tick(120001);
+  assert.equal(m.state.phase, "posted");
+  assert.equal(m.state.runs.guest[0], "dnf");
+  host.ws.close();
+  guest.ws.close();
+});
 test("forfeits award the opponent once, apply a queue break, and allow an agreed rematch", async () => {
   const c = app.realtime.competition,
     m = c.createMatch(

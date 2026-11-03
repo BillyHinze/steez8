@@ -1,7 +1,8 @@
 import crypto from "node:crypto";
-import { parentPort, workerData } from "node:worker_threads";
+import { parentPort } from "node:worker_threads";
 import { gunzipSync } from "node:zlib";
 import { physicsFor } from "./physics-v2.mjs";
+async function verify(workerData) {
 try {
   const physics = await physicsFor(workerData.park);
   if (workerData.replay) {
@@ -49,7 +50,7 @@ try {
       throw Error("Replay score does not match the verified run");
     if (meta.course !== expected.course_id)
       throw Error("Replay course does not match the verified run");
-    parentPort.postMessage({ ok: true, frames: replay.frames });
+    return { ok: true, frames: replay.frames };
   } else {
     const raw = gunzipSync(Buffer.from(workerData.inputs, "base64"), {
       maxOutputLength: 220000,
@@ -108,7 +109,7 @@ try {
       if (!Number.isFinite(s.x + s.y + s.z + s.score))
         throw Error("Nonfinite simulation state");
     }
-    parentPort.postMessage({
+    return {
       inputs_hash: crypto.createHash("sha256").update(raw).digest("hex"),
       phase: s.phase,
       score: Math.round(s.score),
@@ -123,8 +124,16 @@ try {
       crashes: s.crashes,
       best_combo: Math.round(s.bestCombo),
       best_trick: s.bestTrick,
-    });
+    };
   }
-} catch (error) {
-  parentPort.postMessage({ error: error.message });
+ } catch (error) {
+    return { error: error.message };
+  }
 }
+
+// Keep the physics runtime warm between verification requests. Rebuilding its VM
+// for each run is particularly expensive on Render's small shared instances.
+parentPort.on("message", async ({ id, data }) => {
+  const result = await verify(data);
+  parentPort.postMessage({ id, ...result });
+});

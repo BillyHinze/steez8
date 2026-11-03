@@ -289,6 +289,7 @@ export class Competition {
         phaseAt: this.now(),
         missing: {},
         verified: {},
+        pendingScores: {},
         out: [],
         rematch: [],
       };
@@ -829,16 +830,26 @@ export class Competition {
       return true;
     }
     if (v.op === "state") {
+      // The original host client sends its local phase rather than a result
+      // message. This is a completion hint only: never trust its claimed score.
+      if (
+        c === this.hostPeer(m) &&
+        m.state.phase === "run" &&
+        v.phase === "posted" &&
+        v.drop === m.state.drop &&
+        this.activeRoles(m).includes(role)
+      ) this.notePendingScore(m, role);
       if (c === this.hostPeer(m)) this.broadcastState(m);
       return true;
     }
     if (v.op === "result") {
       if (
         v.drop === m.state.drop &&
-        this.activeRoles(m).includes(role) &&
-        v.score < 0
-      )
-        this.post(m, role, parks.y(v.score));
+        this.activeRoles(m).includes(role)
+      ) {
+        if (v.score < 0) this.post(m, role, parks.y(v.score));
+        else if (m.state.phase === "run") this.notePendingScore(m, role);
+      }
       return true;
     }
     if (v.op === "bye") {
@@ -909,12 +920,20 @@ export class Competition {
     m.verified[key] = result.score;
     this.post(m, context.role, result.score);
   }
+  notePendingScore(m, role) {
+    // Score comes from server replay verification, not the client's WebSocket.
+    // A reported completion must still let the match recover if verification
+    // is overloaded or fails, without awarding an unverified score.
+    m.pendingScores ??= {};
+    m.pendingScores[role] ??= this.now();
+  }
   post(m, role, mark) {
     const old = m.state;
     if (m.kind === "duel") m.state = parks.A(m.state, role, m.state.drop, mark);
     else
       m.state = this.input.ct(m.state, this.input.ut(role), m.state.drop, mark);
     if (m.state === old) return;
+    if (m.pendingScores) delete m.pendingScores[role];
     const peer = this.connections(m).find((c) => c.user.id === m.players[role]);
     if (peer)
       this.net.roomSend(
@@ -1099,6 +1118,15 @@ export class Competition {
           this.save(m);
         }
         continue;
+      }
+      // A score that cannot be verified must not hold the next rider hostage.
+      // After a bounded grace period, record a DNF rather than fake points.
+      if (m.state.phase === "run") {
+        for (const role of this.activeRoles(m)) {
+          const reportedAt = m.pendingScores?.[role];
+          if (reportedAt !== undefined && now - reportedAt >= 120000)
+            this.post(m, role, "dnf");
+        }
       }
       if (
         m.state.phase === "run" &&
