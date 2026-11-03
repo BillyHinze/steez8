@@ -794,6 +794,49 @@ test("duel releases each rider immediately and reconciles verified scores across
   host.ws.close();
   guest.ws.close();
 });
+test("four delayed duel score proofs settle the final winner before ranked ratings", async () => {
+  const a = await make("LateHost"),
+    b = await make("LateGuest"),
+    c = app.realtime.competition,
+    m = c.createMatch("duel", "apex",
+      { host: a.user.id, guest: b.user.id }, true),
+    host = await room(a, m.room),
+    guest = await room(b, m.room),
+    contexts = [],
+    scores = [1200, 300, 1100, 500];
+  await tick(7000);
+  await tick(4500);
+  for (let drop = 0; drop < 4; drop++) {
+    assert.equal(m.state.phase, "run");
+    assert.equal(m.state.drop, drop);
+    const role = c.activeRoles(m)[0];
+    contexts.push(c.verificationContext(m.players[role],
+      { duel: { id: m.id, drop } }));
+    const peer = role === "host" ? host : guest;
+    peer.send({ t: "duel", op: "result", v: 2, drop, score: 999999 });
+    const posted = await peer.wait((x) =>
+      x.t === "duel" && x.op === "state" &&
+      x.phase === "posted" && x.drop === drop);
+    assert.equal(posted.phase, "posted");
+    assert.equal(m.state.runs[role][Math.floor(drop / 2)], 0);
+    await tick(4500);
+    if (drop < 3) await tick(4500);
+  }
+  assert.equal(m.state.phase, "winner");
+  assert.equal(m.state.winner, "draw");
+  assert.equal(app.store.rating(a.user.id).games, 0);
+  assert.equal(app.store.rating(b.user.id).games, 0);
+  for (let drop = 0; drop < contexts.length; drop++)
+    c.verified(contexts[drop], { score: scores[drop] });
+  assert.equal(m.state.winner, "host");
+  assert.deepEqual(m.state.runs.host.slice(0, 2), [1200, 1100]);
+  assert.deepEqual(m.state.runs.guest.slice(0, 2), [300, 500]);
+  await tick(250);
+  assert.equal(app.store.rating(a.user.id).wins, 1);
+  assert.equal(app.store.rating(b.user.id).losses, 1);
+  host.ws.close();
+  guest.ws.close();
+});
 test("forfeits award the opponent once, apply a queue break, and allow an agreed rematch", async () => {
   const c = app.realtime.competition,
     m = c.createMatch(
