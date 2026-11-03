@@ -2,6 +2,7 @@ name: Check game
 on:
   push:
     branches: [main]
+    paths: ['public/**', 'server/**', 'tests/**', 'scripts/**', 'package.json', 'pnpm-lock.yaml']
   pull_request:
   workflow_dispatch:
 permissions:
