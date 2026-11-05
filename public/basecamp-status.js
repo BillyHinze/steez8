@@ -10,7 +10,7 @@ export function startBasecampStatus() {
     const lobby = document.querySelector('[aria-label="Basecamp lobby"]');
     bar.hidden = !lobby || status === 'online' || (status === 'checking' && attempts === 0);
     bar.dataset.state = status;
-    const text = status === 'checking' ? 'Connecting to multiplayer. Solo riding is ready.' : 'Multiplayer unavailable. Reconnecting automatically; solo riding still works.';
+    const text = status === 'checking' ? 'Connecting to multiplayer. Solo riding is ready.' : status === 'starting' ? 'The multiplayer simulation is starting. Solo riding is ready.' : 'Multiplayer unavailable. Reconnecting automatically; solo riding still works.';
     if (label.textContent !== text) label.textContent = text;
     retry.disabled = busy;
     if (!bar.isConnected) document.body.append(bar);
@@ -34,8 +34,16 @@ export function startBasecampStatus() {
     busy = true; status = 'checking'; paint();
     try {
       const response = await fetch('/api/health', { cache: 'no-store', signal: AbortSignal.timeout(12000) });
-      if (!response.ok || !(await response.json()).ok) throw Error('Unavailable');
-      status = 'online'; attempts = 0;
+      const health = await response.json();
+      if (!response.ok || !health.ok) throw Error('Unavailable');
+      if (health.ready === false) {
+        status = 'starting';
+        attempts++;
+        schedule();
+      } else {
+        status = 'online';
+        attempts = 0;
+      }
     } catch { status = 'offline'; attempts++; schedule(); }
     finally { busy = false; paint(); }
   }

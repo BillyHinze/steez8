@@ -78,7 +78,8 @@ export function createApplication({
   store.squads = squads;
   let realtime,
     cups,
-    assetBytes = 0;
+    assetBytes = 0,
+    mountainReady = false;
   async function asset(file, stat) {
     const cached = assetCache.get(file);
     if (cached && cached.mtime === stat.mtimeMs) {
@@ -187,6 +188,7 @@ export function createApplication({
       if (p === "/api/health")
         return json({
           ok: true,
+          ready: mountainReady,
           brand,
           version: "0.5.0",
           database: store.remote ? 'turso' : 'sqlite',
@@ -965,6 +967,9 @@ export function createApplication({
   cups = new Cups(store, realtime.transport, { clock });
   store.cups = cups;
   realtime.setCups(cups);
+  const ready = Promise.all([realtime.competition.ready, cups.ready]).then(() => {
+    mountainReady = true;
+  });
   return {
     server,
     store,
@@ -977,7 +982,7 @@ export function createApplication({
     loadouts,
     mountainSessions,
     squads,
-    ready: Promise.all([realtime.competition.ready, cups.ready]),
+    ready,
     missing,
     close: async () => {
       clearInterval(maintenance);
@@ -993,10 +998,19 @@ if (
   process.argv[1] &&
   fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
 ) {
+  console.info("STEEZ8 startup: opening database and game services");
   const app = createApplication();
-  await app.ready;
+  console.info("STEEZ8 startup: database opened; starting HTTP health endpoint");
   const port = Number(process.env.PORT || 4173),
     host = process.env.HOST || "127.0.0.1";
+  app.ready.then(
+    () => console.info("STEEZ8 startup: mountain simulation ready"),
+    (error) => {
+      console.error("STEEZ8 mountain startup failed:", error);
+      process.exit(1);
+    },
+  );
+  // Do not block HTTP health checks on expensive physics module loading.
   app.server.listen(port, host, () =>
     console.log(`Independent game: http://${host}:${port}`),
   );
