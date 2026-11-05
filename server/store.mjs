@@ -66,15 +66,50 @@ export class Store {
       .prepare("DELETE FROM records WHERE collection=? AND id=?")
       .run(table, id);
   }
+  recoverReplica() {
+    if (!this.remote) return false;
+    // Keep the replica file/WAL intact: never delete data to recover a session.
+    try { this.db.close(); } catch {}
+    const Database = require("libsql");
+    this.db = new Database(path.join(this.directory, "replica.sqlite"), {
+      syncUrl: process.env.TURSO_DATABASE_URL,
+      authToken: process.env.TURSO_AUTH_TOKEN,
+      readYourWrites: true,
+      offline: false,
+    });
+    this.db.sync();
+    return true;
+  }
   transaction(fn) {
-    this.db.exec("BEGIN IMMEDIATE");
+    // Reentrant database work shares one atomic transaction.
+    if (this.transactionDepth) return fn();
+    try {
+      this.db.exec("BEGIN IMMEDIATE");
+    } catch (error) {
+      if (!this.remote || !/InvalidParserState.*Txn/.test(String(error.message)))
+        throw error;
+      console.warn("Recovering libSQL replica after failed transaction BEGIN");
+      this.recoverReplica();
+      // Only BEGIN is retried: the callback hasn't modified any records yet.
+      this.db.exec("BEGIN IMMEDIATE");
+    }
+    this.transactionDepth = 1;
     try {
       const result = fn();
+      if (result && typeof result.then === "function")
+        throw Error("Database transactions must be synchronous");
       this.db.exec("COMMIT");
       return result;
     } catch (error) {
-      this.db.exec("ROLLBACK");
+      // Do not replace the original failure with a secondary rollback error.
+      try {
+        if (this.db.inTransaction !== false) this.db.exec("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Database rollback failed:", rollbackError.message);
+      }
       throw error;
+    } finally {
+      this.transactionDepth = 0;
     }
   }
   configureOwner(id) {
