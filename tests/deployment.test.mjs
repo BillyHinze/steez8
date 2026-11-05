@@ -26,7 +26,7 @@ test('HTTPS frontend passes CORS through a plain HTTP proxy connection; foreign 
  for(const foreign of ['https://attacker.test','null','https://steez8.me.attacker.test']) {
   const denied=await fetch(base+'/api/health',{headers:{Origin:foreign,'X-Forwarded-Host':'steez8.me','X-Forwarded-Proto':'https'}}); assert.equal(denied.status,403); assert.equal(denied.headers.get('access-control-allow-origin'),null);
  }
- const healthy=await api('/api/health'); assert.equal(healthy.res.status,200); assert.match(healthy.res.headers.get('vary'),/Origin/);
+ const healthy=await api('/api/health'); assert.equal(healthy.res.status,200); assert.equal(healthy.body.ready,true); assert.match(healthy.res.headers.get('vary'),/Origin/);
 });
 test('trimmed signup, password login and refresh rotation work across origins',async()=>{
  const signed=await api('/auth/v1/signup',{email:'  DeployQA@Example.Test  ',password:'DeployQA-Only-2026',data:{handle:'DeployQA'}});
