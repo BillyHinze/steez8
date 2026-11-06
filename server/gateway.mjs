@@ -1,6 +1,7 @@
 import http from "node:http";
 import net from "node:net";
 import { fork } from "node:child_process";
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { originPolicy } from "./origins.mjs";
 
@@ -11,6 +12,7 @@ export function createGateway({
   targetPort,
   ready = () => false,
   originAllowed = originPolicy(),
+  gatewayToken = "",
 } = {}) {
   const json = (req, res, status, body) => {
     if (req.headers.origin) {
@@ -49,6 +51,17 @@ export function createGateway({
     delete headers.connection;
     // Do not let a browser send a private gateway identification header.
     delete headers["x-steez8-gateway"];
+    delete headers["x-steez8-client-ip"];
+    delete headers["x-steez8-gateway-token"];
+    if (gatewayToken) {
+      // Render's rightmost forwarded IP cannot be replaced by a browser's
+      // user-provided X-Forwarded-For prefix.
+      const forwarded = req.headers["x-forwarded-for"];
+      const visitor = typeof forwarded === "string"
+        ? forwarded.split(",").at(-1).trim() : "";
+      headers["x-steez8-client-ip"] = visitor || req.socket.remoteAddress;
+      headers["x-steez8-gateway-token"] = gatewayToken;
+    }
     const upstream = http.request({
       hostname: "127.0.0.1",
       port: targetPort,
@@ -60,6 +73,9 @@ export function createGateway({
       res.writeHead(response.statusCode || 502, response.headers);
       response.pipe(res);
     });
+    upstream.setTimeout(pathname === "/api/health" ? 8000 :
+      pathname === "/functions/v1/verify-run" ? 130000 : 65000,
+    () => upstream.destroy(Error("Upstream timeout")));
     upstream.on("error", () => {
       if (res.headersSent) res.destroy();
       else json(req, res, 503, {
@@ -83,6 +99,13 @@ export function createGateway({
       let handshake = `${req.method} ${req.url} HTTP/${req.httpVersion}\r\n`;
       for (let i = 0; i < req.rawHeaders.length; i += 2)
         handshake += `${req.rawHeaders[i]}: ${req.rawHeaders[i + 1]}\r\n`;
+      if (gatewayToken) {
+        const forwarded = req.headers["x-forwarded-for"];
+        const visitor = typeof forwarded === "string"
+          ? forwarded.split(",").at(-1).trim() : "";
+        handshake += `X-STEEZ8-Client-IP: ${visitor || req.socket.remoteAddress}\r\n`;
+        handshake += `X-STEEZ8-Gateway-Token: ${gatewayToken}\r\n`;
+      }
       upstream.write(handshake + "\r\n");
       if (head.length) upstream.write(head);
       socket.pipe(upstream);
@@ -103,10 +126,12 @@ export function startGateway({
   if (!Number.isInteger(port) || port < 1 || port >= 65535)
     throw Error("PORT must be between 1 and 65534");
   const targetPort = port + 1;
+  const gatewayToken = crypto.randomBytes(32).toString("hex");
   let backendReady = false, stopping = false, child = null, failures = 0, timer = null;
   const gateway = createGateway({
     targetPort,
     ready: () => backendReady,
+    gatewayToken,
     originAllowed: originPolicy({
       publicOrigin: process.env.PUBLIC_ORIGIN || "",
       allowedOrigins: process.env.ALLOWED_ORIGINS || "",
@@ -123,6 +148,7 @@ export function startGateway({
         PORT: String(targetPort),
         HOST: "127.0.0.1",
         STEEZ8_CHILD: "1",
+        STEEZ8_GATEWAY_TOKEN: gatewayToken,
       },
       stdio: ["ignore", "inherit", "inherit", "ipc"],
     });
