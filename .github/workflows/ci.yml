@@ -25,3 +25,9 @@ jobs:
       - run: pnpm run build:pages
         env:
           BACKEND_ORIGIN: https://steez8-api.onrender.com
+      - name: Validate production connectivity scripts
+        run: |
+          node --check scripts/check-public-site.mjs
+          node --check public/backend-warmup.js
+          node --check public/status-check.js
+          node --check public/basecamp-status.js
