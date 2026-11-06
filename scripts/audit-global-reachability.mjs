@@ -41,7 +41,7 @@ export function summarizeProbes(results) {
 }
 
 async function getDnsReport() {
-  const report = { ipv4: [], ipv6: [], nameservers: [], warnings: [] };
+  const report = { ipv4: [], ipv6: [], nameservers: [], www: [], warnings: [] };
   for (const [key, resolve] of [
     ["ipv4", () => dns.resolve4(domain)],
     ["ipv6", () => dns.resolve6(domain)],
@@ -55,6 +55,16 @@ async function getDnsReport() {
         report.warnings.push(`${key} query failed: ${value(error?.code || error?.message)}`);
     }
   }
+  try {
+    report.www = await dns.resolveCname("www." + domain);
+  } catch (error) {
+    if (!["ENODATA", "ENOTFOUND"].includes(error?.code))
+      report.warnings.push("www CNAME lookup failed: " + value(error?.message));
+  }
+  if (report.www.length === 0)
+    report.warnings.push("Optional www.steez8.me alias is not configured. GitHub Pages recommends www CNAME to billyhinze.github.io.");
+  else if (!report.www.some(x => x.toLowerCase().replace(/\.$/, "") === "billyhinze.github.io"))
+    report.warnings.push("The www CNAME does not point directly to billyhinze.github.io.");
   const actual = new Set(report.ipv4);
   if (actual.size !== expectedIPv4.length || expectedIPv4.some(ip => !actual.has(ip)))
     report.warnings.push("The apex A records differ from the four official GitHub Pages addresses.");
@@ -67,15 +77,15 @@ async function getDnsReport() {
   return report;
 }
 
-async function globalpingRequest() {
+async function globalpingRequest({ target = domain, requestPath = "/", method = "HEAD" } = {}) {
   const body = {
     type: "http",
-    target: domain,
+    target,
     locations: continents.map(continent => ({ continent, limit: 2 })),
     timeout: 20,
     measurementOptions: {
       protocol: "HTTPS",
-      request: { method: "HEAD", path: "/" },
+      request: { method, path: requestPath },
       ipVersion: 4,
     },
   };
@@ -118,6 +128,7 @@ async function run() {
   console.log("NS:", dnsReport.nameservers.join(", ") || "unavailable");
   console.log("IPv4:", dnsReport.ipv4.join(", ") || "unavailable");
   console.log("IPv6:", dnsReport.ipv6.join(", ") || "none");
+  console.log("www CNAME:", dnsReport.www.join(", ") || "none");
   dnsReport.warnings.forEach(message => console.log("::warning::DNS " + message));
 
   let measurement = null;
@@ -133,6 +144,23 @@ async function run() {
     console.error("::warning::Worldwide measurement unavailable: " + remoteError);
   }
 
+  let backendMeasurement = null;
+  let backendError = null;
+  try {
+    backendMeasurement = await globalpingRequest({
+      target: "steez8-api.onrender.com",
+      requestPath: "/api/health",
+      method: "GET",
+    });
+    console.log("Worldwide backend health probes:",
+      backendMeasurement.summary.passed, "passed /", backendMeasurement.summary.checked, "total");
+    for (const row of backendMeasurement.summary.rows)
+      console.log(`BACKEND ${row.ok ? "PASS" : "FAIL"} ${row.country} ${row.city}: ${row.status} HTTP ${row.code ?? "-"} ${row.elapsed ?? "-"}ms`);
+  } catch (error) {
+    backendError = value(error.message);
+    console.error("::warning::Backend worldwide measurement unavailable: " + backendError);
+  }
+
   const lines = [
     "## STEEZ8 worldwide reachability",
     "",
@@ -142,6 +170,7 @@ async function run() {
     "- NS: " + (dnsReport.nameservers.join(", ") || "unavailable"),
     "- IPv4: " + (dnsReport.ipv4.join(", ") || "unavailable"),
     "- IPv6: " + (dnsReport.ipv6.join(", ") || "not published"),
+    "- www: " + (dnsReport.www.join(", ") || "not configured"),
     ...(dnsReport.warnings.length ? ["", ...dnsReport.warnings.map(w => "- ⚠️ " + w)] : []),
     "",
     "### Worldwide HTTPS tests",
@@ -158,11 +187,24 @@ async function run() {
   } else {
     lines.push("Globalping did not complete: " + (remoteError || "unknown error"));
   }
+  lines.push("", "### Backend API across continents");
+  if (backendMeasurement) {
+    lines.push(
+      `Measurement: https://globalping.io/?measurement=${encodeURIComponent(backendMeasurement.id)}`,
+      "",
+      "| Country | City | Status | HTTP | Time |",
+      "|---|---|---|---|---|",
+      ...backendMeasurement.summary.rows.map(r =>
+        `| ${r.country} | ${r.city} | ${r.ok ? "PASS" : r.status} | ${r.code ?? "—"} | ${r.elapsed ?? "—"} ms |`),
+    );
+  } else lines.push("Backend measurements unavailable: " + (backendError || "unknown"));
   lines.push("", "These independent tests cannot predict access on every managed network.");
   if (process.env.GITHUB_STEP_SUMMARY)
     fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
   if (!measurement || measurement.summary.checked < 3)
     throw Error("Insufficient global measurements; cannot claim worldwide success");
+  if (backendMeasurement && backendMeasurement.summary.failed > 0)
+    console.log("::warning::Some independent networks could not reach the Render API; inspect the per-region results.");
   if (measurement.summary.failed > 0)
     console.log("::warning::Some independent networks could not reach the domain; inspect the per-region results.");
   if (measurement.summary.failed >= Math.ceil(measurement.summary.checked * 0.5))
