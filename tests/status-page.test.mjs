@@ -6,11 +6,12 @@ import vm from "node:vm";
 const source = fs.readFileSync(new URL("../public/status-check.js", import.meta.url), "utf8");
 const markup = fs.readFileSync(new URL("../public/status/index.html", import.meta.url), "utf8");
 
-function setup({ online = true, socket = "success", ready = true } = {}) {
+function setup({ online = true, socket = "success", ready = true, website = true } = {}) {
   const elements = new Map();
   const sockets = [];
   const copied = [];
   let apiCalls = 0;
+  let websiteCalls = 0;
 
   function element(id) {
     if (!elements.has(id)) {
@@ -54,7 +55,16 @@ function setup({ online = true, socket = "success", ready = true } = {}) {
         async writeText(value) { copied.push(value); },
       },
     },
-    fetch: async () => {
+    fetch: async (url) => {
+      if (String(url).startsWith("/version.json?connection-check=")) {
+        websiteCalls++;
+        if (!website) throw Error("Website origin not reachable");
+        return {
+          ok: true, status: 200,
+          headers: { get() { return "application/json"; } },
+          async json() { return { version: "1.0.5" }; },
+        };
+      }
       apiCalls++;
       return {
         ok: true,
@@ -71,7 +81,7 @@ function setup({ online = true, socket = "success", ready = true } = {}) {
     Date,
   };
   vm.runInNewContext(source, browser);
-  return { element, sockets, copied, get apiCalls() { return apiCalls; } };
+  return { element, sockets, copied, get apiCalls() { return apiCalls; }, get websiteCalls() { return websiteCalls; } };
 }
 
 async function finish(harness) {
@@ -91,6 +101,8 @@ test("working API and WebSockets show independent success and no tokens are tran
   const h = setup();
   await finish(h);
   assert.equal(h.apiCalls, 1);
+  assert.equal(h.websiteCalls, 1);
+  assert.equal(h.element("website").textContent, "Connected");
   assert.equal(h.element("backend").textContent, "Connected");
   assert.equal(h.element("game").textContent, "Ready");
   assert.equal(h.element("socket").textContent, "Connected");
@@ -131,6 +143,29 @@ test("offline browser does not contact the multiplayer server", async () => {
   const h = setup({ online: false });
   await finish(h);
   assert.equal(h.apiCalls, 0);
+  assert.equal(h.websiteCalls, 0);
+  assert.equal(h.element("website").textContent, "Unavailable");
   assert.equal(h.sockets.length, 0);
   assert.equal(h.element("socket").textContent, "Unavailable");
+});
+
+
+test("website origin failures are reported independently even when multiplayer works", async () => {
+  const h = setup({ website: false });
+  await finish(h);
+  assert.equal(h.websiteCalls, 1);
+  assert.equal(h.apiCalls, 1);
+  assert.equal(h.element("website").textContent, "Not reachable");
+  assert.equal(h.element("website").dataset.state, "offline");
+  assert.equal(h.element("backend").textContent, "Connected");
+  assert.equal(h.element("socket").textContent, "Connected");
+  assert.match(h.element("result").child.textContent, /cached or the current network/);
+  await h.element("copy").handlers.click();
+  assert.match(h.copied[0], /Website: Not reachable/);
+});
+
+test("status page tests a real website origin, not a cached document", () => {
+  assert(markup.includes('id="website"'));
+  assert(markup.includes("not just a cached page"));
+  assert(source.includes("/version.json?connection-check="));
 });
