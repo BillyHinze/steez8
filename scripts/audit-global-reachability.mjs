@@ -5,7 +5,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const domain = "steez8.me";
+const canonicalSite = new URL(process.env.PUBLIC_SITE_ORIGIN || "https://steez8.me");
+if (canonicalSite.protocol !== "https:" || canonicalSite.username || canonicalSite.password ||
+    canonicalSite.pathname !== "/" || canonicalSite.search || canonicalSite.hash)
+  throw Error("PUBLIC_SITE_ORIGIN must be an HTTPS origin without a path");
+const domain = canonicalSite.hostname;
 const expectedIPv4 = [
   "185.199.108.153", "185.199.109.153", "185.199.110.153", "185.199.111.153",
 ];
@@ -62,7 +66,7 @@ async function getDnsReport() {
       report.warnings.push("www CNAME lookup failed: " + value(error?.message));
   }
   if (report.www.length === 0)
-    report.warnings.push("Optional www.steez8.me alias is not configured. GitHub Pages recommends www CNAME to billyhinze.github.io.");
+    report.warnings.push("Optional www." + domain + " alias is not configured. GitHub Pages recommends www CNAME to billyhinze.github.io.");
   else if (!report.www.some(x => x.toLowerCase().replace(/\.$/, "") === "billyhinze.github.io"))
     report.warnings.push("The www CNAME does not point directly to billyhinze.github.io.");
   const actual = new Set(report.ipv4);
@@ -94,7 +98,7 @@ async function globalpingRequest({ target = domain, requestPath = "/", method = 
     headers: {
       "content-type": "application/json",
       "accept": "application/json",
-      "user-agent": "steez8-reachability-check/1.0 (+https://steez8.me)",
+      "user-agent": "steez8-reachability-check/1.0 (+" + canonicalSite.origin + ")",
     },
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(15000),
@@ -108,7 +112,7 @@ async function globalpingRequest({ target = domain, requestPath = "/", method = 
     const result = await fetch("https://api.globalping.io/v1/measurements/" + encodeURIComponent(id), {
       headers: {
         "accept": "application/json",
-        "user-agent": "steez8-reachability-check/1.0 (+https://steez8.me)",
+        "user-agent": "steez8-reachability-check/1.0 (+" + canonicalSite.origin + ")",
       },
       signal: AbortSignal.timeout(10000),
     });
@@ -124,20 +128,24 @@ async function globalpingRequest({ target = domain, requestPath = "/", method = 
 }
 
 
-export async function checkWwwRedirect(fetchImpl = fetch) {
+export async function checkWwwRedirect(fetchImpl = fetch, siteOrigin = canonicalSite.origin) {
   // Check the public www HTTPS endpoint as well as its DNS alias. Do not
-  // follow the redirect; the target should be the canonical steez8.me site.
+  // follow the redirect; the target must be the chosen canonical site.
+  const site = new URL(siteOrigin);
+  if (site.protocol !== "https:" || site.pathname !== "/" || site.search || site.hash)
+    throw Error("The redirect check requires a bare HTTPS site origin");
+  const wwwUrl = "https://www." + site.hostname + "/";
   try {
-    const response = await fetchImpl("https://www.steez8.me/", {
+    const response = await fetchImpl(wwwUrl, {
       method: "HEAD",
       redirect: "manual",
       signal: AbortSignal.timeout(15000),
     });
     const location = response.headers.get("location") || "";
     let target = null;
-    try { target = new URL(location, "https://www.steez8.me"); } catch {}
+    try { target = new URL(location, wwwUrl); } catch {}
     const ok = response.status >= 300 && response.status < 400 &&
-      target?.protocol === "https:" && target?.hostname === domain;
+      target?.protocol === "https:" && target?.hostname === site.hostname;
     return { ok, status: response.status, location: value(location), error: "" };
   } catch (error) {
     return { ok: false, status: null, location: "", error: value(error?.message) };
@@ -145,6 +153,7 @@ export async function checkWwwRedirect(fetchImpl = fetch) {
 }
 
 async function run() {
+  console.log("Checking canonical STEEZ8 site:", canonicalSite.origin);
   const dnsReport = await getDnsReport();
   console.log("NS:", dnsReport.nameservers.join(", ") || "unavailable");
   console.log("IPv4:", dnsReport.ipv4.join(", ") || "unavailable");
@@ -155,7 +164,7 @@ async function run() {
   console.log("www HTTPS redirect:", wwwReport.ok ? "PASS" : "UNVERIFIED",
     "HTTP", wwwReport.status ?? "-", wwwReport.location || wwwReport.error || "no location");
   if (!wwwReport.ok)
-    console.log("::warning::www.steez8.me did not demonstrate a valid HTTPS redirect to the canonical domain.");
+    console.log("::warning::www." + domain + " did not demonstrate a valid HTTPS redirect to the canonical domain.");
 
   let measurement = null;
   let remoteError = null;

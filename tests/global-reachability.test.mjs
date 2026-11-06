@@ -65,3 +65,19 @@ test("failed www TLS or DNS lookup is reported without crashing global reachabil
   assert.equal(report.status, null);
   assert.match(report.error, /TLS unavailable/);
 });
+
+test("www redirect follows the new canonical domain after migration", async () => {
+  let requested = "";
+  const result = await checkWwwRedirect(async (url, options) => {
+    requested = url;
+    assert.equal(options.method, "HEAD");
+    return { status: 301, headers: { get: () => "https://novacryptotool.com/" } };
+  }, "https://novacryptotool.com");
+  assert.equal(requested, "https://www.novacryptotool.com/");
+  assert.equal(result.ok, true);
+
+  const wrongDomain = await checkWwwRedirect(async () => ({
+    status: 301, headers: { get: () => "https://steez8.me/" },
+  }), "https://novacryptotool.com");
+  assert.equal(wrongDomain.ok, false);
+});
