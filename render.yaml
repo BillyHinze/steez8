@@ -19,7 +19,7 @@ services:
       - key: PUBLIC_ORIGIN
         value: https://steez8.me
       - key: ALLOWED_ORIGINS
-        value: https://www.steez8.me,https://billyhinze.github.io
+        value: https://www.steez8.me,https://billyhinze.github.io,https://novacryptotool.com,https://www.novacryptotool.com
       - key: DATA_DIR
         value: /tmp/steez8
       - key: VERIFICATION_CONCURRENCY

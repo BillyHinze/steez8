@@ -25,6 +25,19 @@ jobs:
       - run: pnpm run build:pages
         env:
           BACKEND_ORIGIN: https://steez8-api.onrender.com
+      - name: Validate future Hostinger domain build without changing production
+        run: |
+          pnpm run build:pages
+          test "$(cat dist/CNAME)" = "novacryptotool.com"
+          grep -q 'https://novacryptotool.com' dist/index.html
+          if grep -q 'https://steez8.me' dist/index.html; then
+            echo "Old canonical URL leaked into the new domain build"
+            exit 1
+          fi
+          grep -q 'novacryptotool.com' dist/status/index.html
+        env:
+          BACKEND_ORIGIN: https://steez8-api.onrender.com
+          PUBLIC_SITE_ORIGIN: https://novacryptotool.com
       - name: Validate production connectivity scripts
         run: |
           node --check scripts/check-public-site.mjs
