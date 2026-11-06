@@ -1,11 +1,13 @@
 import { el, button } from './mountain-ui.js';
 export function startBasecampStatus() {
-  let status = 'checking', busy = false, attempts = 0, retryTimer;
+  let status = 'checking', busy = false, attempts = 0, retryTimer, lastCheckedAt = 0;
   const bar = el('aside', undefined, 'mt-connection');
   bar.setAttribute('aria-label', 'Game server connection');
   const label = el('span'); label.setAttribute('role', 'status');
   const retry = button('Retry', () => { attempts = 0; void check(); }, 'mt-connection-retry');
-  bar.append(label, retry);
+  const details = el('a', 'Connection details', 'mt-connection-details');
+  details.href = '/status/';
+  bar.append(label, details, retry);
   function paint() {
     const lobby = document.querySelector('[aria-label="Basecamp lobby"]');
     bar.hidden = !lobby || status === 'online' || (status === 'checking' && attempts === 0);
@@ -45,7 +47,7 @@ export function startBasecampStatus() {
         attempts = 0;
       }
     } catch { status = 'offline'; attempts++; schedule(); }
-    finally { busy = false; paint(); }
+    finally { lastCheckedAt = Date.now(); busy = false; paint(); }
   }
   let frame;
   const observer = new MutationObserver(() => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; paint(); }); });
@@ -53,6 +55,6 @@ export function startBasecampStatus() {
   // Avoid recursive mutation: status text is updated only when it changes.
   window.addEventListener('online', () => { attempts = 0; void check(); });
   window.addEventListener('offline', () => { status = 'offline'; clearTimeout(retryTimer); paint(); });
-  document.addEventListener('visibilitychange', () => { if (!document.hidden && status !== 'online') void check(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && (status !== 'online' || Date.now() - lastCheckedAt > 30000)) void check(); });
   check();
 }
