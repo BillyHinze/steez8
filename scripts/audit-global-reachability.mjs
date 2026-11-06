@@ -124,11 +124,11 @@ async function globalpingRequest({ target = domain, requestPath = "/", method = 
 }
 
 
-async function checkWwwRedirect() {
+export async function checkWwwRedirect(fetchImpl = fetch) {
   // Check the public www HTTPS endpoint as well as its DNS alias. Do not
   // follow the redirect; the target should be the canonical steez8.me site.
   try {
-    const response = await fetch("https://www.steez8.me/", {
+    const response = await fetchImpl("https://www.steez8.me/", {
       method: "HEAD",
       redirect: "manual",
       signal: AbortSignal.timeout(15000),
