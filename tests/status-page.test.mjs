@@ -6,7 +6,7 @@ import vm from "node:vm";
 const source = fs.readFileSync(new URL("../public/status-check.js", import.meta.url), "utf8");
 const markup = fs.readFileSync(new URL("../public/status/index.html", import.meta.url), "utf8");
 
-function setup({ online = true, socket = "success", ready = true, website = true, graphics = true } = {}) {
+function setup({ online = true, socket = "success", ready = true, website = true, graphics = true, healthReplies = null } = {}) {
   const elements = new Map();
   const sockets = [];
   const copied = [];
@@ -71,11 +71,13 @@ function setup({ online = true, socket = "success", ready = true, website = true
         };
       }
       apiCalls++;
+      const reply = healthReplies?.[apiCalls - 1] || { status: 200, ready };
+      if (reply.error) throw Error(reply.error);
       return {
-        ok: true,
-        status: 200,
-        headers: { get() { return "application/json"; } },
-        async json() { return { ok: true, ready }; },
+        ok: (reply.status || 200) >= 200 && (reply.status || 200) < 300,
+        status: reply.status || 200,
+        headers: { get() { return reply.type || "application/json"; } },
+        async json() { return { ok: true, ready: reply.ready ?? true }; },
       };
     },
     WebSocket: socket === "unsupported" ? undefined : MockSocket,
@@ -90,7 +92,7 @@ function setup({ online = true, socket = "success", ready = true, website = true
 }
 
 async function finish(harness) {
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 900; i++) {
     if (!harness.element("run-check").disabled) return;
     await new Promise(resolve => setTimeout(resolve, 5));
   }
@@ -193,4 +195,40 @@ test("graphics diagnostic is included in the standalone status page", () => {
   assert(markup.includes('id="graphics"'));
   assert(source.includes('canvas.getContext("webgl2")'));
   assert(source.includes('canvas.getContext("webgl")'));
+});
+
+
+test("transient Render 503 is retried and recovered without falsely reporting offline", async () => {
+  const h = setup({ healthReplies: [{ status: 503 }, { status: 200, ready: true }] });
+  await finish(h);
+  assert.equal(h.apiCalls, 2);
+  assert.equal(h.element("backend").textContent, "Connected");
+  assert.equal(h.element("game").textContent, "Ready");
+  assert.equal(h.element("socket").textContent, "Connected");
+});
+
+test("an initializing backend is rechecked once and then marked ready", async () => {
+  const h = setup({ healthReplies: [{ ready: false }, { ready: true }] });
+  await finish(h);
+  assert.equal(h.apiCalls, 2);
+  assert.equal(h.element("backend").textContent, "Connected");
+  assert.equal(h.element("socket").textContent, "Connected");
+});
+
+test("a backend still returning 503 reports starting after two bounded checks", async () => {
+  const h = setup({ healthReplies: [{ status: 503 }, { status: 503 }] });
+  await finish(h);
+  assert.equal(h.apiCalls, 2);
+  assert.equal(h.sockets.length, 0);
+  assert.equal(h.element("backend").textContent, "Waking up");
+  assert.match(h.element("result").child.textContent, /after two checks/);
+});
+
+test("two transport failures are reported separately from website-origin reachability", async () => {
+  const h = setup({ healthReplies: [{ error: "connection dropped" }, { error: "still unreachable" }] });
+  await finish(h);
+  assert.equal(h.apiCalls, 2);
+  assert.equal(h.element("website").textContent, "Connected");
+  assert.equal(h.element("backend").textContent, "Not reachable");
+  assert.match(h.element("result").child.textContent, /after two attempts/);
 });
