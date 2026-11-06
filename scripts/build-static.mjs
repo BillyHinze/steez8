@@ -41,8 +41,8 @@ if (siteOrigin !== 'https://steez8.me') {
       if (item.isDirectory()) { updateOrigins(filepath); continue; }
       if (!/\.(?:html|js|json|webmanifest)$/.test(item.name)) continue;
       const source = fs.readFileSync(filepath, 'utf8');
-      if (source.includes('https://steez8.me'))
-        fs.writeFileSync(filepath, source.replaceAll('https://steez8.me', siteOrigin));
+      if (source.includes('steez8.me'))
+        fs.writeFileSync(filepath, source.replaceAll('steez8.me', siteUrl.hostname));
     }
   }
   updateOrigins(output);
