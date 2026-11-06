@@ -92,6 +92,50 @@
     }
   }
 
+  // Render Free can wake slowly after idle. A single timed-out health check
+  // cannot distinguish a cold start from an unreachable network. Recheck once,
+  // only while the user is viewing diagnostics; never send continuous keepalives.
+  async function checkBackendHealth() {
+    const apiUrl = new URL("/api/health", backendOrigin).href;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const controller = new AbortController();
+      let timedOut = false;
+      const timer = setTimeout(() => { timedOut = true; controller.abort(); },
+        attempt === 1 ? 16000 : 30000);
+      let retry = false;
+      try {
+        const response = await fetch(apiUrl, {
+          method: "GET", mode: "cors", credentials: "omit",
+          cache: "no-store", signal: controller.signal,
+        });
+        const type = response.headers.get("content-type") || "";
+        if (response.ok && type.includes("application/json")) {
+          const health = await response.json();
+          if (health?.ok === true && health.ready === false && attempt === 1)
+            retry = true;
+          else
+            return { kind: "health", health };
+        } else if ([502, 503, 504].includes(response.status)) {
+          if (attempt === 1) retry = true;
+          else return { kind: "starting", status: response.status };
+        } else {
+          return { kind: "invalid", status: response.status };
+        }
+      } catch {
+        if (attempt === 1) retry = true;
+        else return { kind: "network-error", timedOut };
+      } finally {
+        clearTimeout(timer);
+      }
+      if (retry) {
+        set("backend", "starting", "Rechecking");
+        checked.textContent = "The multiplayer server may be starting. Checking again…";
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+    }
+    return { kind: "network-error", timedOut: false };
+  }
+
   async function run() {
     if (checking) return;
     checking = true;
@@ -125,38 +169,29 @@
         note("This website does not have a valid HTTPS multiplayer server configured.");
         return;
       }
-      const controller = new AbortController();
-      let timedOut = false;
-      const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 16000);
-      let response;
-      try {
-        response = await fetch(new URL("/api/health", backendOrigin).href, {
-          method: "GET",
-          mode: "cors",
-          credentials: "omit",
-          cache: "no-store",
-          signal: controller.signal,
-        });
-      } catch (error) {
-        set("backend", "offline", timedOut ? "Timed out" : "Not reachable");
+      const probe = await checkBackendHealth();
+      if (probe.kind === "network-error") {
+        set("backend", "offline", probe.timedOut ? "Timed out" : "Not reachable");
         set("socket", "offline", "Unavailable");
         set("game", "offline", "Unavailable");
-        note(timedOut
-          ? "The multiplayer server took too long to answer. It might be waking from idle or your network might be restricting the connection. Solo play is still available."
-          : "This network cannot contact the multiplayer server right now. The website itself is online; check local restrictions or try again later.");
-        return;
-      } finally {
-        clearTimeout(timer);
-      }
-      const type = response.headers.get("content-type") || "";
-      if (!response.ok || !type.includes("application/json")) {
-        set("backend", "starting", response.status === 503 || response.status === 502 ? "Waking up" : "Unavailable");
-        set("socket", "starting", "Waiting");
-        set("game", "starting", "Waiting");
-        note("The hosting platform is starting the game server or is temporarily unavailable. Solo riding works independently. Retry after a short pause.");
+        note(!websiteOnline
+          ? "This network could not load a fresh website file or contact the multiplayer API. Check with the network administrator if the connection is restricted."
+          : probe.timedOut
+            ? "The multiplayer server did not respond after two attempts. It may be starting or temporarily unreachable. Solo riding is still available."
+            : "This network could not contact the multiplayer server after two attempts. Solo riding remains available. Check connection restrictions or retry later.");
         return;
       }
-      const health = await response.json();
+      if (probe.kind === "starting" || probe.kind === "invalid") {
+        const starting = probe.kind === "starting";
+        set("backend", starting ? "starting" : "offline", starting ? "Waking up" : "Unavailable");
+        set("socket", starting ? "starting" : "offline", starting ? "Waiting" : "Unavailable");
+        set("game", starting ? "starting" : "offline", starting ? "Waiting" : "Unavailable");
+        note(starting
+          ? "The game server is still starting after two checks. Solo riding works independently. Run checks again to confirm readiness."
+          : "The server returned an unexpected response (HTTP " + probe.status + "). It may be temporarily unavailable or the network may require sign-in.");
+        return;
+      }
+      const health = probe.health;
       if (health?.ok === true && health.ready === true) {
         set("backend", "online", "Connected");
         set("game", "online", "Ready");
