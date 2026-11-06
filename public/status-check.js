@@ -2,6 +2,7 @@
   "use strict";
   const backendOrigin = window.CORK7_CONFIG?.apiOrigin;
   const ids = {
+    website: document.getElementById("website"),
     internet: document.getElementById("internet"),
     backend: document.getElementById("backend"),
     socket: document.getElementById("socket"),
@@ -11,7 +12,7 @@
   const copy = document.getElementById("copy");
   const result = document.getElementById("result");
   const checked = document.getElementById("checked-at");
-  const states = { website: "Online", internet: "Unknown", backend: "Unknown", socket: "Unknown", game: "Unknown" };
+  const states = { website: "Unknown", internet: "Unknown", backend: "Unknown", socket: "Unknown", game: "Unknown" };
   let checking = false, checkedTime = "";
   function set(key, state, message) {
     states[key] = message;
@@ -57,10 +58,32 @@
     });
   }
 
+  // A loaded page may have come from the browser cache. Check a small, public
+  // same-origin file separately from the multiplayer API so an origin problem
+  // is not mistaken for a Render problem. No user information is transmitted.
+  async function testWebsite() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch("/version.json?connection-check=" + Date.now(), {
+        method: "GET", cache: "no-store", credentials: "omit", signal: controller.signal,
+      });
+      if (!response.ok || !(response.headers.get("content-type") || "").includes("application/json"))
+        return false;
+      const version = await response.json();
+      return typeof version?.version === "string";
+    } catch {
+      return false;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function run() {
     if (checking) return;
     checking = true;
     button.disabled = true;
+    set("website", "checking", "Checking");
     set("internet", "checking", "Checking");
     set("backend", "checking", "Checking");
     set("socket", "checking", "Checking");
@@ -70,12 +93,16 @@
       const online = navigator.onLine !== false;
       set("internet", online ? "online" : "offline", online ? "Browser online" : "Browser offline");
       if (!online) {
+        set("website", "offline", "Unavailable");
         set("backend", "offline", "Unavailable");
         set("socket", "offline", "Unavailable");
         set("game", "offline", "Unavailable");
         note("Your browser reports that it is offline. Check your connection before retrying.");
         return;
       }
+      const websiteOnline = await testWebsite();
+      set("website", websiteOnline ? "online" : "offline",
+        websiteOnline ? "Connected" : "Not reachable");
       if (!backendOrigin || new URL(backendOrigin).protocol !== "https:") {
         set("backend", "offline", "Not configured");
         set("socket", "offline", "Unavailable");
@@ -121,14 +148,16 @@
         const realtime = await testRealtime();
         set("socket", realtime === "online" ? "online" : "offline",
           realtime === "online" ? "Connected" : realtime === "unsupported" ? "Unsupported" : "Not reachable");
-        note(realtime === "online"
-          ? "The website, multiplayer API, WebSocket connection and game simulation are responding. You can return to Basecamp."
-          : "The multiplayer API and simulation are responding, but this browser cannot establish a real-time WebSocket connection. Some networks restrict real-time connections. Check with the network administrator or retry later.");
+        note(!websiteOnline
+          ? "The multiplayer server is reachable, but this browser cannot load a fresh file from steez8.me. The website could be cached or the current network might be restricting this domain. Ask the network administrator to check the connection."
+          : realtime === "online"
+            ? "The website, multiplayer API, WebSocket connection and game simulation are responding. You can return to Basecamp."
+            : "The multiplayer API and simulation are responding, but this browser cannot establish a real-time WebSocket connection. Some networks restrict real-time connections. Check with the network administrator or retry later.");
       } else if (health?.ok === true && health.ready === false) {
         set("backend", "starting", "Starting");
         set("socket", "starting", "Waiting");
         set("game", "starting", "Loading");
-        note("The server is responding but the game simulation is still starting. Solo riding works while it prepares.");
+        note("The server is responding but the game simulation is still starting. Solo riding works while it prepares. You can run the checks again when it is ready.");
       } else {
         set("backend", "offline", "Unavailable");
         set("socket", "offline", "Unavailable");
