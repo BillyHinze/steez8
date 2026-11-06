@@ -3,6 +3,7 @@
   const backendOrigin = window.CORK7_CONFIG?.apiOrigin;
   const ids = {
     website: document.getElementById("website"),
+    graphics: document.getElementById("graphics"),
     internet: document.getElementById("internet"),
     backend: document.getElementById("backend"),
     socket: document.getElementById("socket"),
@@ -12,7 +13,7 @@
   const copy = document.getElementById("copy");
   const result = document.getElementById("result");
   const checked = document.getElementById("checked-at");
-  const states = { website: "Unknown", internet: "Unknown", backend: "Unknown", socket: "Unknown", game: "Unknown" };
+  const states = { graphics: "Unknown", website: "Unknown", internet: "Unknown", backend: "Unknown", socket: "Unknown", game: "Unknown" };
   let checking = false, checkedTime = "";
   function set(key, state, message) {
     states[key] = message;
@@ -26,6 +27,18 @@
     const paragraph = document.createElement("p");
     paragraph.textContent = message;
     result.append(paragraph);
+  }
+  // A working website/API does not guarantee the device can render the game.
+  // Use a tiny in-memory canvas; do not download models or collect identifiers.
+  function testGraphics() {
+    try {
+      const canvas = document.createElement("canvas");
+      if (typeof canvas.getContext !== "function") return false;
+      return !!(canvas.getContext("webgl2") || canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl"));
+    } catch {
+      return false;
+    }
   }
   async function testRealtime() {
     if (typeof WebSocket !== "function") return "unsupported";
@@ -83,6 +96,8 @@
     if (checking) return;
     checking = true;
     button.disabled = true;
+    const graphicsReady = testGraphics();
+    set("graphics", graphicsReady ? "online" : "offline", graphicsReady ? "3D supported" : "3D unavailable");
     set("website", "checking", "Checking");
     set("internet", "checking", "Checking");
     set("backend", "checking", "Checking");
@@ -148,7 +163,9 @@
         const realtime = await testRealtime();
         set("socket", realtime === "online" ? "online" : "offline",
           realtime === "online" ? "Connected" : realtime === "unsupported" ? "Unsupported" : "Not reachable");
-        note(!websiteOnline
+        note(!graphicsReady
+          ? "The network and game server are responding, but this browser cannot create a WebGL 3D graphics context. Check browser graphics support and hardware acceleration before trying the mountain again."
+          : !websiteOnline
           ? "The multiplayer server is reachable, but this browser cannot load a fresh file from steez8.me. The website could be cached or the current network might be restricting this domain. Ask the network administrator to check the connection."
           : realtime === "online"
             ? "The website, multiplayer API, WebSocket connection and game simulation are responding. You can return to Basecamp."
@@ -177,6 +194,7 @@
       "Checked: " + (checkedTime || "not run"),
       "Site: https://steez8.me/",
       "Website: " + states.website,
+      "Browser 3D: " + states.graphics,
       "Internet: " + states.internet,
       "Multiplayer API: " + states.backend,
       "Realtime WebSocket: " + states.socket,
