@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { summarizeProbes } from "../scripts/audit-global-reachability.mjs";
+import { summarizeProbes, checkWwwRedirect } from "../scripts/audit-global-reachability.mjs";
 
 test("global reachability counts clean HTTPS results separately from failures", () => {
   const result = summarizeProbes([
@@ -32,4 +32,36 @@ test("global reachability safely prints potentially untrusted probe location tex
   ]);
   assert.equal(data.rows[0].country, "AA Injected ::error::");
   assert.equal(data.rows[0].ok, true);
+});
+
+
+test("canonical www HTTPS redirect is accepted", async () => {
+  let seenUrl = "";
+  const report = await checkWwwRedirect(async (url, opts) => {
+    seenUrl = url;
+    assert.equal(opts.method, "HEAD");
+    assert.equal(opts.redirect, "manual");
+    return { status: 301, headers: { get: () => "https://steez8.me/" } };
+  });
+  assert.equal(seenUrl, "https://www.steez8.me/");
+  assert.equal(report.ok, true);
+  assert.equal(report.status, 301);
+});
+
+test("incorrect www redirect or a non-redirect response cannot pass", async () => {
+  const wrongDestination = await checkWwwRedirect(async () => ({
+    status: 302, headers: { get: () => "https://example.com/" },
+  }));
+  assert.equal(wrongDestination.ok, false);
+  const notRedirect = await checkWwwRedirect(async () => ({
+    status: 200, headers: { get: () => "https://steez8.me/" },
+  }));
+  assert.equal(notRedirect.ok, false);
+});
+
+test("failed www TLS or DNS lookup is reported without crashing global reachability", async () => {
+  const report = await checkWwwRedirect(async () => { throw Error("TLS unavailable"); });
+  assert.equal(report.ok, false);
+  assert.equal(report.status, null);
+  assert.match(report.error, /TLS unavailable/);
 });
