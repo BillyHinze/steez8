@@ -15,6 +15,7 @@ export class Store {
     this.remote = !!process.env.TURSO_DATABASE_URL;
     if (process.env.RENDER && !this.remote) throw Error('Free Render hosting requires TURSO_DATABASE_URL and TURSO_AUTH_TOKEN so accounts survive restarts.');
     if (this.remote && !process.env.TURSO_AUTH_TOKEN) throw Error('TURSO_AUTH_TOKEN is required for permanent account storage.');
+    if (this.remote) console.info("STEEZ8 database: opening remote replica");
     if (this.remote || process.env.DATABASE_DRIVER === 'libsql') {
       const Database = require('libsql');
       this.db = new Database(path.join(directory, this.remote ? 'replica.sqlite' : 'game.sqlite'), this.remote ? {
@@ -23,12 +24,23 @@ export class Store {
         readYourWrites: true,
         offline: false,
       } : {});
-      if (this.remote) this.db.sync();
+      if (this.remote) {
+        console.info("STEEZ8 database: initial Turso replica sync started");
+        const start = Date.now();
+        this.db.sync();
+        console.info("STEEZ8 database: initial replica synced in", Date.now() - start, "ms");
+      }
     } else this.db = new DatabaseSync(path.join(directory, "game.sqlite"));
     // Remote libSQL accepts one schema statement per exec call.
+    if (this.remote) console.info("STEEZ8 database: applying idempotent schema");
     const schema = fs.readFileSync(new URL("../migrations/001_initial.sql", import.meta.url), "utf8");
     for (const statement of schema.split(";").map(s => s.trim()).filter(Boolean)) this.db.exec(statement);
-    if (this.remote) this.db.sync();
+    if (this.remote) {
+      console.info("STEEZ8 database: post-schema replica sync started");
+      const start = Date.now();
+      this.db.sync();
+      console.info("STEEZ8 database: post-schema replica synced in", Date.now() - start, "ms");
+    }
     let key = this.db
       .prepare("SELECT value FROM metadata WHERE key=?")
       .get("session-key")?.value;
@@ -39,6 +51,7 @@ export class Store {
         .run("session-key", key);
     }
     this.key = key;
+    if (this.remote) console.info("STEEZ8 database: metadata ready");
     if (process.env.OWNER_ACCOUNT_ID) this.configureOwner(process.env.OWNER_ACCOUNT_ID);
   }
   rows(table) {
