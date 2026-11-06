@@ -42,7 +42,7 @@ collect(output);
 const codeFiles=webFiles.filter(f=>/\.(?:js|css)$/.test(f));
 const fingerprint=crypto.createHash('sha256');for(const f of codeFiles.sort())fingerprint.update(fs.readFileSync(f));
 const release=fingerprint.digest('hex').slice(0,12);
-const names=[...new Set(codeFiles.map(f=>path.basename(f)))].map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\const names=[...new Set(codeFiles.map(f=>path.basename(f)))].map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\let bytes = 0, files = 0;'));'));
+const names=[...new Set(codeFiles.map(f=>path.basename(f)))].map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
 const references=new RegExp('('+names.join('|')+')(?=["\x27\x60\\\\])','g');
 for(const f of webFiles.filter(f=>/\.(?:js|html)$/.test(f))){
   let source=fs.readFileSync(f,'utf8').replace(references,'$1?release='+release);
