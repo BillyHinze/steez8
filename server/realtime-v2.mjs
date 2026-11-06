@@ -118,6 +118,17 @@ export function attachRealtime(server, wss, store, options = {}) {
     });
     competition.hello(c.user.id);
   }
+  // Avoid a database query for every multiplayer message. Login always
+  // verifies immediately; later revocations are checked at a bounded interval.
+  const SESSION_RECHECK_MS = 15000;
+  function sessionValid(c) {
+    if (!c.user || !c.token) return false;
+    const now = Date.now();
+    if (now - (c.authCheckedAt || 0) < SESSION_RECHECK_MS) return true;
+    c.authCheckedAt = now;
+    const user = store.authenticate(c.token);
+    return !!user && user.id === c.user.id && !store.banned(c.user.id);
+  }
   function outfit(id, value) {
     if (
       !value ||
@@ -160,6 +171,7 @@ export function attachRealtime(server, wss, store, options = {}) {
         room,
         user: null,
         token: null,
+        authCheckedAt: 0,
         id: 0,
         name: "Rider",
         outfit: null,
@@ -233,6 +245,7 @@ export function attachRealtime(server, wss, store, options = {}) {
           const first = !c.user;
           c.user = user;
           c.token = m.token;
+          c.authCheckedAt = Date.now();
           c.name = store.profile(user.id)?.handle || user.handle;
           clearTimeout(deadline);
           if (hub) {
@@ -303,7 +316,7 @@ export function attachRealtime(server, wss, store, options = {}) {
           return;
         }
         if (!c.user) return;
-        if (!store.authenticate(c.token)) {
+        if (!sessionValid(c)) {
           ws.close(4004, "Session expired");
           return;
         }
@@ -455,7 +468,7 @@ export function attachRealtime(server, wss, store, options = {}) {
       if (Date.now() - c.last > 45000) c.ws.close(4003, "Heartbeat timeout");
       else if (
         c.user &&
-        (!store.authenticate(c.token) || store.banned(c.user.id))
+        !sessionValid(c)
       )
         c.ws.close(4004, "Session unavailable");
     }
