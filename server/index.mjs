@@ -998,22 +998,36 @@ if (
   process.argv[1] &&
   fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
 ) {
-  console.info("STEEZ8 startup: opening database and game services");
-  const app = createApplication();
-  console.info("STEEZ8 startup: database opened; starting HTTP health endpoint");
-  const port = Number(process.env.PORT || 4173),
-    host = process.env.HOST || "127.0.0.1";
-  app.ready.then(
-    () => console.info("STEEZ8 startup: mountain simulation ready"),
-    (error) => {
-      console.error("STEEZ8 mountain startup failed:", error);
-      process.exit(1);
-    },
-  );
-  // Do not block HTTP health checks on expensive physics module loading.
-  app.server.listen(port, host, () =>
-    console.log(`Independent game: http://${host}:${port}`),
-  );
-  process.on("SIGTERM", () => app.close().then(() => process.exit(0)));
-  process.on("SIGINT", () => app.close().then(() => process.exit(0)));
+  if (process.env.STEEZ8_CHILD !== "1") {
+    // The public port stays responsive even if a Turso replica sync stalls.
+    const { startGateway } = await import("./gateway.mjs");
+    startGateway();
+  } else {
+    console.info("STEEZ8 startup: opening database and game services");
+    const app = createApplication();
+    console.info("STEEZ8 startup: database opened; starting game server");
+    const port = Number(process.env.PORT || 4173);
+    const host = process.env.HOST || "127.0.0.1";
+    let listened = false, initialized = false;
+    const ready = () => {
+      if (!listened || !initialized) return;
+      console.info("STEEZ8 startup: mountain simulation ready");
+      process.send?.({ type: "steez8-ready" });
+    };
+    app.ready.then(
+      () => { initialized = true; ready(); },
+      (error) => {
+        console.error("STEEZ8 mountain startup failed:", error);
+        process.exitCode = 1;
+        void app.close().finally(() => process.exit(1));
+      },
+    );
+    app.server.listen(port, host, () => {
+      listened = true;
+      console.info(`STEEZ8 game server listening internally on ${host}:${port}`);
+      ready();
+    });
+    process.once("SIGTERM", () => void app.close().then(() => process.exit(0)));
+    process.once("SIGINT", () => void app.close().then(() => process.exit(0)));
+  }
 }
