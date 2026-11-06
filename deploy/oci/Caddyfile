@@ -1,7 +1,3 @@
-{
-  email ops@steez8.me
-}
-
 {$STEEZ8_API_HOST} {
   encode zstd gzip
   header {
