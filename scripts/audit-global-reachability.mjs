@@ -77,16 +77,16 @@ async function getDnsReport() {
   return report;
 }
 
-async function globalpingRequest({ target = domain, requestPath = "/", method = "HEAD" } = {}) {
+async function globalpingRequest({ target = domain, requestPath = "/", method = "HEAD", ipVersion = 4, probesPerContinent = 2 } = {}) {
   const body = {
     type: "http",
     target,
-    locations: continents.map(continent => ({ continent, limit: 2 })),
+    locations: continents.map(continent => ({ continent, limit: probesPerContinent })),
     timeout: 20,
     measurementOptions: {
       protocol: "HTTPS",
       request: { method, path: requestPath },
-      ipVersion: 4,
+      ipVersion,
     },
   };
   const response = await fetch("https://api.globalping.io/v1/measurements", {
@@ -123,6 +123,27 @@ async function globalpingRequest({ target = domain, requestPath = "/", method = 
   throw Error("Worldwide probe results did not finish within the allotted time");
 }
 
+
+async function checkWwwRedirect() {
+  // Check the public www HTTPS endpoint as well as its DNS alias. Do not
+  // follow the redirect; the target should be the canonical steez8.me site.
+  try {
+    const response = await fetch("https://www.steez8.me/", {
+      method: "HEAD",
+      redirect: "manual",
+      signal: AbortSignal.timeout(15000),
+    });
+    const location = response.headers.get("location") || "";
+    let target = null;
+    try { target = new URL(location, "https://www.steez8.me"); } catch {}
+    const ok = response.status >= 300 && response.status < 400 &&
+      target?.protocol === "https:" && target?.hostname === domain;
+    return { ok, status: response.status, location: value(location), error: "" };
+  } catch (error) {
+    return { ok: false, status: null, location: "", error: value(error?.message) };
+  }
+}
+
 async function run() {
   const dnsReport = await getDnsReport();
   console.log("NS:", dnsReport.nameservers.join(", ") || "unavailable");
@@ -130,6 +151,11 @@ async function run() {
   console.log("IPv6:", dnsReport.ipv6.join(", ") || "none");
   console.log("www CNAME:", dnsReport.www.join(", ") || "none");
   dnsReport.warnings.forEach(message => console.log("::warning::DNS " + message));
+  const wwwReport = await checkWwwRedirect();
+  console.log("www HTTPS redirect:", wwwReport.ok ? "PASS" : "UNVERIFIED",
+    "HTTP", wwwReport.status ?? "-", wwwReport.location || wwwReport.error || "no location");
+  if (!wwwReport.ok)
+    console.log("::warning::www.steez8.me did not demonstrate a valid HTTPS redirect to the canonical domain.");
 
   let measurement = null;
   let remoteError = null;
@@ -142,6 +168,31 @@ async function run() {
   } catch (error) {
     remoteError = value(error.message);
     console.error("::warning::Worldwide measurement unavailable: " + remoteError);
+  }
+
+
+  // The existing IPv4 probes cannot validate newly published AAAA records.
+  // Check one IPv6-capable public probe per continent when IPv6 is advertised.
+  // A provider with no IPv6 probes or a temporary probe quota must not
+  // incorrectly mark the working IPv4 site as offline.
+  let ipv6Measurement = null;
+  let ipv6Error = null;
+  if (dnsReport.ipv6.length) {
+    try {
+      ipv6Measurement = await globalpingRequest({ ipVersion: 6, probesPerContinent: 1 });
+      console.log("Worldwide IPv6 HTTPS probes:", ipv6Measurement.summary.passed,
+        "passed /", ipv6Measurement.summary.checked, "total");
+      for (const row of ipv6Measurement.summary.rows)
+        console.log(`IPV6 ${row.ok ? "PASS" : "FAIL"} ${row.country} ${row.city}: ${row.status} HTTP ${row.code ?? "-"} ${row.elapsed ?? "-"}ms`);
+      if (ipv6Measurement.summary.failed > 0)
+        console.log("::warning::Some IPv6 probes failed; investigate IPv6 routing, TLS or probe availability.");
+    } catch (error) {
+      ipv6Error = value(error?.message);
+      console.log("::warning::Worldwide IPv6 measurement unavailable: " + ipv6Error);
+    }
+  } else {
+    ipv6Error = "No AAAA records visible to this runner";
+    console.log("::warning::IPv6 probe skipped: " + ipv6Error);
   }
 
   let backendMeasurement = null;
@@ -171,6 +222,8 @@ async function run() {
     "- IPv4: " + (dnsReport.ipv4.join(", ") || "unavailable"),
     "- IPv6: " + (dnsReport.ipv6.join(", ") || "not published"),
     "- www: " + (dnsReport.www.join(", ") || "not configured"),
+    "- www HTTPS redirect: " + (wwwReport.ok ? "PASS" : "UNVERIFIED") +
+      " (HTTP " + (wwwReport.status ?? "—") + ", " + (wwwReport.location || wwwReport.error || "no location") + ")",
     ...(dnsReport.warnings.length ? ["", ...dnsReport.warnings.map(w => "- ⚠️ " + w)] : []),
     "",
     "### Worldwide HTTPS tests",
@@ -186,6 +239,20 @@ async function run() {
     );
   } else {
     lines.push("Globalping did not complete: " + (remoteError || "unknown error"));
+  }
+
+  lines.push("", "### Worldwide IPv6 HTTPS tests");
+  if (ipv6Measurement) {
+    lines.push(
+      `Measurement: https://globalping.io/?measurement=${encodeURIComponent(ipv6Measurement.id)}`,
+      "",
+      "| Country | City | Status | HTTP | Time |",
+      "|---|---|---|---|---|",
+      ...ipv6Measurement.summary.rows.map(r =>
+        `| ${r.country} | ${r.city} | ${r.ok ? "PASS" : r.status} | ${r.code ?? "—"} | ${r.elapsed ?? "—"} ms |`),
+    );
+  } else {
+    lines.push("IPv6 tests unavailable: " + (ipv6Error || "unknown"));
   }
   lines.push("", "### Backend API across continents");
   if (backendMeasurement) {
