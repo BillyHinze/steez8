@@ -6,7 +6,7 @@ import vm from "node:vm";
 const source = fs.readFileSync(new URL("../public/status-check.js", import.meta.url), "utf8");
 const markup = fs.readFileSync(new URL("../public/status/index.html", import.meta.url), "utf8");
 
-function setup({ online = true, socket = "success", ready = true, website = true } = {}) {
+function setup({ online = true, socket = "success", ready = true, website = true, graphics = true } = {}) {
   const elements = new Map();
   const sockets = [];
   const copied = [];
@@ -47,7 +47,12 @@ function setup({ online = true, socket = "success", ready = true, website = true
     },
     document: {
       getElementById: element,
-      createElement() { return element("created:" + Math.random()); },
+      createElement(tag) {
+        if (tag === "canvas") return {
+          getContext(type) { return graphics && type === "webgl2" ? {} : null; },
+        };
+        return element("created:" + Math.random());
+      },
     },
     navigator: {
       onLine: online,
@@ -103,6 +108,7 @@ test("working API and WebSockets show independent success and no tokens are tran
   assert.equal(h.apiCalls, 1);
   assert.equal(h.websiteCalls, 1);
   assert.equal(h.element("website").textContent, "Connected");
+  assert.equal(h.element("graphics").textContent, "3D supported");
   assert.equal(h.element("backend").textContent, "Connected");
   assert.equal(h.element("game").textContent, "Ready");
   assert.equal(h.element("socket").textContent, "Connected");
@@ -168,4 +174,23 @@ test("status page tests a real website origin, not a cached document", () => {
   assert(markup.includes('id="website"'));
   assert(markup.includes("not just a cached page"));
   assert(source.includes("/version.json?connection-check="));
+});
+
+
+test("browser graphics failure is distinct from healthy networking", async () => {
+  const h = setup({ graphics: false });
+  await finish(h);
+  assert.equal(h.element("graphics").textContent, "3D unavailable");
+  assert.equal(h.element("graphics").dataset.state, "offline");
+  assert.equal(h.element("website").textContent, "Connected");
+  assert.equal(h.element("backend").textContent, "Connected");
+  assert.equal(h.element("socket").textContent, "Connected");
+  assert.match(h.element("result").child.textContent, /cannot create a WebGL 3D graphics context/);
+  await h.element("copy").handlers.click();
+  assert.match(h.copied[0], /Browser 3D: 3D unavailable/);
+});
+test("graphics diagnostic is included in the standalone status page", () => {
+  assert(markup.includes('id="graphics"'));
+  assert(source.includes('canvas.getContext("webgl2")'));
+  assert(source.includes('canvas.getContext("webgl")'));
 });
