@@ -49,7 +49,8 @@
         return;
       }
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 16000);
+      let timedOut = false;
+      const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 16000);
       let response;
       try {
         response = await fetch(new URL("/api/health", backendOrigin).href, {
@@ -60,7 +61,6 @@
           signal: controller.signal,
         });
       } catch (error) {
-        const timedOut = error?.name === "AbortError";
         set("backend", "offline", timedOut ? "Timed out" : "Not reachable");
         set("game", "offline", "Unavailable");
         note(timedOut
