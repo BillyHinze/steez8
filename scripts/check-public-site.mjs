@@ -4,7 +4,10 @@
 import assert from "node:assert/strict";
 import dns from "node:dns/promises";
 
-const site = "https://steez8.me";
+// A Pages domain migration must verify the configured hostname, not only the
+// previous STEEZ8 address. Defaults preserve the live site until cutover.
+const site = new URL(process.env.PUBLIC_SITE_ORIGIN || "https://steez8.me").origin;
+const siteHostname = new URL(site).hostname;
 const expectedA = new Set([
   "185.199.108.153", "185.199.109.153",
   "185.199.110.153", "185.199.111.153",
@@ -29,12 +32,12 @@ function assertOk(response, label) {
 }
 
 console.log("Checking global-facing STEEZ8 production endpoints...");
-const ipv4 = await dns.resolve4("steez8.me");
+const ipv4 = await dns.resolve4(siteHostname);
 assert(ipv4.length > 0, "No A records published");
 for (const addr of ipv4) assert(expectedA.has(addr), "Unexpected GitHub Pages A record: " + addr);
 console.log("DNS IPv4:", ipv4.join(", "));
 try {
-  const ipv6 = await dns.resolve6("steez8.me");
+  const ipv6 = await dns.resolve6(siteHostname);
   for (const addr of ipv6) assert(expectedAAAA.has(addr), "Unexpected GitHub Pages AAAA record: " + addr);
   console.log("DNS IPv6:", ipv6.join(", "));
 } catch (error) {
