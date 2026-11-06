@@ -34,8 +34,10 @@ export function startBasecampStatus() {
     if (busy) return;
     clearTimeout(retryTimer);
     busy = true; status = 'checking'; paint();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
     try {
-      const response = await fetch('/api/health', { cache: 'no-store', signal: AbortSignal.timeout(12000) });
+      const response = await fetch('/api/health', { cache: 'no-store', signal: controller.signal });
       const health = await response.json();
       if (!response.ok || !health.ok) throw Error('Unavailable');
       if (health.ready === false) {
@@ -47,7 +49,7 @@ export function startBasecampStatus() {
         attempts = 0;
       }
     } catch { status = 'offline'; attempts++; schedule(); }
-    finally { lastCheckedAt = Date.now(); busy = false; paint(); }
+    finally { clearTimeout(timer); lastCheckedAt = Date.now(); busy = false; paint(); }
   }
   let frame;
   const observer = new MutationObserver(() => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; paint(); }); });
