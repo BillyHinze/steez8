@@ -1,0 +1,22 @@
+#cloud-config
+# Infrastructure only: this configuration never contains Turso credentials.
+# The site is NOT switched to the VM during provisioning.
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+  - git
+  - docker.io
+  - docker-compose-v2
+write_files:
+  - path: /etc/steez8/README
+    permissions: '0600'
+    content: |
+      Backend credentials belong in /etc/steez8/backend.env (mode 0600).
+      Never put secrets into cloud-init, Terraform variables/state or GitHub.
+      Do not start Docker Compose until credentials and DNS are provisioned.
+runcmd:
+  - [bash, -lc, "systemctl enable --now docker"]
+  - [bash, -lc, "mkdir -p /etc/steez8 && chmod 0700 /etc/steez8"]
+  - [bash, -lc, "git clone --depth 1 https://github.com/BillyHinze/steez8.git /opt/steez8"]
+final_message: "STEEZ8 staging host initialized; production routing remains unchanged."

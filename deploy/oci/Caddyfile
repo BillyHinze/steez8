@@ -1,0 +1,11 @@
+{$STEEZ8_API_HOST} {
+  encode zstd gzip
+  header {
+    X-Content-Type-Options nosniff
+    Referrer-Policy same-origin
+    -Server
+  }
+  reverse_proxy backend:10000 {
+    flush_interval -1
+  }
+}
