@@ -176,9 +176,17 @@ export function createApplication({
         "content-security-policy",
         "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' blob: data: ws: wss:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
       );
+      const trustedGateway =
+        !!process.env.STEEZ8_GATEWAY_TOKEN &&
+        req.headers["x-steez8-gateway-token"] === process.env.STEEZ8_GATEWAY_TOKEN;
+      const forwardedAddress = trustedGateway ? req.headers["x-steez8-client-ip"] : null;
+      const visitorAddress =
+        typeof forwardedAddress === "string" && forwardedAddress.length <= 64 &&
+        /^[a-zA-Z0-9:.\-_]+$/.test(forwardedAddress)
+          ? forwardedAddress : req.socket.remoteAddress;
       if (
         serviceRequest && !rate(
-          req.socket.remoteAddress +
+          (user?.id || visitorAddress) +
             ":" +
             (p.startsWith("/auth/") ? "auth" : "api"),
           p.startsWith("/auth/") ? 40 : 2000,
