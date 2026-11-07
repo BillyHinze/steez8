@@ -1,7 +1,9 @@
 import { css as mountainCSS } from "./mountain-ui.js";
+import { startGrabStudio } from "./grab-studio.js";
 import { t as clientFactory } from "./_next/static/chunks/supabase-BEhtaJUq.js";
 async function startOwnerUI() {
   mountainCSS();
+  startGrabStudio();
   import('./basecamp-status.js').then(m => m.startBasecampStatus());
   import("./sessions.js").then(m => m.startSessionHUD());
   import("./squads.js").then(m => m.startSquadHUD());
