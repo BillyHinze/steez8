@@ -122,8 +122,11 @@ try {
     // blended entry animation. The earlier 400ms window falsely flagged
     // an entering knee tuck as a sustained repeated glitch.
     await page.waitForTimeout(1150);
-    const actual = await page.evaluate(() => window.__steez8SignaturePose);
+    // Capturing a software-WebGL screenshot can occupy the browser for
+    // hundreds of milliseconds. Take it BEFORE the stability baseline so
+    // the first "105ms" sample doesn't secretly include screenshot time.
     await page.screenshot({ path: `/tmp/steez8-${browserName}-pose-${style}.png` }).catch(() => {});
+    const actual = await page.evaluate(() => window.__steez8SignaturePose);
     assert(actual?.joints?.Arm_L && actual?.joints?.Elbow_L && actual?.joints?.Hand_L,
       label + " did not animate the actual arm, elbow and hand rig");
     assert(actual?.joints?.Leg_L && actual?.joints?.Knee_R,
