@@ -76,6 +76,10 @@ test("the active game, verified input parser, preview and score paths share grab
   assert(animation.includes("this.grabStyle===6"));
   assert(animation.includes("Back Scratcher:"));
   assert(locker.includes("steez8:preview-grab"));
+  // The preview camera must remain locally declared in strict-mode ES modules.
+  // Comma-chaining the listener call to P=... caused the Locker to crash on mount.
+  assert.match(locker, /window\.addEventListener\(`steez8:preview-grab`,previewGrab\);let P=new h\(/);
+  assert.doesNotMatch(locker, /window\.addEventListener\(`steez8:preview-grab`,previewGrab\),P=/);
   assert(replay.includes("[1,4,5].includes(t.grabStyle)"));
   assert(bootstrap.includes("startGrabStudio();"));
   assert(studio.includes("/api/grab-loadout"));
