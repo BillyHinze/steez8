@@ -44,11 +44,14 @@ export function startGrabStudio() {
   let previewPlaying = true, panelOpen = false, controls = null;
   let status = "Saved on this device", failed = false;
   let accountId = null, accountEpoch = 0, editVersion = 0, saveTimer = null;
-  let domFrame = 0;
+  let domFrame = 0, lastActivated = "";
   const client = clientFactory();
 
   function activate() {
     const equipped = activeRide();
+    const signature = equipped + ":" + state[equipped].join(",");
+    if (signature === lastActivated) return;
+    lastActivated = signature;
     window.__steez8GrabActiveSlots = [...state[equipped]];
     window.dispatchEvent(new CustomEvent("steez8:grabs-changed", {
       detail: { ride: equipped, slots: [...state[equipped]] },
