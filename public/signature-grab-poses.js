@@ -263,15 +263,15 @@ export function stabilizeSignaturePoles(controller, style, strength) {
     const pole = controller.bones[`Pole_${side}`];
     if (!pole?.parent) continue;
     pole.parent.getWorldQuaternion(controller.switchParent);
-    pole.getWorldQuaternion(controller.switchClip);
-    controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.switchClip).normalize();
+    pole.getWorldQuaternion(controller.swapClip);
+    controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.swapClip).normalize();
     controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
       .normalize().applyQuaternion(rootRotation);
     controller.delta.setFromUnitVectors(controller.gazeFace, controller.gazeTarget);
     // Identity to the original pole orientation at grab fade-in/out.
-    controller.delta.slerp(controller.switchTurn.identity(), 1 - fade);
-    controller.switchClip.copy(controller.switchParent).invert();
-    controller.delta.premultiply(controller.switchClip).multiply(controller.switchParent);
+    controller.delta.slerp(controller.swapTurn.identity(), 1 - fade);
+    controller.swapClip.copy(controller.switchParent).invert();
+    controller.delta.premultiply(controller.swapClip).multiply(controller.switchParent);
     pole.quaternion.premultiply(controller.delta).normalize();
     adjusted++;
   }
@@ -287,8 +287,8 @@ export function stabilizeSignaturePoles(controller, style, strength) {
     for (const side of ["L", "R"]) {
       const pole = controller.bones[`Pole_${side}`];
       if (!pole) continue;
-      pole.getWorldQuaternion(controller.switchClip);
-      controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.switchClip).normalize();
+      pole.getWorldQuaternion(controller.swapClip);
+      controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.swapClip).normalize();
       controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
         .normalize().applyQuaternion(rootRotation);
       sample.poleAlignment[side] = +controller.gazeFace.dot(controller.gazeTarget).toFixed(3);
