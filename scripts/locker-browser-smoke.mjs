@@ -97,6 +97,11 @@ try {
       console.log("SIGNATURE DEBUG", await page.evaluate(() => ({
         url: location.href,
         render: window.__steez8SignaturePose,
+        animator: window.__steez8AnimatorTrace,
+        status: document.querySelector(".bc-preview-status")?.textContent,
+        canvases: [...document.querySelectorAll("canvas")].map(el => ({
+          width: el.width, height: el.height, visible: !!el.getClientRects().length
+        })),
         lastPreview: window.__steez8LastPreviewEvent,
         activeSlots: window.__steez8GrabActiveSlots,
         body: document.body?.innerText?.slice(0, 600),
