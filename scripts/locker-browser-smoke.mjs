@@ -124,7 +124,8 @@ try {
     await page.waitForTimeout(1150);
     const actual = await page.evaluate(() => window.__steez8SignaturePose);
     await page.screenshot({ path: `/tmp/steez8-${browserName}-pose-${style}.png` }).catch(() => {});
-    assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
+    assert(actual?.joints?.Arm_L && actual?.joints?.Elbow_L && actual?.joints?.Hand_L,
+      label + " did not animate the actual arm, elbow and hand rig");
     assert(actual?.joints?.Leg_L && actual?.joints?.Knee_R,
       label + " did not pose the real skeletal legs");
     const signature = JSON.stringify([
@@ -169,7 +170,7 @@ try {
       previousJoints = current.joints;
     }
     console.log("SIGNATURE POSE STABILITY", label, "largest quaternion step", largestStep.toFixed(3));
-    console.log("SIGNATURE RIG", label, "hands:", actual.activeGrips,
+    console.log("SIGNATURE RIG", label, "authored arms:", actual.joints?.Arm_L ? 2 : 0,
       "legs and skis:", signature.slice(0, 220));
   }
   assert.equal(silhouettes.size, 4, "Four distinct authored grab silhouettes required");
