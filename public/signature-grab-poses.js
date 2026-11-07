@@ -168,7 +168,10 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     if (!grip) continue;
     const ski = grip.ski === "opposite" ? chain.ski : chain.tailSki;
     if (!ski) continue;
-    const blend = weight * grip.reach;
+    // Reach only part-way toward a long ski tip. A fully constrained two-bone
+    // arm cannot physically reach some signature targets; forcing it there
+    // folds the elbows across the chest and sends the poles through the body.
+    const blend = Math.min(.72, weight * grip.reach * .72);
     chain.arm.getWorldPosition(contact.start);
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
@@ -176,6 +179,16 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     contact.socket.set(...grip.socket);
     ski.localToWorld(contact.socket);
     contact.target.lerpVectors(contact.hand, contact.socket, blend);
+    // Limit wrist-target travel when changing grabs, similar to the original
+    // GrabContact solver. A single bad frame must not whip the entire arm.
+    if (chain.valid && Number.isFinite(step) && step > 0) {
+      contact.previous.copy(chain.previous);
+      contact.root.localToWorld(contact.previous);
+      const jump = contact.previous.distanceTo(contact.target);
+      const allowed = 2.7 * Math.min(step, .05);
+      if (jump > allowed) contact.target.lerpVectors(
+        contact.previous, contact.target, allowed / jump);
+    }
 
     // A physical two-link arm cannot extend farther than upper + forearm.
     const upper = contact.start.distanceTo(contact.elbow);
@@ -200,15 +213,19 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
       .addScaledVector(contact.axis, along)
       .addScaledVector(contact.bend.normalize(), height);
 
-    // Reuse the stable getWorldQuaternion / two-bone aim helpers.
+    // The regular grab solver is disabled for signature grabs; save the
+    // unmodified bone rotations for GrabContact.restore() on the next frame.
+    // Otherwise this IK would accumulate its own changes frame after frame.
+    for (const joint of [chain.arm, chain.elbow, chain.hand]) {
+      if (!contact.saved.has(joint)) contact.saved.set(joint, joint.quaternion.clone());
+    }
     contact.aim(chain.arm, contact.start, contact.elbow, contact.middle);
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
     contact.aim(chain.elbow, contact.elbow, contact.hand, contact.target);
-    ski.getWorldQuaternion(contact.held);
-    const restRotation = grip.ski === "opposite" ? chain.onAcross : chain.onTail;
-    contact.held.multiply(restRotation);
-    contact.wrist.slerp(contact.held, blend);
+    // Preserve the rider's authored wrist direction. Forcing a hand into
+    // the ski mesh's world orientation rotated wrists and attached poles
+    // through the forearms, even when the hand's position was reasonable.
     contact.rotate(chain.hand, contact.wrist);
     chain.hand.getWorldPosition(chain.previous);
     contact.root.worldToLocal(chain.previous);
@@ -225,4 +242,38 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     };
   }
   return applied > 0;
+}
+
+/**
+ * Keep the pole shafts pointing down and behind the rider during a signature
+ * grab. The original pole grip assumes hands remain at their skiing sockets;
+ * hand IK moves those sockets dramatically and otherwise swings the shafts
+ * across the chest. Pole_L/R use local -Y as the shaft direction.
+ *
+ * This changes only the pole-bone rotation, never the rider's hand IK,
+ * geometry, input log, or ski physics. Existing PoleGrip.restore() resets
+ * the original pole rotations at the beginning of the next frame.
+ */
+export function stabilizeSignaturePoles(controller, style, strength) {
+  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) return false;
+  const fade = smooth(Math.min(1, strength * 2));
+  const rootRotation = controller.root.getWorldQuaternion(controller.switchRoot);
+  let adjusted = 0;
+  for (const side of ["L", "R"]) {
+    const pole = controller.bones[`Pole_${side}`];
+    if (!pole?.parent) continue;
+    pole.parent.getWorldQuaternion(controller.switchParent);
+    pole.getWorldQuaternion(controller.switchClip);
+    controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.switchClip).normalize();
+    controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
+      .normalize().applyQuaternion(rootRotation);
+    controller.delta.setFromUnitVectors(controller.gazeFace, controller.gazeTarget);
+    // Identity to the original pole orientation at grab fade-in/out.
+    controller.delta.slerp(controller.switchTurn.identity(), 1 - fade);
+    controller.switchClip.copy(controller.switchParent).invert();
+    controller.delta.premultiply(controller.switchClip).multiply(controller.switchParent);
+    pole.quaternion.premultiply(controller.delta).normalize();
+    adjusted++;
+  }
+  return adjusted > 0;
 }
