@@ -56,5 +56,7 @@ jobs:
         if: always()
         with:
           name: locker-browser-screenshot
-          path: /tmp/steez8-locker-smoke.png
+          path: |
+            /tmp/steez8-locker-smoke.png
+            /tmp/steez8-*-pose-*.png
           if-no-files-found: ignore
