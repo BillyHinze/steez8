@@ -81,7 +81,7 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   assert(script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
   assert(!script.includes("`TailGrab`,`TailGrab`,`JapanGrab`,`JapanGrab`"),
     "The four signature styles still alias old Tail/Japan clips");
-  const foot = script.indexOf("this.fine&&this.footContact.update(.2+A*.14");
+  const foot = script.indexOf("this.fine&&!(this.grabStyle>=4&&this.grabStyle<=7&&this.grab>.001)&&this.footContact.update(.2+A*.14");
   const pose = script.indexOf("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)");
   const hand = script.indexOf("sigReach(this.grabContact,this.grabStyle,this.grab,e)");
   assert(foot >= 0 && foot < pose && pose < hand,
