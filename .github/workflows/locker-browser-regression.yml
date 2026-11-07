@@ -1,0 +1,55 @@
+name: Reproduce Locker in Chromium
+
+on:
+  push:
+    branches: [debug/grab-lab-browser-repro]
+    paths: ['scripts/locker-browser-smoke.mjs', '.github/workflows/locker-browser-regression.yml', 'public/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locker-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - name: Build STEEZ8 matching Pages
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build:pages
+        env:
+          BACKEND_ORIGIN: http://127.0.0.1:4174
+          PUBLIC_SITE_ORIGIN: https://novacryptotool.com
+      - name: Install Chromium browser for interaction test
+        run: |
+          npm install --prefix /tmp/steez8-playwright --no-save --no-package-lock playwright@1.58.2
+          /tmp/steez8-playwright/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Open Locker and report actual browser crashes
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/steez8-http.log 2>&1 &
+          static_pid=$!
+          SINGLE_INSTANCE=1 PORT=4174 HOST=127.0.0.1 PUBLIC_ORIGIN=http://127.0.0.1:4173 ALLOWED_ORIGINS=http://127.0.0.1:4173 DATA_DIR=/tmp/steez8-locker-db DATABASE_DRIVER=libsql node --experimental-vm-modules server/index.mjs >/tmp/steez8-api.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$static_pid" "$api_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:4174/api/health >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4174/api/health
+          LOCKER_TEST_SIGNED_IN=1 node scripts/locker-browser-smoke.mjs
+          LOCKER_TEST_SIGNED_IN=1 LOCKER_TEST_BROWSER=webkit node scripts/locker-browser-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: locker-browser-screenshot
+          path: /tmp/steez8-locker-smoke.png
+          if-no-files-found: ignore
