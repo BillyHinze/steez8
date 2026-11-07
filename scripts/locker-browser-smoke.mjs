@@ -71,12 +71,17 @@ try {
   // product code or pretend the modal is a Grab Lab failure.
   await lab.evaluate(element => element.click());
   await page.waitForTimeout(1600);
+  assert.equal(await page.locator("body > .gl-root").count(), 1,
+    "Grab Lab must use an isolated portal outside the React app");
+  assert.equal(await page.locator(".bc-locker-controls .gl-bar").count(), 0,
+    "Grab Lab must never change React-owned Locker controls");
   assert(await page.locator(".gl-panel").count() > 0, "Grab Lab panel failed to open");
   assert(await page.getByRole("button", { name: /back scratcher/i }).count() > 0,
     "Grab Lab catalog did not render");
   await page.getByRole("button", { name: /back scratcher/i }).first().evaluate(element => element.click());
   await page.waitForTimeout(1600);
   console.log("Grab Lab selected and rendered:", await page.locator(".gl-panel").count());
+  assert.equal(await page.locator("body > .gl-root").count(), 1, "Grab portal disappeared after selection");
   
   const body = await page.locator("body").innerText().catch(() => "");
   console.log("Body heading preview:", body.slice(0, 250).replace(/\s+/g, " "));
