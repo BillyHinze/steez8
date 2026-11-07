@@ -117,9 +117,10 @@ function smooth(value) {
 }
 
 /**
- * The body pose is applied after leg IK and before arm IK. This is important:
- * putting hip/knee changes before footContact.update() causes the old foot IK
- * to erase them, which was why the previous "new" grabs looked like remixes.
+ * The body pose is applied after the optional foot-contact stage and before
+ * arm IK. While a signature grab is held, the regular airborne foot-contact
+ * solver is bypassed: its knee solution fights these extreme authored poses
+ * and can flip the legs between incompatible joint orientations.
  */
 export function applySignatureGrabPose(controller, style, strength, airTime = 0) {
   const profile = SIGNATURE_GRAB_POSES[style];
