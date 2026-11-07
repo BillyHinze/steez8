@@ -15,6 +15,12 @@ const browser = await browserType.launch({
     : {}),
 });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+await page.addInitScript(() => {
+  window.__steez8GrabDebugEnabled = true;
+  window.addEventListener("steez8:preview-grab", event => {
+    window.__steez8LastPreviewEvent = event.detail;
+  });
+});
 const exceptions = [];
 const badHttp = [];
 page.on("pageerror", error => exceptions.push(error.stack || error.message));
@@ -85,7 +91,18 @@ try {
     const card = page.getByRole("button", { name: new RegExp(label, "i") }).first();
     assert(await card.count() > 0, label + " missing from Grab Lab");
     await card.evaluate(element => element.click());
-    await page.waitForFunction(id => window.__steez8SignaturePose?.id === id, style, { timeout: 12000 });
+    try {
+      await page.waitForFunction(id => window.__steez8SignaturePose?.id === id, style, { timeout: 12000 });
+    } catch (error) {
+      console.log("SIGNATURE DEBUG", await page.evaluate(() => ({
+        url: location.href,
+        render: window.__steez8SignaturePose,
+        lastPreview: window.__steez8LastPreviewEvent,
+        activeSlots: window.__steez8GrabActiveSlots,
+        body: document.body?.innerText?.slice(0, 600),
+      })));
+      throw error;
+    }
     await page.waitForTimeout(400);
     const actual = await page.evaluate(() => window.__steez8SignaturePose);
     assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
