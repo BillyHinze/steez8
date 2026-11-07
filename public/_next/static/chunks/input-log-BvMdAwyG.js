@@ -760,27 +760,27 @@ var Lt = e => e?.isTrusted === !0
     buttons: [0]
 }, {
     id: `mute`,
-    label: `Mute grab`,
-    short: `Mute grab`,
-    hint: `Hold in the air. Let go to open up for the landing.`,
+    label: `Grab slot 1`,
+    short: `Grab slot 1`,
+    hint: `Hold in the air. Choose the style in Locker → Custom Grabs. Let go before landing.`,
     group: `ride`,
     listens: `ride`,
     keys: [`ShiftLeft`, `ShiftRight`],
     buttons: [4]
 }, {
     id: `tail`,
-    label: `Tail grab`,
-    short: `Tail grab`,
-    hint: `Hold in the air.`,
+    label: `Grab slot 2`,
+    short: `Grab slot 2`,
+    hint: `Hold in the air. Choose the style in Locker → Custom Grabs.`,
     group: `ride`,
     listens: `ride`,
     keys: [`KeyQ`],
     buttons: [2]
 }, {
     id: `japan`,
-    label: `Japan grab`,
-    short: `Japan grab`,
-    hint: `Hold in the air.`,
+    label: `Grab slot 3`,
+    short: `Grab slot 3`,
+    hint: `Hold in the air. Choose the style in Locker → Custom Grabs.`,
     group: `ride`,
     listens: `ride`,
     keys: [`KeyE`],

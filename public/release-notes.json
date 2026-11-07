@@ -1,5 +1,23 @@
 [
   {
+    "id": "2026-11-07-custom-grab-lab",
+    "label": "7 NOV · 0.6",
+    "tag": "GRAB LAB",
+    "title": "Three keys. Your signature grabs.",
+    "body": "Grab Lab is now in the STEEZ8 Locker. Build independent three-key loadouts for skis and snowboards, choose from eight styles, preview the moves on your rider, and keep your choices linked to your account. Your existing SHIFT, Q and E binds still work, and verified lines still earn grab and variety points.",
+    "icon": "star",
+    "highlights": [
+      "EIGHT SKI + SNOWBOARD GRABS",
+      "THREE ASSIGNABLE GRAB KEYS",
+      "RIDER PREVIEW",
+      "SAVED TO YOUR ACCOUNT"
+    ],
+    "link": {
+      "href": "/?open=locker",
+      "label": "Open Grab Lab"
+    }
+  },
+  {
     "id": "2026-11-03-ridgeline",
     "label": "3 NOV · 0.5",
     "tag": "NEW PARK",

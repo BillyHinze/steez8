@@ -534,8 +534,8 @@ var Tt = .7
         this.riding = !1)
     }
 }
-  , Ft = [`MUTE GRAB`, `TAIL GRAB`, `JAPAN GRAB`]
-  , It = [`WEDDLE GRAB`, `NOSE GRAB`, `METHOD GRAB`]
+  , Ft = [`MUTE GRAB`, `TAIL GRAB`, `JAPAN GRAB`, `SAFETY GRAB`, `BLUNT GRAB`, `ROCKET AIR`, `TRUE NOSE GRAB`, `BACK SCRATCHER`]
+  , It = [`WEDDLE GRAB`, `NOSE GRAB`, `METHOD GRAB`, `INDY GRAB`, `STALEFISH GRAB`, `MELON GRAB`, `TAILFISH GRAB`, `SEATBELT GRAB`]
   , Lt = class {
     constructor() {
         this.mask = 0,
@@ -579,7 +579,9 @@ var Tt = .7
         return (e ? It : Ft).filter( (e, t) => this.mask & 1 << t)
     }
     get count() {
-        return Number(!!(this.mask & 1)) + Number(!!(this.mask & 2)) + Number(!!(this.mask & 4))
+        let n = this.mask, count = 0;
+        while (n > 0) { n &= n - 1; count++; }
+        return count
     }
 }
   , Rt = a.PI * 2
