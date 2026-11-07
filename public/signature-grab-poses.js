@@ -285,8 +285,12 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
  * geometry, input log, or ski physics. Existing PoleGrip.restore() resets
  * the original pole rotations at the beginning of the next frame.
  */
-export function stabilizeSignaturePoles(controller, style, strength) {
-  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) return false;
+export function stabilizeSignaturePoles(controller, style, strength, step = 1 / 60) {
+  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) {
+    controller?.signaturePoleHistory?.clear();
+    return false;
+  }
+  const history = controller.signaturePoleHistory ??= new Map();
   const fade = smooth(Math.min(1, strength * 2));
   const rootRotation = controller.root.getWorldQuaternion(controller.switchRoot);
   let adjusted = 0;
@@ -304,6 +308,17 @@ export function stabilizeSignaturePoles(controller, style, strength) {
     controller.swapClip.copy(controller.switchParent).invert();
     controller.delta.premultiply(controller.swapClip).multiply(controller.switchParent);
     pole.quaternion.premultiply(controller.delta).normalize();
+    // The standard pole controller can rotate the attachment sharply when
+    // hand positions change. Clamp the finished local pole quaternion to a
+    // continuous path, without changing the shaft's down/back target.
+    const previous = history.get(side);
+    if (previous && Number.isFinite(step) && step > 0) {
+      controller.delta.copy(pole.quaternion);
+      pole.quaternion.copy(previous)
+        .rotateTowards(controller.delta, 3.2 * Math.min(step, .05));
+    }
+    if (previous) previous.copy(pole.quaternion);
+    else history.set(side, pole.quaternion.clone());
     adjusted++;
   }
   if (adjusted && typeof window !== "undefined" &&
