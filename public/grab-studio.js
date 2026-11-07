@@ -11,7 +11,7 @@ const FALLBACK_RIDE = "skis";
 function activeRide() {
   try {
     const saved = JSON.parse(localStorage.getItem("whiteout-outfit-v1") || "null");
-    return saved?.outfit?.ride === "board" ? "board" : FALLBACK_RIDE;
+    return saved?.ride === "board" ? "board" : FALLBACK_RIDE;
   } catch { return FALLBACK_RIDE; }
 }
 function localLoadout() {
