@@ -43,18 +43,18 @@ export const SIGNATURE_GRAB_POSES = Object.freeze({
   ),
   5: pose(5, "Rocket Air",
     freezeBones({
-      // Project both skis forward, straighten the knees and reach toward tips.
+      // Project both skis forward with hips lifted and knees almost straight.
       Torso: [.64, 0, -.04], Spine: [.26, 0, 0],
       Neck: [-.18, 0, 0], Head: [-.12, .06, 0],
-      Leg_L: [-.35, -.06, -.06], Knee_L: [.22, .02, 0],
-      Leg_R: [-.39, .06, .06], Knee_R: [.23, -.02, 0],
-      Foot_L: [.32, -.04, -.04], Foot_R: [.33, .04, .04],
+      Leg_L: [.68, -.06, -.06], Knee_L: [-.22, .02, 0],
+      Leg_R: [.72, .06, .06], Knee_R: [-.25, -.02, 0],
+      Foot_L: [-.66, -.04, -.04], Foot_R: [-.68, .04, .04],
       Arm_L: [.65, -.15, .22], Elbow_L: [-.64, .03, .10],
       Hand_L: [-.10, -.03, 0],
       Arm_R: [.66, .12, -.22], Elbow_R: [-.62, -.03, -.10],
       Hand_R: [-.09, .03, 0],
     }),
-    Object.freeze({ L: [.29, -.05, -.12], R: [.28, .05, .12] }),
+    Object.freeze({ L: [-.64, -.05, -.10], R: [-.62, .05, .10] }),
     Object.freeze({
       L: Object.freeze({ ski: "same", socket: Object.freeze([-.035, .07, .92]), reach: .98 }),
       R: Object.freeze({ ski: "same", socket: Object.freeze([.035, .07, .92]), reach: .98 }),
@@ -80,18 +80,18 @@ export const SIGNATURE_GRAB_POSES = Object.freeze({
   ),
   7: pose(7, "Back Scratcher",
     freezeBones({
-      // Deep arched tuck with the rear ski sections thrown behind the head.
+      // Reversed tucked hips and knees lift BOTH ski tails behind the helmet.
       Torso: [-.30, .13, -.12], Spine: [-.38, .06, -.06],
       Neck: [.17, -.11, .05], Head: [.18, -.09, .05],
-      Leg_L: [-.99, -.04, -.14], Knee_L: [1.43, -.07, -.08],
-      Leg_R: [-1.07, .04, .14], Knee_R: [1.50, .07, .08],
-      Foot_L: [-.58, -.08, -.12], Foot_R: [-.60, .08, .12],
+      Leg_L: [1.12, -.09, -.14], Knee_L: [-1.47, -.07, -.08],
+      Leg_R: [1.08, .09, .14], Knee_R: [-1.42, .07, .08],
+      Foot_L: [.93, -.08, -.12], Foot_R: [.96, .08, .12],
       Arm_L: [-.40, -.18, .68], Elbow_L: [-1.04, -.10, .18],
       Hand_L: [-.12, 0, 0],
       Arm_R: [-.47, .18, -.70], Elbow_R: [-1.01, .12, -.20],
       Hand_R: [-.13, 0, 0],
     }),
-    Object.freeze({ L: [-.61, -.12, -.10], R: [-.65, .12, .10] }),
+    Object.freeze({ L: [.88, -.12, -.10], R: [.86, .12, .10] }),
     Object.freeze({
       L: Object.freeze({ ski: "same", socket: Object.freeze([-.07, .08, -.89]), reach: .98 }),
       R: Object.freeze({ ski: "same", socket: Object.freeze([.07, .08, -.89]), reach: .98 }),
