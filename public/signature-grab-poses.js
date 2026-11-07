@@ -151,6 +151,24 @@ export function applySignatureGrabPose(controller, style, strength, airTime = 0)
 }
 
 /**
+ * Slew-limit the custom arm IK itself, not just its wrist target. Three.js
+ * two-bone aiming can choose a substantially different elbow solution when
+ * the limb nears full extension. A remembered local quaternion keeps that
+ * transition continuous without accumulating the rotation in the base rig.
+ */
+function limitSignatureJoint(contact, chain, joint, historyKey, step) {
+  const previous = chain[historyKey];
+  if (chain.valid && previous && Number.isFinite(step) && step > 0) {
+    contact.held.copy(joint.quaternion);
+    joint.quaternion.copy(previous)
+      .rotateTowards(contact.held, 2.2 * Math.min(step, .05));
+    joint.updateWorldMatrix(false, true);
+  }
+  if (previous) previous.copy(joint.quaternion);
+  else chain[historyKey] = joint.quaternion.clone();
+}
+
+/**
  * Two-bone IK attachment: wrists actually reach the correct ski mesh.
  * On original grabs, the existing solver remains unchanged.
  * This uses the controller's existing GrabContact arm solver to avoid
@@ -166,6 +184,12 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
   for (const chain of contact.chains) {
     const grip = profile.grips[chain.side];
     if (!grip) continue;
+    // Grounded transitions call GrabContact.reset(), so stale signature
+    // quaternions cannot leak from one jump into the next.
+    if (!chain.valid) {
+      chain.signatureArmRotation = null;
+      chain.signatureElbowRotation = null;
+    }
     const ski = grip.ski === "opposite" ? chain.ski : chain.tailSki;
     if (!ski) continue;
     // Reach only part-way toward a long ski tip. A fully constrained two-bone
@@ -220,9 +244,11 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
       if (!contact.saved.has(joint)) contact.saved.set(joint, joint.quaternion.clone());
     }
     contact.aim(chain.arm, contact.start, contact.elbow, contact.middle);
+    limitSignatureJoint(contact, chain, chain.arm, "signatureArmRotation", step);
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
     contact.aim(chain.elbow, contact.elbow, contact.hand, contact.target);
+    limitSignatureJoint(contact, chain, chain.elbow, "signatureElbowRotation", step);
     // The pose profile already authors Hand_L/Hand_R. Only solve arm and
     // elbow positions; never apply a second world-space wrist correction.
     // A child hand follows its articulated elbow naturally, and its own
