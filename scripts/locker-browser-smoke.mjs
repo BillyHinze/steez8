@@ -51,7 +51,7 @@ try {
     assert.equal(login.signedIn, true, "Login state was not established in browser: " + login.error);
   }
   console.log("Opening STEEZ8 with ?open=locker in headless " + browserName + "");
-  await page.goto(process.env.LOCKER_TEST_URL || "http://127.0.0.1:4173/?open=locker", {
+  await page.goto(process.env.LOCKER_TEST_URL || "http://127.0.0.1:4173/?open=locker&grabDebug=1", {
     waitUntil: "domcontentloaded", timeout: 45000,
   });
   for (let step = 0; step < 35; step++) {
@@ -76,10 +76,32 @@ try {
   assert.equal(await page.locator(".bc-locker-controls .gl-bar").count(), 0,
     "Grab Lab must never change React-owned Locker controls");
   assert(await page.locator(".gl-panel").count() > 0, "Grab Lab panel failed to open");
-  assert(await page.getByRole("button", { name: /back scratcher/i }).count() > 0,
-    "Grab Lab catalog did not render");
-  await page.getByRole("button", { name: /back scratcher/i }).first().evaluate(element => element.click());
-  await page.waitForTimeout(1600);
+  // These four styles were previously shallow overlays of Tail/Japan. Make
+  // the real rider rig play each one, not merely render a selection card.
+  const silhouettes = new Set();
+  for (const [style, label] of [
+    [4, "Blunt"], [5, "Rocket Air"], [6, "True Nose"], [7, "Back Scratcher"]
+  ]) {
+    const card = page.getByRole("button", { name: new RegExp(label, "i") }).first();
+    assert(await card.count() > 0, label + " missing from Grab Lab");
+    await card.evaluate(element => element.click());
+    await page.waitForFunction(id => window.__steez8SignaturePose?.id === id, style, { timeout: 12000 });
+    await page.waitForTimeout(400);
+    const actual = await page.evaluate(() => window.__steez8SignaturePose);
+    assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
+    assert(actual?.joints?.Leg_L && actual?.joints?.Knee_R,
+      label + " did not pose the real skeletal legs");
+    const signature = JSON.stringify([
+      actual.joints.Leg_L, actual.joints.Leg_R,
+      actual.joints.Knee_L, actual.joints.Knee_R,
+      actual.joints.Foot_L, actual.joints.Foot_R
+    ]);
+    assert(!silhouettes.has(signature), label + " reuses another grab silhouette");
+    silhouettes.add(signature);
+    console.log("SIGNATURE RIG", label, "hands:", actual.activeGrips,
+      "legs and skis:", signature.slice(0, 220));
+  }
+  assert.equal(silhouettes.size, 4, "Four distinct authored grab silhouettes required");
   console.log("Grab Lab selected and rendered:", await page.locator(".gl-panel").count());
   assert.equal(await page.locator("body > .gl-root").count(), 1, "Grab portal disappeared after selection");
   
