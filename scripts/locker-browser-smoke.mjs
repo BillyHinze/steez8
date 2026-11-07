@@ -106,6 +106,7 @@ try {
         url: location.href,
         render: window.__steez8SignaturePose,
         animator: window.__steez8AnimatorTrace,
+        branch: window.__steez8SignatureBranch,
         status: document.querySelector(".bc-preview-status")?.textContent,
         canvases: [...document.querySelectorAll("canvas")].map(el => ({
           width: el.width, height: el.height, visible: !!el.getClientRects().length
