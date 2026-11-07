@@ -158,14 +158,24 @@ export function applySignatureGrabPose(controller, style, strength, airTime = 0)
  */
 export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
   const profile = SIGNATURE_GRAB_POSES[style];
-  if (!profile) return false;
+  if (!profile) {
+    for (const chain of contact.chains) chain.signatureLastHand = null;
+    return false;
+  }
   const weight = smooth(strength);
-  if (weight < .001) return false;
+  if (weight < .001) {
+    for (const chain of contact.chains) chain.signatureLastHand = null;
+    return false;
+  }
   contact.root.updateWorldMatrix(true, true);
   let applied = 0;
   for (const chain of contact.chains) {
     const grip = profile.grips[chain.side];
-    if (!grip) continue;
+    if (!grip) {
+      chain.signatureLastHand = null;
+      continue;
+    }
+    if (!chain.valid) chain.signatureLastHand = null;
     const ski = grip.ski === "opposite" ? chain.ski : chain.tailSki;
     if (!ski) continue;
     // Reach only part-way toward a long ski tip. A fully constrained two-bone
@@ -223,10 +233,19 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
     contact.aim(chain.elbow, contact.elbow, contact.hand, contact.target);
-    // Preserve the rider's authored wrist direction. Forcing a hand into
-    // the ski mesh's world orientation rotated wrists and attached poles
-    // through the forearms, even when the hand's position was reasonable.
+    // Preserve the authored wrist direction, rather than imposing a ski
+    // mesh's orientation. Bound the actual *local* hand rotation as well:
+    // even with a smooth wrist target, a rapidly changing parent elbow can
+    // turn an unconstrained hand 40+ degrees between preview frames.
     contact.rotate(chain.hand, contact.wrist);
+    if (chain.valid && chain.signatureLastHand && Number.isFinite(step) && step > 0) {
+      contact.held.copy(chain.hand.quaternion);
+      chain.hand.quaternion.copy(chain.signatureLastHand)
+        .rotateTowards(contact.held, 3 * Math.min(step, .05));
+      chain.hand.updateWorldMatrix(false, true);
+    }
+    if (!chain.signatureLastHand) chain.signatureLastHand = chain.hand.quaternion.clone();
+    else chain.signatureLastHand.copy(chain.hand.quaternion);
     chain.hand.getWorldPosition(chain.previous);
     contact.root.worldToLocal(chain.previous);
     chain.valid = true;
