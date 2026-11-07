@@ -31,7 +31,7 @@ jobs:
       - name: Install Chromium browser for interaction test
         run: |
           npm install --prefix /tmp/steez8-playwright --no-save --no-package-lock playwright@1.58.2
-          /tmp/steez8-playwright/node_modules/.bin/playwright install --with-deps chromium
+          /tmp/steez8-playwright/node_modules/.bin/playwright install --with-deps chromium webkit
       - name: Open Locker and report actual browser crashes
         shell: bash
         run: |
@@ -46,6 +46,7 @@ jobs:
           done
           curl --fail --silent http://127.0.0.1:4174/api/health
           LOCKER_TEST_SIGNED_IN=1 node scripts/locker-browser-smoke.mjs
+          LOCKER_TEST_SIGNED_IN=1 LOCKER_TEST_BROWSER=webkit node scripts/locker-browser-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
