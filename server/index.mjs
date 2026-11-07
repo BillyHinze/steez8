@@ -13,6 +13,7 @@ import { Cups } from "./cups.mjs";
 import { Payments } from "./payments.mjs";
 import { Challenges } from "./challenges.mjs";
 import { Loadouts, equippedOutfit } from "./loadouts.mjs";
+import { GrabLoadouts } from "./grabs.mjs";
 import { Journal } from "./journal.mjs";
 import { Sessions } from "./sessions.mjs";
 import { Squads } from "./squads.mjs";
@@ -69,6 +70,7 @@ export function createApplication({
     challenges = new Challenges(store, economy, { clock }),
     journal = new Journal(store, economy, { clock }),
     loadouts = new Loadouts(store),
+    grabLoadouts = new GrabLoadouts(store),
     mountainSessions = new Sessions(store, { clock }),
     squads = new Squads(store, { clock }),
     rates = new Map(),
@@ -221,6 +223,7 @@ export function createApplication({
           passes: store.catalog.passes,
         });
       if (p === "/api/loadouts") { need(); if (req.method === "GET") return json(loadouts.snapshot(user.id)); if (req.method === "POST") return json(loadouts.action(user.id, await body())); fail("Method not allowed", 405); }
+      if (p === "/api/grab-loadout") { need(); if (req.method === "GET") return json(grabLoadouts.snapshot(user.id)); if (req.method === "POST") return json(grabLoadouts.save(user.id, await body())); fail("Method not allowed", 405); }
       if (p === "/api/journal" && req.method === "GET") { need(); return json(journal.snapshot(user.id)); }
       if (p === "/api/journal/claim" && req.method === "POST") { need(); return json(journal.claim(user.id, (await body()).milestone)); }
       if (p === "/api/sessions" && req.method === "GET") { need(); return json(mountainSessions.snapshot(user.id)); }
