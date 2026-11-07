@@ -80,7 +80,7 @@ test("the game plays authored grab arms without unstable wrist IK", () => {
   assert(script.includes("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)"));
   assert(!script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"),
     "The unstable two-bone wrist attachment must not be active");
-  assert(script.includes("sigPoles(this,this.grabStyle,n.airborne?this.grab:0)"),
+  assert(script.includes("sigPoles(this,this.grabStyle,n.airborne?this.grab:0,e)"),
     "Signature grabs must keep attached ski poles aligned while grabbing");
   assert(script.includes("if(this.grabStyle>=4&&this.grabStyle<=7){"),
     "Signature grabs must bypass the classic hand solver");
