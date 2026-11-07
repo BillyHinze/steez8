@@ -5,10 +5,10 @@ export const GRAB_CATALOG = Object.freeze([
   { id: 1, skis: "Tail", board: "Nose", family: "tail", note: "Reach back for the tip and hold through the spin." },
   { id: 2, skis: "Japan", board: "Method", family: "japan", note: "Bend into a stylish arched grab." },
   { id: 3, skis: "Safety", board: "Indy", family: "mute", note: "Clean, compact grab beside the boot." },
-  { id: 4, skis: "Blunt", board: "Stalefish", family: "tail", note: "Pull the ski or board back with a deeper shoulder turn." },
-  { id: 5, skis: "Rocket Air", board: "Melon", family: "tail", note: "Extend the legs for a straight, floating silhouette." },
-  { id: 6, skis: "True Nose", board: "Tailfish", family: "japan", note: "Fold toward the tip with a sharp knee tuck." },
-  { id: 7, skis: "Back Scratcher", board: "Seatbelt", family: "japan", note: "Bring the tips back into a compact arched pose." },
+  { id: 4, skis: "Blunt", board: "Stalefish", family: "signature-blunt", note: "Low cross-body crouch: pull a ski across your front and hold the leading tip." },
+  { id: 5, skis: "Rocket Air", board: "Melon", family: "signature-rocket", note: "Launch both skis forward with extended legs and reach for both tips." },
+  { id: 6, skis: "True Nose", board: "Tailfish", family: "signature-nose", note: "Fold one knee toward your chest, lift its ski upright and catch its nose." },
+  { id: 7, skis: "Back Scratcher", board: "Seatbelt", family: "signature-scratcher", note: "Arch back, fold both knees and pull the ski tails up behind your helmet." },
 ]);
 export const GRAB_SLOT_ACTIONS = Object.freeze(["mute", "tail", "japan"]);
 export const DEFAULT_GRAB_LOADOUT = Object.freeze({
