@@ -118,7 +118,10 @@ try {
       })));
       throw error;
     }
-    await page.waitForTimeout(400);
+    // Test the held pose after its first-second transition, not the valid
+    // blended entry animation. The earlier 400ms window falsely flagged
+    // an entering knee tuck as a sustained repeated glitch.
+    await page.waitForTimeout(1150);
     const actual = await page.evaluate(() => window.__steez8SignaturePose);
     await page.screenshot({ path: `/tmp/steez8-${browserName}-pose-${style}.png` }).catch(() => {});
     assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
@@ -161,7 +164,7 @@ try {
         largestStep = Math.max(largestStep, change);
         assert(change < .55,
           label + ": " + name + " jumped " + change.toFixed(2) +
-          " radians in a single 105ms sample (max " + largestStep.toFixed(2) + ")");
+          " radians in sample " + frame + " at held pose (max " + largestStep.toFixed(2) + ")");
       }
       previousJoints = current.joints;
     }
