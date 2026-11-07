@@ -30,7 +30,7 @@ try {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, password: "TemporaryLockerBrowserPass123", data: { handle: "LockerSmoke01" } }),
     });
-    assert.equal(signup.status, 200, "Test account signup failed: " + await signup.text().catch(() => ""));
+    if (signup.status !== 200) throw Error("Test account signup failed: " + signup.status + " " + await signup.text().catch(() => ""));
     const session = await signup.json();
     console.log("Test account created; starting authenticated Locker check.");
     await page.goto("http://127.0.0.1:4173/", { waitUntil: "domcontentloaded", timeout: 45000 });
