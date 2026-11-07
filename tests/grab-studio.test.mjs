@@ -73,8 +73,10 @@ test("the active game, verified input parser, preview and score paths share grab
   const studio = read("grab-studio.js");
   const verifier = fs.readFileSync(new URL("../server/verification-worker-v2.mjs", import.meta.url),"utf8");
   assert(engine.includes("__steez8GrabActiveSlots[p]"));
-  assert(animation.includes("this.grabStyle===6"));
-  assert(animation.includes("Back Scratcher:"));
+  // New grabs have their own procedural 3D poses, not old Tail/Japan overlays.
+  assert(animation.includes('from "../../../signature-grab-poses.js"'));
+  assert(animation.includes("sigGrab(this,this.grabStyle,this.grab,n.airTime)"));
+  assert(animation.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
   assert(locker.includes("steez8:preview-grab"));
   // The preview camera must remain locally declared in strict-mode ES modules.
   // Comma-chaining the listener call to P=... caused the Locker to crash on mount.
