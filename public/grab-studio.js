@@ -45,6 +45,13 @@ export function startGrabStudio() {
   let status = "Saved on this device", failed = false;
   let accountId = null, accountEpoch = 0, editVersion = 0, saveTimer = null;
   let domFrame = 0, lastActivated = "";
+  // Render custom controls in an isolated sibling of React's application root.
+  // Prepending into .bc-locker-controls disturbed React's DOM reconciliation.
+  const portal = document.createElement("aside");
+  portal.className = "gl-root";
+  portal.setAttribute("aria-label", "STEEZ8 Custom Grabs");
+  portal.hidden = true;
+  document.body.append(portal);
   const client = clientFactory();
 
   function activate() {
@@ -65,7 +72,7 @@ export function startGrabStudio() {
   function setStatus(text, isError = false) {
     status = text;
     failed = isError;
-    const node = controls?.querySelector(".gl-status");
+    const node = portal.querySelector(".gl-status");
     if (node) {
       node.textContent = text;
       node.classList.toggle("is-error", isError);
@@ -132,7 +139,7 @@ export function startGrabStudio() {
     return button;
   }
   function renderPanel() {
-    const root = controls?.querySelector(":scope > .gl-panel");
+    const root = portal.querySelector(":scope > .gl-panel");
     if (!root || !panelOpen) return;
     root.replaceChildren();
     const intro = node("div", undefined, "gl-intro");
@@ -207,36 +214,44 @@ export function startGrabStudio() {
 
   function paint() {
     domFrame = 0;
+    // Observe React's Locker only; never append, prepend or remove its children.
     const host = document.querySelector(".bc-locker .bc-locker-controls");
-    if (!host) { controls = null; return; }
-    if (controls !== host) { controls = host; panelOpen = false; }
-    if (!host.querySelector(":scope > .gl-bar")) {
+    if (!host) {
+      if (controls) {
+        controls = null;
+        panelOpen = false;
+        portal.classList.remove("gl-grab-open");
+        portal.querySelector(":scope > .gl-panel")?.remove();
+        preview(null);
+      }
+      portal.hidden = true;
+      return;
+    }
+    controls = host;
+    portal.hidden = false;
+    if (!portal.querySelector(":scope > .gl-bar")) {
       const bar = node("div", undefined, "gl-bar");
       const button = action("CUSTOM GRABS", () => {
         panelOpen = !panelOpen;
-        host.classList.toggle("gl-grab-open", panelOpen);
+        portal.classList.toggle("gl-grab-open", panelOpen);
         button.setAttribute("aria-expanded", String(panelOpen));
+        button.setAttribute("aria-label", panelOpen ? "Close custom grabs" : "Open custom grabs");
         if (panelOpen) {
           ride = activeRide();
           chosenSlot = 0;
-          if (!host.querySelector(":scope > .gl-panel"))
-            host.append(node("section", undefined, "gl-panel"));
-          renderPanel(); preview();
+          if (!portal.querySelector(":scope > .gl-panel"))
+            portal.append(node("section", undefined, "gl-panel"));
+          renderPanel();
+          preview();
         } else {
-          host.querySelector(":scope > .gl-panel")?.remove(); preview(null);
+          portal.querySelector(":scope > .gl-panel")?.remove();
+          preview(null);
         }
       }, "gl-open");
       button.setAttribute("aria-expanded", String(panelOpen));
-      button.setAttribute("aria-label", panelOpen ? "Close custom grabs" : "Open custom grabs");
+      button.setAttribute("aria-label", "Open custom grabs");
       bar.append(button);
-      host.prepend(bar);
-    }
-    if (panelOpen) {
-      host.classList.add("gl-grab-open");
-      if (!host.querySelector(":scope > .gl-panel")) {
-        host.append(node("section", undefined, "gl-panel"));
-        renderPanel(); preview();
-      }
+      portal.append(bar);
     }
     activate();
   }
@@ -257,6 +272,7 @@ export function startGrabStudio() {
   window.addEventListener("independent-outfit-refresh", activate);
   return () => {
     observer.disconnect();
+    portal.remove();
     if (domFrame) cancelAnimationFrame(domFrame);
     if (saveTimer) clearTimeout(saveTimer);
     subscription?.data?.subscription?.unsubscribe?.();
