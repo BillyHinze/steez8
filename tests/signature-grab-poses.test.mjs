@@ -82,6 +82,10 @@ test("the game plays authored grab arms without unstable wrist IK", () => {
     "The unstable two-bone wrist attachment must not be active");
   assert(script.includes("sigPoles(this,this.grabStyle,n.airborne?this.grab:0,e)"),
     "Signature grabs must keep attached ski poles aligned while grabbing");
+  assert(script.includes("this.fine&&!(n.airborne&&this.grabStyle>=4&&this.grabStyle<=7&&this.grab>.001)&&this.poleGrip.update"),
+    "The stock skiing PoleGrip must not overwrite signature-grab pole orientation");
+  assert(rig.includes("pole.parent.getWorldQuaternion(controller.swapParent).invert()"),
+    "Signature poles must solve a stable parent-local orientation");
   assert(script.includes("if(this.grabStyle>=4&&this.grabStyle<=7){"),
     "Signature grabs must bypass the classic hand solver");
   assert(script.includes("if(!this.fine||E&&!r.grab||this.grab<=.001)this.grabContact.reset()"),
