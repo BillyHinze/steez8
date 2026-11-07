@@ -276,57 +276,45 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
 }
 
 /**
- * Keep the pole shafts pointing down and behind the rider during a signature
- * grab. The original pole grip assumes hands remain at their skiing sockets;
- * hand IK moves those sockets dramatically and otherwise swings the shafts
- * across the chest. Pole_L/R use local -Y as the shaft direction.
+ * Point the signature-grab poles down and slightly back in the RIDER'S space.
+ * The original PoleGrip controller targets skiing hand positions and must not
+ * also run while the hand/arm rig uses extreme signature-grab poses.
  *
- * This changes only the pole-bone rotation, never the rider's hand IK,
- * geometry, input log, or ski physics. Existing PoleGrip.restore() resets
- * the original pole rotations at the beginning of the next frame.
+ * Work in each pole's PARENT space rather than applying repeated corrections
+ * to its previous angle. This prevents pole rotation from accumulating and
+ * works identically in Chromium and WebKit regardless of frame rate.
  */
 export function stabilizeSignaturePoles(controller, style, strength, step = 1 / 60) {
-  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) {
-    controller?.signaturePoleHistory?.clear();
-    return false;
-  }
-  const history = controller.signaturePoleHistory ??= new Map();
-  const fade = smooth(Math.min(1, strength * 2));
+  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) return false;
+  const fade = smooth(strength);
   const rootRotation = controller.root.getWorldQuaternion(controller.switchRoot);
   let adjusted = 0;
   for (const side of ["L", "R"]) {
     const pole = controller.bones[`Pole_${side}`];
     if (!pole?.parent) continue;
-    pole.parent.getWorldQuaternion(controller.switchParent);
-    pole.getWorldQuaternion(controller.swapClip);
-    controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.swapClip).normalize();
+    // Record the original animation pose for the next frame's restore pass.
+    // Never leave a modified pole quaternion in the next frame's base.
+    controller.overlay(pole.name, 0, 0, 0);
+    // Desired pole direction in rider/root space: down and slightly outward/
+    // behind. Convert it to the hand bone's LOCAL coordinates.
     controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
       .normalize().applyQuaternion(rootRotation);
-    controller.delta.setFromUnitVectors(controller.gazeFace, controller.gazeTarget);
-    // Identity to the original pole orientation at grab fade-in/out.
-    controller.delta.slerp(controller.swapTurn.identity(), 1 - fade);
-    controller.swapClip.copy(controller.switchParent).invert();
-    controller.delta.premultiply(controller.swapClip).multiply(controller.switchParent);
-    pole.quaternion.premultiply(controller.delta).normalize();
-    // The standard pole controller can rotate the attachment sharply when
-    // hand positions change. Clamp the finished local pole quaternion to a
-    // continuous path, without changing the shaft's down/back target.
-    const previous = history.get(side);
-    if (previous && Number.isFinite(step) && step > 0) {
-      controller.delta.copy(pole.quaternion);
-      pole.quaternion.copy(previous)
-        .rotateTowards(controller.delta, 3.2 * Math.min(step, .05));
-    }
-    if (previous) previous.copy(pole.quaternion);
-    else history.set(side, pole.quaternion.clone());
+    pole.parent.getWorldQuaternion(controller.swapParent).invert();
+    controller.gazeTarget.applyQuaternion(controller.swapParent).normalize();
+    controller.swapClip.setFromUnitVectors(
+      controller.gazeFace.set(0, -1, 0), controller.gazeTarget
+    ).normalize();
+    // Local -Y is the shaft axis; point it toward the stable target.
+    // Only the grab fade-in/out blends back toward the normal pole pose.
+    pole.quaternion.slerp(controller.swapClip, fade).normalize();
     adjusted++;
   }
   if (adjusted && typeof window !== "undefined" &&
       (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug")) &&
       window.__steez8SignaturePose?.id === style) {
     const sample = window.__steez8SignaturePose;
-    for (const boneName of ["Elbow_L", "Elbow_R", "Hand_L", "Hand_R", "Pole_L", "Pole_R"]) {
-      sample.joints[boneName] = controller.bones[boneName]?.quaternion?.toArray()
+    for (const name of ["Elbow_L", "Elbow_R", "Hand_L", "Hand_R", "Pole_L", "Pole_R"]) {
+      sample.joints[name] = controller.bones[name]?.quaternion?.toArray()
         .map(v => +v.toFixed(4)) ?? null;
     }
     sample.poleAlignment = {};
