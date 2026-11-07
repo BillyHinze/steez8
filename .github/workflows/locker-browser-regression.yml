@@ -26,7 +26,7 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm run build:pages
         env:
-          BACKEND_ORIGIN: https://steez8-api.onrender.com
+          BACKEND_ORIGIN: http://127.0.0.1:4174
           PUBLIC_SITE_ORIGIN: https://novacryptotool.com
       - name: Install Chromium browser for interaction test
         run: |
@@ -36,9 +36,16 @@ jobs:
         shell: bash
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/steez8-http.log 2>&1 &
-          pid=$!
-          trap 'kill "$pid" 2>/dev/null || true' EXIT
-          node scripts/locker-browser-smoke.mjs
+          static_pid=$!
+          SINGLE_INSTANCE=1 PORT=4174 HOST=127.0.0.1 PUBLIC_ORIGIN=http://127.0.0.1:4173 ALLOWED_ORIGINS=http://127.0.0.1:4173 DATA_DIR=/tmp/steez8-locker-db DATABASE_DRIVER=libsql node --experimental-vm-modules server/index.mjs >/tmp/steez8-api.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$static_pid" "$api_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:4174/api/health >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4174/api/health
+          LOCKER_TEST_SIGNED_IN=1 node scripts/locker-browser-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
