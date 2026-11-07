@@ -69,13 +69,21 @@ try {
     await page.waitForTimeout(1000);
   }
   await page.waitForTimeout(1300);
+  // Close first-visit modal through the public UI, so this test exercises
+  // normal clickable Locker controls and screenshots show the actual rider.
+  const onboarding = page.locator(".modal-backdrop button").filter({ hasText: /got it/i }).first();
+  if (await onboarding.count()) {
+    await onboarding.click({ timeout: 12000 });
+    await page.waitForTimeout(400);
+    console.log("First-visit overlay dismissed before checking rider poses.");
+  }
   // Enabling Grab Lab must never crash the Locker or hide its original controls.
   const lab = page.getByRole("button", { name: /custom grabs/i }).first();
   assert(await lab.count() > 0, "The Grab Lab button never mounted");
   console.log("Onboarding modal before grab test:", (await page.locator(".modal-backdrop").allInnerTexts()).map(t=>t.slice(0,180)));
   // Bypass a first-run onboarding modal in this interaction test; never alter
   // product code or pretend the modal is a Grab Lab failure.
-  await lab.evaluate(element => element.click());
+  await lab.click({ timeout: 10000 });
   await page.waitForTimeout(1600);
   assert.equal(await page.locator("body > .gl-root").count(), 1,
     "Grab Lab must use an isolated portal outside the React app");
@@ -90,7 +98,7 @@ try {
   ]) {
     const card = page.getByRole("button", { name: new RegExp(label, "i") }).first();
     assert(await card.count() > 0, label + " missing from Grab Lab");
-    await card.evaluate(element => element.click());
+    await card.click({ timeout: 10000 });
     try {
       await page.waitForFunction(id => window.__steez8SignaturePose?.id === id, style, { timeout: 12000 });
     } catch (error) {
@@ -110,6 +118,7 @@ try {
     }
     await page.waitForTimeout(400);
     const actual = await page.evaluate(() => window.__steez8SignaturePose);
+    await page.screenshot({ path: `/tmp/steez8-${browserName}-pose-${style}.png` }).catch(() => {});
     assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
     assert(actual?.joints?.Leg_L && actual?.joints?.Knee_R,
       label + " did not pose the real skeletal legs");
