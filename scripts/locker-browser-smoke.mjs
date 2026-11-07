@@ -131,6 +131,33 @@ try {
     ]);
     assert(!silhouettes.has(signature), label + " reuses another grab silhouette");
     silhouettes.add(signature);
+    // The old smoke test inspected only one still frame. A repeating 1.5s
+    // airtime reset let the knees and skis snap wildly while still passing.
+    // Sample >3 seconds of the held pose and reject any large frame-to-frame
+    // lower-body jump, even when all the quaternions remain finite.
+    const movingBones = ["Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R"];
+    let previousJoints = actual.joints;
+    let largestStep = 0;
+    for (let frame = 0; frame < 35; frame++) {
+      await page.waitForTimeout(105);
+      const current = await page.evaluate(() => window.__steez8SignaturePose);
+      assert.equal(current?.id, style, label + " stopped playing while selected");
+      for (const name of movingBones) {
+        const qa = previousJoints[name], qb = current.joints?.[name];
+        assert(qa?.length === 4 && qb?.length === 4 &&
+          qb.every(Number.isFinite), label + ": invalid quaternion on " + name);
+        const mag = Math.hypot(...qb);
+        assert(Math.abs(mag - 1) < .025, label + ": non-unit quaternion on " + name);
+        const dot = Math.abs(qa.reduce((sum, value, i) => sum + value * qb[i], 0));
+        const change = 2 * Math.acos(Math.min(1, Math.max(0, dot)));
+        largestStep = Math.max(largestStep, change);
+        assert(change < .55,
+          label + ": " + name + " jumped " + change.toFixed(2) +
+          " radians in a single 105ms sample (max " + largestStep.toFixed(2) + ")");
+      }
+      previousJoints = current.joints;
+    }
+    console.log("SIGNATURE POSE STABILITY", label, "largest quaternion step", largestStep.toFixed(3));
     console.log("SIGNATURE RIG", label, "hands:", actual.activeGrips,
       "legs and skis:", signature.slice(0, 220));
   }
