@@ -137,6 +137,15 @@ export function applySignatureGrabPose(controller, style, strength, airTime = 0)
     controller.skiRotation(side,
       angles[0] * weight, angles[1] * weight, angles[2] * weight);
   }
+  if (typeof window !== "undefined" &&
+      (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug"))) {
+    const names = ["Torso", "Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R", "Arm_L", "Arm_R"];
+    window.__steez8SignaturePose = {
+      id: style, name: profile.name, activeGrips: 0, stage: "body", strength: +weight.toFixed(3),
+      joints: Object.fromEntries(names.map(name =>
+        [name, controller.bones?.[name]?.quaternion?.toArray().map(v => +v.toFixed(4)) ?? null])),
+    };
+  }
   return true;
 }
 
@@ -206,10 +215,10 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     applied++;
   }
   if (applied && typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).has("grabDebug")) {
+      (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug"))) {
     const names = ["Torso", "Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R", "Arm_L", "Arm_R"];
     window.__steez8SignaturePose = {
-      id: style, name: profile.name, activeGrips: applied,
+      id: style, name: profile.name, activeGrips: applied, stage: "wrist-IK",
       joints: Object.fromEntries(names.map(name =>
         [name, contact.root.getObjectByName(name)?.quaternion.toArray().map(v => +v.toFixed(4)) ?? null])),
     };
