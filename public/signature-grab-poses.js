@@ -8,7 +8,10 @@
  * All joint rotations are radians in the existing rig's YXZ overlay order.
  * These are authored poses, not aliases of Mute/Tail/Japan animation clips.
  * Existing physics, score IDs, replay packet formats and keyboard binds remain
- * unchanged. The final reach constraint targets actual Ski_L/Ski_R meshes.
+ * unchanged. Arms and hands use distinct authored rotations: forcing a
+ * second hand-to-ski inverse-kinematics pass caused arm and wrist instability.
+ * The experimental reach helper below is intentionally not called by the
+ * current runtime.
  */
 const pose = (id, name, skeleton, skis, grips) =>
   Object.freeze({
