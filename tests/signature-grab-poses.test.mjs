@@ -81,11 +81,20 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   assert(script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
   assert(!script.includes("`TailGrab`,`TailGrab`,`JapanGrab`,`JapanGrab`"),
     "The four signature styles still alias old Tail/Japan clips");
-  const foot = script.indexOf("this.fine&&!(this.grabStyle>=4&&this.grabStyle<=7&&this.grab>.001)&&this.footContact.update(.2+A*.14");
+  const foot = script.indexOf("this.fine&&this.footContact.update(.2+A*.14");
   const pose = script.indexOf("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)");
   const hand = script.indexOf("sigReach(this.grabContact,this.grabStyle,this.grab,e)");
   assert(foot >= 0 && foot < pose && pose < hand,
     "Foot IK must run before authored knee/hip pose, then new hand-to-ski IK");
+  // The baseline quaternion history must never contain the procedural
+  // signature pose itself: otherwise each subsequent frame re-adds the
+  // authored rotation and the legs/arms eventually spin uncontrollably.
+  const legHistory = script.indexOf("for(let[e,t]of this.lastJoints)/^(Leg_|Knee_|Foot_)/.test(e.name)&&t.copy(e.quaternion)", foot);
+  const armHistory = script.indexOf("for(let[e,t]of this.lastJoints)/^(Arm_|Elbow_|Hand_)/.test(e.name)&&t.copy(e.quaternion)", pose);
+  assert(foot < legHistory && legHistory < pose,
+    "The leg smoothing baseline must be saved BEFORE procedural grab rotation");
+  assert(pose < armHistory && armHistory < hand,
+    "The arm smoothing baseline must be saved BEFORE custom wrist IK");
   assert(script.includes("this.weights.Air+=t*this.grab"),
     "Signature grabs must use neutral Air, not another old grab clip");
 });
