@@ -77,12 +77,12 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   assert.doesNotThrow(()=>parse(script,{ecmaVersion:"latest",sourceType:"module"}));
   assert.doesNotThrow(()=>parse(rig,{ecmaVersion:"latest",sourceType:"module"}));
   assert(script.includes('from "../../../signature-grab-poses.js"'));
-  assert(script.includes("sigGrab(this,this.grabStyle,this.grab,n.airTime)"));
+  assert(script.includes("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)"));
   assert(script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
   assert(!script.includes("`TailGrab`,`TailGrab`,`JapanGrab`,`JapanGrab`"),
     "The four signature styles still alias old Tail/Japan clips");
   const foot = script.indexOf("this.fine&&this.footContact.update(.2+A*.14");
-  const pose = script.indexOf("sigGrab(this,this.grabStyle,this.grab,n.airTime)");
+  const pose = script.indexOf("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)");
   const hand = script.indexOf("sigReach(this.grabContact,this.grabStyle,this.grab,e)");
   assert(foot >= 0 && foot < pose && pose < hand,
     "Foot IK must run before authored knee/hip pose, then new hand-to-ski IK");
