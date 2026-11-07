@@ -135,13 +135,21 @@ try {
     // airtime reset let the knees and skis snap wildly while still passing.
     // Sample >3 seconds of the held pose and reject any large frame-to-frame
     // lower-body jump, even when all the quaternions remain finite.
-    const movingBones = ["Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R"];
+    const movingBones = [
+      "Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R",
+      "Arm_L", "Arm_R", "Elbow_L", "Elbow_R", "Hand_L", "Hand_R",
+      "Pole_L", "Pole_R"
+    ];
     let previousJoints = actual.joints;
     let largestStep = 0;
     for (let frame = 0; frame < 35; frame++) {
       await page.waitForTimeout(105);
       const current = await page.evaluate(() => window.__steez8SignaturePose);
       assert.equal(current?.id, style, label + " stopped playing while selected");
+      for (const side of ["L", "R"]) {
+        assert(current?.poleAlignment?.[side] >= .9,
+          label + ": " + side + " pole pointed across the rider instead of trailing");
+      }
       for (const name of movingBones) {
         const qa = previousJoints[name], qb = current.joints?.[name];
         assert(qa?.length === 4 && qb?.length === 4 &&
