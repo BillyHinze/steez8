@@ -8,7 +8,10 @@
  * All joint rotations are radians in the existing rig's YXZ overlay order.
  * These are authored poses, not aliases of Mute/Tail/Japan animation clips.
  * Existing physics, score IDs, replay packet formats and keyboard binds remain
- * unchanged. The final reach constraint targets actual Ski_L/Ski_R meshes.
+ * unchanged. Arms and hands use distinct authored rotations: forcing a
+ * second hand-to-ski inverse-kinematics pass caused arm and wrist instability.
+ * The experimental reach helper below is intentionally not called by the
+ * current runtime.
  */
 const pose = (id, name, skeleton, skis, grips) =>
   Object.freeze({
@@ -151,6 +154,24 @@ export function applySignatureGrabPose(controller, style, strength, airTime = 0)
 }
 
 /**
+ * Slew-limit the custom arm IK itself, not just its wrist target. Three.js
+ * two-bone aiming can choose a substantially different elbow solution when
+ * the limb nears full extension. A remembered local quaternion keeps that
+ * transition continuous without accumulating the rotation in the base rig.
+ */
+function limitSignatureJoint(contact, chain, joint, historyKey, step) {
+  const previous = chain[historyKey];
+  if (chain.valid && previous && Number.isFinite(step) && step > 0) {
+    contact.held.copy(joint.quaternion);
+    joint.quaternion.copy(previous)
+      .rotateTowards(contact.held, 2.2 * Math.min(step, .05));
+    joint.updateWorldMatrix(false, true);
+  }
+  if (previous) previous.copy(joint.quaternion);
+  else chain[historyKey] = joint.quaternion.clone();
+}
+
+/**
  * Two-bone IK attachment: wrists actually reach the correct ski mesh.
  * On original grabs, the existing solver remains unchanged.
  * This uses the controller's existing GrabContact arm solver to avoid
@@ -166,9 +187,18 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
   for (const chain of contact.chains) {
     const grip = profile.grips[chain.side];
     if (!grip) continue;
+    // Grounded transitions call GrabContact.reset(), so stale signature
+    // quaternions cannot leak from one jump into the next.
+    if (!chain.valid) {
+      chain.signatureArmRotation = null;
+      chain.signatureElbowRotation = null;
+    }
     const ski = grip.ski === "opposite" ? chain.ski : chain.tailSki;
     if (!ski) continue;
-    const blend = weight * grip.reach;
+    // Reach only part-way toward a long ski tip. A fully constrained two-bone
+    // arm cannot physically reach some signature targets; forcing it there
+    // folds the elbows across the chest and sends the poles through the body.
+    const blend = Math.min(.72, weight * grip.reach * .72);
     chain.arm.getWorldPosition(contact.start);
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
@@ -176,6 +206,16 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     contact.socket.set(...grip.socket);
     ski.localToWorld(contact.socket);
     contact.target.lerpVectors(contact.hand, contact.socket, blend);
+    // Limit wrist-target travel when changing grabs, similar to the original
+    // GrabContact solver. A single bad frame must not whip the entire arm.
+    if (chain.valid && Number.isFinite(step) && step > 0) {
+      contact.previous.copy(chain.previous);
+      contact.root.localToWorld(contact.previous);
+      const jump = contact.previous.distanceTo(contact.target);
+      const allowed = 2.7 * Math.min(step, .05);
+      if (jump > allowed) contact.target.lerpVectors(
+        contact.previous, contact.target, allowed / jump);
+    }
 
     // A physical two-link arm cannot extend farther than upper + forearm.
     const upper = contact.start.distanceTo(contact.elbow);
@@ -200,16 +240,24 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
       .addScaledVector(contact.axis, along)
       .addScaledVector(contact.bend.normalize(), height);
 
-    // Reuse the stable getWorldQuaternion / two-bone aim helpers.
+    // The regular grab solver is disabled for signature grabs; save the
+    // unmodified bone rotations for GrabContact.restore() on the next frame.
+    // Otherwise this IK would accumulate its own changes frame after frame.
+    for (const joint of [chain.arm, chain.elbow, chain.hand]) {
+      if (!contact.saved.has(joint)) contact.saved.set(joint, joint.quaternion.clone());
+    }
     contact.aim(chain.arm, contact.start, contact.elbow, contact.middle);
+    limitSignatureJoint(contact, chain, chain.arm, "signatureArmRotation", step);
     chain.elbow.getWorldPosition(contact.elbow);
     chain.hand.getWorldPosition(contact.hand);
     contact.aim(chain.elbow, contact.elbow, contact.hand, contact.target);
-    ski.getWorldQuaternion(contact.held);
-    const restRotation = grip.ski === "opposite" ? chain.onAcross : chain.onTail;
-    contact.held.multiply(restRotation);
-    contact.wrist.slerp(contact.held, blend);
-    contact.rotate(chain.hand, contact.wrist);
+    limitSignatureJoint(contact, chain, chain.elbow, "signatureElbowRotation", step);
+    // The pose profile already authors Hand_L/Hand_R. Only solve arm and
+    // elbow positions; never apply a second world-space wrist correction.
+    // A child hand follows its articulated elbow naturally, and its own
+    // local rotation stays stable instead of flipping under two competing
+    // orientation constraints.
+    chain.hand.updateWorldMatrix(false, true);
     chain.hand.getWorldPosition(chain.previous);
     contact.root.worldToLocal(chain.previous);
     chain.valid = true;
@@ -225,4 +273,60 @@ export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
     };
   }
   return applied > 0;
+}
+
+/**
+ * Point the signature-grab poles down and slightly back in the RIDER'S space.
+ * The original PoleGrip controller targets skiing hand positions and must not
+ * also run while the hand/arm rig uses extreme signature-grab poses.
+ *
+ * Work in each pole's PARENT space rather than applying repeated corrections
+ * to its previous angle. This prevents pole rotation from accumulating and
+ * works identically in Chromium and WebKit regardless of frame rate.
+ */
+export function stabilizeSignaturePoles(controller, style, strength, step = 1 / 60) {
+  if (!isSignatureGrab(style) || controller?.board || !(strength > .001)) return false;
+  const fade = smooth(strength);
+  const rootRotation = controller.root.getWorldQuaternion(controller.switchRoot);
+  let adjusted = 0;
+  for (const side of ["L", "R"]) {
+    const pole = controller.bones[`Pole_${side}`];
+    if (!pole?.parent) continue;
+    // Record the original animation pose for the next frame's restore pass.
+    // Never leave a modified pole quaternion in the next frame's base.
+    controller.overlay(pole.name, 0, 0, 0);
+    // Desired pole direction in rider/root space: down and slightly outward/
+    // behind. Convert it to the hand bone's LOCAL coordinates.
+    controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
+      .normalize().applyQuaternion(rootRotation);
+    pole.parent.getWorldQuaternion(controller.swapParent).invert();
+    controller.gazeTarget.applyQuaternion(controller.swapParent).normalize();
+    controller.swapClip.setFromUnitVectors(
+      controller.gazeFace.set(0, -1, 0), controller.gazeTarget
+    ).normalize();
+    // Local -Y is the shaft axis; point it toward the stable target.
+    // Only the grab fade-in/out blends back toward the normal pole pose.
+    pole.quaternion.slerp(controller.swapClip, fade).normalize();
+    adjusted++;
+  }
+  if (adjusted && typeof window !== "undefined" &&
+      (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug")) &&
+      window.__steez8SignaturePose?.id === style) {
+    const sample = window.__steez8SignaturePose;
+    for (const name of ["Elbow_L", "Elbow_R", "Hand_L", "Hand_R", "Pole_L", "Pole_R"]) {
+      sample.joints[name] = controller.bones[name]?.quaternion?.toArray()
+        .map(v => +v.toFixed(4)) ?? null;
+    }
+    sample.poleAlignment = {};
+    for (const side of ["L", "R"]) {
+      const pole = controller.bones[`Pole_${side}`];
+      if (!pole) continue;
+      pole.getWorldQuaternion(controller.swapClip);
+      controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.swapClip).normalize();
+      controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
+        .normalize().applyQuaternion(rootRotation);
+      sample.poleAlignment[side] = +controller.gazeFace.dot(controller.gazeTarget).toFixed(3);
+    }
+  }
+  return adjusted > 0;
 }

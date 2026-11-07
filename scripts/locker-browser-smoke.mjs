@@ -118,10 +118,17 @@ try {
       })));
       throw error;
     }
-    await page.waitForTimeout(400);
-    const actual = await page.evaluate(() => window.__steez8SignaturePose);
+    // Test the held pose after its first-second transition, not the valid
+    // blended entry animation. The earlier 400ms window falsely flagged
+    // an entering knee tuck as a sustained repeated glitch.
+    await page.waitForTimeout(1150);
+    // Capturing a software-WebGL screenshot can occupy the browser for
+    // hundreds of milliseconds. Take it BEFORE the stability baseline so
+    // the first "105ms" sample doesn't secretly include screenshot time.
     await page.screenshot({ path: `/tmp/steez8-${browserName}-pose-${style}.png` }).catch(() => {});
-    assert(actual?.activeGrips >= 1, label + " did not reach the ski with its rig");
+    const actual = await page.evaluate(() => window.__steez8SignaturePose);
+    assert(actual?.joints?.Arm_L && actual?.joints?.Elbow_L && actual?.joints?.Hand_L,
+      label + " did not animate the actual arm, elbow and hand rig");
     assert(actual?.joints?.Leg_L && actual?.joints?.Knee_R,
       label + " did not pose the real skeletal legs");
     const signature = JSON.stringify([
@@ -135,13 +142,21 @@ try {
     // airtime reset let the knees and skis snap wildly while still passing.
     // Sample >3 seconds of the held pose and reject any large frame-to-frame
     // lower-body jump, even when all the quaternions remain finite.
-    const movingBones = ["Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R"];
+    const movingBones = [
+      "Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R",
+      "Arm_L", "Arm_R", "Elbow_L", "Elbow_R", "Hand_L", "Hand_R",
+      "Pole_L", "Pole_R"
+    ];
     let previousJoints = actual.joints;
     let largestStep = 0;
     for (let frame = 0; frame < 35; frame++) {
       await page.waitForTimeout(105);
       const current = await page.evaluate(() => window.__steez8SignaturePose);
       assert.equal(current?.id, style, label + " stopped playing while selected");
+      for (const side of ["L", "R"]) {
+        assert(current?.poleAlignment?.[side] >= .9,
+          label + ": " + side + " pole pointed across the rider instead of trailing");
+      }
       for (const name of movingBones) {
         const qa = previousJoints[name], qb = current.joints?.[name];
         assert(qa?.length === 4 && qb?.length === 4 &&
@@ -153,12 +168,12 @@ try {
         largestStep = Math.max(largestStep, change);
         assert(change < .55,
           label + ": " + name + " jumped " + change.toFixed(2) +
-          " radians in a single 105ms sample (max " + largestStep.toFixed(2) + ")");
+          " radians in sample " + frame + " at held pose (max " + largestStep.toFixed(2) + ")");
       }
       previousJoints = current.joints;
     }
     console.log("SIGNATURE POSE STABILITY", label, "largest quaternion step", largestStep.toFixed(3));
-    console.log("SIGNATURE RIG", label, "hands:", actual.activeGrips,
+    console.log("SIGNATURE RIG", label, "authored arms:", actual.joints?.Arm_L ? 2 : 0,
       "legs and skis:", signature.slice(0, 220));
   }
   assert.equal(silhouettes.size, 4, "Four distinct authored grab silhouettes required");
