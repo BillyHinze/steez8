@@ -22,6 +22,29 @@ page.on("response", response => {
 });
 
 try {
+  if (process.env.LOCKER_TEST_SIGNED_IN === "1") {
+    const backend = "http://127.0.0.1:4174";
+    const email = "locker-browser-smoke@example.test";
+    const signup = await fetch(backend + "/auth/v1/signup", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email, password: "TemporaryLockerBrowserPass123", data: { handle: "LockerSmoke01" } }),
+    });
+    assert.equal(signup.status, 200, "Test account signup failed: " + await signup.text().catch(() => ""));
+    const session = await signup.json();
+    console.log("Test account created; starting authenticated Locker check.");
+    await page.goto("http://127.0.0.1:4173/", { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForFunction(() => window.CORK7_SERVICES?.apiOrigin === "http://127.0.0.1:4174", { timeout: 15000 });
+    const login = await page.evaluate(async tokens => {
+      const mod = await import("/_next/static/chunks/supabase-BEhtaJUq.js");
+      const result = await mod.t().auth.setSession({
+        access_token: tokens.access_token, refresh_token: tokens.refresh_token,
+      });
+      return { error: result.error?.message, signedIn: !!result.data?.session };
+    }, session);
+    console.log("Signed-in browser state:", login);
+    assert.equal(login.signedIn, true, "Login state was not established in browser: " + login.error);
+  }
   console.log("Opening STEEZ8 with ?open=locker in headless Chromium");
   await page.goto(process.env.LOCKER_TEST_URL || "http://127.0.0.1:4173/?open=locker", {
     waitUntil: "domcontentloaded", timeout: 45000,
