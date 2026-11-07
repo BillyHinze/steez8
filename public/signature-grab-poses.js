@@ -117,10 +117,10 @@ function smooth(value) {
 }
 
 /**
- * The body pose is applied after the optional foot-contact stage and before
- * arm IK. While a signature grab is held, the regular airborne foot-contact
- * solver is bypassed: its knee solution fights these extreme authored poses
- * and can flip the legs between incompatible joint orientations.
+ * The body pose is applied after the normal foot-contact IK and before arm
+ * IK. The animation controller stores its smoothed leg and arm baselines
+ * before adding the procedural signature poses. Otherwise those extra joint
+ * rotations leak into the next frame's baseline and compound endlessly.
  */
 export function applySignatureGrabPose(controller, style, strength, airTime = 0) {
   const profile = SIGNATURE_GRAB_POSES[style];
