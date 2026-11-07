@@ -70,7 +70,7 @@ test("all four 3D poses animate hips, knees, both skis and arms separately", () 
   assert.equal(outputs.size,4);
 });
 
-test("the game plays genuine poses after foot IK and anchors wrists with the new IK", () => {
+test("the game plays authored grab arms without unstable wrist IK", () => {
   const script = fs.readFileSync(new URL(
     "../public/_next/static/chunks/rider-animation-1mQglCn7.js", import.meta.url), "utf8");
   const rig = fs.readFileSync(new URL("../public/signature-grab-poses.js",import.meta.url),"utf8");
@@ -78,20 +78,20 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   assert.doesNotThrow(()=>parse(rig,{ecmaVersion:"latest",sourceType:"module"}));
   assert(script.includes('from "../../../signature-grab-poses.js"'));
   assert(script.includes("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)"));
-  assert(script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
+  assert(!script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"),
+    "The unstable two-bone wrist attachment must not be active");
   assert(script.includes("sigPoles(this,this.grabStyle,n.airborne?this.grab:0)"),
     "Signature grabs must keep attached ski poles aligned while grabbing");
   assert(script.includes("if(this.grabStyle>=4&&this.grabStyle<=7){"),
     "Signature grabs must bypass the classic hand solver");
   assert(script.includes("if(!this.fine||E&&!r.grab||this.grab<=.001)this.grabContact.reset()"),
-    "Signature IK target continuity must be preserved while the grab is held");
+    "Signature styles must isolate the original hand contact solver");
   assert(!script.includes("`TailGrab`,`TailGrab`,`JapanGrab`,`JapanGrab`"),
     "The four signature styles still alias old Tail/Japan clips");
   const foot = script.indexOf("this.fine&&this.footContact.update(.2+A*.14");
   const pose = script.indexOf("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)");
-  const hand = script.indexOf("sigReach(this.grabContact,this.grabStyle,this.grab,e)");
-  assert(foot >= 0 && foot < pose && pose < hand,
-    "Foot IK must run before authored knee/hip pose, then new hand-to-ski IK");
+  assert(foot >= 0 && foot < pose,
+    "Foot IK must run before authored knee/hip pose");
   // The baseline quaternion history must never contain the procedural
   // signature pose itself: otherwise each subsequent frame re-adds the
   // authored rotation and the legs/arms eventually spin uncontrollably.
@@ -102,7 +102,7 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
     "The leg smoothing baseline must be saved BEFORE procedural grab rotation");
   assert(legHistory < armHistory && armHistory < pose,
     "Signature arms must save their baseline BEFORE applying authored arm rotations");
-  assert(pose < classicArmHistory && classicArmHistory < hand,
+  assert(pose < classicArmHistory,
     "Original grabs must preserve their normal post-contact arm baseline");
   assert(script.includes("this.weights.Air+=t*this.grab"),
     "Signature grabs must use neutral Air, not another old grab clip");
