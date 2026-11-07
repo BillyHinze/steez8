@@ -23,7 +23,7 @@ await page.addInitScript(() => {
 });
 const exceptions = [];
 const badHttp = [];
-page.on("pageerror", error => exceptions.push(error.stack || error.message));
+page.on("pageerror", error => { exceptions.push(error.stack || error.message); console.error("BROWSER PAGEERROR:", error.stack || error.message); });
 page.on("console", message => {
   if (message.type() === "error") console.error("BROWSER CONSOLE:", message.text().slice(0, 1200));
 });
@@ -102,6 +102,7 @@ try {
     try {
       await page.waitForFunction(id => window.__steez8SignaturePose?.id === id, style, { timeout: 12000 });
     } catch (error) {
+      console.error("BROWSER ERRORS SO FAR:", exceptions.slice(0,12));
       console.log("SIGNATURE DEBUG", await page.evaluate(() => ({
         url: location.href,
         render: window.__steez8SignaturePose,
