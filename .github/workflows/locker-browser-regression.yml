@@ -1,9 +1,14 @@
-name: Reproduce Locker in Chromium
+name: Browser regression — signed-in Locker and Grab Lab
 
 on:
   push:
-    branches: [debug/grab-lab-browser-repro]
+    branches: [main, debug/grab-lab-browser-repro]
     paths: ['scripts/locker-browser-smoke.mjs', '.github/workflows/locker-browser-regression.yml', 'public/**']
+  pull_request:
+    paths:
+      - 'public/**'
+      - 'scripts/locker-browser-smoke.mjs'
+      - '.github/workflows/locker-browser-regression.yml'
   workflow_dispatch:
 
 permissions:
