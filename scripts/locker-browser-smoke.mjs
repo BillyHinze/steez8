@@ -4,10 +4,15 @@ import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
 
 const pkg = pathToFileURL("/tmp/steez8-playwright/node_modules/playwright/index.mjs").href;
-const { chromium } = await import(pkg);
-const browser = await chromium.launch({
+const playwright = await import(pkg);
+const browserName = process.env.LOCKER_TEST_BROWSER || "chromium";
+const browserType = playwright[browserName];
+assert(browserType, "Unsupported browser: " + browserName);
+const browser = await browserType.launch({
   headless: true,
-  args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-webgl", "--disable-dev-shm-usage"],
+  ...(browserName === "chromium"
+    ? { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-webgl", "--disable-dev-shm-usage"] }
+    : {}),
 });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
 const exceptions = [];
@@ -24,11 +29,11 @@ page.on("response", response => {
 try {
   if (process.env.LOCKER_TEST_SIGNED_IN === "1") {
     const backend = "http://127.0.0.1:4174";
-    const email = "locker-browser-smoke@example.test";
+    const email = browserName + "-locker-browser-smoke@example.test";
     const signup = await fetch(backend + "/auth/v1/signup", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password: "TemporaryLockerBrowserPass123", data: { handle: "LockerSmoke01" } }),
+      body: JSON.stringify({ email, password: "TemporaryLockerBrowserPass123", data: { handle: browserName === "webkit" ? "LockerWebKit" : "LockerChromium" } }),
     });
     if (signup.status !== 200) throw Error("Test account signup failed: " + signup.status + " " + await signup.text().catch(() => ""));
     const session = await signup.json();
@@ -45,7 +50,7 @@ try {
     console.log("Signed-in browser state:", login);
     assert.equal(login.signedIn, true, "Login state was not established in browser: " + login.error);
   }
-  console.log("Opening STEEZ8 with ?open=locker in headless Chromium");
+  console.log("Opening STEEZ8 with ?open=locker in headless " + browserName + "");
   await page.goto(process.env.LOCKER_TEST_URL || "http://127.0.0.1:4173/?open=locker", {
     waitUntil: "domcontentloaded", timeout: 45000,
   });
