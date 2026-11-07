@@ -1,0 +1,45 @@
+/* STEEZ8 Grab Lab — independent of the recovered React bundle's styling. */
+.bc-locker-controls .gl-bar{display:flex;align-items:center;gap:10px;flex:none;padding:4px 4px 8px;margin:0 0 7px;border-bottom:1px solid #7899a83d}
+.bc-locker-controls .gl-open{font:800 12px/1.2 system-ui,sans-serif;letter-spacing:.095em;text-transform:uppercase;cursor:pointer;border:1px solid #a6d8e280;color:#f3f8f5;background:linear-gradient(115deg,#1a4f5f,#142533);border-radius:11px;min-height:40px;padding:9px 13px;flex:1;display:flex;justify-content:space-between;align-items:center}
+.bc-locker-controls .gl-open::after{content:'›';font-size:22px;line-height:10px}
+.bc-locker-controls .gl-open[aria-expanded="true"]{background:#e9f0e9;color:#122a32}
+.bc-locker-controls.gl-grab-open > :not(.gl-bar):not(.gl-panel){display:none!important}
+.bc-locker-controls.gl-grab-open{overflow:hidden!important}
+.bc-locker-controls .gl-panel{display:flex;flex-direction:column;flex:1;min-height:0;color:#e9f2f3;font:500 12px/1.45 system-ui,sans-serif}
+.bc-locker-controls .gl-panel *{box-sizing:border-box}
+.bc-locker-controls .gl-panel h2,.bc-locker-controls .gl-panel h3{font-family:inherit;text-transform:none}
+.bc-locker-controls .gl-intro{padding:5px 4px 8px}
+.bc-locker-controls .gl-kicker{color:#8fe3e6;font-size:10px;font-weight:800;letter-spacing:.16em}
+.bc-locker-controls .gl-intro h2{margin:4px 0 1px!important;font-size:29px!important;line-height:1.08;font-weight:900;letter-spacing:-.04em;color:#f5faf6}
+.bc-locker-controls .gl-intro p{color:#bed2d6;margin:5px 0 0;font-size:11px;line-height:1.5}
+.bc-locker-controls .gl-ride-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid #91b7bd45;border-radius:12px;margin:8px 4px;background:#0d2332}
+.bc-locker-controls .gl-ride-tabs button{cursor:pointer;border:0;border-radius:9px;background:transparent;color:#b9d0d4;padding:11px 5px;font:800 12px system-ui,sans-serif}
+.bc-locker-controls .gl-ride-tabs button[aria-pressed="true"]{background:#f3f1e8;color:#0e252e}
+.bc-locker-controls .gl-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#b4d3d7;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin:14px 4px 8px}
+.bc-locker-controls .gl-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:0 4px}
+.bc-locker-controls .gl-slot{min-width:0;cursor:pointer;background:#132a3b;border:1px solid #82a7b36b;border-radius:12px;display:flex;flex-direction:column;text-align:left;padding:10px 8px;min-height:86px;color:#edf7f7}
+.bc-locker-controls .gl-slot[aria-pressed="true"]{background:#e5f4ed;color:#10252e;border-color:#fdfefc;box-shadow:0 0 0 1px #fdfefc}
+.bc-locker-controls .gl-key{font:800 10px system-ui,sans-serif;letter-spacing:.06em;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;border:1px solid #aac4c7a0;border-radius:5px;padding:2px 7px;min-height:22px}
+.bc-locker-controls .gl-slot strong{font-size:11px;line-height:1.25;overflow-wrap:anywhere;margin-top:auto;padding-top:9px}
+.bc-locker-controls .gl-scroll{padding:0 3px 6px;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#769da5 transparent;flex:1}
+.bc-locker-controls .gl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bc-locker-controls .gl-card{min-width:0;cursor:pointer;text-align:left;display:flex;flex-direction:column;justify-content:space-between;gap:7px;background:#102231d9;color:#e3eff1;border:1px solid #7395a65e;border-radius:12px;min-height:103px;padding:11px}
+.bc-locker-controls .gl-card[aria-pressed="true"]{background:#f5f3e9;color:#122936;border-color:#fff;box-shadow:0 0 0 1px #fff}
+.bc-locker-controls .gl-card small{font:700 9px/1.2 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.76}
+.bc-locker-controls .gl-card strong{font:900 15px/1.1 system-ui,sans-serif;letter-spacing:-.025em}
+.bc-locker-controls .gl-card .gl-detail{font:500 10px/1.35 system-ui,sans-serif;opacity:.85}
+.bc-locker-controls .gl-card .gl-equipped{font:900 9px system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#3df0cb}
+.bc-locker-controls .gl-card[aria-pressed="true"] .gl-equipped{color:#126a5b}
+.bc-locker-controls .gl-card:hover,.bc-locker-controls .gl-slot:hover{border-color:#e5f5e9}
+.bc-locker-controls .gl-bottom{padding:9px 4px 6px;border-top:1px solid #8eb8bf46;flex:none}
+.bc-locker-controls .gl-preview{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.bc-locker-controls .gl-preview button{background:#17374a;color:#ecf7f5;border:1px solid #88bfc980;border-radius:8px;min-height:32px;padding:5px 10px;cursor:pointer;font:700 10px system-ui,sans-serif}
+.bc-locker-controls .gl-status{margin:6px 0 0;font:600 10px/1.35 system-ui,sans-serif;color:#a8c8c8;min-height:13px}
+.bc-locker-controls .gl-status.is-error{color:#ffd0aa}
+.bc-locker-controls .gl-open:focus-visible,.bc-locker-controls .gl-panel button:focus-visible{outline:2px solid #f4fc85;outline-offset:2px}
+@media (max-width:620px){
+  .bc-locker-controls .gl-card{min-height:100px}
+  .bc-locker-controls .gl-intro h2{font-size:26px!important}
+  .bc-locker-controls.gl-grab-open{min-height:450px!important}
+}
+@media (prefers-reduced-motion:reduce){.bc-locker-controls .gl-card,.bc-locker-controls .gl-slot{scroll-behavior:auto}}
