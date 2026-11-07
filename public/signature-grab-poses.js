@@ -275,5 +275,24 @@ export function stabilizeSignaturePoles(controller, style, strength) {
     pole.quaternion.premultiply(controller.delta).normalize();
     adjusted++;
   }
+  if (adjusted && typeof window !== "undefined" &&
+      (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug")) &&
+      window.__steez8SignaturePose?.id === style) {
+    const sample = window.__steez8SignaturePose;
+    for (const boneName of ["Elbow_L", "Elbow_R", "Hand_L", "Hand_R", "Pole_L", "Pole_R"]) {
+      sample.joints[boneName] = controller.bones[boneName]?.quaternion?.toArray()
+        .map(v => +v.toFixed(4)) ?? null;
+    }
+    sample.poleAlignment = {};
+    for (const side of ["L", "R"]) {
+      const pole = controller.bones[`Pole_${side}`];
+      if (!pole) continue;
+      pole.getWorldQuaternion(controller.switchClip);
+      controller.gazeFace.set(0, -1, 0).applyQuaternion(controller.switchClip).normalize();
+      controller.gazeTarget.set(side === "L" ? -.22 : .22, -1, -.38)
+        .normalize().applyQuaternion(rootRotation);
+      sample.poleAlignment[side] = +controller.gazeFace.dot(controller.gazeTarget).toFixed(3);
+    }
+  }
   return adjusted > 0;
 }
