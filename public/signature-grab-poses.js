@@ -1,0 +1,218 @@
+/**
+ * Original STEEZ8 signature ski-grab choreography.
+ *
+ * Screenshot references: Blunt (cross-body crouch), Rocket Air (long forward
+ * extension), True Nose (one ski drawn almost upright beside the chest),
+ * Back Scratcher (both tails pulled high behind the rider).
+ *
+ * All joint rotations are radians in the existing rig's YXZ overlay order.
+ * These are authored poses, not aliases of Mute/Tail/Japan animation clips.
+ * Existing physics, score IDs, replay packet formats and keyboard binds remain
+ * unchanged. The final reach constraint targets actual Ski_L/Ski_R meshes.
+ */
+const pose = (id, name, skeleton, skis, grips) =>
+  Object.freeze({
+    id, name,
+    skeleton: Object.freeze(skeleton),
+    skis: Object.freeze(skis),
+    grips: Object.freeze(grips),
+  });
+
+const freezeBones = bones =>
+  Object.freeze(Object.fromEntries(Object.entries(bones).map(([name, values]) =>
+    [name, Object.freeze(values)])));
+
+export const SIGNATURE_GRAB_POSES = Object.freeze({
+  4: pose(4, "Blunt",
+    freezeBones({
+      // Low one-sided crouch; the cross-body hand reaches across the front ski.
+      Torso: [.38, -.22, .22], Spine: [.22, -.19, .08],
+      Neck: [-.10, .16, -.10], Head: [-.12, .19, -.08],
+      Leg_L: [.48, -.09, -.20], Knee_L: [-.68, 0, .10],
+      Leg_R: [.82, .10, .25], Knee_R: [-1.03, -.12, -.13],
+      Foot_L: [.18, -.06, -.14], Foot_R: [.25, .10, .20],
+      Arm_L: [.36, -.28, .53], Elbow_L: [-.72, -.05, .16],
+      Hand_L: [-.20, 0, -.06],
+      Arm_R: [-.23, .20, -.52], Elbow_R: [.30, .02, -.14],
+      Hand_R: [.12, .08, 0],
+    }),
+    Object.freeze({ L: [.16, -.13, -.12], R: [-.34, .18, .24] }),
+    Object.freeze({
+      L: Object.freeze({ ski: "opposite", socket: Object.freeze([-.08, .10, .70]), reach: .94 }),
+    })
+  ),
+  5: pose(5, "Rocket Air",
+    freezeBones({
+      // Project both skis forward, straighten the knees and reach toward tips.
+      Torso: [.64, 0, -.04], Spine: [.26, 0, 0],
+      Neck: [-.18, 0, 0], Head: [-.12, .06, 0],
+      Leg_L: [-.35, -.06, -.06], Knee_L: [.22, .02, 0],
+      Leg_R: [-.39, .06, .06], Knee_R: [.23, -.02, 0],
+      Foot_L: [.32, -.04, -.04], Foot_R: [.33, .04, .04],
+      Arm_L: [.65, -.15, .22], Elbow_L: [-.64, .03, .10],
+      Hand_L: [-.10, -.03, 0],
+      Arm_R: [.66, .12, -.22], Elbow_R: [-.62, -.03, -.10],
+      Hand_R: [-.09, .03, 0],
+    }),
+    Object.freeze({ L: [.29, -.05, -.12], R: [.28, .05, .12] }),
+    Object.freeze({
+      L: Object.freeze({ ski: "same", socket: Object.freeze([-.035, .07, .92]), reach: .98 }),
+      R: Object.freeze({ ski: "same", socket: Object.freeze([.035, .07, .92]), reach: .98 }),
+    })
+  ),
+  6: pose(6, "True Nose",
+    freezeBones({
+      // Bring one leading ski upright beside the chest in a tight forward tuck.
+      Torso: [.42, -.31, .20], Spine: [.26, -.15, .07],
+      Neck: [-.18, .12, -.07], Head: [-.15, .22, .05],
+      Leg_L: [1.08, -.19, -.13], Knee_L: [-1.24, -.06, .05],
+      Leg_R: [.54, .05, .14], Knee_R: [-.78, 0, -.08],
+      Foot_L: [.65, -.16, -.08], Foot_R: [.10, .06, .12],
+      Arm_L: [.48, -.29, .32], Elbow_L: [-.70, .05, .06],
+      Hand_L: [-.11, 0, 0],
+      Arm_R: [-.11, .13, -.50], Elbow_R: [.31, 0, -.10],
+      Hand_R: [.12, 0, 0],
+    }),
+    Object.freeze({ L: [.94, -.16, .12], R: [-.12, .10, -.13] }),
+    Object.freeze({
+      L: Object.freeze({ ski: "same", socket: Object.freeze([-.05, .08, 1.04]), reach: 1 }),
+    })
+  ),
+  7: pose(7, "Back Scratcher",
+    freezeBones({
+      // Deep arched tuck with the rear ski sections thrown behind the head.
+      Torso: [-.30, .13, -.12], Spine: [-.38, .06, -.06],
+      Neck: [.17, -.11, .05], Head: [.18, -.09, .05],
+      Leg_L: [-.99, -.04, -.14], Knee_L: [1.43, -.07, -.08],
+      Leg_R: [-1.07, .04, .14], Knee_R: [1.50, .07, .08],
+      Foot_L: [-.58, -.08, -.12], Foot_R: [-.60, .08, .12],
+      Arm_L: [-.40, -.18, .68], Elbow_L: [-1.04, -.10, .18],
+      Hand_L: [-.12, 0, 0],
+      Arm_R: [-.47, .18, -.70], Elbow_R: [-1.01, .12, -.20],
+      Hand_R: [-.13, 0, 0],
+    }),
+    Object.freeze({ L: [-.61, -.12, -.10], R: [-.65, .12, .10] }),
+    Object.freeze({
+      L: Object.freeze({ ski: "same", socket: Object.freeze([-.07, .08, -.89]), reach: .98 }),
+      R: Object.freeze({ ski: "same", socket: Object.freeze([.07, .08, -.89]), reach: .98 }),
+    })
+  ),
+});
+
+export const SIGNATURE_GRAB_IDS = Object.freeze([4, 5, 6, 7]);
+
+export function isSignatureGrab(style) {
+  return Number.isInteger(style) && Object.hasOwn(SIGNATURE_GRAB_POSES, style);
+}
+export function signatureGrip(style, side) {
+  if (side !== "L" && side !== "R") return null;
+  return SIGNATURE_GRAB_POSES[style]?.grips[side] ?? null;
+}
+function clamp01(value) {
+  return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
+}
+function smooth(value) {
+  const x = clamp01(value);
+  return x * x * (3 - 2 * x);
+}
+
+/**
+ * The body pose is applied after leg IK and before arm IK. This is important:
+ * putting hip/knee changes before footContact.update() causes the old foot IK
+ * to erase them, which was why the previous "new" grabs looked like remixes.
+ */
+export function applySignatureGrabPose(controller, style, strength, airTime = 0) {
+  const profile = SIGNATURE_GRAB_POSES[style];
+  if (!profile || controller?.board) return false;
+  const weight = smooth(strength);
+  if (weight < .0001) return false;
+  const settle = Math.sin((Number.isFinite(airTime) ? airTime : 0) * 2.15) * .010 * weight;
+  for (const [bone, angle] of Object.entries(profile.skeleton)) {
+    // Motion is centred on the held silhouette; no abrupt new spin/flip input.
+    const breath = bone === "Spine" || bone === "Torso" ? settle : 0;
+    controller.overlay(bone,
+      angle[0] * weight + breath, angle[1] * weight, angle[2] * weight);
+  }
+  for (const [side, angles] of Object.entries(profile.skis)) {
+    controller.skiRotation(side,
+      angles[0] * weight, angles[1] * weight, angles[2] * weight);
+  }
+  return true;
+}
+
+/**
+ * Two-bone IK attachment: wrists actually reach the correct ski mesh.
+ * On original grabs, the existing solver remains unchanged.
+ * This uses the controller's existing GrabContact arm solver to avoid
+ * allocating per-frame Three.js objects and to preserve pole/hand rigging.
+ */
+export function reachSignatureGrab(contact, style, strength, step = 1 / 60) {
+  const profile = SIGNATURE_GRAB_POSES[style];
+  if (!profile) return false;
+  const weight = smooth(strength);
+  if (weight < .001) return false;
+  contact.root.updateWorldMatrix(true, true);
+  let applied = 0;
+  for (const chain of contact.chains) {
+    const grip = profile.grips[chain.side];
+    if (!grip) continue;
+    const ski = grip.ski === "opposite" ? chain.ski : chain.tailSki;
+    if (!ski) continue;
+    const blend = weight * grip.reach;
+    chain.arm.getWorldPosition(contact.start);
+    chain.elbow.getWorldPosition(contact.elbow);
+    chain.hand.getWorldPosition(contact.hand);
+    chain.hand.getWorldQuaternion(contact.wrist);
+    contact.socket.set(...grip.socket);
+    ski.localToWorld(contact.socket);
+    contact.target.lerpVectors(contact.hand, contact.socket, blend);
+
+    // A physical two-link arm cannot extend farther than upper + forearm.
+    const upper = contact.start.distanceTo(contact.elbow);
+    const forearm = contact.elbow.distanceTo(contact.hand);
+    contact.axis.subVectors(contact.target, contact.start);
+    const length = contact.axis.length();
+    if (length < .00001) continue;
+    const distance = Math.max(Math.abs(upper - forearm) + .0005,
+      Math.min((upper + forearm) * .985, length));
+    contact.axis.multiplyScalar(1 / length);
+    contact.target.copy(contact.start).addScaledVector(contact.axis, distance);
+    contact.bend.subVectors(contact.elbow, contact.start);
+    contact.bend.addScaledVector(contact.axis, -contact.bend.dot(contact.axis));
+    if (contact.bend.lengthSq() < 1e-7) {
+      contact.bend.set(chain.side === "L" ? -1 : 1, 0, .25)
+        .transformDirection(contact.root.matrixWorld);
+      contact.bend.addScaledVector(contact.axis, -contact.bend.dot(contact.axis));
+    }
+    const along = (upper * upper - forearm * forearm + distance * distance) / (2 * distance);
+    const height = Math.sqrt(Math.max(0, upper * upper - along * along));
+    contact.middle.copy(contact.start)
+      .addScaledVector(contact.axis, along)
+      .addScaledVector(contact.bend.normalize(), height);
+
+    // Reuse the stable getWorldQuaternion / two-bone aim helpers.
+    contact.aim(chain.arm, contact.start, contact.elbow, contact.middle);
+    chain.elbow.getWorldPosition(contact.elbow);
+    chain.hand.getWorldPosition(contact.hand);
+    contact.aim(chain.elbow, contact.elbow, contact.hand, contact.target);
+    ski.getWorldQuaternion(contact.held);
+    const restRotation = grip.ski === "opposite" ? chain.onAcross : chain.onTail;
+    contact.held.multiply(restRotation);
+    contact.wrist.slerp(contact.held, blend);
+    contact.rotate(chain.hand, contact.wrist);
+    chain.hand.getWorldPosition(chain.previous);
+    contact.root.worldToLocal(chain.previous);
+    chain.valid = true;
+    applied++;
+  }
+  if (applied && typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).has("grabDebug")) {
+    const names = ["Torso", "Leg_L", "Leg_R", "Knee_L", "Knee_R", "Foot_L", "Foot_R", "Arm_L", "Arm_R"];
+    window.__steez8SignaturePose = {
+      id: style, name: profile.name, activeGrips: applied,
+      joints: Object.fromEntries(names.map(name =>
+        [name, contact.root.getObjectByName(name)?.quaternion.toArray().map(v => +v.toFixed(4)) ?? null])),
+    };
+  }
+  return applied > 0;
+}
