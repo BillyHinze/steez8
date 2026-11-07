@@ -79,6 +79,10 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   assert(script.includes('from "../../../signature-grab-poses.js"'));
   assert(script.includes("sigGrab(this,this.grabStyle,this.grab,signatureAirTime)"));
   assert(script.includes("sigReach(this.grabContact,this.grabStyle,this.grab,e)"));
+  assert(script.includes("sigPoles(this,this.grabStyle,n.airborne?this.grab:0)"),
+    "Signature grabs must keep attached ski poles aligned while grabbing");
+  assert(script.includes("this.grabStyle>=4&&this.grabStyle<=7&&this.grab>.001?this.grabContact.reset()"),
+    "The original hand-to-ski IK must not fight the signature arm solver");
   assert(!script.includes("`TailGrab`,`TailGrab`,`JapanGrab`,`JapanGrab`"),
     "The four signature styles still alias old Tail/Japan clips");
   const foot = script.indexOf("this.fine&&this.footContact.update(.2+A*.14");
