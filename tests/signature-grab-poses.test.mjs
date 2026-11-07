@@ -96,11 +96,14 @@ test("the game plays genuine poses after foot IK and anchors wrists with the new
   // signature pose itself: otherwise each subsequent frame re-adds the
   // authored rotation and the legs/arms eventually spin uncontrollably.
   const legHistory = script.indexOf("for(let[e,t]of this.lastJoints)/^(Leg_|Knee_|Foot_)/.test(e.name)&&t.copy(e.quaternion)", foot);
-  const armHistory = script.indexOf("for(let[e,t]of this.lastJoints)/^(Arm_|Elbow_|Hand_)/.test(e.name)&&t.copy(e.quaternion)", pose);
+  const armHistory = script.indexOf("if(sigHistory)for(let[e,t]of this.lastJoints)/^(Arm_|Elbow_|Hand_)/.test(e.name)&&t.copy(e.quaternion)", foot);
+  const classicArmHistory = script.indexOf("if(!sigHistory)for(let[e,t]of this.lastJoints)/^(Arm_|Elbow_|Hand_)/.test(e.name)&&t.copy(e.quaternion)", pose);
   assert(foot < legHistory && legHistory < pose,
     "The leg smoothing baseline must be saved BEFORE procedural grab rotation");
-  assert(pose < armHistory && armHistory < hand,
-    "The arm smoothing baseline must be saved BEFORE custom wrist IK");
+  assert(legHistory < armHistory && armHistory < pose,
+    "Signature arms must save their baseline BEFORE applying authored arm rotations");
+  assert(pose < classicArmHistory && classicArmHistory < hand,
+    "Original grabs must preserve their normal post-contact arm baseline");
   assert(script.includes("this.weights.Air+=t*this.grab"),
     "Signature grabs must use neutral Air, not another old grab clip");
 });
