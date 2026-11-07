@@ -27555,7 +27555,7 @@ function wp(e, t, n, r, i=0, a=0) {
     r[a++] = bp(o.y, 32767),
     r[a++] = bp(o.z, 32767),
     r[a++] = bp(o.w, 32767),
-    r[a++] = (e.airborne ? up : 0) | (e.switchStance ? dp : 0) | (e.grind ? fp : 0) | (e.phase === `finished` ? pp : 0) | (t.forward ? mp : 0) | (t.brake ? hp : 0) | (t.jump ? gp : 0) | (t.grab ? _p : 0) | ap | (t.cork && e.corkSet !== !1 ? np : 0) | (t.grabStyle === 1 ? rp : t.grabStyle === 2 ? ip : 0) | ((t.airRoll ?? 0) > .06 ? op : (t.airRoll ?? 0) < -.06 ? sp : 0) | (e.landingSettling ? cp : 0) | (e.equipmentDetached ? lp : 0),
+    r[a++] = (e.airborne ? up : 0) | (e.switchStance ? dp : 0) | (e.grind ? fp : 0) | (e.phase === `finished` ? pp : 0) | (t.forward ? mp : 0) | (t.brake ? hp : 0) | (t.jump ? gp : 0) | (t.grab ? _p : 0) | ap | (t.cork && e.corkSet !== !1 ? np : 0) | ([1,4,5].includes(t.grabStyle) ? rp : [2,6,7].includes(t.grabStyle) ? ip : 0) | ((t.airRoll ?? 0) > .06 ? op : (t.airRoll ?? 0) < -.06 ? sp : 0) | (e.landingSettling ? cp : 0) | (e.equipmentDetached ? lp : 0),
     r[a] = bp(t.steer, 1e3)
 }
 function Tp(e, t, n, r, i) {
