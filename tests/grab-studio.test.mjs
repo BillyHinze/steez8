@@ -53,13 +53,13 @@ test("the existing server physics counts each new grab without changing verified
     ledger.update(0.016, false);
   }
   assert.equal(ledger.count, 5);
-  assert.deepEqual(ledger.names, ["SAFETY GRAB", "BLUNT GRAB", "ROCKET AIR", "TRUE NOSE GRAB", "BACK SCRATCHER"]);
+  assert.deepEqual(Array.from(ledger.names), ["SAFETY GRAB", "BLUNT GRAB", "ROCKET AIR", "TRUE NOSE GRAB", "BACK SCRATCHER"]);
   ledger.reset();
   for (const style of [3,7]) {
     ledger.update(0.3, true, style, true);
     ledger.update(0.016, false);
   }
-  assert.deepEqual(ledger.names, ["INDY GRAB", "SEATBELT GRAB"]);
+  assert.deepEqual(Array.from(ledger.names), ["INDY GRAB", "SEATBELT GRAB"]);
 });
 
 test("the active game, verified input parser, preview and score paths share grab-style support", async () => {
@@ -73,7 +73,8 @@ test("the active game, verified input parser, preview and score paths share grab
   const studio = read("grab-studio.js");
   const verifier = fs.readFileSync(new URL("../server/verification-worker-v2.mjs", import.meta.url),"utf8");
   assert(engine.includes("__steez8GrabActiveSlots[p]"));
-  assert(animation.includes("this.grabStyle===7"));
+  assert(animation.includes("this.grabStyle===6"));
+  assert(animation.includes("Back Scratcher:"));
   assert(locker.includes("steez8:preview-grab"));
   assert(replay.includes("[1,4,5].includes(t.grabStyle)"));
   assert(bootstrap.includes("startGrabStudio();"));
