@@ -1,0 +1,45 @@
+name: steez8
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: deploy/oci/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - /etc/steez8/backend.env
+    environment:
+      PORT: "10000"
+      HOST: 0.0.0.0
+      NODE_ENV: production
+      DATA_DIR: /data
+      PUBLIC_ORIGIN: https://steez8.me
+      ALLOWED_ORIGINS: https://www.steez8.me,https://billyhinze.github.io
+      PAYMENT_MODE: disabled
+    expose:
+      - "10000"
+    volumes:
+      - replica:/data
+    mem_limit: 7g
+    pids_limit: 256
+    security_opt:
+      - no-new-privileges:true
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      STEEZ8_API_HOST: ${STEEZ8_API_HOST:?Set STEEZ8_API_HOST to an approved domain with an A record pointing to the Oracle VM}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  replica:
+  caddy_data:
+  caddy_config:

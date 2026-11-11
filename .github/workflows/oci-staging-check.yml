@@ -1,0 +1,42 @@
+name: Validate Oracle Always Free staging image
+on:
+  push:
+    branches: [infra/oci-always-free-staging]
+    paths:
+      - 'infra/oci/**'
+      - 'deploy/oci/**'
+      - 'scripts/verify-oci-staging.mjs'
+      - '.github/workflows/oci-staging-check.yml'
+  pull_request:
+    paths:
+      - 'infra/oci/**'
+      - 'deploy/oci/**'
+      - 'scripts/verify-oci-staging.mjs'
+      - '.github/workflows/oci-staging-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.10.5
+      - run: terraform -chdir=infra/oci fmt -check
+      - run: terraform -chdir=infra/oci init -backend=false
+      - run: terraform -chdir=infra/oci validate
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/oci/Dockerfile
+          platforms: linux/arm64
+          push: false
+          tags: steez8/oci-staging:test
