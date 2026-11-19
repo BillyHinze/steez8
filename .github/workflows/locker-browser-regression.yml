@@ -32,7 +32,7 @@ jobs:
           pnpm run build:pages
         env:
           BACKEND_ORIGIN: http://127.0.0.1:4174
-          PUBLIC_SITE_ORIGIN: https://novacryptotool.com
+          PUBLIC_SITE_ORIGIN: https://steez8.me
       - name: Install Chromium browser for interaction test
         run: |
           npm install --prefix /tmp/steez8-playwright --no-save --no-package-lock playwright@1.58.2
