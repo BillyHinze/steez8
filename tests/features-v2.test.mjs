@@ -1,5 +1,10 @@
-import test from "node:test";
+import test, { mock } from "node:test";
 import assert from "node:assert/strict";
+
+// This file tests the 2026 autumn season pass and daily reward fixtures.
+// Pin only the Date clock so the tests remain valid after that season ends;
+// real timers and socket timeouts are deliberately left untouched.
+mock.timers.enable({ apis: ["Date"], now: new Date("2026-11-07T12:00:00.000Z") });
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";

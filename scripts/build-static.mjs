@@ -8,8 +8,8 @@ const api = process.env.BACKEND_ORIGIN;
 if (!api) throw Error('BACKEND_ORIGIN is required: use the HTTPS URL of your deployed game backend.');
 const url = new URL(api);
 if (!['https:', 'http:'].includes(url.protocol) || url.pathname !== '/' || url.search || url.hash || url.username || url.password || url.protocol === 'http:' && !['localhost','127.0.0.1'].includes(url.hostname)) throw Error('BACKEND_ORIGIN must be an HTTPS origin (HTTP is allowed only for localhost tests).');
-// Keep the existing domain until Hostinger DNS and GitHub Pages settings are ready.
-// Set PUBLIC_SITE_ORIGIN to the new HTTPS apex domain during a coordinated cutover.
+// The canonical STEEZ8 domain is steez8.me. PUBLIC_SITE_ORIGIN may be set
+// explicitly by deployment workflows, but the default is the primary hostname.
 const siteUrl = new URL(process.env.PUBLIC_SITE_ORIGIN || 'https://steez8.me');
 if (siteUrl.protocol !== 'https:' || siteUrl.username || siteUrl.password ||
     siteUrl.pathname !== '/' || siteUrl.search || siteUrl.hash)
