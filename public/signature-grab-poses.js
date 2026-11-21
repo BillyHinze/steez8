@@ -104,6 +104,63 @@ export const SIGNATURE_GRAB_POSES = Object.freeze({
 
 export const SIGNATURE_GRAB_IDS = Object.freeze([4, 5, 6, 7]);
 
+/**
+ * Snowboard signature grabs (same stable IDs as the ski grabs).
+ *
+ * The board is attached to the boots, so a snowboard grab needs a real
+ * board-grab clip underneath to put a hand on the board: `base` is the ski
+ * grab clip name the board mapper converts (MuteGrab -> BoardGrab,
+ * TailGrab -> BoardNose, JapanGrab -> BoardMethod). `skeleton` is an authored
+ * upper-body overlay in the same YXZ radians as the ski profiles, applied
+ * on top of that clip every frame (the mixer re-samples the clip first, so
+ * nothing accumulates). Feet are never overlaid: the board stays bound to the
+ * bindings.
+ *
+ * The torso, grabbing arm and elbow angles were solved in the real rig (Locker
+ * preview, rider-v20) so the grabbing hand ends within ~7 cm of the board's
+ * axis at `grip.along`: board position in rear-to-front boot spacings, 0 at
+ * the rear boot, about 2.4 at the nose, negative toward the tail. They are
+ * fixed constants, not a runtime IK solver. tests/signature-grab-poses.test.mjs
+ * and scripts/locker-browser-smoke.mjs check them.
+ */
+const boardPose = (id, name, base, grip, skeleton) =>
+  Object.freeze({ id, name, base, grip: Object.freeze(grip), skeleton: freezeBones(skeleton) });
+export const BOARD_SIGNATURE_POSES = Object.freeze({
+  // Rig convention: the nose is past Foot_R, so Hand_R is the front hand and
+  // Hand_L the rear hand. "heel" = hand on the side away from the bent knees.
+  4: boardPose(4, "Stalefish", "MuteGrab", { hand: "L", along: .15, edge: "heel" }, {
+    // Rear hand behind the back leg to the heel edge; chest opens to the
+    // grab while the head stays up and looks down the line.
+    Torso: [-.20, -.60, .40], Spine: [-.12, -.36, .24],
+    Arm_L: [.40, .30, 0], Elbow_L: [-.075, -.20, .05],
+    Neck: [-.04, -.20, 0], Head: [-.06, -.30, 0],
+  }),
+  5: boardPose(5, "Melon", "JapanGrab", { hand: "R", along: .8, edge: "heel" }, {
+    // Front hand behind the front leg to the heel edge; the head looks over
+    // the lead shoulder.
+    Torso: [0, 0, -.40], Spine: [0, 0, -.24],
+    Elbow_R: [.275, 0, 0],
+    Neck: [-.08, .20, -.02], Head: [-.10, .30, -.04],
+  }),
+  6: boardPose(6, "Tailfish", "MuteGrab", { hand: "L", along: -.9 }, {
+    // Rear hand reaches all the way back to the tail.
+    Torso: [.10, -.50, -.40], Spine: [.06, -.30, -.24],
+    Arm_L: [0, -.10, -.05], Elbow_L: [.025, -.25, .10],
+    Neck: [-.04, -.22, 0], Head: [-.06, -.32, 0],
+  }),
+  7: boardPose(7, "Seatbelt", "JapanGrab", { hand: "R", along: -.56 }, {
+    // Front hand reaches across the body to the tail: deep cross-body twist.
+    Torso: [-.375, .40, .225], Spine: [-.225, .24, .135],
+    Arm_R: [.575, .375, -.10], Elbow_R: [-.375, .025, -.05],
+    Neck: [-.08, -.30, 0], Head: [-.12, -.42, 0],
+  }),
+});
+
+/** Base grab clip for a snowboard signature grab (rider-animation uses it). */
+export function boardGrabBase(style) {
+  return BOARD_SIGNATURE_POSES[style]?.base ?? "MuteGrab";
+}
+
 export function isSignatureGrab(style) {
   return Number.isInteger(style) && Object.hasOwn(SIGNATURE_GRAB_POSES, style);
 }
@@ -120,14 +177,85 @@ function smooth(value) {
 }
 
 /**
+ * Snowboard signature overlay. Same baseline rule as the ski poses: the
+ * controller has already saved its smoothing baseline, and every frame
+ * recomputes the overlay from that baseline (never from last frame's pose).
+ */
+function applyBoardSignaturePose(controller, style, strength, airTime, step) {
+  // The board path has no per-joint smoothing, so the overlay itself must be
+  // continuous: changing grab mid-air fades the old profile out and the new
+  // one in (~0.17 s each way) instead of snapping. A new jump (airTime went
+  // backwards) starts directly on the current style; `strength` fades it in.
+  const blend = controller.boardSignatureBlend ??= { style, weight: 1, airTime: 0 };
+  const time = Number.isFinite(airTime) ? airTime : 0;
+  const dt = Number.isFinite(step) && step > 0 ? Math.min(step, .05) : 1 / 60;
+  if (time < blend.airTime - 1e-6) { blend.style = style; blend.weight = 1; }
+  blend.airTime = time;
+  if (blend.style !== style) {
+    blend.weight -= dt * 6;
+    if (blend.weight <= 0) { blend.style = style; blend.weight = 0; }
+  } else blend.weight = Math.min(1, blend.weight + dt * 6);
+  const profile = BOARD_SIGNATURE_POSES[blend.style];
+  if (!profile) return false;
+  const weight = smooth(strength) * smooth(blend.weight);
+  if (weight < .0001) return false;
+  const settle = Math.sin(time * 2.15) * .008 * weight;
+  for (const [bone, angle] of Object.entries(profile.skeleton)) {
+    const breath = bone === "Spine" || bone === "Torso" ? settle : 0;
+    controller.overlay(bone,
+      angle[0] * weight + breath, angle[1] * weight, angle[2] * weight);
+  }
+  if (typeof window !== "undefined" &&
+      (window.__steez8GrabDebugEnabled || new URLSearchParams(window.location.search).has("grabDebug"))) {
+    const names = ["Torso", "Spine", "Neck", "Head", "Leg_L", "Leg_R", "Knee_L", "Knee_R",
+      "Foot_L", "Foot_R", "Arm_L", "Arm_R", "Elbow_L", "Elbow_R", "Hand_L", "Hand_R"];
+    window.__steez8SignaturePose = {
+      id: style, name: profile.name, board: true, stage: "board", strength: +weight.toFixed(3),
+      joints: Object.fromEntries(names.map(name =>
+        [name, controller.bones?.[name]?.quaternion?.toArray().map(v => +v.toFixed(4)) ?? null])),
+      grip: boardGripGeometry(controller, profile.grip.hand),
+    };
+    window.__steez8BoardAnimator = controller;
+  }
+  return true;
+}
+
+/**
+ * Debug-only measurement (allocates): where the grabbing hand is relative to
+ * the board axis through both boots. dist = metres from the axis, along =
+ * position in boot spacings from the rear boot (Foot_L) toward the nose,
+ * side < 0 = heel side (away from the bent knees).
+ */
+export function boardGripGeometry(controller, hand) {
+  const bones = controller?.bones;
+  if (!bones?.Foot_L || !bones.Foot_R || !bones["Hand_" + hand] || !bones.Knee_L || !bones.Knee_R) return null;
+  controller.root?.updateWorldMatrix?.(true, true);
+  const at = name => { const v = bones[name].getWorldPosition(bones[name].position.clone()); return [v.x, v.y, v.z]; };
+  const rear = at("Foot_L"), front = at("Foot_R"), axis = front.map((v, i) => v - rear[i]);
+  const length = Math.hypot(...axis), unit = axis.map(v => v / length);
+  const offset = name => { const p = at(name).map((v, i) => v - rear[i]); const t = p.reduce((s, v, i) => s + v * unit[i], 0); return { t, perp: p.map((v, i) => v - t * unit[i]) }; };
+  const handAt = offset("Hand_" + hand);
+  const knees = [offset("Knee_L"), offset("Knee_R")];
+  const toe = knees[0].perp.map((v, i) => (v + knees[1].perp[i]) / 2); toe[1] = 0;
+  const toeLength = Math.hypot(...toe) || 1, flat = handAt.perp.slice(); flat[1] = 0;
+  return {
+    hand,
+    dist: +Math.hypot(...handAt.perp).toFixed(3),
+    along: +(handAt.t / length).toFixed(2),
+    side: +(flat.reduce((s, v, i) => s + v * toe[i] / toeLength, 0)).toFixed(3),
+  };
+}
+
+/**
  * The body pose is applied after the normal foot-contact IK and before arm
  * IK. The animation controller stores its smoothed leg and arm baselines
  * before adding the procedural signature poses. Otherwise those extra joint
  * rotations leak into the next frame's baseline and compound endlessly.
  */
-export function applySignatureGrabPose(controller, style, strength, airTime = 0) {
+export function applySignatureGrabPose(controller, style, strength, airTime = 0, step) {
+  if (controller?.board) return applyBoardSignaturePose(controller, style, strength, airTime, step);
   const profile = SIGNATURE_GRAB_POSES[style];
-  if (!profile || controller?.board) return false;
+  if (!profile) return false;
   const weight = smooth(strength);
   if (weight < .0001) return false;
   const settle = Math.sin((Number.isFinite(airTime) ? airTime : 0) * 2.15) * .010 * weight;

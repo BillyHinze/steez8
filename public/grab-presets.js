@@ -1,14 +1,14 @@
 // STEEZ8 Grab Studio: stable grab IDs shared by browser, multiplayer physics and API.
 // IDs 0-2 are the original grabs. Never renumber them: recorded runs use these IDs.
 export const GRAB_CATALOG = Object.freeze([
-  { id: 0, skis: "Mute", board: "Weddle", family: "mute", note: "Classic cross-body grab, held close to the bindings." },
-  { id: 1, skis: "Tail", board: "Nose", family: "tail", note: "Reach back for the tip and hold through the spin." },
-  { id: 2, skis: "Japan", board: "Method", family: "japan", note: "Bend into a stylish arched grab." },
-  { id: 3, skis: "Safety", board: "Indy", family: "mute", note: "Clean, compact grab beside the boot." },
-  { id: 4, skis: "Blunt", board: "Stalefish", family: "signature-blunt", note: "Low cross-body crouch: pull a ski across your front and hold the leading tip." },
-  { id: 5, skis: "Rocket Air", board: "Melon", family: "signature-rocket", note: "Launch both skis forward with extended legs and reach for both tips." },
-  { id: 6, skis: "True Nose", board: "Tailfish", family: "signature-nose", note: "Fold one knee toward your chest, lift its ski upright and catch its nose." },
-  { id: 7, skis: "Back Scratcher", board: "Seatbelt", family: "signature-scratcher", note: "Arch back, fold both knees and pull the ski tails up behind your helmet." },
+  { id: 0, skis: "Mute", board: "Weddle", family: "mute", note: "Classic cross-body grab, held close to the bindings.", boardNote: "Front hand to the toe edge between the bindings." },
+  { id: 1, skis: "Tail", board: "Nose", family: "tail", note: "Reach back for the tip and hold through the spin.", boardNote: "Front hand reaches out and grabs the nose." },
+  { id: 2, skis: "Japan", board: "Method", family: "japan", note: "Bend into a stylish arched grab.", boardNote: "Front hand on the heel edge, board kicked up behind you." },
+  { id: 3, skis: "Safety", board: "Indy", family: "mute", note: "Clean, compact grab beside the boot.", boardNote: "Rear hand to the toe edge between the bindings." },
+  { id: 4, skis: "Blunt", board: "Stalefish", family: "signature-blunt", note: "Low cross-body crouch: pull a ski across your front and hold the leading tip.", boardNote: "Rear hand behind the back leg to the heel edge." },
+  { id: 5, skis: "Rocket Air", board: "Melon", family: "signature-rocket", note: "Launch both skis forward with extended legs and reach for both tips.", boardNote: "Front hand behind the front leg to the heel edge." },
+  { id: 6, skis: "True Nose", board: "Tailfish", family: "signature-nose", note: "Fold one knee toward your chest, lift its ski upright and catch its nose.", boardNote: "Rear hand reaches all the way back to the tail." },
+  { id: 7, skis: "Back Scratcher", board: "Seatbelt", family: "signature-scratcher", note: "Arch back, fold both knees and pull the ski tails up behind your helmet.", boardNote: "Front hand reaches across your body to grab the tail." },
 ]);
 export const GRAB_SLOT_ACTIONS = Object.freeze(["mute", "tail", "japan"]);
 export const DEFAULT_GRAB_LOADOUT = Object.freeze({
