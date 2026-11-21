@@ -3,9 +3,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { parse } from "acorn";
 import {
-  SIGNATURE_GRAB_IDS, SIGNATURE_GRAB_POSES,
-  applySignatureGrabPose, isSignatureGrab, signatureGrip,
+  SIGNATURE_GRAB_IDS, SIGNATURE_GRAB_POSES, BOARD_SIGNATURE_POSES,
+  applySignatureGrabPose, isSignatureGrab, signatureGrip, boardGrabBase,
 } from "../public/signature-grab-poses.js";
+import { GRAB_CATALOG } from "../public/grab-presets.js";
 
 const expectedNames = ["Blunt", "Rocket Air", "True Nose", "Back Scratcher"];
 
@@ -65,7 +66,13 @@ test("all four 3D poses animate hips, knees, both skis and arms separately", () 
     const quiet={...mock, overlay(){throw Error("No changes when grab released")} ,
       skiRotation(){throw Error("No changes when grab released")}};
     assert.equal(applySignatureGrabPose(quiet,id,0),false);
-    assert.equal(applySignatureGrabPose({...mock,board:true},id,1),false);
+    // Snowboard: the board profile moves only the upper body; legs, knees,
+    // feet and ski rotations stay untouched so the board stays on the boots.
+    const boardBones = new Set();
+    const boardMock = { board:true, overlay(name){ boardBones.add(name); },
+      skiRotation(){ throw Error("No ski rotation on a snowboard"); } };
+    assert.equal(applySignatureGrabPose(boardMock,id,1,0.5,1/60),true);
+    assert([...boardBones].every(name => !/^(Leg_|Knee_|Foot_)/.test(name)), [...boardBones].join());
   }
   assert.equal(outputs.size,4);
 });
@@ -110,4 +117,51 @@ test("the game plays authored grab arms without unstable wrist IK", () => {
     "Original grabs must preserve their normal post-contact arm baseline");
   assert(script.includes("this.weights.Air+=t*this.grab"),
     "Signature grabs must use neutral Air, not another old grab clip");
+});
+
+test("snowboard signature grabs use a real board-grab clip and their own authored upper body", () => {
+  assert.deepEqual(Object.keys(BOARD_SIGNATURE_POSES).map(Number), [...SIGNATURE_GRAB_IDS]);
+  const silhouettes = new Set();
+  for (const id of SIGNATURE_GRAB_IDS) {
+    const profile = BOARD_SIGNATURE_POSES[id];
+    assert.equal(profile.name, GRAB_CATALOG[id].board, "board profile name must match the catalog");
+    assert(["MuteGrab", "TailGrab", "JapanGrab"].includes(profile.base), id + " needs a clip that puts a hand on the board");
+    assert.equal(boardGrabBase(id), profile.base);
+    assert(["L", "R"].includes(profile.grip.hand) && Number.isFinite(profile.grip.along));
+    assert(profile.skeleton[`Arm_${profile.grip.hand}`] || profile.skeleton[`Elbow_${profile.grip.hand}`],
+      id + " must author its grabbing arm");
+    for (const [bone, angles] of Object.entries(profile.skeleton)) {
+      assert(!/^(Leg_|Knee_|Foot_)/.test(bone), id + " must not move the bound legs: " + bone);
+      assert(angles.length === 3 && angles.every(v => Number.isFinite(v) && Math.abs(v) <= 1.6), id + " " + bone);
+    }
+    silhouettes.add(profile.base + JSON.stringify(profile.skeleton));
+    assert(GRAB_CATALOG[id].boardNote && GRAB_CATALOG[id].boardNote !== GRAB_CATALOG[id].note,
+      id + " needs its own snowboard description");
+  }
+  assert.equal(silhouettes.size, 4, "each snowboard grab needs a distinct silhouette");
+  assert.equal(boardGrabBase(0), "MuteGrab");
+});
+
+test("the snowboard pose cross-fades when the grab changes mid-air instead of snapping", () => {
+  const applied = [];
+  const rider = { board: true, overlay(name, x, y, z) { applied.push([name, Math.hypot(x, y, z)]); } };
+  const torso = () => applied.filter(([n]) => n === "Torso").at(-1)?.[1] ?? 0;
+  applySignatureGrabPose(rider, 4, 1, .5, 1 / 60);
+  const full = torso();
+  applySignatureGrabPose(rider, 7, 1, .52, 1 / 60); // switch Stalefish -> Seatbelt
+  assert(torso() < full * .99 && torso() > 0, "the old pose must fade out, not vanish");
+  for (let f = 0; f < 30; f++) applySignatureGrabPose(rider, 7, 1, .54 + f / 60, 1 / 60);
+  const seatbelt = Math.hypot(...BOARD_SIGNATURE_POSES[7].skeleton.Torso);
+  assert(Math.abs(torso() - seatbelt) < .02, "the new pose must be fully applied within half a second");
+  applied.length = 0;
+  applySignatureGrabPose(rider, 5, 1, .1, 1 / 60); // a new jump starts on its own style
+  assert(Math.abs(torso() - Math.hypot(...BOARD_SIGNATURE_POSES[5].skeleton.Torso)) < .02);
+});
+
+test("the board animation path applies the snowboard pose after the hand-contact reset", () => {
+  const script = fs.readFileSync(new URL("../public/_next/static/chunks/rider-animation-1mQglCn7.js", import.meta.url), "utf8");
+  assert(script.includes("if(this.board){let e=boardGrabBase(this.grabStyle);N(e,`${e}Mirror`,t*this.grab)}"),
+    "snowboard signature grabs must play a real board-grab clip");
+  const reset = script.indexOf("this.pressing=0,this.grabContact.reset(),n.crashTime<=0&&this.grab>.001&&this.grabStyle>=4&&this.grabStyle<=7&&sigGrab(this,this.grabStyle,this.grab,n.airTime,e)");
+  assert(reset > 0, "GrabContact.reset() restores arm joints, so the board pose must run after it and keep fading after touchdown");
 });

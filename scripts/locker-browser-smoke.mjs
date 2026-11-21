@@ -177,6 +177,60 @@ try {
       "legs and skis:", signature.slice(0, 220));
   }
   assert.equal(silhouettes.size, 4, "Four distinct authored grab silhouettes required");
+
+  // Snowboard signature grabs: each must put the correct hand on the board,
+  // hold perfectly still, and look different from the others.
+  const { BOARD_SIGNATURE_POSES } = await import(new URL("../public/signature-grab-poses.js", import.meta.url));
+  // Headless browsers only produce animation frames on request; render them
+  // explicitly instead of sleeping, and measure every frame's joint change.
+  const renderFrames = count => page.evaluate(count => {
+    const names = ["Torso", "Spine", "Neck", "Head", "Leg_L", "Leg_R", "Knee_L", "Knee_R",
+      "Arm_L", "Arm_R", "Elbow_L", "Elbow_R", "Hand_L", "Hand_R"];
+    return new Promise(resolve => {
+      let previous = null, worst = { step: 0, bone: null };
+      const frame = left => requestAnimationFrame(() => {
+        const rider = window.__steez8BoardAnimator;
+        if (rider) {
+          const current = Object.fromEntries(names.map(n => [n, rider.bones[n].quaternion.toArray()]));
+          if (previous) for (const n of names) {
+            const a = previous[n], b = current[n];
+            const step = 2 * Math.acos(Math.min(1, Math.abs(a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3])));
+            if (step > worst.step) worst = { step, bone: n };
+          }
+          previous = current;
+        }
+        left > 0 ? frame(left - 1) : resolve(worst);
+      });
+      frame(count);
+    });
+  }, count);
+  await page.locator(".gl-open").first().click({ timeout: 10000 });
+  await page.getByRole("button", { name: /^snowboard$/i }).first().click({ timeout: 10000 });
+  await renderFrames(30);
+  await lab.click({ timeout: 10000 });
+  await page.locator(".gl-ride-tabs button").filter({ hasText: /snowboard/i }).first().click({ timeout: 10000 });
+  const boardSilhouettes = new Set();
+  for (const [id, profile] of Object.entries(BOARD_SIGNATURE_POSES)) {
+    const style = Number(id);
+    await page.locator(`.gl-card:has(strong:text-is("${profile.name}"))`).first().click({ timeout: 10000 });
+    await page.waitForFunction(style => window.__steez8SignaturePose?.id === style && window.__steez8SignaturePose?.board,
+      style, { timeout: 12000 });
+    await renderFrames(30); // fade in fully
+    const hold = await renderFrames(120);
+    const pose = await page.evaluate(() => window.__steez8SignaturePose);
+    await page.screenshot({ path: `/tmp/steez8-${browserName}-board-pose-${style}.png` }).catch(() => {});
+    console.log("BOARD GRAB", profile.name, "grip", JSON.stringify(pose.grip), "largest held step", hold.step.toFixed(3));
+    assert(hold.step < .1, `${profile.name}: ${hold.bone} moved ${hold.step.toFixed(2)} rad in one frame while held`);
+    assert.equal(pose.grip?.hand, profile.grip.hand, profile.name + " grabs with the wrong hand");
+    assert(pose.grip.dist < .12, `${profile.name}: hand is ${pose.grip.dist} m from the board`);
+    assert(Math.abs(pose.grip.along - profile.grip.along) < .2,
+      `${profile.name}: hand is at ${pose.grip.along} along the board, expected ${profile.grip.along}`);
+    if (profile.grip.edge === "heel") assert(pose.grip.side < 0, profile.name + " must grab the heel edge");
+    const signature = JSON.stringify(["Torso", "Arm_L", "Arm_R", "Elbow_L", "Elbow_R"].map(n => pose.joints[n]));
+    assert(!boardSilhouettes.has(signature), profile.name + " reuses another snowboard silhouette");
+    boardSilhouettes.add(signature);
+  }
+  assert.equal(boardSilhouettes.size, 4, "Four distinct snowboard grab silhouettes required");
   console.log("Grab Lab selected and rendered:", await page.locator(".gl-panel").count());
   assert.equal(await page.locator("body > .gl-root").count(), 1, "Grab portal disappeared after selection");
   

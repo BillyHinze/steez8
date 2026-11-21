@@ -1,5 +1,23 @@
 [
   {
+    "id": "2026-11-21-snowboard-signature-grabs",
+    "label": "21 NOV · 0.6.1",
+    "tag": "SNOWBOARD",
+    "title": "Stalefish, Melon, Tailfish and Seatbelt are real grabs now.",
+    "body": "Snowboarders picking a signature grab used to just float in a plain air pose. Each of the four now has its own move with your hand on the board: Stalefish reaches behind the back leg, Melon behind the front leg, Tailfish all the way to the tail, and Seatbelt across your body to the tail. Switching grabs mid-air blends smoothly, and Grab Lab now describes the snowboard moves properly.",
+    "icon": "star",
+    "highlights": [
+      "FOUR NEW SNOWBOARD GRAB ANIMATIONS",
+      "HAND ON THE BOARD",
+      "SMOOTH MID-AIR SWITCHING",
+      "PREVIEW IN GRAB LAB"
+    ],
+    "link": {
+      "href": "/?open=locker",
+      "label": "Open Grab Lab"
+    }
+  },
+  {
     "id": "2026-11-07-custom-grab-lab",
     "label": "7 NOV · 0.6",
     "tag": "GRAB LAB",

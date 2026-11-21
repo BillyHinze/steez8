@@ -181,10 +181,11 @@ export function startGrabStudio() {
         preview(grab.id);
       }, "gl-card");
       card.setAttribute("aria-pressed", String(selected));
-      card.setAttribute("aria-label", grab[ride] + ". " + grab.note + (equipped >= 0 ? ". Equipped." : ""));
+      const note = ride === "board" ? grab.boardNote ?? grab.note : grab.note;
+      card.setAttribute("aria-label", grab[ride] + ". " + note + (equipped >= 0 ? ". Equipped." : ""));
       card.append(node("small", grab.id < 3 ? "ORIGINAL" : "SIGNATURE"),
         node("strong", grab[ride]),
-        node("span", grab.note, "gl-detail"));
+        node("span", note, "gl-detail"));
       if (equipped >= 0) card.append(node("span", "EQUIPPED · " + keys[equipped], "gl-equipped"));
       grid.append(card);
     }
