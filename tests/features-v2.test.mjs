@@ -868,8 +868,14 @@ test("forfeits award the opponent once, apply a queue break, and allow an agreed
     a = await room(accounts.One, m.room),
     b = await room(accounts.Two, m.room);
   const before = app.store.rating(accounts.Two.user.id).wins;
+  const missingBefore = JSON.stringify(m.missing);
   a.send({ t: "duel", op: "bye", v: 2 });
-  await new Promise((r) => setTimeout(r, 20));
+  // Wait until the server has actually recorded the bye; a fixed short sleep
+  // raced the WebSocket handler on busy CI runners.
+  for (let waited = 0; JSON.stringify(m.missing) === missingBefore; waited += 5) {
+    assert.ok(waited < 3000, "server never processed the bye");
+    await new Promise((r) => setTimeout(r, 5));
+  }
   await tick(10001);
   assert.equal(m.state.phase, "winner");
   assert.equal(app.store.rating(accounts.Two.user.id).wins, before + 1);

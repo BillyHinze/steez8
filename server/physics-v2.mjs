@@ -3,19 +3,31 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import sources from "./recovered/runtime-sources.mjs";
-const chunks = path.resolve(
-    import.meta.dirname,
-    "../public/_next/static/chunks",
-  ),
-  cache = new Map();
+import {
+  SIMULATION_FILES,
+  liveVersion,
+  simulationDirectory,
+} from "./simulation-versions.mjs";
+const cache = new Map();
 const colliderData = JSON.parse(
   fs.readFileSync(
     new URL("./recovered/course-colliders.json", import.meta.url),
     "utf8",
   ),
 );
-export function physicsFor(park = "nordryggen") {
-  if (cache.has(park)) return cache.get(park);
+// Physics for a park at a specific input-log version (default: the version
+// the current client sends). See simulation-versions.mjs.
+export function physicsFor(park = "nordryggen", version) {
+  if (version === undefined) version = liveVersion(park);
+  const chunks = simulationDirectory(park, version);
+  if (!chunks)
+    return Promise.reject(Error(`Unsupported simulation version ${version} for ${park}`));
+  return physicsFromDirectory(park, chunks, park + "@" + version);
+}
+// Exported for tests: build physics from an explicit directory of
+// SIMULATION_FILES (for example a frozen copy).
+export function physicsFromDirectory(park, chunks, key = park + "@" + chunks) {
+  if (cache.has(key)) return cache.get(key);
   const pending = (async () => {
     const context = vm.createContext({
       console,
@@ -95,7 +107,8 @@ export function physicsFor(park = "nordryggen") {
         return m;
       }
       // Course definitions must match what the browser executes, including new parks.
-      let source = ['active-course-BUb4R-L7.js', 'parks-1qsmaijL.js', 'live-protocol-j28FoPiw.js', 'input-log-BvMdAwyG.js'].includes(name) ? fs.readFileSync(path.join(chunks, name), 'utf8') : sources[name];
+      // The simulation files come from public/ (LIVE) or a frozen copy.
+      let source = SIMULATION_FILES.includes(name) ? fs.readFileSync(path.join(chunks, name), 'utf8') : sources[name];
       if (!source) throw Error("Missing verifier source: " + name);
       if (name === "input-log-BvMdAwyG.js")
         source +=
@@ -166,6 +179,8 @@ export function physicsFor(park = "nordryggen") {
       },
     };
   })();
-  cache.set(park, pending);
+  cache.set(key, pending);
+  // Do not keep a failed build cached forever; the next request retries.
+  pending.catch(() => { if (cache.get(key) === pending) cache.delete(key); });
   return pending;
 }
