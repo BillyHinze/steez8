@@ -93,15 +93,15 @@ test("the active game, verified input parser, preview and score paths share grab
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), "steez8-grabs-"));
 const app = createApplication({
   dataDir: dir,
-  publicOrigin: "https://novacryptotool.com",
-  allowedOrigins: "https://www.novacryptotool.com",
+  publicOrigin: "https://steez8.me",
+  allowedOrigins: "https://www.steez8.me",
 });
 await app.ready;
 app.server.listen(0, "127.0.0.1");
 await once(app.server, "listening");
 const base = "http://127.0.0.1:" + app.server.address().port;
 
-async function api(route, body, accessToken, origin = "https://novacryptotool.com") {
+async function api(route, body, accessToken, origin = "https://steez8.me") {
   const response = await fetch(base + route, {
     method: body === undefined ? "GET" : "POST",
     headers: {
