@@ -2,10 +2,11 @@ import crypto from "node:crypto";
 import { parentPort } from "node:worker_threads";
 import { gunzipSync } from "node:zlib";
 import { physicsFor } from "./physics-v2.mjs";
+import { acceptedVersions } from "./simulation-versions.mjs";
 async function verify(workerData) {
 try {
-  const physics = await physicsFor(workerData.park);
   if (workerData.replay) {
+    const physics = await physicsFor(workerData.park);
     const raw = gunzipSync(Buffer.from(workerData.replay, "base64"), {
         maxOutputLength: 12 * 1024 * 1024,
       }),
@@ -59,22 +60,18 @@ try {
     const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength),
       version = view.getUint32(1, true),
       steps = view.getUint32(5, true),
-      expected = {
-        nordryggen: 39,
-        apex: 36,
-        ridgeline: 36,
-        bigair: 31,
-        forestline: 8,
-        halfpipe: 7,
-      }[workerData.park];
+      // Every version registered in simulation-versions.mjs: the live client
+      // version plus any frozen versions kept for a release transition.
+      accepted = acceptedVersions(workerData.park);
     if (
-      version !== expected ||
+      !accepted.includes(version) ||
       steps < 1 ||
       steps >
         Math.min(36000, Math.ceil((workerData.maximumSeconds || 600) * 60)) ||
       raw.length !== 9 + steps * 6
     )
       throw Error(`Input-log version or length mismatch (version=${version}, steps=${steps}, bytes=${raw.length}, limit=${workerData.maximumSeconds})`);
+    const physics = await physicsFor(workerData.park, version);
     const s = physics.createSimulation({
       competitive: workerData.competitive,
       lane: workerData.lane,

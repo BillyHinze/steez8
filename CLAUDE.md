@@ -55,7 +55,16 @@ Key client chunks:
 - Rules: exactly one system owns a joint each frame. Do not add a second IK or orientation solver to arms/wrists. Do not write rotations that build on the previous frame's quaternion. Overlays must be recomputed from the saved baseline every frame.
 
 **Server-authoritative scores** (`server/verify-v2.mjs`, `verification-worker-v2.mjs`, `physics-v2.mjs`): the client uploads a gzipped input log (header `[1][u32 version][u32 steps]`, then 6 bytes per step: i16 steer, i16 airRoll, u8 flags, u8 equipment). One warm worker thread replays it through the real client simulation inside `node:vm`. It loads `active-course`, `parks`, `live-protocol` and `input-log` from **`public/`** and everything else from the recovered originals. Per-park input-log versions are checked (`nordryggen 39, apex 36, ridgeline 36, bigair 31, forestline 8, halfpipe 7`). Ridgeline reuses Apex colliders. **Shirakumo is not in the verifier course list.**
-→ **Any change to simulation code changes verified scores.** Client and server must ship the same `active-course` at the same moment (see §6).
+→ **Any change to simulation code changes verified scores.** Accepted versions are registered in `server/simulation-versions.mjs`. `LIVE` means the chunks in `public/`; any other label is a frozen copy of the four simulation files in `server/simulations/<label>/`. The worker reads the version from the log header and loads that simulation (`physicsFor(park, version)`).
+
+**Shipping a simulation or scoring change (mandatory procedure):**
+1. Copy `SIMULATION_FILES` from `public/_next/static/chunks/` unchanged into `server/simulations/<label>/`, and point the current version number at `<label>`.
+2. Make the change. Bump the encoder default (`encode(e=N)`) for each affected park in `engine-*.js` (or the base default 39 in `input-log-*.js` for nordryggen), and register the new number as `LIVE`.
+3. Run `node --experimental-vm-modules scripts/record-golden-runs.mjs`. It adds runs for new versions and never overwrites existing ones.
+4. `tests/simulation-versions.test.mjs` must pass. Old golden runs must verify against the frozen copy, the client's encoder versions must match the registry, and every accepted version must have a golden run. **Never edit `tests/fixtures/golden-runs.json` to make a failing golden pass.** A failure there means verified scores changed for an existing version.
+5. After the frontend release has been live long enough, remove the frozen version in a later PR.
+
+The scripted golden rider covers every park, all grab styles 0–7 with holds of varying length, rails and chained tricks. Halfpipe and Big Air produce little or no trick score, so scoring changes there are weakly covered.
 
 **Multiplayer** (`server/realtime-v2.mjs`, `competition.mjs`, `cups.mjs`, `squads.mjs`): authenticated WebSocket rooms per park (capacity 20–30, overflow rooms `park-N`). Each client sends its own pose as a 98/194-byte binary packet; the server checks the format and relays it, with no server-side movement authority. The server also handles chat with moderation, invites, parties and follows. Ranked 1v1/2v2 duels are turn-based "drops" verified by physics. 3v3/4v4 squads are concurrent solo Apex runs with summed scores. Cups are owner-created timed events. All live state is in memory on one instance and a restart ends active matches.
 
@@ -88,7 +97,7 @@ Tests cover auth, privacy, economy idempotency, ranked/team/cup flows through re
 - The domain is **steez8.me**. Never deploy to or make anything canonical on `novacryptotool.com` (a former temporary domain).
 - Never wipe, recreate, migrate destructively or overwrite the Turso database. The schema is `CREATE TABLE IF NOT EXISTS` and runs at every boot, so any schema change must be additive and idempotent. Back up from the Turso dashboard before any data change, and get the owner's approval.
 - Secrets (`TURSO_AUTH_TOKEN`, `STEEZ8_GATEWAY_TOKEN`, reset webhook) belong only in Render. Never put them in the repository, `runtime-config.js` or `dist/`.
-- **Version skew:** merging to `main` deploys the backend immediately, but the frontend changes only when the deploy repo's SHA is bumped. For simulation or protocol changes, bump `source-revision.txt` right after the merge, or make the server accept both versions (input-log version numbers exist for this purpose).
+- **Version skew:** merging to `main` deploys the backend immediately, but the frontend changes only when the deploy repo's SHA is bumped. For simulation changes, follow the versioning procedure in §3 so the backend accepts both the old and new client. Other protocol changes (WebSocket messages, API shapes) need equivalent backward compatibility.
 - Use a branch and a PR. CI (`ci.yml`) and the Playwright Locker regression run on PRs.
 
 ## 6. Known limitations and stale items (as of b103d42)
